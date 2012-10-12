@@ -1,4 +1,4 @@
-// 
+//
 //  Host.m
 //  WS
 //
@@ -16,18 +16,18 @@
 
 // TODO: To be moved into RHManagedObject
 +(void)initialize {
-	[super initialize];
 	
-	const static NSInteger schemaVersion = 5;
-	
-	NSString *key = [NSString stringWithFormat:@"RHSchemaVersion-%@", [self modelName]];
-	NSInteger version = [[NSUserDefaults standardUserDefaults] integerForKey:key];
-	
-    
-	if (version != schemaVersion) {
-		[self deleteStore];
-		[[NSUserDefaults standardUserDefaults] setInteger:schemaVersion forKey:key];
-	}
+	if (self == [Host class]) {
+        const static NSInteger schemaVersion = 5;
+        
+        NSString *key = [NSString stringWithFormat:@"RHSchemaVersion-%@", [self modelName]];
+        NSInteger version = [[NSUserDefaults standardUserDefaults] integerForKey:key];
+        
+        if (version != schemaVersion) {
+            [self deleteStore];
+            [[NSUserDefaults standardUserDefaults] setInteger:schemaVersion forKey:key];
+        }
+    }
 }
 
 +(NSString *)entityName {
@@ -38,12 +38,12 @@
 	return @"WS";
 }
 
-+(Host *)hostWithID:(NSNumber *)hostID {	
++(Host *)hostWithID:(NSNumber *)hostID {
 	NSArray *results = [Host fetchWithPredicate:[NSPredicate predicateWithFormat:@"hostid=%i", [hostID intValue]]];
 	if ([results count] > 0) {
-		return (Host *)[results objectAtIndex:0];		
+		return (Host *)[results objectAtIndex:0];
 	}
-
+    
 	Host *newHost = (Host *)[Host newEntity];
 	newHost.hostid = hostID;
 	
@@ -53,7 +53,7 @@
 
 +(NSArray *)hostsClosestToLocation:(CLLocation *)location withLimit:(int)limit {
 	CLLocationCoordinate2D c = location.coordinate;
-	NSPredicate *predicate;	
+	NSPredicate *predicate;
 	int factor = 1;
 	
 	CLLocationDegrees minLatitude, maxLatitude, minLongitude, maxLongitude;
@@ -65,7 +65,7 @@
 		maxLongitude = c.longitude + (i *factor);
 		
 		predicate = [NSPredicate predicateWithFormat:@"%f < latitude AND latitude < %f AND %f < longitude AND longitude < %f AND notcurrentlyavailable != 1", minLatitude, maxLatitude, minLongitude, maxLongitude];
-
+        
 		// NSArray *test = [Host fetchWithPredicate:predicate];
 		
 		if ( [Host countWithPredicate:predicate] > limit ) {
@@ -78,18 +78,18 @@
 
 
 -(NSString *)title {
-	return self.fullname ? self.fullname : self.name;	
+	return self.fullname ? self.fullname : self.name;
 }
 
 -(void)updateDistanceFromLocation:(CLLocation *)_location {
-	CLLocationCoordinate2D coord = [self coordinate];	
+	CLLocationCoordinate2D coord = [self coordinate];
 	CLLocation *host_location = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
-
+    
 	double distance = [_location distanceFromLocation:host_location];
 	
 	self.distance = [NSNumber numberWithDouble:distance];
 	
-	[host_location release];	
+	[host_location release];
 }
 
 -(NSString *)subtitle {
@@ -108,14 +108,14 @@
 		if (units == 0) {
 			return [NSString stringWithFormat:@"%.1f km %@", distance/1000, bearing];
 		} else {
-			return [NSString stringWithFormat:@"%.1f miles %@", distance/1609.344, bearing];			
+			return [NSString stringWithFormat:@"%.1f miles %@", distance/1609.344, bearing];
 		}
-			
-			
+        
+        
 	} else if ([self.street length] > 0) {
 		return [NSString stringWithFormat:@"%@, %@", self.street, self.city];
 	} else {
-		return self.city;		
+		return self.city;
 	}
 }
 
@@ -126,20 +126,20 @@
 	
 	if (self.postal_code) {
 		[array addObject:self.postal_code];
-	}					
+	}
 	
 	if (self.city) {
 		[array addObject:self.city];
-	}	 
+	}
 	
 	if (self.country) {
 		[array addObject:[self.country uppercaseString]];
 	}
-
+    
 	if (street) {
-		return [NSString stringWithFormat:@"%@\n%@", street, [array componentsJoinedByString:@", "]];	
+		return [NSString stringWithFormat:@"%@\n%@", street, [array componentsJoinedByString:@", "]];
 	} else {
-		return [array componentsJoinedByString:@", "];		
+		return [array componentsJoinedByString:@", "];
 	}
 }
 
@@ -148,10 +148,10 @@
 }
 
 /*
--(NSString *)contactURL {
-	// return [NSString stringWithFormat:@"http://www.warmshowers.org/user/%@/contact", self.hostid];
-	return [NSString stringWithFormat:@"/user/%@/contact", self.hostid];
-}*/
+ -(NSString *)contactURL {
+ // return [NSString stringWithFormat:@"http://www.warmshowers.org/user/%@/contact", self.hostid];
+ return [NSString stringWithFormat:@"/user/%@/contact", self.hostid];
+ }*/
 
 -(BOOL)needsUpdate {
 	// one week
@@ -164,7 +164,7 @@
 -(BOOL)isStale {
 	// return (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 60 );
 	// two weeks
-	return (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 1209600 );	
+	return (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 1209600 );
 }
 
 -(NSUInteger)pinColour {
@@ -185,7 +185,7 @@
 -(NSString *)trimmedPhoneNumber {
 	// return [self.homephone stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	NSArray *comps = [self.homephone componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-
+    
 	NSMutableArray *words = [NSMutableArray array];
 	for (NSString *comp in comps) {
 		if([comp length] > 0) {
@@ -198,13 +198,13 @@
 
 
 -(void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
-	 self.latitude = [NSNumber numberWithFloat:newCoordinate.latitude];
-	 self.longitude = [NSNumber numberWithFloat:newCoordinate.longitude];
+    self.latitude = [NSNumber numberWithFloat:newCoordinate.latitude];
+    self.longitude = [NSNumber numberWithFloat:newCoordinate.longitude];
 }
 
 -(CLLocationCoordinate2D)coordinate {
 	CLLocationCoordinate2D c;
-
+    
 	c.latitude = [self.latitude floatValue];
 	c.longitude = [self.longitude floatValue];
 	
