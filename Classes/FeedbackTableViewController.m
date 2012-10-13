@@ -64,7 +64,7 @@
 		[fetchRequest setPredicate:predicate];
 		
 		self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-																			managedObjectContext:[Feedback managedObjectContext]
+																			managedObjectContext:[Feedback managedObjectContextForCurrentThread]
 																			  sectionNameKeyPath:nil
 																					   cacheName:nil];
 		// [fetchedResultsController setDelegate:self];

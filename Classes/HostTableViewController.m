@@ -37,27 +37,22 @@
 	
     [toolbarItems makeObjectsPerformSelector:@selector(release)];
 	[self setToolbarItems:toolbarItems animated:YES];
+    
+    [self addSearchBarWithPlaceHolder:@"Search Cached Hosts"];
+}
 
-	/***** Search Bar *****/
-	UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,0,self.tableView.frame.size.width,44)];
-	searchBar.placeholder = @"Search Cached Hosts";
-	searchBar.delegate = self;
-	self.searchController = [[[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self] autorelease];
-	self.searchController.delegate = self;
-	self.searchController.searchResultsDataSource = self;	
-	self.searchController.searchResultsDelegate = self;	
-	self.tableView.tableHeaderView = self.searchController.searchBar;
-	[searchBar release];
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+	[self updateDistances];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 	self.navigationItem.hidesBackButton = YES;
-	
-	// todo: how often should this run?
-	[self updateDistances];
 }
 
+/*
 -(BOOL)searchDisplayController:(UISearchDisplayController *)_controller shouldReloadTableForSearchString:(NSString *)_searchString {
 	self.searchString = _searchString;
 	self.fetchedResultsController = nil;
@@ -70,7 +65,7 @@
 	self.fetchedResultsController = nil;
 	[self.tableView reloadData];
 }
-
+*/
 
 -(void)helpButtonPressed:(id)sender {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Help"
@@ -135,7 +130,7 @@
 		// Edit the section name key path and cache name if appropriate.
 		// nil for section name key path means "no sections".
 		self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
-																			managedObjectContext:[Host managedObjectContext] 
+																			managedObjectContext:[Host managedObjectContextForCurrentThread]
 																			  sectionNameKeyPath:nil 
 																					   cacheName:nil];
 		[fetchedResultsController setDelegate:self];

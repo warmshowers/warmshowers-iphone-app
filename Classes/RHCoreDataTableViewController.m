@@ -1,6 +1,6 @@
 //
 //  RHCoreDataTableViewController.m
-//  Version: 0.7.1
+//  Version: 0.7.3
 //
 //  Copyright (C) 2012 by Christopher Meyer
 //  http://schwiiz.org/
@@ -83,7 +83,7 @@
 -(void)searchDisplayController:(UISearchDisplayController *)controller willUnloadSearchResultsTableView:(UITableView *)tableView {
 	self.searchString = nil;
 	self.fetchedResultsController = nil;
-	[self.tableView reloadData];
+	// [self.tableView reloadData];
 }
 
 -(void)willMassUpdateNotificationReceived:(id)notification {

@@ -1,6 +1,6 @@
 //
 //  RHManagedObject.h
-//  Version: 0.7.1
+//  Version: 0.7.3
 //
 //  Copyright (C) 2012 by Christopher Meyer
 //  http://schwiiz.org/
@@ -30,7 +30,6 @@ typedef enum {
 	RHAggregateSum
 } RHAggregate;
 
-
 #import <CoreData/CoreData.h>
 @class RHManagedObjectContextManager;
 
@@ -39,7 +38,6 @@ typedef enum {
 /* Abstract Classes */
 +(NSString *)entityName;
 +(NSString *)modelName;
-
 
 +(NSEntityDescription *)entityDescription;
 +(void)deleteStore;
@@ -53,7 +51,6 @@ typedef enum {
 +(NSArray *)fetchWithPredicate:(NSPredicate *)predicate;
 +(NSArray *)fetchWithPredicate:(NSPredicate *)predicate sortDescriptor:(NSSortDescriptor *)descriptor;
 +(NSArray *)fetchWithPredicate:(NSPredicate *)predicate sortDescriptor:(NSSortDescriptor *)descriptor withLimit:(NSUInteger)limit;
-// +(NSArray *)serialize:(NSArray *)items;
 
 +(NSUInteger)count;
 +(NSUInteger)countWithPredicate:(NSPredicate *)predicate;
@@ -63,9 +60,10 @@ typedef enum {
 +(NSAttributeType)attributeTypeWithKey:(NSString *)key;
 +(id)aggregateWithType:(RHAggregate)aggregate key:(NSString *)key predicate:(NSPredicate *)predicate defaultValue:(id)defaultValue;
 
-
 +(void)deleteAll;
-+(NSManagedObjectContext *)managedObjectContext;
++(NSUInteger)deleteWithPredicate:(NSPredicate *)predicate;
++(NSManagedObjectContext *)managedObjectContext __deprecated;
++(NSManagedObjectContext *)managedObjectContextForCurrentThread;
 +(RHManagedObjectContextManager *)managedObjectContextManager;
 
 /* Instance methods */
@@ -75,7 +73,6 @@ typedef enum {
 -(NSDictionary *)serialize;
 
 @end
-
 
 @interface ImageToDataTransformer : NSValueTransformer
 

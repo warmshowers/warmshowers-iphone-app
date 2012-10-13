@@ -41,7 +41,7 @@
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		
 		// Edit the entity name as appropriate.
-		NSEntityDescription *entity = [NSEntityDescription entityForName:@"HostEntity" inManagedObjectContext:[Host managedObjectContext]];
+		NSEntityDescription *entity = [NSEntityDescription entityForName:@"HostEntity" inManagedObjectContext:[Host managedObjectContextForCurrentThread]];
 		[fetchRequest setEntity:entity];
 		
 		// [fetchRequest setFetchBatchSize:20];		
@@ -66,7 +66,7 @@
 		// Edit the section name key path and cache name if appropriate.
 		// nil for section name key path means "no sections".
 		self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
-																			managedObjectContext:[Host managedObjectContext] 
+																			managedObjectContext:[Host managedObjectContextForCurrentThread] 
 																			  sectionNameKeyPath:nil 
 																					   cacheName:nil];
 		[fetchedResultsController setDelegate:self];

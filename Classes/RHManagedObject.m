@@ -1,6 +1,6 @@
 //
 //  RHManagedObject.m
-//  Version: 0.7.1
+//  Version: 0.7.3
 //
 //  Copyright (C) 2012 by Christopher Meyer
 //  http://schwiiz.org/
@@ -28,9 +28,7 @@
 #import "RHManagedObjectContextManager.h"
 
 @interface RHManagedObject()
-
 @end
-
 
 @implementation RHManagedObject
 
@@ -51,7 +49,7 @@
 }
 
 +(NSEntityDescription *)entityDescription {
-	return [NSEntityDescription entityForName:[self entityName] inManagedObjectContext:[self managedObjectContext]];
+	return [NSEntityDescription entityForName:[self entityName] inManagedObjectContext:[self managedObjectContextForCurrentThread]];
 }
 
 +(void)commit {
@@ -59,7 +57,7 @@
 }
 
 +(id)newEntity {
-	return [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:[self managedObjectContext]];
+	return [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:[self managedObjectContextForCurrentThread]];
 }
 
 +(id)getWithPredicate:(NSPredicate *)predicate {
@@ -98,7 +96,7 @@
 	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
 	
 	[fetch setEntity:[self entityDescription]];
-    
+		
 	if (predicate) {
 		[fetch setPredicate:predicate];
 	}
@@ -113,7 +111,7 @@
 	
 	[fetch setIncludesPendingChanges:YES];
 	
-	return [[self managedObjectContext] executeFetchRequest:fetch error:nil];
+	return [[self managedObjectContextForCurrentThread] executeFetchRequest:fetch error:nil];
 }
 
 +(NSUInteger)count {
@@ -129,7 +127,7 @@
 		[fetch setPredicate:predicate];
 	}
 	
-	return [self.managedObjectContext countForFetchRequest:fetch error:nil];
+	return [[self managedObjectContextForCurrentThread] countForFetchRequest:fetch error:nil];
 }
 
 +(NSArray *)distinctValuesWithAttribute:(NSString *)attribute predicate:(NSPredicate *)predicate {
@@ -185,7 +183,7 @@
 	[fetch setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
 	
 	NSError *error;
-	NSArray *objects = [[self managedObjectContext] executeFetchRequest:fetch error:&error];
+	NSArray *objects = [[self managedObjectContextForCurrentThread] executeFetchRequest:fetch error:&error];
 	
 	id returnValue = nil;
 	
@@ -204,18 +202,34 @@
 }
 
 +(void)deleteAll {
+    
+    [self deleteWithPredicate:nil];
+    /*
+    
 	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
-	[fetch setEntity:[NSEntityDescription entityForName:[self entityName] inManagedObjectContext:[self managedObjectContext]]];
+	[fetch setEntity:[NSEntityDescription entityForName:[self entityName] inManagedObjectContext:[self managedObjectContextForCurrentThread]]];
 	[fetch setIncludesPendingChanges:YES];
 	[fetch setReturnsObjectsAsFaults:YES];
 	
-	for (RHManagedObject *basket in [self.managedObjectContext executeFetchRequest:fetch error:nil]) {
+	for (RHManagedObject *basket in [[self managedObjectContextForCurrentThread] executeFetchRequest:fetch error:nil]) {
 		[(RHManagedObject *)basket delete];
 	}
+     */
+}
+
++(NSUInteger)deleteWithPredicate:(NSPredicate *)predicate {
+    NSArray *itemsToDelete = [self fetchWithPredicate:predicate];
+    [itemsToDelete makeObjectsPerformSelector:@selector(delete)];
+    return [itemsToDelete count];
+}
+
+// deprecated = use managedObjectContextForCurrentThread instead
++(NSManagedObjectContext *)managedObjectContext {
+    return [self managedObjectContextForCurrentThread];
 }
 
 // Returns the NSManagedObjectContext for the current thread
-+(NSManagedObjectContext *)managedObjectContext {
++(NSManagedObjectContext *)managedObjectContextForCurrentThread {
 	return [[self managedObjectContextManager] managedObjectContext];
 }
 
@@ -242,7 +256,8 @@
 }
 
 -(id)objectInCurrentThreadContext {
-	return [[self managedObjectContext] objectWithID:self.objectID];
+    NSManagedObjectContext *currentMoc = [[self class] performSelector:@selector(managedObjectContextForCurrentThread)];
+	return [currentMoc objectWithID:self.objectID];
 }
 
 // This function needs work
