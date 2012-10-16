@@ -9,7 +9,6 @@
 #import "RHAboutViewController.h"
 #import "NSString+analytics.h"
 #import "RHWebViewController.h"
-#import "UIImage+scaleImage.h"
 #import "RHPromptForReview.h"
 #import "UIColor+utils.h"
 
@@ -64,7 +63,7 @@
 -(UITableViewCell *)headerCell {
 	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
 	
-	[cell.imageView setImage:[[UIImage imageNamed:@"Icon-72"] roundCornersOfRadius:10]];
+	[cell.imageView setImage:[UIImage imageNamed:@"Icon-72-rounded"]];
 	
 	[cell.textLabel setFont:[UIFont boldSystemFontOfSize:20]];
 	[cell.detailTextLabel setFont:[UIFont systemFontOfSize:14]];
@@ -125,7 +124,7 @@
 			break;
 		case 2:
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-			[cell.imageView setImage:[[UIImage imageNamed:@"trackmytour"] roundCornersOfRadius:10]];
+			[cell.imageView setImage:[UIImage imageNamed:@"trackmytour"]];
 			[cell.textLabel setText:@"TrackMyTour"];
 			[cell.detailTextLabel setText:@"A tracking app for bike touring"];
 			[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];

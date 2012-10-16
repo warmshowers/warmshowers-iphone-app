@@ -22,7 +22,6 @@
 
 #import "FeedbackTableViewController.h"
 #import "SVProgressHUD.h"
-#import "UIImage+scaleImage.h"
 #import "MKMapView+Utils.h"
 
 @implementation HostInfoViewController
@@ -196,7 +195,7 @@
         case 0:
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
             
-            [cell.imageView setImage:[[UIImage imageNamed:@"Icon-72"] roundCornersOfRadius:10]];
+            [cell.imageView setImage:[UIImage imageNamed:@"Icon-72-rounded"]];
             
             [cell.textLabel setText:[self.host title]];
             [cell setBackgroundColor:[UIColor clearColor]];

@@ -16,6 +16,8 @@
 		28D3F202112F7DC200FD0661 /* WS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28D3F201112F7DC200FD0661 /* WS.xcdatamodeld */; };
 		8316FBAB1611806100A4F1B6 /* RHActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8316FBAA1611806100A4F1B6 /* RHActionSheet.m */; };
 		831FBAA1160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m in Sources */ = {isa = PBXBuildFile; fileRef = 831FBAA0160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m */; };
+		8324D707162E227C00E0E82A /* Icon-72-rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 8324D705162E227C00E0E82A /* Icon-72-rounded.png */; };
+		8324D708162E227C00E0E82A /* Icon-72-rounded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8324D706162E227C00E0E82A /* Icon-72-rounded@2x.png */; };
 		832C51411625EE9300379852 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 832C51401625EE9300379852 /* Default-Portrait@2x~ipad.png */; };
 		832C51421625EED000379852 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 832C513E1625EDFC00379852 /* Default-Portrait~ipad.png */; };
 		832C51441625EF1F00379852 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 832C51431625EF1F00379852 /* Default-Landscape@2x~ipad.png */; };
@@ -72,7 +74,6 @@
 		83DA4CD1161728EC0080E8D1 /* RHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DA4CD0161728EC0080E8D1 /* RHAlertView.m */; };
 		83E605571608477F00C7C50E /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E605561608477F00C7C50E /* Feedback.m */; };
 		83F00E0415EBC6E000761BC6 /* RHAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E0315EBC5B400761BC6 /* RHAboutViewController.m */; };
-		83F00E0A15EBC72100761BC6 /* UIImage+scaleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E0915EBC72000761BC6 /* UIImage+scaleImage.m */; };
 		83F00E0D15EBC73900761BC6 /* RHPromptForReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E0C15EBC73900761BC6 /* RHPromptForReview.m */; };
 		83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1515EBD11B00761BC6 /* trackmytour.png */; };
 		83F00E1815EBD11B00761BC6 /* trackmytour@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */; };
@@ -104,6 +105,8 @@
 		8316FBAA1611806100A4F1B6 /* RHActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHActionSheet.m; sourceTree = "<group>"; };
 		831FBA9F160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+disablesAutomaticKeyboardDismissal.h"; sourceTree = "<group>"; };
 		831FBAA0160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+disablesAutomaticKeyboardDismissal.m"; sourceTree = "<group>"; };
+		8324D705162E227C00E0E82A /* Icon-72-rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72-rounded.png"; sourceTree = "<group>"; };
+		8324D706162E227C00E0E82A /* Icon-72-rounded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72-rounded@2x.png"; sourceTree = "<group>"; };
 		832C513E1625EDFC00379852 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		832C51401625EE9300379852 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "../Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		832C51431625EF1F00379852 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "../Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
@@ -197,8 +200,6 @@
 		83E605561608477F00C7C50E /* Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feedback.m; sourceTree = "<group>"; };
 		83F00E0215EBC5B400761BC6 /* RHAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHAboutViewController.h; sourceTree = "<group>"; };
 		83F00E0315EBC5B400761BC6 /* RHAboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHAboutViewController.m; sourceTree = "<group>"; };
-		83F00E0815EBC72000761BC6 /* UIImage+scaleImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+scaleImage.h"; sourceTree = "<group>"; };
-		83F00E0915EBC72000761BC6 /* UIImage+scaleImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+scaleImage.m"; sourceTree = "<group>"; };
 		83F00E0B15EBC73900761BC6 /* RHPromptForReview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHPromptForReview.h; sourceTree = "<group>"; };
 		83F00E0C15EBC73900761BC6 /* RHPromptForReview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHPromptForReview.m; sourceTree = "<group>"; };
 		83F00E1515EBD11B00761BC6 /* trackmytour.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trackmytour.png; sourceTree = "<group>"; };
@@ -401,6 +402,8 @@
 				83533E261622F483003788C5 /* Icon-72@2x.png */,
 				83533E221622F472003788C5 /* Icon@2x.png */,
 				83533E201622F46D003788C5 /* Icon.png */,
+				8324D705162E227C00E0E82A /* Icon-72-rounded.png */,
+				8324D706162E227C00E0E82A /* Icon-72-rounded@2x.png */,
 				83F00E1515EBD11B00761BC6 /* trackmytour.png */,
 				83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */,
 				836CCF0914ABB4C4000EDC51 /* 74-location-white.png */,
@@ -449,8 +452,6 @@
 				83C78E7F1474DE3D00274616 /* CLLocation+Bearing.m */,
 				8389E0FA14C4BF2400B0E900 /* UIScrollView+autoContentSize.h */,
 				8389E0FB14C4BF2400B0E900 /* UIScrollView+autoContentSize.m */,
-				83F00E0815EBC72000761BC6 /* UIImage+scaleImage.h */,
-				83F00E0915EBC72000761BC6 /* UIImage+scaleImage.m */,
 				83F00E2215EBD76100761BC6 /* UIColor+utils.h */,
 				83F00E2315EBD76100761BC6 /* UIColor+utils.m */,
 				83F00E1915EBD3FE00761BC6 /* NSString+analytics.h */,
@@ -570,6 +571,8 @@
 				832C51421625EED000379852 /* Default-Portrait~ipad.png in Resources */,
 				832C51441625EF1F00379852 /* Default-Landscape@2x~ipad.png in Resources */,
 				832C51461625EFD700379852 /* Default-Landscape~ipad.png in Resources */,
+				8324D707162E227C00E0E82A /* Icon-72-rounded.png in Resources */,
+				8324D708162E227C00E0E82A /* Icon-72-rounded@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,7 +603,6 @@
 				836CCF0614ABB3E6000EDC51 /* Host.m in Sources */,
 				8389E0FC14C4BF2400B0E900 /* UIScrollView+autoContentSize.m in Sources */,
 				83F8C187152B8B280084E380 /* ContactHostViewController.m in Sources */,
-				83F00E0A15EBC72100761BC6 /* UIImage+scaleImage.m in Sources */,
 				83F00E0D15EBC73900761BC6 /* RHPromptForReview.m in Sources */,
 				83F00E1B15EBD3FE00761BC6 /* NSString+analytics.m in Sources */,
 				83F00E2415EBD76100761BC6 /* UIColor+utils.m in Sources */,
