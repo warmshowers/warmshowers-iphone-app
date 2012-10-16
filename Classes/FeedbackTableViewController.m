@@ -7,6 +7,7 @@
 //
 
 #import "WSAppDelegate.h"
+#import "Host.h"
 #import "FeedbackTableViewController.h"
 #import "Feedback.h"
 
@@ -68,11 +69,7 @@
 																			  sectionNameKeyPath:nil
 																					   cacheName:nil];
 		// [fetchedResultsController setDelegate:self];
-		[fetchedResultsController release];
-		[fetchRequest release];
 		
-		[sortDescriptor release];
-		[sortDescriptors release];
 		
 		NSError *error = nil;
 		if (![fetchedResultsController performFetch:&error]) {
@@ -121,11 +118,6 @@
 			[df setDateStyle:NSDateFormatterMediumStyle];
 			[df setTimeStyle:NSDateFormatterNoStyle];
 			[cell.detailTextLabel setText:[df stringFromDate:rec.date]];
-			[df release];
-			break;
-            
-			
-		default:
 			break;
 	}
 }
@@ -135,7 +127,7 @@
 	
 	UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
 		[cell.detailTextLabel setFont:[UIFont systemFontOfSize:13]];
 		[cell.detailTextLabel setNumberOfLines:0];
 		[cell.detailTextLabel setLineBreakMode:UILineBreakModeWordWrap];
@@ -172,10 +164,6 @@
 
 
 
--(void)dealloc {
-	[host release];
-	[super dealloc];
-}
 
 
 @end

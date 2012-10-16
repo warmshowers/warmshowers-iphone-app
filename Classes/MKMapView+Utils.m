@@ -53,8 +53,8 @@
     // http://developer.apple.com/library/ios/#documentation/MapKit/Reference/MKMapItem_class/Reference/Reference.html
     if (itemClass && [itemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)]) {
         // ios6
-        MKPlacemark *placemark = [[[MKPlacemark alloc] initWithCoordinate:annotation.coordinate addressDictionary:nil] autorelease];
-        MKMapItem *mapItem = [[[MKMapItem alloc] initWithPlacemark:placemark] autorelease];
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:annotation.coordinate addressDictionary:nil];
+        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
         [mapItem setName:[annotation title]];
         [MKMapItem openMapsWithItems:[NSArray arrayWithObject:mapItem] launchOptions:nil];
         
@@ -152,8 +152,8 @@
 		northEast.longitude = MAX(northEast.longitude, coord.longitude);
 	}
 	
-	CLLocation *locSouthWest = [[[CLLocation alloc] initWithLatitude:southWest.latitude longitude:southWest.longitude] autorelease];
-	CLLocation *locNorthEast = [[[CLLocation alloc] initWithLatitude:northEast.latitude longitude:northEast.longitude] autorelease];
+	CLLocation *locSouthWest = [[CLLocation alloc] initWithLatitude:southWest.latitude longitude:southWest.longitude];
+	CLLocation *locNorthEast = [[CLLocation alloc] initWithLatitude:northEast.latitude longitude:northEast.longitude];
 	CLLocationDistance meters = [locSouthWest distanceFromLocation:locNorthEast];
 	
 	MKCoordinateRegion region;

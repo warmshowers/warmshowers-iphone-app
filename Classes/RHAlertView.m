@@ -26,14 +26,14 @@
 #import "RHAlertView.h"
 
 @interface RHAlertView()
-@property (nonatomic, retain) NSMutableDictionary *actions;
+@property (nonatomic, strong) NSMutableDictionary *actions;
 @end
 
 @implementation RHAlertView
 @synthesize actions;
 
 +(RHAlertView *)alertWithTitle:(NSString *)title message:(NSString *)message {
-	return [[[self alloc] initWithTitle:title message:message] autorelease];
+	return [[self alloc] initWithTitle:title message:message];
 }
 
 +(RHAlertView *)alertWithOKButtonWithTitle:(NSString *)title message:(NSString *)message {
@@ -71,7 +71,7 @@
 	NSInteger index = [self addButtonWithTitle:title];
 	if (block) {
 		NSNumber *key = [NSNumber numberWithInt:index];
-		[self.actions setObject:[[block copy] autorelease] forKey:key];
+		[self.actions setObject:[block copy] forKey:key];
 	}
 	return index;
 }
@@ -99,9 +99,5 @@
 	}
 }
 
--(void)dealloc {
-	[actions release];
-	[super dealloc];
-}
 
 @end

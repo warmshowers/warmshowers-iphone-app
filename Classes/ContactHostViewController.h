@@ -9,14 +9,14 @@
 
 @interface ContactHostViewController : UIViewController<UITextViewDelegate>
 
-@property (retain, nonatomic) Host *host;
+@property (strong, nonatomic) Host *host;
 
-@property (retain, nonatomic) IBOutlet UILabel *messageToTextLabel;
-@property (retain, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (retain, nonatomic) IBOutlet UITextView *textView;
-@property (retain, nonatomic) IBOutlet UITextField *subjectTextField;
-@property (retain, nonatomic) UISwipeGestureRecognizer *swipeGesture;
+@property (strong, nonatomic) IBOutlet UILabel *messageToTextLabel;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) IBOutlet UITextField *subjectTextField;
+@property (strong, nonatomic) UISwipeGestureRecognizer *swipeGesture;
 
-@property (retain, nonatomic) NSString *token;
+@property (strong, nonatomic) NSString *token;
 
 @end

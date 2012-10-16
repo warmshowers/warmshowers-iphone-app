@@ -9,11 +9,11 @@
 
 @interface RHWebViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate>
 
-@property (nonatomic, retain) NSURL *url;
-@property (nonatomic, retain) UIWebView *webView;
-@property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) NSURL *url;
+@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, assign) BOOL shouldShowDoneButton;
-@property (nonatomic, retain) UIActionSheet *popoverActionsheet;
+@property (nonatomic, strong) UIActionSheet *popoverActionsheet;
 
 -(void)fadeWebViewIn;
 

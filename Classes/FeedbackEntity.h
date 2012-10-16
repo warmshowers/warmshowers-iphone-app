@@ -14,11 +14,11 @@
 
 @interface FeedbackEntity : RHManagedObject
 
-@property (nonatomic, retain) NSString * body;
-@property (nonatomic, retain) NSString * hostOrGuest;
-@property (nonatomic, retain) NSNumber * nid;
-@property (nonatomic, retain) NSString * fullname;
-@property (nonatomic, retain) NSDate * date;
-@property (nonatomic, retain) HostEntity *host;
+@property (nonatomic, strong) NSString * body;
+@property (nonatomic, strong) NSString * hostOrGuest;
+@property (nonatomic, strong) NSNumber * nid;
+@property (nonatomic, strong) NSString * fullname;
+@property (nonatomic, strong) NSDate * date;
+@property (nonatomic, strong) HostEntity *host;
 
 @end

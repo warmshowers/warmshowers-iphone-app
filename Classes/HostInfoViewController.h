@@ -11,10 +11,10 @@
 
 @interface HostInfoViewController : UITableViewController
 
-@property (nonatomic, retain) Host *host;
-@property (nonatomic, retain) UILabel *statusLabel;
+@property (nonatomic, strong) Host *host;
+@property (nonatomic, strong) UILabel *statusLabel;
 @property (nonatomic, assign, getter = isShowingLoadingIndicator) BOOL showingLoadingIndicator;
-@property (nonatomic, retain) RHActionSheet *popoverActionsheet;
+@property (nonatomic, strong) RHActionSheet *popoverActionsheet;
 
 -(void)refreshHost;
 -(void)setLastUpdatedDate;

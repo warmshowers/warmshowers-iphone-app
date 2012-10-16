@@ -89,7 +89,6 @@
 	
 	self.distance = [NSNumber numberWithDouble:distance];
 	
-	[host_location release];
 }
 
 -(NSString *)subtitle {
@@ -213,7 +212,7 @@
 
 // convenience method
 -(CLLocation *)location {
-	return [[[CLLocation alloc] initWithLatitude:[self.latitude doubleValue] longitude:[self.longitude doubleValue]] autorelease];
+	return [[CLLocation alloc] initWithLatitude:[self.latitude doubleValue] longitude:[self.longitude doubleValue]];
 }
 
 -(void)purgeFeedback {

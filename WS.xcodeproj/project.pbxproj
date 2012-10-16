@@ -23,20 +23,20 @@
 		8330B481126A0775008B2EC4 /* WSRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8330B480126A0775008B2EC4 /* WSRequests.m */; };
 		834162061610E6B200AEC2D2 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 834162031610E6B200AEC2D2 /* SVProgressHUD.bundle */; };
 		834162071610E6B200AEC2D2 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 834162051610E6B200AEC2D2 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		8341620B1610E73E00AEC2D2 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8341620A1610E73E00AEC2D2 /* DSActivityView.m */; };
+		8341620B1610E73E00AEC2D2 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8341620A1610E73E00AEC2D2 /* DSActivityView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8341621A1610FA6800AEC2D2 /* RHCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 834162151610FA6800AEC2D2 /* RHCoreDataTableViewController.m */; };
 		8341621B1610FA6800AEC2D2 /* RHManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 834162171610FA6800AEC2D2 /* RHManagedObject.m */; };
 		8341621C1610FA6800AEC2D2 /* RHManagedObjectContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 834162191610FA6800AEC2D2 /* RHManagedObjectContextManager.m */; };
-		83441AC916085E5000468716 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AB516085E5000468716 /* AFHTTPClient.m */; };
-		83441ACA16085E5000468716 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AB716085E5000468716 /* AFHTTPRequestOperation.m */; };
-		83441ACB16085E5000468716 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AB916085E5000468716 /* AFImageRequestOperation.m */; };
-		83441ACC16085E5000468716 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441ABB16085E5000468716 /* AFJSONRequestOperation.m */; };
-		83441ACD16085E5000468716 /* AFJSONUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441ABD16085E5000468716 /* AFJSONUtilities.m */; };
-		83441ACE16085E5000468716 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441ABF16085E5000468716 /* AFNetworkActivityIndicatorManager.m */; };
-		83441ACF16085E5000468716 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AC216085E5000468716 /* AFPropertyListRequestOperation.m */; };
-		83441AD016085E5000468716 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AC416085E5000468716 /* AFURLConnectionOperation.m */; };
-		83441AD116085E5000468716 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AC616085E5000468716 /* AFXMLRequestOperation.m */; };
-		83441AD216085E5000468716 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AC816085E5000468716 /* UIImageView+AFNetworking.m */; };
+		83441AC916085E5000468716 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AB516085E5000468716 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		83441ACA16085E5000468716 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AB716085E5000468716 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		83441ACB16085E5000468716 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AB916085E5000468716 /* AFImageRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		83441ACC16085E5000468716 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441ABB16085E5000468716 /* AFJSONRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		83441ACD16085E5000468716 /* AFJSONUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441ABD16085E5000468716 /* AFJSONUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		83441ACE16085E5000468716 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441ABF16085E5000468716 /* AFNetworkActivityIndicatorManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		83441ACF16085E5000468716 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AC216085E5000468716 /* AFPropertyListRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		83441AD016085E5000468716 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AC416085E5000468716 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		83441AD116085E5000468716 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AC616085E5000468716 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		83441AD216085E5000468716 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AC816085E5000468716 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		83441AD51608694900468716 /* WSHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AD41608694900468716 /* WSHTTPClient.m */; };
 		83518606152C0C1F009E558F /* MKMapView+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 835185FF152C0B0B009E558F /* MKMapView+Utils.m */; };
 		83533E211622F46D003788C5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 83533E201622F46D003788C5 /* Icon.png */; };
@@ -62,7 +62,7 @@
 		839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */; };
 		83BE50B6126B4E7B00B5A65A /* HostInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BE50B4126B4E7B00B5A65A /* HostInfoViewController.m */; };
 		83C78E801474DE3D00274616 /* CLLocation+Bearing.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C78E7F1474DE3D00274616 /* CLLocation+Bearing.m */; };
-		83CB0A941608914C00433BF0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CB0A931608914C00433BF0 /* JSONKit.m */; };
+		83CB0A941608914C00433BF0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CB0A931608914C00433BF0 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		83CDACE0160A310000B5DC83 /* FeedbackTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CDACDF160A310000B5DC83 /* FeedbackTableViewController.m */; };
 		83CE1361147455CB006EED95 /* FavouriteHostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE1360147455CB006EED95 /* FavouriteHostTableViewController.m */; };
 		83CF4474126A01A200DF3CFD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF4473126A01A200DF3CFD /* MapKit.framework */; };
@@ -638,6 +638,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -674,6 +675,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -710,6 +712,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WS_Prefix.pch;

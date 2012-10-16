@@ -12,6 +12,6 @@
 
 @interface FeedbackTableViewController : RHCoreDataTableViewController
 
-@property (nonatomic, retain) Host *host;
+@property (nonatomic, strong) Host *host;
 
 @end

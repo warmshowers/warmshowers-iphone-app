@@ -67,7 +67,7 @@
                              locateButton,
                              nil];
 	
-    [toolbarItems makeObjectsPerformSelector:@selector(release)];
+    // [toolbarItems makeObjectsPerformSelector:@selector(release)];
 	[self setToolbarItems:toolbarItems animated:YES];
 }
 
@@ -91,7 +91,7 @@
 
 
 -(void)logoutActionSheet:(id)sender {
-	self.popoverActionsheet = [[[RHActionSheet alloc] initWithTitle:nil] autorelease];
+	self.popoverActionsheet = [[RHActionSheet alloc] initWithTitle:nil];
 	
 	[self.popoverActionsheet addDestructiveButtonWithTitle:@"Logout" block:^{
 		[[WSAppDelegate sharedInstance] performSelector:@selector(logout)];
@@ -145,11 +145,7 @@
 																			  sectionNameKeyPath:nil
 																					   cacheName:nil];
 		[fetchedResultsController setDelegate:self];
-		[fetchedResultsController release];
-		[fetchRequest release];
 		
-		[sortDescriptor release];
-		[sortDescriptors release];
 		
 		NSError *error = nil;
 		if (![fetchedResultsController performFetch:&error]) {
@@ -265,7 +261,7 @@
 		pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
 		
 		if ( pinView == nil ) {
-            pinView = (MKPinAnnotationView *)[[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:defaultPinID] autorelease];
+            pinView = (MKPinAnnotationView *)[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:defaultPinID];
 		}
         
 		pinView.pinColor = [annotation pinColour]; // MKPinAnnotationColorGreen;
@@ -289,7 +285,6 @@
 	HostInfoViewController *controller = [[HostInfoViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	controller.host = host;
 	[self.navigationController pushViewController:controller animated:YES];
-	[controller release];
 }
 
 -(void)infoButtonPressed:(id)sender {
@@ -301,8 +296,6 @@
 	navController.modalPresentationStyle = UIModalPresentationFormSheet;
 	
 	[self.navigationController presentModalViewController:navController animated:YES];
-	[controller release];
-	[navController release];
 }
 
 -(void)authenticationChanged:(id)notification {
@@ -319,12 +312,5 @@
 
 #pragma mark -
 #pragma mark Memory management
--(void)dealloc {
-	[mapView release];
-	[fetchedResultsController release];
-	[popoverActionsheet release];
-	
-	[super dealloc];
-}
 
 @end

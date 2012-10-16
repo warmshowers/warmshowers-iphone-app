@@ -27,15 +27,15 @@
 -(void)viewDidLoad {
 	[super viewDidLoad];
 	
-	UIBarButtonItem *helpButton = [[UIBarButtonItem alloc] initWithTitle:@"Help" style:UIBarButtonItemStyleBordered target:self action:@selector(helpButtonPressed:)];	
+	UIBarButtonItem *helpButton = [[UIBarButtonItem alloc] initWithTitle:@"Help" style:UIBarButtonItemStyleBordered target:self action:@selector(helpButtonPressed:)];
 	
 	NSArray *toolbarItems = [NSArray arrayWithObjects:
 							 // searchButton,
-							 [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],	
+							 [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
 							 helpButton,
 							 nil];
 	
-    [toolbarItems makeObjectsPerformSelector:@selector(release)];
+
 	[self setToolbarItems:toolbarItems animated:YES];
     
     [self addSearchBarWithPlaceHolder:@"Search Cached Hosts"];
@@ -74,7 +74,6 @@
 										  cancelButtonTitle:nil
 										  otherButtonTitles:@"OK", nil];
 	[alert show];
-	[alert release];
 }
 
 // too many entries to do pretty animations
@@ -134,11 +133,7 @@
 																			  sectionNameKeyPath:nil 
 																					   cacheName:nil];
 		[fetchedResultsController setDelegate:self];
-		[fetchedResultsController release];
-		[fetchRequest release];
 	
-		[sortDescriptor release];
-		[sortDescriptors release];
 		
 		NSError *error = nil;
 		if (![fetchedResultsController performFetch:&error]) {
@@ -178,7 +173,7 @@
 	
 	UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
 	
@@ -191,7 +186,6 @@
 	HostInfoViewController *controller = [[HostInfoViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	controller.host = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	[self.navigationController pushViewController:controller animated:YES];
-	[controller release];
 }
 
 
@@ -203,10 +197,5 @@
     return YES;
 }
 
--(void)dealloc {
-	[searchController release];
-	[searchString release];
-	[super dealloc];
-}
 
 @end

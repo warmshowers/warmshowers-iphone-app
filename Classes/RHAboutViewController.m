@@ -37,7 +37,6 @@
 	self.navigationItem.leftBarButtonItem = doneButton;
 	self.navigationController.navigationBar.tintColor = [UIColor colorFromHexString:@"2E74A5"];
 	
-	[doneButton release];
 	
 }
 
@@ -80,7 +79,7 @@
 	[cell.textLabel setText:appName];
 	[cell.detailTextLabel setText:versionLabel];
 	[cell setBackgroundColor:[UIColor clearColor]];
-	[cell setBackgroundView:[[[UIView alloc] initWithFrame:CGRectZero] autorelease]];
+	[cell setBackgroundView:[[UIView alloc] initWithFrame:CGRectZero]];
 	[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 	
 	return cell;
@@ -91,7 +90,7 @@
 	[cell.textLabel setTextAlignment:UITextAlignmentCenter];
 	[cell.textLabel setText:@"by Christopher Meyer"];
 	[cell setBackgroundColor:[UIColor clearColor]];
-	[cell setBackgroundView:[[[UIView alloc] initWithFrame:CGRectZero] autorelease]];
+	[cell setBackgroundView:[[UIView alloc] initWithFrame:CGRectZero]];
 	[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 	return cell;
 }

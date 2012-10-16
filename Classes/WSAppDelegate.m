@@ -42,7 +42,7 @@
 }
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
 	self.navigationController = [[UINavigationController alloc] initWithRootViewController:[self.segmentViewControllers objectAtIndex:0]];
 	self.window.rootViewController = self.navigationController;
@@ -53,9 +53,9 @@
 	[self.navigationController setToolbarHidden:NO];
 	[self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:46/255.0 green:116/255.0 blue:165/255.0 alpha:1]];
 	
-	self.segmentsController = [[[SegmentsController alloc] initWithNavigationController:self.navigationController viewControllers:[self segmentViewControllers]] autorelease];
+	self.segmentsController = [[SegmentsController alloc] initWithNavigationController:self.navigationController viewControllers:[self segmentViewControllers]];
 	
-	self.locationManager = [[[CLLocationManager alloc] init] autorelease];
+	self.locationManager = [[CLLocationManager alloc] init];
 	self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 	
 	if ([CLLocationManager locationServicesEnabled]) {
@@ -77,9 +77,6 @@
 		UIViewController *list = [[HostTableViewController alloc] initWithStyle:UITableViewStylePlain];
 		UIViewController *list2 = [[FavouriteHostTableViewController alloc] initWithStyle:UITableViewStylePlain];
 		self.segmentViewControllers = [NSArray arrayWithObjects:map, list, list2, nil];
-		[map release];
-		[list release];
-		[list2 release];
 	}
 	
 	return segmentViewControllers;
@@ -135,10 +132,11 @@
     
     NSString *name = [[NSUserDefaults standardUserDefaults] stringForKey:@"ws-name"];
     [[alert textFieldAtIndex:0] setText:name];
-        
+    
+    __weak RHAlertView *bAlert = alert;
     [alert addButtonWithTitle:@"Login" block:^{
-        NSString *name = [[alert textFieldAtIndex:0] text];
-        NSString *password = [[alert textFieldAtIndex:1] text];
+        NSString *name = [[bAlert textFieldAtIndex:0] text];
+        NSString *password = [[bAlert textFieldAtIndex:1] text];
         
         [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"ws-name"];
         [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"ws-password"];
@@ -238,18 +236,5 @@
     // [[RHManagedObjectContextManager sharedInstance] commit];
 }
 
-- (void)dealloc {
-    
-    
-	
-	[segmentsController release];
-	[segmentViewControllers release];
-	
-	[locationManager release];
-	
-    [navigationController release];
-    [window release];
-    [super dealloc];
-}
 
 @end

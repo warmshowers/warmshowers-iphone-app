@@ -52,11 +52,9 @@
 	
 	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed:)];
 	self.navigationItem.leftBarButtonItem = cancelButton;
-	[cancelButton release];
 	
     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStylePlain target:self action:@selector(sendButtonPressed:)];
     self.navigationItem.rightBarButtonItem = sendButton;
-    [sendButton release];
     
     
 	/*
@@ -175,7 +173,7 @@
 
 -(void)keyboardDidShow:(NSNotification *)_notification {
 	UIView *keyboardView = [[UIApplication sharedApplication] keyboardView];
-	self.swipeGesture = [[[UISwipeGestureRecognizer alloc] initWithTarget:self.textView action:@selector(resignFirstResponder)] autorelease];
+	self.swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self.textView action:@selector(resignFirstResponder)];
 	self.swipeGesture.direction = UISwipeGestureRecognizerDirectionDown;
 	[keyboardView addGestureRecognizer:self.swipeGesture];
 }
@@ -276,15 +274,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-	[host release];
-	[scrollView release];
-	[textView release];
-	[messageToTextLabel release];
-	[token release];
-	[subjectTextField release];
-    [swipeGesture release];
     
-	[super dealloc];
 }
 
 @end

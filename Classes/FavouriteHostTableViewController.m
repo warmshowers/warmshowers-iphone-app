@@ -70,11 +70,7 @@
 																			  sectionNameKeyPath:nil 
 																					   cacheName:nil];
 		[fetchedResultsController setDelegate:self];
-		[fetchedResultsController release];
-		[fetchRequest release];
 		
-		[sortDescriptor release];
-		[sortDescriptors release];
 		
 		NSError *error = nil;
 		if (![fetchedResultsController performFetch:&error]) {

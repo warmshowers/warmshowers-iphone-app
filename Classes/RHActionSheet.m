@@ -10,7 +10,7 @@
 
 @interface RHActionSheet()
 
-@property (nonatomic, retain) NSMutableDictionary *actions;
+@property (nonatomic, strong) NSMutableDictionary *actions;
 
 +(NSNumber *)keyForIndex:(NSInteger)index;
 
@@ -53,7 +53,7 @@
 	NSNumber *key = [RHActionSheet keyForIndex:index];
 	
 	if (block) {
-		[self.actions setObject:[[block copy] autorelease] forKey:key];
+		[self.actions setObject:[block copy] forKey:key];
 	}
 	
 	return index;
@@ -87,9 +87,5 @@
 	
 }
 
--(void)dealloc {
-	[actions release];
-	[super dealloc];
-}
 
 @end

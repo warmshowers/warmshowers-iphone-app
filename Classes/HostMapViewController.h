@@ -12,13 +12,13 @@
 
 @interface HostMapViewController : UIViewController <NSFetchedResultsControllerDelegate, MKMapViewDelegate>
 
-@property (nonatomic, retain) IBOutlet MKMapView *mapView;
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) IBOutlet MKMapView *mapView;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, assign) int lastZoomLevel;
 
 @property (nonatomic, assign) BOOL locationUpdated;
 @property (nonatomic, assign) BOOL hasRunOnce;
-@property (nonatomic, retain) RHActionSheet *popoverActionsheet;
+@property (nonatomic, strong) RHActionSheet *popoverActionsheet;
 
 
 -(void)zoomToCurrentLocation:(id)sender;

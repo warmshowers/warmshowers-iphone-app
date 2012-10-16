@@ -29,7 +29,6 @@ const float PPRWebViewControllerFadeDuration = 0.5;
 							 target:self
 							 action:@selector(actionButtonTapped:)];
 	self.navigationItem.rightBarButtonItem = actions;
-	[actions release];	
 }
 
 -(void)viewDidUnload {
@@ -49,7 +48,6 @@ const float PPRWebViewControllerFadeDuration = 0.5;
     UIView *mainView = [[UIView alloc] initWithFrame:CGRectZero];
     mainView.autoresizingMask = resizeAllMask;
     self.view = mainView;
-    [mainView release];
     
     webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     webView.autoresizingMask = resizeAllMask;
@@ -78,7 +76,6 @@ const float PPRWebViewControllerFadeDuration = 0.5;
 												 otherButtonTitles:@"Open in Safari", nil];
 	
 	[self.popoverActionsheet showFromBarButtonItem:sender animated:YES];
-	[self.popoverActionsheet release];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
@@ -118,7 +115,6 @@ const float PPRWebViewControllerFadeDuration = 0.5;
                                              target:self
                                              action:@selector(doneButtonTapped:)];
             self.navigationItem.leftBarButtonItem = done;
-            [done release];
         } else {
             self.navigationItem.leftBarButtonItem = nil;
         }
@@ -147,14 +143,6 @@ const float PPRWebViewControllerFadeDuration = 0.5;
 #pragma mark Device Orientation
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
-}
-
--(void)dealloc {
-    [url release], url = nil;
-    [webView stopLoading], webView.delegate = nil, [webView release], webView = nil;
-    [activityIndicator release], activityIndicator = nil;
-	[popoverActionsheet release], popoverActionsheet = nil;
-    [super dealloc];
 }
 
 @end

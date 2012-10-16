@@ -43,7 +43,7 @@
 																						   target:self
 																						   action:@selector(showActions:)];
 	
-	self.statusLabel = [[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 200, 20)] autorelease];
+	self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 200, 20)];
 	[self.statusLabel setBackgroundColor:[UIColor clearColor]];
 	[self.statusLabel setFont:[UIFont systemFontOfSize:14]];
 	[self.statusLabel setTextAlignment:UITextAlignmentCenter];
@@ -65,7 +65,7 @@
 							 fixed,
 							 nil];
 	
-    [toolbarItems makeObjectsPerformSelector:@selector(release)];
+
 	[self setToolbarItems:toolbarItems animated:YES];
     
 	[self.host addObserver:self forKeyPath:@"last_updated_details" options:0 context:nil];
@@ -184,7 +184,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
 		[cell.detailTextLabel setFont:[UIFont systemFontOfSize:13]];
 		[cell.detailTextLabel setNumberOfLines:0];
 		[cell.detailTextLabel setLineBreakMode:UILineBreakModeWordWrap];
@@ -194,13 +194,13 @@
 	
 	switch (indexPath.section) {
         case 0:
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
             
             [cell.imageView setImage:[[UIImage imageNamed:@"Icon-72"] roundCornersOfRadius:10]];
             
             [cell.textLabel setText:[self.host title]];
             [cell setBackgroundColor:[UIColor clearColor]];
-            [cell setBackgroundView:[[[UIView alloc] initWithFrame:CGRectZero] autorelease]];
+            [cell setBackgroundView:[[UIView alloc] initWithFrame:CGRectZero]];
             [cell.textLabel setNumberOfLines:0];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             
@@ -252,7 +252,6 @@
 				[df setTimeStyle:NSDateFormatterNoStyle];
 				cell.textLabel.text = @"Mbr Since";
 				cell.detailTextLabel.text = [df stringFromDate:self.host.member_since];
-				[df release];
 				
 			} else if (indexPath.row == 7) {
 				cell.textLabel.text = @"Last Login";
@@ -261,7 +260,7 @@
 			break;
 		case 2:
 			if (indexPath.row == 0) {
-				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"FeedbackCell"] autorelease];
+				cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"FeedbackCell"];
 				cell.textLabel.text = [NSString stringWithFormat:@"Feedback (%i)", [self.host.feedback count]];
 				cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			}
@@ -336,7 +335,6 @@
 		FeedbackTableViewController *controller = [[FeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
 		[controller setHost:self.host];
 		[self.navigationController pushViewController:controller animated:YES];
-		[controller release];
 	}
 	
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -382,7 +380,7 @@
 
 -(void)showActions:(id)sender {
 	if (self.host.last_updated_details != nil) {
-		self.popoverActionsheet = [[[RHActionSheet alloc] init] autorelease];
+		self.popoverActionsheet = [[RHActionSheet alloc] init];
 		
 		if ([self.host.favourite boolValue]) {
 			[self.popoverActionsheet addButtonWithTitle:@"Unmark as Favourite" block:^{
@@ -413,8 +411,6 @@
 			UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 			[self.navigationController presentModalViewController:navController animated:YES];
 			
-			[controller release];
-			[navController release];
 		}];
 		
 		[self.popoverActionsheet addButtonWithTitle:@"Contact Host" block:^{
@@ -424,8 +420,6 @@
 			UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 			[navController setModalPresentationStyle:UIModalPresentationPageSheet];
 			[self.navigationController presentModalViewController:navController animated:YES];
-			[controller release];
-			[navController release];
 		}];
 		
 		[self.popoverActionsheet addCancelButtonWithTitle:@"Cancel"];
@@ -446,11 +440,7 @@
 	
 	[self.host removeObserver:self forKeyPath:@"last_updated_details"];
 	
-	[host release];
-	[statusLabel release];
-	[popoverActionsheet release];
 	
-    [super dealloc];
 }
 
 @end

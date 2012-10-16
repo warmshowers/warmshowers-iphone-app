@@ -10,8 +10,8 @@
 #import "NSArray+PerformSelector.h"
 
 @interface SegmentsController ()
-@property (nonatomic, retain, readwrite) NSArray *viewControllers;
-@property (nonatomic, retain, readwrite) UINavigationController *navigationController;
+@property (nonatomic, strong, readwrite) NSArray *viewControllers;
+@property (nonatomic, strong, readwrite) UINavigationController *navigationController;
 @end
 
 @implementation SegmentsController
@@ -35,7 +35,6 @@
 		segmentedControl.selectedSegmentIndex = 0;
 		[self indexDidChangeForSegmentedControl:segmentedControl];
 
-		[segmentedControl release];		
     }
     return self;
 }
@@ -50,10 +49,5 @@
     incomingViewController.navigationItem.titleView = _segmentedControl;
 }
 
--(void)dealloc {
-    [super dealloc];
-    self.viewControllers = nil;
-    self.navigationController = nil;
-}
 
 @end

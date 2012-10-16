@@ -12,8 +12,8 @@
 
 @interface HostTableViewController : RHCoreDataTableViewController<UISearchDisplayDelegate, UISearchBarDelegate>
 
-@property (nonatomic, retain) UISearchDisplayController *searchController;
-@property (nonatomic, retain) NSString *searchString;
+@property (nonatomic, strong) UISearchDisplayController *searchController;
+@property (nonatomic, strong) NSString *searchString;
 // @property (nonatomic, retain) IBOuUITableViewCell *tempCell;
 
 

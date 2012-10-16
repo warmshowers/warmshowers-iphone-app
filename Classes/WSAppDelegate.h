@@ -23,11 +23,11 @@
 
 @interface WSAppDelegate : NSObject <UIApplicationDelegate, CLLocationManagerDelegate>
 
-@property (nonatomic, retain) UIWindow *window;
-@property (nonatomic, retain) UINavigationController *navigationController;
-@property (nonatomic, retain) SegmentsController *segmentsController;
-@property (nonatomic, retain) NSArray *segmentViewControllers;
-@property (nonatomic, retain) CLLocationManager *locationManager;
+@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) UINavigationController *navigationController;
+@property (nonatomic, strong) SegmentsController *segmentsController;
+@property (nonatomic, strong) NSArray *segmentViewControllers;
+@property (nonatomic, strong) CLLocationManager *locationManager;
 
 +(WSAppDelegate *)sharedInstance;
 
