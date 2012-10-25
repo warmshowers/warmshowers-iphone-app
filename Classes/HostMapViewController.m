@@ -306,6 +306,28 @@
     }
 }
 
+-(IBAction)mapTypeSegmentedControl:(UISegmentedControl *)sender {
+	switch ([sender selectedSegmentIndex]) {
+		case 0:
+			self.mapView.mapType = MKMapTypeStandard;
+			break;
+		case 1:
+			self.mapView.mapType = MKMapTypeSatellite;
+			break;
+		default:
+			self.mapView.mapType = MKMapTypeHybrid;
+			break;
+	}
+	
+	if ([self.presentedViewController isEqual:self.mapPropertiesViewController]) {
+		[self.mapPropertiesViewController dismissViewControllerAnimated:YES completion:nil];
+	}
+}
+
+-(IBAction)showMapProperties:(id)sender {
+	[self presentModalViewController:self.mapPropertiesViewController animated:YES];
+}
+
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
 }
@@ -313,4 +335,8 @@
 #pragma mark -
 #pragma mark Memory management
 
+- (void)viewDidUnload {
+    [self setMapPropertiesViewController:nil];
+    [super viewDidUnload];
+}
 @end

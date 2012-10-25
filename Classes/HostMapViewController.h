@@ -19,12 +19,15 @@
 @property (nonatomic, assign) BOOL locationUpdated;
 @property (nonatomic, assign) BOOL hasRunOnce;
 @property (nonatomic, strong) RHActionSheet *popoverActionsheet;
+@property (strong, nonatomic) IBOutlet UIViewController *mapPropertiesViewController;
 
 
 -(void)zoomToCurrentLocation:(id)sender;
 -(void)redrawAnnotations;
 -(void)removeNonVisibleAnnotations;
-
 -(void)infoButtonPressed:(id)sender;
+
+-(IBAction)mapTypeSegmentedControl:(UISegmentedControl *)sender;
+-(IBAction)showMapProperties:(id)sender;
 
 @end
