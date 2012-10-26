@@ -1,6 +1,6 @@
 //
 //  RHAlertView.m
-//  Version: 0.1
+//  Version: 0.2
 //
 //  Copyright (C) 2012 by Christopher Meyer
 //  http://schwiiz.org/
@@ -45,8 +45,8 @@
 -(id)init {
 	if (self=[super init]) {
 		self.delegate = self;
+		self.actions = [NSMutableDictionary dictionary];
 	}
-	
 	return self;
 }
 
@@ -55,16 +55,7 @@
 		self.title = title;
 		self.message = message;
 	}
-	
 	return self;
-}
-
--(NSMutableDictionary *)actions {
-	if (actions == nil) {
-		self.actions = [NSMutableDictionary dictionary];
-	}
-	
-	return actions;
 }
 
 -(NSInteger)addButtonWithTitle:(NSString *)title block:(RHAlertBlock)block {
@@ -97,7 +88,9 @@
 	if (block) {
 		block();
 	}
+	
+	// This line prevents a retain cycle if alert is referenced within the block.
+	self.actions = nil;
 }
-
 
 @end

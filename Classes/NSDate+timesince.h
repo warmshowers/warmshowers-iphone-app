@@ -1,5 +1,6 @@
 //
 //  NSDate+timesince.h
+//  Version: 0.3
 //
 //  Copyright (C) 2012 by Christopher Meyer
 //  http://schwiiz.org/

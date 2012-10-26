@@ -56,7 +56,7 @@
 	self.segmentsController = [[SegmentsController alloc] initWithNavigationController:self.navigationController viewControllers:[self segmentViewControllers]];
 	
 	self.locationManager = [[CLLocationManager alloc] init];
-	self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+	self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
 	
 	if ([CLLocationManager locationServicesEnabled]) {
 		[self.locationManager startUpdatingLocation];
@@ -65,7 +65,7 @@
     if ([self isLoggedIn]) {
         [RHPromptForReview sharedInstance];
     } else {
-        [self loginWithPrompt:YES];
+		[self logout];
     }
     
     return YES;
@@ -87,7 +87,6 @@
 }
 
 -(void)loginWithoutPrompt {
-    // NSLog(@"%@", @"loginWithoutPrompt");
 	return [self loginWithPrompt:NO];
 }
 
@@ -149,11 +148,11 @@
         
         [alert2 addButtonWithTitle:@"OK" block:^{
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.warmshowers.org/user/register"]];
-            [self loginWithPrompt:YES];
+            [self logout];
         }];
                 
         [alert2 addButtonWithTitle:@"Cancel" block:^{
-            [self loginWithPrompt:YES];
+            [self logout];
         }];
         
         [alert2 show];

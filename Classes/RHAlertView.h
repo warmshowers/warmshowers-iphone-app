@@ -1,6 +1,6 @@
 //
 //  RHAlertView.h
-//  Version: 0.1
+//  Version: 0.2
 //
 //  Copyright (C) 2012 by Christopher Meyer
 //  http://schwiiz.org/
