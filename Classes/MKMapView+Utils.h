@@ -1,5 +1,5 @@
 //
-//  MKMapView+Utils.h.h
+//  MKMapView+Utils.h
 //
 //  Copyright (C) 2012 by Christopher Meyer
 //  http://schwiiz.org/
