@@ -1,6 +1,6 @@
 //
 //  RHManagedObjectContextManager.m
-//  Version: 0.9
+//  Version: 0.8.2
 //
 //  Copyright (C) 2012 by Christopher Meyer
 //  http://schwiiz.org/
@@ -22,13 +22,11 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-//
 
 #import "RHManagedObjectContextManager.h"
 
 @interface RHManagedObjectContextManager()
 
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContextBackground;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContextForMainThread;
 @property (nonatomic, strong) NSMutableDictionary *managedObjectContexts;
 @property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
@@ -40,11 +38,10 @@
 -(NSString *)storePath;
 -(NSURL *)storeURL;
 -(NSString *)databaseName;
--(void)backgroundMocDidSave:(NSNotification *)saveNotification;
+-(void)mocDidSave:(NSNotification *)saveNotification;
 @end
 
 @implementation RHManagedObjectContextManager
-@synthesize managedObjectContextBackground;
 @synthesize managedObjectContextForMainThread;
 @synthesize managedObjectContexts;
 @synthesize managedObjectModel;
@@ -113,10 +110,6 @@
 		}
 	}
 	
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextDidSaveNotification object:self.managedObjectContextBackground];
-		
-	self.managedObjectContextBackground = nil;
 	self.managedObjectContextForMainThread = nil;
 	self.managedObjectContexts = nil;
 	self.managedObjectModel = nil;
@@ -149,45 +142,18 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}
-	
-	NSManagedObjectContext *parentContext = [moc parentContext];
-	
-	[parentContext performBlock:^{
-		NSError *error = nil;
-		
-		if (![parentContext save:&error])			{
-			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-			abort();
-		}
-	}];
-	
+
 	[self discardManagedObjectContext];
 }
 
 #pragma mark -
 #pragma mark Core Data stack
-
--(NSManagedObjectContext *)managedObjectContextBackground {
-	if (managedObjectContextBackground == nil) {
-		self.managedObjectContextBackground = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-		[managedObjectContextBackground setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
-		[managedObjectContextBackground setMergePolicy:kMergePolicy];
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(backgroundMocDidSave:)
-													 name:NSManagedObjectContextDidSaveNotification
-												   object:managedObjectContextBackground];
-		
-	}
-	
-	return managedObjectContextBackground;
-}
-
 -(NSManagedObjectContext *)managedObjectContextForMainThread {
 	if (managedObjectContextForMainThread == nil) {
-		// NSAssert([NSThread isMainThread], @"Construction may only happen on the main thread!");
-		self.managedObjectContextForMainThread = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-		[managedObjectContextForMainThread setParentContext:[self managedObjectContextBackground]];
+		NSAssert([NSThread isMainThread], @"Must be instantiated on main thread.");
+		self.managedObjectContextForMainThread = [[NSManagedObjectContext alloc] init];
+		[managedObjectContextForMainThread setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
+		[managedObjectContextForMainThread setMergePolicy:kMergePolicy];
 	}
 	
 	return managedObjectContextForMainThread;
@@ -198,31 +164,34 @@
 	
 	if ([thread isMainThread]) {
 		return [self managedObjectContextForMainThread];
-	} else if (managedObjectContextForMainThread == nil) {
-		// YES, this is necessary.
-		dispatch_sync(dispatch_get_main_queue(),^{
-			[self managedObjectContextForCurrentThread];
-		});
 	}
-	
 	
 	// a key to cache the moc for the current thread
 	NSString *threadKey = [NSString stringWithFormat:@"%p", thread];
-	
-	@synchronized(self) {
-		if ( [self.managedObjectContexts objectForKey:threadKey] == nil ) {
-			// create a moc for this thread
-			NSManagedObjectContext *threadContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
-			[threadContext setParentContext:[self managedObjectContextBackground]];
-			[self.managedObjectContexts setObject:threadContext forKey:threadKey];
-		}
-	}
-	
+
+    if ( [self.managedObjectContexts objectForKey:threadKey] == nil ) {
+		// create a moc for this thread
+        NSManagedObjectContext *threadContext = [[NSManagedObjectContext alloc] init];
+        [threadContext setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
+		[threadContext setMergePolicy:kMergePolicy];
+		
+        // cache the moc for this thread
+        [self.managedObjectContexts setObject:threadContext forKey:threadKey];
+		
+		// attach a notification thingie
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(mocDidSave:)
+													 name:NSManagedObjectContextDidSaveNotification
+												   object:threadContext];
+    }
+
 	return [self.managedObjectContexts objectForKey:threadKey];
 }
 
 -(void)discardManagedObjectContext {
 	NSString *threadKey = [NSString stringWithFormat:@"%p", [NSThread currentThread]];
+	NSManagedObjectContext *threadContext = [self.managedObjectContexts objectForKey:threadKey];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextDidSaveNotification object:threadContext];
 	[self.managedObjectContexts removeObjectForKey:threadKey];
 }
 
@@ -305,22 +274,22 @@
 	return persistentStoreCoordinator;
 }
 
--(void)backgroundMocDidSave:(NSNotification *)saveNotification {
-	
-	NSManagedObjectContext *moc = [self managedObjectContextForMainThread];
-	
-	/*
-	 // This ensures no updated object is fault, which would cause the NSFetchedResultsController updates to fail.
-	 // http://www.mlsite.net/blog/?p=518
-	 NSArray* updates = [[saveNotification.userInfo objectForKey:@"updated"] allObjects];
-	 for (NSInteger i = [updates count]-1; i >= 0; i--) {
-	 [[[self managedObjectContextForMainThread] objectWithID:[[updates objectAtIndex:i] objectID]] willAccessValueForKey:nil];
-	 }
-	 */
-	
-	[moc performBlock:^{
-		[moc mergeChangesFromContextDidSaveNotification:saveNotification];
-	}];
+-(void)mocDidSave:(NSNotification *)saveNotification {
+    if ([NSThread isMainThread]) {
+		// This ensures no updated object is fault, which would cause the NSFetchedResultsController updates to fail.
+		// http://www.mlsite.net/blog/?p=518
+		
+		/*
+		 NSArray* updates = [[saveNotification.userInfo objectForKey:@"updated"] allObjects];
+		
+		for (NSInteger i = [updates count]-1; i >= 0; i--) {
+			[[[self managedObjectContextForMainThread] objectWithID:[[updates objectAtIndex:i] objectID]] willAccessValueForKey:nil];
+		}*/
+		
+        [[self managedObjectContextForMainThread] mergeChangesFromContextDidSaveNotification:saveNotification];
+    } else {
+        [self performSelectorOnMainThread:@selector(mocDidSave:) withObject:saveNotification waitUntilDone:NO];
+    }
 }
 
 -(BOOL)doesRequireMigration {

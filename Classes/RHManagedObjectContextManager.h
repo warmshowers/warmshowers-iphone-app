@@ -1,6 +1,6 @@
 //
 //  RHManagedObjectContextManager.h
-//  Version: 0.9
+//  Version: 0.8.2
 //
 //  Copyright (C) 2012 by Christopher Meyer
 //  http://schwiiz.org/
@@ -22,7 +22,6 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-//
 
 #define kMergePolicy NSMergeByPropertyObjectTrumpMergePolicy
 #define RHWillMassUpdateNotification @"RHWillMassUpdateNotification"
