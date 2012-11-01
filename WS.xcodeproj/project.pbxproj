@@ -48,6 +48,7 @@
 		83533E291622F663003788C5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 83533E281622F663003788C5 /* Default.png */; };
 		83533E2F1622F782003788C5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83533E2E1622F782003788C5 /* Default@2x.png */; };
 		83533E311622F7AF003788C5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83533E301622F7AF003788C5 /* Default-568h@2x.png */; };
+		8355479B1642DFFE00D2A0B5 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8355479A1642DFFE00D2A0B5 /* Settings.bundle */; };
 		83576CCF16396108000FBE93 /* pagecurl.png in Resources */ = {isa = PBXBuildFile; fileRef = 83576CCD16396108000FBE93 /* pagecurl.png */; };
 		83576CD016396108000FBE93 /* pagecurl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83576CCE16396108000FBE93 /* pagecurl@2x.png */; };
 		836CCF0114ABB3D1000EDC51 /* HostMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF0014ABB3D1000EDC51 /* HostMapViewController.xib */; };
@@ -159,6 +160,7 @@
 		83533E281622F663003788C5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		83533E2E1622F782003788C5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		83533E301622F7AF003788C5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		8355479A1642DFFE00D2A0B5 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		83576CCD16396108000FBE93 /* pagecurl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pagecurl.png; sourceTree = "<group>"; };
 		83576CCE16396108000FBE93 /* pagecurl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pagecurl@2x.png"; sourceTree = "<group>"; };
 		836CCF0014ABB3D1000EDC51 /* HostMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostMapViewController.xib; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				8355479A1642DFFE00D2A0B5 /* Settings.bundle */,
 				28A0AAE50D9B0CCF005BE974 /* WS_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -581,6 +584,7 @@
 				8324D708162E227C00E0E82A /* Icon-72-rounded@2x.png in Resources */,
 				83576CCF16396108000FBE93 /* pagecurl.png in Resources */,
 				83576CD016396108000FBE93 /* pagecurl@2x.png in Resources */,
+				8355479B1642DFFE00D2A0B5 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
