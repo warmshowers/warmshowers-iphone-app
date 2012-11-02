@@ -42,8 +42,7 @@
 }
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];	
 	self.navigationController = [[UINavigationController alloc] initWithRootViewController:[self.segmentViewControllers objectAtIndex:0]];
 	self.window.rootViewController = self.navigationController;
 	[self.window makeKeyAndVisible];
@@ -68,6 +67,8 @@
 		[self logout];
     }
     
+	[[NSDate formatter] setTimeStyle:NSDateFormatterNoStyle];
+	
     return YES;
 }
 

@@ -114,10 +114,7 @@
 			break;
 		case 2:
 			[cell.textLabel setText:@"Date"];
-			NSDateFormatter *df = [[NSDateFormatter alloc] init];
-			[df setDateStyle:NSDateFormatterMediumStyle];
-			[df setTimeStyle:NSDateFormatterNoStyle];
-			[cell.detailTextLabel setText:[df stringFromDate:rec.date]];
+			[cell.detailTextLabel setText:[rec.date formatWithUTCTimeZone]];
 			break;
 	}
 }

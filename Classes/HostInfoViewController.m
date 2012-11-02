@@ -246,16 +246,15 @@
 				cell.detailTextLabel.text = [self.host subtitle];
                 
             } else if (indexPath.row == 6) {
-				NSDateFormatter *df = [[NSDateFormatter alloc] init];
-				[df setDateStyle:NSDateFormatterMediumStyle];
-				[df setTimeStyle:NSDateFormatterNoStyle];
 				cell.textLabel.text = @"Mbr Since";
-				cell.detailTextLabel.text = [df stringFromDate:self.host.member_since];
+				cell.detailTextLabel.text = [self.host.member_since formatWithUTCTimeZone];
+				
 				
 			} else if (indexPath.row == 7) {
 				cell.textLabel.text = @"Last Login";
 				cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ ago", [self.host.last_login timesince]];
             }
+			
 			break;
 		case 2:
 			if (indexPath.row == 0) {
