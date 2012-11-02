@@ -39,15 +39,18 @@
 }
 
 +(Host *)hostWithID:(NSNumber *)hostID {
-	NSArray *results = [Host fetchWithPredicate:[NSPredicate predicateWithFormat:@"hostid=%i", [hostID intValue]]];
-	if ([results count] > 0) {
-		return (Host *)[results objectAtIndex:0];
+
+	
+	Host *host = [Host getWithPredicate:[NSPredicate predicateWithFormat:@"hostid=%i", [hostID intValue]]];
+	
+	if (host) {
+		return host;
 	}
     
-	Host *newHost = (Host *)[Host newEntity];
-	newHost.hostid = hostID;
+	host = [Host newEntity];
+	host.hostid = hostID;
 	
-	return newHost;
+	return host;
 }
 
 

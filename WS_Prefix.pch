@@ -20,4 +20,5 @@
     #import "AFJSONRequestOperation.h"
     #import "RHAlertView.h"
     #import "NSDate+formatter.h"
+    #import "NSArray+firstObject.h"
 #endif

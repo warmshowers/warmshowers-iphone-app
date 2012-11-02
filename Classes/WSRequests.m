@@ -180,14 +180,16 @@
     }
     
 	NSString *path = [NSString stringWithFormat:@"/user/%i/json_recommendations", [host.hostid intValue]];
-	// NSString *path = [NSString stringWithFormat:@"/user/1165/json_recommendations", [host.hostid intValue]];
+	
 	NSURLRequest *URLRequest = [[WSHTTPClient sharedHTTPClient] requestWithMethod:@"GET" path:path parameters:nil];
 	
 	AFJSONRequestOperation *operation = [AFJSONRequestOperation
                                          JSONRequestOperationWithRequest:URLRequest
                                          success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                                              
-                                             [host purgeFeedback];
+											 // We don't know when stuff gets deleted,
+											 // so we purge the feedback before updating.
+											 [host purgeFeedback];
                                              
                                              NSArray *recommendations = [JSON objectForKey:@"recommendations"];
                                              

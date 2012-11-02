@@ -20,15 +20,16 @@
 
 +(Feedback *)feedbackWithID:(NSNumber *)nid {
 	
-	NSArray *results = [Feedback fetchWithPredicate:[NSPredicate predicateWithFormat:@"nid=%i", [nid intValue]]];
-	if ([results count] > 0) {
-		return (Feedback *)[results objectAtIndex:0];
+	Feedback *feedback = [Feedback getWithPredicate:[NSPredicate predicateWithFormat:@"nid=%i", [nid intValue]]];
+	
+	if (feedback) {
+		return feedback;
 	}
 	
-	Feedback *newFeedback = (Feedback *)[Feedback newEntity];
-	newFeedback.nid = nid;
+	feedback = [Feedback newEntity];
+	feedback.nid = nid;
 	
-	return newFeedback;
+	return feedback;
 	
 }
 
