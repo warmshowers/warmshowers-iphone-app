@@ -479,20 +479,20 @@
 		83D73F0013A151A40070D03A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				83C78E7E1474DE3D00274616 /* CLLocation+Bearing.h */,
+				83C78E7F1474DE3D00274616 /* CLLocation+Bearing.m */,
 				835185FE152C0B0B009E558F /* MKMapView+Utils.h */,
 				835185FF152C0B0B009E558F /* MKMapView+Utils.m */,
 				839FD6F1126AED0A00C008F8 /* MKMapView+ZoomLevel.h */,
 				839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */,
-				83D73F0B13A151E70070D03A /* NSString+truncate.h */,
-				83D73F0C13A151E70070D03A /* NSString+truncate.m */,
-				83C78E7E1474DE3D00274616 /* CLLocation+Bearing.h */,
-				83C78E7F1474DE3D00274616 /* CLLocation+Bearing.m */,
-				8389E0FA14C4BF2400B0E900 /* UIScrollView+autoContentSize.h */,
-				8389E0FB14C4BF2400B0E900 /* UIScrollView+autoContentSize.m */,
-				83F00E2215EBD76100761BC6 /* UIColor+utils.h */,
-				83F00E2315EBD76100761BC6 /* UIColor+utils.m */,
 				83F00E1915EBD3FE00761BC6 /* NSString+analytics.h */,
 				83F00E1A15EBD3FE00761BC6 /* NSString+analytics.m */,
+				83D73F0B13A151E70070D03A /* NSString+truncate.h */,
+				83D73F0C13A151E70070D03A /* NSString+truncate.m */,
+				83F00E2215EBD76100761BC6 /* UIColor+utils.h */,
+				83F00E2315EBD76100761BC6 /* UIColor+utils.m */,
+				8389E0FA14C4BF2400B0E900 /* UIScrollView+autoContentSize.h */,
+				8389E0FB14C4BF2400B0E900 /* UIScrollView+autoContentSize.m */,
 				831FBA9F160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.h */,
 				831FBAA0160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m */,
 			);

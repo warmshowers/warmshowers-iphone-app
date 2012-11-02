@@ -38,7 +38,7 @@
 
 	[self setToolbarItems:toolbarItems animated:YES];
     
-    [self addSearchBarWithPlaceHolder:@"Search Cached Hosts"];
+    [self addSearchBarWithPlaceHolder:@"Filter Cached Hosts"];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
