@@ -8,10 +8,9 @@
 
 #import <CoreData/CoreData.h>
 #import <MapKit/MapKit.h>
-#import "MKAnnotationExtended.h"
 #import "HostEntity.h"
 
-@interface Host : HostEntity<MKAnnotationExtended> {
+@interface Host : HostEntity<MKAnnotation> {
 	CLLocationCoordinate2D coordinate;
 }
 
@@ -29,6 +28,9 @@
 // -(NSString *)contactURL;
 -(BOOL)needsUpdate;
 -(BOOL)isStale;
+
+-(NSUInteger)pinColour;
+
 -(NSString *)trimmedPhoneNumber;
 -(CLLocation *)location;
 -(NSString *)address;

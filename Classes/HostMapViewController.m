@@ -11,7 +11,6 @@
 #import "Host.h"
 #import "MKMapView+Utils.h"
 #import "MKMapView+ZoomLevel.h"
-#import "MKAnnotationExtended.h"
 #import "WSAppDelegate.h"
 #import "HostInfoViewController.h"
 #import "RHAboutViewController.h"
@@ -253,20 +252,22 @@
 	[self.mapView removeAnnotations:[self.mapView nonVisibleAnnotations]];
 }
 
--(MKAnnotationView *)mapView:(MKMapView *)mV viewForAnnotation:(id<MKAnnotationExtended>)annotation {
+-(MKAnnotationView *)mapView:(MKMapView *)mV viewForAnnotation:(id<MKAnnotation>)annotation {
     MKPinAnnotationView *pinView = nil;
-    if (annotation != mapView.userLocation) {
+	
+	if ([annotation isKindOfClass:[Host class]]) {
+		
 		static NSString *defaultPinID = @"HostAnnotation";
 		
+		Host *host = (Host *)annotation;
 		pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
 		
 		if ( pinView == nil ) {
-            pinView = (MKPinAnnotationView *)[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:defaultPinID];
+            pinView = (MKPinAnnotationView *)[[MKPinAnnotationView alloc] initWithAnnotation:host reuseIdentifier:defaultPinID];
 		}
         
-		pinView.pinColor = [annotation pinColour]; // MKPinAnnotationColorGreen;
+		pinView.pinColor = [host pinColour];
 		pinView.canShowCallout = YES;
-        pinView.animatesDrop = [annotation animatesDrop];
 		
 		UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 		[button addTarget:self action:@selector(accessoryTapped:) forControlEvents:UIControlEventTouchUpInside];

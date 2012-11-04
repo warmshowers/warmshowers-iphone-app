@@ -29,5 +29,4 @@
 	self.showsVerticalScrollIndicator = YES;
 }
 
-
 @end
