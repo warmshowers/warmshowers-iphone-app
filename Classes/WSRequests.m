@@ -75,10 +75,9 @@
                                              [Host commit];
                                              
                                          } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                                             NSLog(@"%@", [error localizedDescription]);
+                                             // NSLog(@"%@", [error localizedDescription]);
                                              if ([response statusCode] == 401) {
                                                  [[WSAppDelegate sharedInstance] loginWithoutPrompt];
-                                                 // [[WSAppDelegate sharedInstance] logout];
                                              }
                                          }];
     
@@ -96,11 +95,11 @@
 	
 	[[WSHTTPClient sharedHTTPClient] cancelAllHTTPOperationsWithMethod:@"GET" path:path];
 	
-	NSURLRequest *nsurlrequest = [[WSHTTPClient sharedHTTPClient] requestWithMethod:@"GET" path:path parameters:nil];	
+	NSURLRequest *nsurlrequest = [[WSHTTPClient sharedHTTPClient] requestWithMethod:@"GET" path:path parameters:nil];
 	
-	NSLog(@"%@", nsurlrequest);
+	// NSLog(@"%@", nsurlrequest);
 	
-	[SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeGradient];
+	[SVProgressHUD showWithStatus:@"Loading..."];
 	
 	AFJSONRequestOperation *operation = [AFJSONRequestOperation
                                          JSONRequestOperationWithRequest:nsurlrequest
@@ -176,8 +175,7 @@
                                                   */
                                              }
 											 [SVProgressHUD dismiss];
-											[[RHAlertView alertWithOKButtonWithTitle:@"Error" message:[error description]] show];
-										 
+											//  [[RHAlertView alertWithOKButtonWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription]] show];
                                          }];
 	
 	[[WSHTTPClient sharedHTTPClient] enqueueHTTPRequestOperation:operation];

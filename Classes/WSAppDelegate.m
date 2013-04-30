@@ -95,6 +95,14 @@
 -(void)loginWithPrompt:(BOOL)prompt {
     dispatch_async(dispatch_get_main_queue(), ^{
         
+		// Sessions MUST be cleared before attemping authentication.
+		NSURL *baseURL = [[WSHTTPClient sharedHTTPClient] baseURL];
+		NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:baseURL];
+		
+		for (NSHTTPCookie *cookie in cookies) {
+			[[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+		}
+		
         if (prompt) {
             [self promptForUsernameAndPassword];
         } else {
@@ -112,12 +120,6 @@
 }
 
 -(void)logout {
-    NSURL *baseURL = [[WSHTTPClient sharedHTTPClient] baseURL];
-	NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:baseURL];
-	
-	for (NSHTTPCookie *cookie in cookies) {
-		[[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
-	}
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ws-password"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ws-loggedin"];
@@ -133,7 +135,18 @@
     NSString *name = [[NSUserDefaults standardUserDefaults] stringForKey:@"ws-name"];
     [[alert textFieldAtIndex:0] setText:name];
     
-    __weak RHAlertView *bAlert = alert;    
+    __weak RHAlertView *bAlert = alert;
+	
+	[alert addButtonWithTitle:@"Login" block:^{
+        NSString *name = [[bAlert textFieldAtIndex:0] text];
+        NSString *password = [[bAlert textFieldAtIndex:1] text];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"ws-name"];
+        [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"ws-password"];
+        
+        [self loginWithUsername:name password:password];
+    }];
+	
     [alert addButtonWithTitle:@"Sign Up" block:^{
         RHAlertView *alert2 = [RHAlertView alertWithTitle:@"Warmshowers Sign Up" message:@"You will be redirected to the sign up page on Warmshowers.org."];
         
@@ -149,21 +162,14 @@
         [alert2 show];
     }];
 	
-	[alert addButtonWithTitle:@"Login" block:^{
-        NSString *name = [[bAlert textFieldAtIndex:0] text];
-        NSString *password = [[bAlert textFieldAtIndex:1] text];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"ws-name"];
-        [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"ws-password"];
-        
-        [self loginWithUsername:name password:password];
-    }];
+
     
     [alert show];
 }
 
 
 -(void)loginWithUsername:(NSString *)_username password:(NSString *)_password {
+		
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             _username, @"username",
                             _password, @"password", nil];
@@ -179,8 +185,17 @@
         [self loginSuccess];
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        [SVProgressHUD showSuccessWithStatus:@"Invalid login!"];
-        [self promptForUsernameAndPassword];
+        
+		[SVProgressHUD dismiss];
+		
+		RHAlertView *alert = [RHAlertView alertWithTitle:@"Warmshowers" message:@"Login failed. Please check your username and password and try again.  If you don't have an account you can tap the Sign Up button to register."];
+		
+		[alert addButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
+			[self logout];
+		}];
+		
+		[alert show];
+	
     }];
     
     [[WSHTTPClient sharedHTTPClient] enqueueHTTPRequestOperation:request];

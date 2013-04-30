@@ -197,7 +197,8 @@
     NSURLRequest *nsurlrequest = [[WSHTTPClient sharedHTTPClient] requestWithMethod:@"POST" path:@"/services/rest/contact/contact" parameters:params];
     
     AFJSONRequestOperation *request = [AFJSONRequestOperation
-                                       JSONRequestOperationWithRequest:nsurlrequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+									   JSONRequestOperationWithRequest:nsurlrequest
+									   success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                                            
                                            NSNumber *status = [JSON objectForKey:@"status"];
                                            NSString *message = [JSON objectForKey:@"message"];
@@ -209,10 +210,10 @@
                                                [SVProgressHUD dismiss];
                                                [[RHAlertView alertWithOKButtonWithTitle:nil message:message] show];
                                            }
+										   
                                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                                           
                                            [SVProgressHUD dismiss];
-                                           [[RHAlertView alertWithOKButtonWithTitle:nil message:[error localizedDescription]] show];
+                                           [[RHAlertView alertWithOKButtonWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription]] show];
                                        }];
     
     

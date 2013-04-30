@@ -90,7 +90,7 @@
 
 
 -(void)logoutActionSheet:(id)sender {
-	self.popoverActionsheet = [[RHActionSheet alloc] initWithTitle:nil];
+	self.popoverActionsheet = [RHActionSheet actionSheetWithTitle:nil];
 	
 	[self.popoverActionsheet addDestructiveButtonWithTitle:@"Logout" block:^{
 		[[WSAppDelegate sharedInstance] performSelector:@selector(logout)];

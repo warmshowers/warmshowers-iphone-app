@@ -91,6 +91,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
+	[SVProgressHUD dismiss];
 	[self.popoverActionsheet dismissWithClickedButtonIndex:[self.popoverActionsheet cancelButtonIndex] animated:YES];
 }
 

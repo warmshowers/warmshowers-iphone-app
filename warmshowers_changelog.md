@@ -1,9 +1,10 @@
 # Warmshowers Changelog
 
-v3.5 (build 352+)
+v3.5 (build 358+)
 
-- updated SVProgressHUD, RHTools, & RHManagedObject
+- updated SVProgressHUD, RHTools, RHManagedObject, AFNetworking
 - deprecated DSActivityView
+- fixed bug that prevented a user from logging in
 
 v3.4 (build 351 submitted)
 
@@ -16,10 +17,3 @@ v3.3 (build 341 submitted)
 - Inserted [tableView reloadData] into appearing list views
 - Cleaned up icons with rounded corners
 - different map views (corner image)
-
-
-
-# Under development
-
-- host no longer available
-- timeouts and error response
