@@ -133,17 +133,7 @@
     NSString *name = [[NSUserDefaults standardUserDefaults] stringForKey:@"ws-name"];
     [[alert textFieldAtIndex:0] setText:name];
     
-    __weak RHAlertView *bAlert = alert;
-    [alert addButtonWithTitle:@"Login" block:^{
-        NSString *name = [[bAlert textFieldAtIndex:0] text];
-        NSString *password = [[bAlert textFieldAtIndex:1] text];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"ws-name"];
-        [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"ws-password"];
-        
-        [self loginWithUsername:name password:password];
-    }];
-    
+    __weak RHAlertView *bAlert = alert;    
     [alert addButtonWithTitle:@"Sign Up" block:^{
         RHAlertView *alert2 = [RHAlertView alertWithTitle:@"Warmshowers Sign Up" message:@"You will be redirected to the sign up page on Warmshowers.org."];
         
@@ -157,6 +147,16 @@
         }];
         
         [alert2 show];
+    }];
+	
+	[alert addButtonWithTitle:@"Login" block:^{
+        NSString *name = [[bAlert textFieldAtIndex:0] text];
+        NSString *password = [[bAlert textFieldAtIndex:1] text];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"ws-name"];
+        [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"ws-password"];
+        
+        [self loginWithUsername:name password:password];
     }];
     
     [alert show];

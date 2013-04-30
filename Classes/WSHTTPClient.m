@@ -34,14 +34,4 @@
 	return ([self networkReachabilityStatus] != AFNetworkReachabilityStatusNotReachable);
 }
 
-
-
-
-
-
-
-
-
-
-
 @end

@@ -8,7 +8,6 @@
 
 #import "HostInfoViewController.h"
 #import "Host.h"
-#import "DSActivityView.h"
 
 #import "WSRequests.h"
 #import "RHWebViewController.h"
@@ -148,15 +147,20 @@
 		[self.navigationController popViewControllerAnimated:YES];
 		
 	} else {
-		self.showingLoadingIndicator = show;
+		
+		/*
+		 self.showingLoadingIndicator = show;
 		
 		if (self.isShowingLoadingIndicator) {
-			[DSActivityView newActivityViewForView:self.view];
+			[SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeGradient];
 		} else {
-			[DSActivityView removeView];
+			[SVProgressHUD dismiss];
 		}
+		  */
+		
 		
 		[self setLastUpdatedDate];
+		self.showingLoadingIndicator = show;
 		[self.tableView reloadData];
 	}
 }
@@ -380,44 +384,47 @@
 	if (self.host.last_updated_details != nil) {
 		self.popoverActionsheet = [[RHActionSheet alloc] init];
 		
+		__weak Host *bHost = self.host;
+		__weak UINavigationController *bNavController = self.navigationController;
+		
 		if ([self.host.favourite boolValue]) {
 			[self.popoverActionsheet addButtonWithTitle:@"Unmark as Favourite" block:^{
-				self.host.favourite = [NSNumber numberWithBool:NO];
+				bHost.favourite = [NSNumber numberWithBool:NO];
 				[Host commit];
-				[[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:self.host forKey:@"host"]];
+				[[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:bHost forKey:@"host"]];
 				
 				[SVProgressHUD showSuccessWithStatus:@"Unmarked as favourite"];
 			}];
 		} else {
 			[self.popoverActionsheet addButtonWithTitle:@"Mark as Favourite" block:^{
-				self.host.favourite = [NSNumber numberWithBool:YES];
+				bHost.favourite = [NSNumber numberWithBool:YES];
 				[Host commit];
-				[[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:self.host forKey:@"host"]];
+				[[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:bHost forKey:@"host"]];
 				[SVProgressHUD showSuccessWithStatus:@"Marked as favourite"];
 			}];
 		}
 		
 		[self.popoverActionsheet addButtonWithTitle:@"View in Maps" block:^{
-            [MKMapView openInMapsWithAnnotation:self.host];
+            [MKMapView openInMapsWithAnnotation:bHost];
 		}];
 		
 		[self.popoverActionsheet addButtonWithTitle:@"View Online" block:^{
 			RHWebViewController *controller = [[RHWebViewController alloc] init];
-			[controller setUrl:[NSURL URLWithString:[self.host infoURL]]];
+			[controller setUrl:[NSURL URLWithString:[bHost infoURL]]];
 			[controller setShouldShowDoneButton:YES];
 			
 			UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-			[self.navigationController presentModalViewController:navController animated:YES];
+			[bNavController presentModalViewController:navController animated:YES];
 			
 		}];
 		
 		[self.popoverActionsheet addButtonWithTitle:@"Contact Host" block:^{
 			ContactHostViewController *controller = [[ContactHostViewController alloc] initWithNibName:@"ContactHostViewController" bundle:nil];
-			[controller setHost:self.host];
+			[controller setHost:bHost];
 			
 			UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 			[navController setModalPresentationStyle:UIModalPresentationPageSheet];
-			[self.navigationController presentModalViewController:navController animated:YES];
+			[bNavController presentModalViewController:navController animated:YES];
 		}];
 		
 		[self.popoverActionsheet addCancelButtonWithTitle:@"Cancel"];

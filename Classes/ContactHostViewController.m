@@ -11,7 +11,6 @@
 #import "UIScrollView+autoContentSize.h"
 #import "Host.h"
 #import "WSHTTPClient.h"
-#import "DSActivityView.h"
 #import "SVProgressHUD.h"
 
 @interface ContactHostViewController ()

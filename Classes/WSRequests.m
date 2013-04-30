@@ -96,7 +96,11 @@
 	
 	[[WSHTTPClient sharedHTTPClient] cancelAllHTTPOperationsWithMethod:@"GET" path:path];
 	
-	NSURLRequest *nsurlrequest = [[WSHTTPClient sharedHTTPClient] requestWithMethod:@"GET" path:path parameters:nil];
+	NSURLRequest *nsurlrequest = [[WSHTTPClient sharedHTTPClient] requestWithMethod:@"GET" path:path parameters:nil];	
+	
+	NSLog(@"%@", nsurlrequest);
+	
+	[SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeGradient];
 	
 	AFJSONRequestOperation *operation = [AFJSONRequestOperation
                                          JSONRequestOperationWithRequest:nsurlrequest
@@ -146,10 +150,16 @@
                                              }
                                              
                                              [Host commit];
+											 
+											 
+											 [SVProgressHUD dismiss];
                                              
                                          } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                              
-                                             if ( [response statusCode] == 404 ) {
+											 NSInteger statusCode = [response statusCode];
+											 
+											 // 404 not found (page doesn't exist anymore)
+                                             if ( statusCode == 404 ) {
                                                  [host setNotcurrentlyavailable:[NSNumber numberWithBool:YES]];
                                                  [Host commit];
                                                  
@@ -165,7 +175,9 @@
                                                   }
                                                   */
                                              }
-                                             
+											 [SVProgressHUD dismiss];
+											[[RHAlertView alertWithOKButtonWithTitle:@"Error" message:[error description]] show];
+										 
                                          }];
 	
 	[[WSHTTPClient sharedHTTPClient] enqueueHTTPRequestOperation:operation];

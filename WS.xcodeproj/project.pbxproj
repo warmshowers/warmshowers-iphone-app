@@ -22,9 +22,6 @@
 		832C51441625EF1F00379852 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 832C51431625EF1F00379852 /* Default-Landscape@2x~ipad.png */; };
 		832C51461625EFD700379852 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 832C51451625EFD700379852 /* Default-Landscape~ipad.png */; };
 		8330B481126A0775008B2EC4 /* WSRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8330B480126A0775008B2EC4 /* WSRequests.m */; };
-		834162061610E6B200AEC2D2 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 834162031610E6B200AEC2D2 /* SVProgressHUD.bundle */; };
-		834162071610E6B200AEC2D2 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 834162051610E6B200AEC2D2 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		8341620B1610E73E00AEC2D2 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8341620A1610E73E00AEC2D2 /* DSActivityView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		83441AD51608694900468716 /* WSHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AD41608694900468716 /* WSHTTPClient.m */; };
 		83518606152C0C1F009E558F /* MKMapView+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 835185FF152C0B0B009E558F /* MKMapView+Utils.m */; };
 		83533E211622F46D003788C5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 83533E201622F46D003788C5 /* Icon.png */; };
@@ -50,14 +47,21 @@
 		83708C1D145C7CA400B15150 /* NSArray+PerformSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 83708C1C145C7CA400B15150 /* NSArray+PerformSelector.m */; };
 		8388B1371458A8100079ACE3 /* HostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388B1361458A8100079ACE3 /* HostTableViewController.m */; };
 		8389E0FC14C4BF2400B0E900 /* UIScrollView+autoContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 8389E0FB14C4BF2400B0E900 /* UIScrollView+autoContentSize.m */; };
+		838AB078172F9021005A9149 /* NSArray+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB066172F9020005A9149 /* NSArray+rhextensions.m */; };
+		838AB079172F9021005A9149 /* NSDate+formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB068172F9020005A9149 /* NSDate+formatter.m */; };
+		838AB07A172F9021005A9149 /* NSDate+timesince.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB06A172F9020005A9149 /* NSDate+timesince.m */; };
+		838AB07B172F9021005A9149 /* NSDictionary+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB06C172F9020005A9149 /* NSDictionary+rhextensions.m */; };
+		838AB07C172F9021005A9149 /* RHActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB06E172F9020005A9149 /* RHActionSheet.m */; };
+		838AB07D172F9021005A9149 /* RHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB070172F9020005A9149 /* RHAlertView.m */; };
+		838AB07E172F9021005A9149 /* RHBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB072172F9020005A9149 /* RHBarButtonItem.m */; };
+		838AB07F172F9021005A9149 /* RHButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB074172F9020005A9149 /* RHButton.m */; };
+		838AB080172F9021005A9149 /* RHSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB076172F9020005A9149 /* RHSwitch.m */; };
+		838AB089172F9375005A9149 /* UIApplication+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB088172F9375005A9149 /* UIApplication+rhextensions.m */; };
+		838AB08E172F9452005A9149 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 838AB08B172F9452005A9149 /* SVProgressHUD.bundle */; };
+		838AB08F172F9452005A9149 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB08D172F9452005A9149 /* SVProgressHUD.m */; };
+		838AB091172F94FA005A9149 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838AB090172F94FA005A9149 /* QuartzCore.framework */; };
+		838AB093172F9500005A9149 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838AB092172F9500005A9149 /* MobileCoreServices.framework */; };
 		839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */; };
-		83A98DB41646CA9500F329E8 /* NSArray+firstObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A98DA71646CA9500F329E8 /* NSArray+firstObject.m */; };
-		83A98DB51646CA9500F329E8 /* NSDate+formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A98DA91646CA9500F329E8 /* NSDate+formatter.m */; };
-		83A98DB61646CA9500F329E8 /* NSDate+timesince.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A98DAB1646CA9500F329E8 /* NSDate+timesince.m */; };
-		83A98DB71646CA9500F329E8 /* RHActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A98DAD1646CA9500F329E8 /* RHActionSheet.m */; };
-		83A98DB81646CA9500F329E8 /* RHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A98DAF1646CA9500F329E8 /* RHAlertView.m */; };
-		83A98DB91646CA9500F329E8 /* RHBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A98DB11646CA9500F329E8 /* RHBarButtonItem.m */; };
-		83A98DBA1646CA9500F329E8 /* RHSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A98DB31646CA9500F329E8 /* RHSwitch.m */; };
 		83A98DC11646CAA300F329E8 /* RHCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A98DBC1646CAA300F329E8 /* RHCoreDataTableViewController.m */; };
 		83A98DC21646CAA300F329E8 /* RHManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A98DBE1646CAA300F329E8 /* RHManagedObject.m */; };
 		83A98DC31646CAA300F329E8 /* RHManagedObjectContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A98DC01646CAA300F329E8 /* RHManagedObjectContextManager.m */; };
@@ -118,11 +122,6 @@
 		8330B47F126A0775008B2EC4 /* WSRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSRequests.h; sourceTree = "<group>"; };
 		8330B480126A0775008B2EC4 /* WSRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSRequests.m; sourceTree = "<group>"; };
 		8330B4C8126A092E008B2EC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		834162031610E6B200AEC2D2 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		834162041610E6B200AEC2D2 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		834162051610E6B200AEC2D2 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
-		834162091610E73E00AEC2D2 /* DSActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSActivityView.h; sourceTree = "<group>"; };
-		8341620A1610E73E00AEC2D2 /* DSActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSActivityView.m; sourceTree = "<group>"; };
 		83441AD31608694900468716 /* WSHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSHTTPClient.h; sourceTree = "<group>"; };
 		83441AD41608694900468716 /* WSHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSHTTPClient.m; sourceTree = "<group>"; };
 		835185FE152C0B0B009E558F /* MKMapView+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Utils.h"; sourceTree = "<group>"; };
@@ -155,22 +154,34 @@
 		8388B1361458A8100079ACE3 /* HostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostTableViewController.m; sourceTree = "<group>"; };
 		8389E0FA14C4BF2400B0E900 /* UIScrollView+autoContentSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+autoContentSize.h"; sourceTree = "<group>"; };
 		8389E0FB14C4BF2400B0E900 /* UIScrollView+autoContentSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+autoContentSize.m"; sourceTree = "<group>"; };
+		838AB065172F9020005A9149 /* NSArray+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+rhextensions.h"; path = "../../RHTools/NSArray+rhextensions.h"; sourceTree = "<group>"; };
+		838AB066172F9020005A9149 /* NSArray+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+rhextensions.m"; path = "../../RHTools/NSArray+rhextensions.m"; sourceTree = "<group>"; };
+		838AB067172F9020005A9149 /* NSDate+formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+formatter.h"; path = "../../RHTools/NSDate+formatter.h"; sourceTree = "<group>"; };
+		838AB068172F9020005A9149 /* NSDate+formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+formatter.m"; path = "../../RHTools/NSDate+formatter.m"; sourceTree = "<group>"; };
+		838AB069172F9020005A9149 /* NSDate+timesince.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+timesince.h"; path = "../../RHTools/NSDate+timesince.h"; sourceTree = "<group>"; };
+		838AB06A172F9020005A9149 /* NSDate+timesince.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+timesince.m"; path = "../../RHTools/NSDate+timesince.m"; sourceTree = "<group>"; };
+		838AB06B172F9020005A9149 /* NSDictionary+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+rhextensions.h"; path = "../../RHTools/NSDictionary+rhextensions.h"; sourceTree = "<group>"; };
+		838AB06C172F9020005A9149 /* NSDictionary+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+rhextensions.m"; path = "../../RHTools/NSDictionary+rhextensions.m"; sourceTree = "<group>"; };
+		838AB06D172F9020005A9149 /* RHActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHActionSheet.h; path = ../../RHTools/RHActionSheet.h; sourceTree = "<group>"; };
+		838AB06E172F9020005A9149 /* RHActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHActionSheet.m; path = ../../RHTools/RHActionSheet.m; sourceTree = "<group>"; };
+		838AB06F172F9020005A9149 /* RHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHAlertView.h; path = ../../RHTools/RHAlertView.h; sourceTree = "<group>"; };
+		838AB070172F9020005A9149 /* RHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHAlertView.m; path = ../../RHTools/RHAlertView.m; sourceTree = "<group>"; };
+		838AB071172F9020005A9149 /* RHBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHBarButtonItem.h; path = ../../RHTools/RHBarButtonItem.h; sourceTree = "<group>"; };
+		838AB072172F9020005A9149 /* RHBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHBarButtonItem.m; path = ../../RHTools/RHBarButtonItem.m; sourceTree = "<group>"; };
+		838AB073172F9020005A9149 /* RHButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHButton.h; path = ../../RHTools/RHButton.h; sourceTree = "<group>"; };
+		838AB074172F9020005A9149 /* RHButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHButton.m; path = ../../RHTools/RHButton.m; sourceTree = "<group>"; };
+		838AB075172F9020005A9149 /* RHSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHSwitch.h; path = ../../RHTools/RHSwitch.h; sourceTree = "<group>"; };
+		838AB076172F9020005A9149 /* RHSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHSwitch.m; path = ../../RHTools/RHSwitch.m; sourceTree = "<group>"; };
+		838AB077172F9021005A9149 /* RHTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTools.h; path = ../../RHTools/RHTools.h; sourceTree = "<group>"; };
+		838AB087172F9375005A9149 /* UIApplication+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+rhextensions.h"; path = "../../RHTools/UIApplication+rhextensions.h"; sourceTree = "<group>"; };
+		838AB088172F9375005A9149 /* UIApplication+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+rhextensions.m"; path = "../../RHTools/UIApplication+rhextensions.m"; sourceTree = "<group>"; };
+		838AB08B172F9452005A9149 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		838AB08C172F9452005A9149 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		838AB08D172F9452005A9149 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		838AB090172F94FA005A9149 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		838AB092172F9500005A9149 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		839FD6F1126AED0A00C008F8 /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
 		839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
-		83A98DA61646CA9500F329E8 /* NSArray+firstObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+firstObject.h"; path = "../../RHTools/NSArray+firstObject.h"; sourceTree = "<group>"; };
-		83A98DA71646CA9500F329E8 /* NSArray+firstObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+firstObject.m"; path = "../../RHTools/NSArray+firstObject.m"; sourceTree = "<group>"; };
-		83A98DA81646CA9500F329E8 /* NSDate+formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+formatter.h"; path = "../../RHTools/NSDate+formatter.h"; sourceTree = "<group>"; };
-		83A98DA91646CA9500F329E8 /* NSDate+formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+formatter.m"; path = "../../RHTools/NSDate+formatter.m"; sourceTree = "<group>"; };
-		83A98DAA1646CA9500F329E8 /* NSDate+timesince.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+timesince.h"; path = "../../RHTools/NSDate+timesince.h"; sourceTree = "<group>"; };
-		83A98DAB1646CA9500F329E8 /* NSDate+timesince.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+timesince.m"; path = "../../RHTools/NSDate+timesince.m"; sourceTree = "<group>"; };
-		83A98DAC1646CA9500F329E8 /* RHActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHActionSheet.h; path = ../../RHTools/RHActionSheet.h; sourceTree = "<group>"; };
-		83A98DAD1646CA9500F329E8 /* RHActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHActionSheet.m; path = ../../RHTools/RHActionSheet.m; sourceTree = "<group>"; };
-		83A98DAE1646CA9500F329E8 /* RHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHAlertView.h; path = ../../RHTools/RHAlertView.h; sourceTree = "<group>"; };
-		83A98DAF1646CA9500F329E8 /* RHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHAlertView.m; path = ../../RHTools/RHAlertView.m; sourceTree = "<group>"; };
-		83A98DB01646CA9500F329E8 /* RHBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHBarButtonItem.h; path = ../../RHTools/RHBarButtonItem.h; sourceTree = "<group>"; };
-		83A98DB11646CA9500F329E8 /* RHBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHBarButtonItem.m; path = ../../RHTools/RHBarButtonItem.m; sourceTree = "<group>"; };
-		83A98DB21646CA9500F329E8 /* RHSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHSwitch.h; path = ../../RHTools/RHSwitch.h; sourceTree = "<group>"; };
-		83A98DB31646CA9500F329E8 /* RHSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHSwitch.m; path = ../../RHTools/RHSwitch.m; sourceTree = "<group>"; };
 		83A98DBB1646CAA300F329E8 /* RHCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHCoreDataTableViewController.h; path = ../../RHManagedObject/RHCoreDataTableViewController.h; sourceTree = "<group>"; };
 		83A98DBC1646CAA300F329E8 /* RHCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHCoreDataTableViewController.m; path = ../../RHManagedObject/RHCoreDataTableViewController.m; sourceTree = "<group>"; };
 		83A98DBD1646CAA300F329E8 /* RHManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHManagedObject.h; path = ../../RHManagedObject/RHManagedObject.h; sourceTree = "<group>"; };
@@ -239,6 +250,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				838AB093172F9500005A9149 /* MobileCoreServices.framework in Frameworks */,
+				838AB091172F94FA005A9149 /* QuartzCore.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				83FFC5F416187B7D00158C5F /* CoreData.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
@@ -257,11 +270,10 @@
 			children = (
 				83A98DA51646CA6900F329E8 /* RHCoreData (referenced) */,
 				83A98DA41646CA5D00F329E8 /* RHTools (referenced) */,
+				838AB08A172F9452005A9149 /* SVProgressHUD */,
 				83FD202C1646DD9B00EC2AD1 /* AFNetworking (referenced) */,
 				839E2D551291D587003E2348 /* Model */,
 				83D73F0013A151A40070D03A /* Categories */,
-				834162081610E73E00AEC2D2 /* DSActivityView */,
-				834162021610E6B200AEC2D2 /* SVProgressHUD */,
 				8330B476126A075E008B2EC4 /* HTTPRequest */,
 				83F168BF14685B17003D3E3F /* RH */,
 				83F168C014685B4F003D3E3F /* Host View Controllers */,
@@ -319,6 +331,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				838AB092172F9500005A9149 /* MobileCoreServices.framework */,
+				838AB090172F94FA005A9149 /* QuartzCore.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				83D26B35126A4DE400412151 /* CoreLocation.framework */,
 				8330B4C8126A092E008B2EC4 /* SystemConfiguration.framework */,
@@ -341,25 +355,6 @@
 				83CB0A931608914C00433BF0 /* JSONKit.m */,
 			);
 			name = HTTPRequest;
-			sourceTree = "<group>";
-		};
-		834162021610E6B200AEC2D2 /* SVProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				834162031610E6B200AEC2D2 /* SVProgressHUD.bundle */,
-				834162041610E6B200AEC2D2 /* SVProgressHUD.h */,
-				834162051610E6B200AEC2D2 /* SVProgressHUD.m */,
-			);
-			path = SVProgressHUD;
-			sourceTree = "<group>";
-		};
-		834162081610E73E00AEC2D2 /* DSActivityView */ = {
-			isa = PBXGroup;
-			children = (
-				834162091610E73E00AEC2D2 /* DSActivityView.h */,
-				8341620A1610E73E00AEC2D2 /* DSActivityView.m */,
-			);
-			path = DSActivityView;
 			sourceTree = "<group>";
 		};
 		836CCF0814ABB425000EDC51 /* Images */ = {
@@ -393,6 +388,16 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		838AB08A172F9452005A9149 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				838AB08B172F9452005A9149 /* SVProgressHUD.bundle */,
+				838AB08C172F9452005A9149 /* SVProgressHUD.h */,
+				838AB08D172F9452005A9149 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		839E2D551291D587003E2348 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,20 +417,27 @@
 		83A98DA41646CA5D00F329E8 /* RHTools (referenced) */ = {
 			isa = PBXGroup;
 			children = (
-				83A98DA61646CA9500F329E8 /* NSArray+firstObject.h */,
-				83A98DA71646CA9500F329E8 /* NSArray+firstObject.m */,
-				83A98DA81646CA9500F329E8 /* NSDate+formatter.h */,
-				83A98DA91646CA9500F329E8 /* NSDate+formatter.m */,
-				83A98DAA1646CA9500F329E8 /* NSDate+timesince.h */,
-				83A98DAB1646CA9500F329E8 /* NSDate+timesince.m */,
-				83A98DAC1646CA9500F329E8 /* RHActionSheet.h */,
-				83A98DAD1646CA9500F329E8 /* RHActionSheet.m */,
-				83A98DAE1646CA9500F329E8 /* RHAlertView.h */,
-				83A98DAF1646CA9500F329E8 /* RHAlertView.m */,
-				83A98DB01646CA9500F329E8 /* RHBarButtonItem.h */,
-				83A98DB11646CA9500F329E8 /* RHBarButtonItem.m */,
-				83A98DB21646CA9500F329E8 /* RHSwitch.h */,
-				83A98DB31646CA9500F329E8 /* RHSwitch.m */,
+				838AB065172F9020005A9149 /* NSArray+rhextensions.h */,
+				838AB066172F9020005A9149 /* NSArray+rhextensions.m */,
+				838AB067172F9020005A9149 /* NSDate+formatter.h */,
+				838AB068172F9020005A9149 /* NSDate+formatter.m */,
+				838AB069172F9020005A9149 /* NSDate+timesince.h */,
+				838AB06A172F9020005A9149 /* NSDate+timesince.m */,
+				838AB06B172F9020005A9149 /* NSDictionary+rhextensions.h */,
+				838AB06C172F9020005A9149 /* NSDictionary+rhextensions.m */,
+				838AB06D172F9020005A9149 /* RHActionSheet.h */,
+				838AB06E172F9020005A9149 /* RHActionSheet.m */,
+				838AB06F172F9020005A9149 /* RHAlertView.h */,
+				838AB070172F9020005A9149 /* RHAlertView.m */,
+				838AB071172F9020005A9149 /* RHBarButtonItem.h */,
+				838AB072172F9020005A9149 /* RHBarButtonItem.m */,
+				838AB073172F9020005A9149 /* RHButton.h */,
+				838AB074172F9020005A9149 /* RHButton.m */,
+				838AB075172F9020005A9149 /* RHSwitch.h */,
+				838AB076172F9020005A9149 /* RHSwitch.m */,
+				838AB077172F9021005A9149 /* RHTools.h */,
+				838AB087172F9375005A9149 /* UIApplication+rhextensions.h */,
+				838AB088172F9375005A9149 /* UIApplication+rhextensions.m */,
 			);
 			name = "RHTools (referenced)";
 			sourceTree = "<group>";
@@ -589,7 +601,6 @@
 				83F8C188152B8B280084E380 /* ContactHostViewController.xib in Resources */,
 				83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */,
 				83F00E1815EBD11B00761BC6 /* trackmytour@2x.png in Resources */,
-				834162061610E6B200AEC2D2 /* SVProgressHUD.bundle in Resources */,
 				83533E211622F46D003788C5 /* Icon.png in Resources */,
 				83533E231622F472003788C5 /* Icon@2x.png in Resources */,
 				83533E251622F47E003788C5 /* Icon-72.png in Resources */,
@@ -606,6 +617,7 @@
 				83576CCF16396108000FBE93 /* pagecurl.png in Resources */,
 				83576CD016396108000FBE93 /* pagecurl@2x.png in Resources */,
 				8355479B1642DFFE00D2A0B5 /* Settings.bundle in Resources */,
+				838AB08E172F9452005A9149 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,17 +655,8 @@
 				83CB0A941608914C00433BF0 /* JSONKit.m in Sources */,
 				83CDACE0160A310000B5DC83 /* FeedbackTableViewController.m in Sources */,
 				831FBAA1160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m in Sources */,
-				834162071610E6B200AEC2D2 /* SVProgressHUD.m in Sources */,
-				8341620B1610E73E00AEC2D2 /* DSActivityView.m in Sources */,
 				83F051281618ED83001317D6 /* FeedbackEntity.m in Sources */,
 				83F0512B1618ED84001317D6 /* HostEntity.m in Sources */,
-				83A98DB41646CA9500F329E8 /* NSArray+firstObject.m in Sources */,
-				83A98DB51646CA9500F329E8 /* NSDate+formatter.m in Sources */,
-				83A98DB61646CA9500F329E8 /* NSDate+timesince.m in Sources */,
-				83A98DB71646CA9500F329E8 /* RHActionSheet.m in Sources */,
-				83A98DB81646CA9500F329E8 /* RHAlertView.m in Sources */,
-				83A98DB91646CA9500F329E8 /* RHBarButtonItem.m in Sources */,
-				83A98DBA1646CA9500F329E8 /* RHSwitch.m in Sources */,
 				83A98DC11646CAA300F329E8 /* RHCoreDataTableViewController.m in Sources */,
 				83A98DC21646CAA300F329E8 /* RHManagedObject.m in Sources */,
 				83A98DC31646CAA300F329E8 /* RHManagedObjectContextManager.m in Sources */,
@@ -666,6 +669,17 @@
 				83FD20461646DDB200EC2AD1 /* AFURLConnectionOperation.m in Sources */,
 				83FD20471646DDB200EC2AD1 /* AFXMLRequestOperation.m in Sources */,
 				83FD20481646DDB200EC2AD1 /* UIImageView+AFNetworking.m in Sources */,
+				838AB078172F9021005A9149 /* NSArray+rhextensions.m in Sources */,
+				838AB079172F9021005A9149 /* NSDate+formatter.m in Sources */,
+				838AB07A172F9021005A9149 /* NSDate+timesince.m in Sources */,
+				838AB07B172F9021005A9149 /* NSDictionary+rhextensions.m in Sources */,
+				838AB07C172F9021005A9149 /* RHActionSheet.m in Sources */,
+				838AB07D172F9021005A9149 /* RHAlertView.m in Sources */,
+				838AB07E172F9021005A9149 /* RHBarButtonItem.m in Sources */,
+				838AB07F172F9021005A9149 /* RHButton.m in Sources */,
+				838AB080172F9021005A9149 /* RHSwitch.m in Sources */,
+				838AB089172F9375005A9149 /* UIApplication+rhextensions.m in Sources */,
+				838AB08F172F9452005A9149 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,7 +745,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = WS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3B20AA38-9257-4FB9-824C-60AB4C2B75B9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7863B5EE-AC5E-4D62-8FED-141925B2F0B5";
 				SDKROOT = iphoneos;
 			};
 			name = "Ad-Hoc";
@@ -761,7 +775,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = WS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "80A6B4EC-7254-4F29-8487-1287374C4A88";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D0DA06DF-AF2A-4916-8C52-CBF31CC81AFC";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;

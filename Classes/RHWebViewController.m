@@ -69,21 +69,18 @@ const float PPRWebViewControllerFadeDuration = 0.5;
 }
 
 -(void)actionButtonTapped:(id)sender {
-	self.popoverActionsheet = [[UIActionSheet alloc] initWithTitle:nil
-														  delegate:self
-												 cancelButtonTitle:@"Cancel"
-											destructiveButtonTitle:nil
-												 otherButtonTitles:@"Open in Safari", nil];
 	
+	self.popoverActionsheet = [RHActionSheet actionSheetWithTitle:nil];
+	
+	NSURL *burl = self.webView.request.URL;
+	
+	[self.popoverActionsheet addButtonWithTitle:@"Open in Safari" block:^{
+		[[UIApplication sharedApplication] openURL:burl];
+	}];
+	
+	[self.popoverActionsheet addCancelButton];
+		
 	[self.popoverActionsheet showFromBarButtonItem:sender animated:YES];
-}
-
--(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	NSString *buttonText = [actionSheet buttonTitleAtIndex:buttonIndex];
-	
-	if (buttonText == @"Open in Safari") {
-		[[UIApplication sharedApplication] openURL:self.webView.request.URL];
-	}
 }
 
 
