@@ -16,3 +16,10 @@ v3.3 (build 341 submitted)
 - Inserted [tableView reloadData] into appearing list views
 - Cleaned up icons with rounded corners
 - different map views (corner image)
+
+
+
+# Under development
+
+- host no longer available
+- timeouts and error response
