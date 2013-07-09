@@ -47,16 +47,6 @@
 		83708C1D145C7CA400B15150 /* NSArray+PerformSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 83708C1C145C7CA400B15150 /* NSArray+PerformSelector.m */; };
 		8388B1371458A8100079ACE3 /* HostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388B1361458A8100079ACE3 /* HostTableViewController.m */; };
 		8389E0FC14C4BF2400B0E900 /* UIScrollView+autoContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 8389E0FB14C4BF2400B0E900 /* UIScrollView+autoContentSize.m */; };
-		838AB078172F9021005A9149 /* NSArray+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB066172F9020005A9149 /* NSArray+rhextensions.m */; };
-		838AB079172F9021005A9149 /* NSDate+formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB068172F9020005A9149 /* NSDate+formatter.m */; };
-		838AB07A172F9021005A9149 /* NSDate+timesince.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB06A172F9020005A9149 /* NSDate+timesince.m */; };
-		838AB07B172F9021005A9149 /* NSDictionary+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB06C172F9020005A9149 /* NSDictionary+rhextensions.m */; };
-		838AB07C172F9021005A9149 /* RHActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB06E172F9020005A9149 /* RHActionSheet.m */; };
-		838AB07D172F9021005A9149 /* RHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB070172F9020005A9149 /* RHAlertView.m */; };
-		838AB07E172F9021005A9149 /* RHBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB072172F9020005A9149 /* RHBarButtonItem.m */; };
-		838AB07F172F9021005A9149 /* RHButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB074172F9020005A9149 /* RHButton.m */; };
-		838AB080172F9021005A9149 /* RHSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB076172F9020005A9149 /* RHSwitch.m */; };
-		838AB089172F9375005A9149 /* UIApplication+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB088172F9375005A9149 /* UIApplication+rhextensions.m */; };
 		838AB08E172F9452005A9149 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 838AB08B172F9452005A9149 /* SVProgressHUD.bundle */; };
 		838AB08F172F9452005A9149 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AB08D172F9452005A9149 /* SVProgressHUD.m */; };
 		838AB091172F94FA005A9149 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838AB090172F94FA005A9149 /* QuartzCore.framework */; };
@@ -73,6 +63,22 @@
 		83CF4474126A01A200DF3CFD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF4473126A01A200DF3CFD /* MapKit.framework */; };
 		83D26B36126A4DE400412151 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D26B35126A4DE400412151 /* CoreLocation.framework */; };
 		83D73F0D13A151E70070D03A /* NSString+truncate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D73F0C13A151E70070D03A /* NSString+truncate.m */; };
+		83D757EC178BE5A200C4CC64 /* NSArray+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757CA178BE5A200C4CC64 /* NSArray+rhextensions.m */; };
+		83D757ED178BE5A200C4CC64 /* NSDate+formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757CC178BE5A200C4CC64 /* NSDate+formatter.m */; };
+		83D757EE178BE5A200C4CC64 /* NSDate+timesince.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757CE178BE5A200C4CC64 /* NSDate+timesince.m */; };
+		83D757EF178BE5A200C4CC64 /* NSDictionary+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757D0178BE5A200C4CC64 /* NSDictionary+rhextensions.m */; };
+		83D757F0178BE5A200C4CC64 /* NSString+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757D2178BE5A200C4CC64 /* NSString+rhextensions.m */; };
+		83D757F1178BE5A200C4CC64 /* RHActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757D4178BE5A200C4CC64 /* RHActionSheet.m */; };
+		83D757F2178BE5A200C4CC64 /* RHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757D6178BE5A200C4CC64 /* RHAlertView.m */; };
+		83D757F3178BE5A200C4CC64 /* RHBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757D8178BE5A200C4CC64 /* RHBarButtonItem.m */; };
+		83D757F4178BE5A200C4CC64 /* RHButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757DA178BE5A200C4CC64 /* RHButton.m */; };
+		83D757F6178BE5A200C4CC64 /* RHSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757DE178BE5A200C4CC64 /* RHSwitch.m */; };
+		83D757F7178BE5A200C4CC64 /* RHTableSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757E0178BE5A200C4CC64 /* RHTableSection.m */; };
+		83D757F8178BE5A200C4CC64 /* RHTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757E2178BE5A200C4CC64 /* RHTableView.m */; };
+		83D757F9178BE5A200C4CC64 /* RHTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757E4178BE5A200C4CC64 /* RHTableViewCell.m */; };
+		83D757FA178BE5A200C4CC64 /* RHTableViewCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757E6178BE5A200C4CC64 /* RHTableViewCells.m */; };
+		83D757FB178BE5A200C4CC64 /* RHTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757E8178BE5A200C4CC64 /* RHTapGestureRecognizer.m */; };
+		83D757FC178BE5A200C4CC64 /* UIApplication+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757EB178BE5A200C4CC64 /* UIApplication+rhextensions.m */; };
 		83E605571608477F00C7C50E /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E605561608477F00C7C50E /* Feedback.m */; };
 		83F00E0415EBC6E000761BC6 /* RHAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E0315EBC5B400761BC6 /* RHAboutViewController.m */; };
 		83F00E0D15EBC73900761BC6 /* RHPromptForReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E0C15EBC73900761BC6 /* RHPromptForReview.m */; };
@@ -154,27 +160,6 @@
 		8388B1361458A8100079ACE3 /* HostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostTableViewController.m; sourceTree = "<group>"; };
 		8389E0FA14C4BF2400B0E900 /* UIScrollView+autoContentSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+autoContentSize.h"; sourceTree = "<group>"; };
 		8389E0FB14C4BF2400B0E900 /* UIScrollView+autoContentSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+autoContentSize.m"; sourceTree = "<group>"; };
-		838AB065172F9020005A9149 /* NSArray+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+rhextensions.h"; path = "../../RHTools/NSArray+rhextensions.h"; sourceTree = "<group>"; };
-		838AB066172F9020005A9149 /* NSArray+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+rhextensions.m"; path = "../../RHTools/NSArray+rhextensions.m"; sourceTree = "<group>"; };
-		838AB067172F9020005A9149 /* NSDate+formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+formatter.h"; path = "../../RHTools/NSDate+formatter.h"; sourceTree = "<group>"; };
-		838AB068172F9020005A9149 /* NSDate+formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+formatter.m"; path = "../../RHTools/NSDate+formatter.m"; sourceTree = "<group>"; };
-		838AB069172F9020005A9149 /* NSDate+timesince.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+timesince.h"; path = "../../RHTools/NSDate+timesince.h"; sourceTree = "<group>"; };
-		838AB06A172F9020005A9149 /* NSDate+timesince.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+timesince.m"; path = "../../RHTools/NSDate+timesince.m"; sourceTree = "<group>"; };
-		838AB06B172F9020005A9149 /* NSDictionary+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+rhextensions.h"; path = "../../RHTools/NSDictionary+rhextensions.h"; sourceTree = "<group>"; };
-		838AB06C172F9020005A9149 /* NSDictionary+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+rhextensions.m"; path = "../../RHTools/NSDictionary+rhextensions.m"; sourceTree = "<group>"; };
-		838AB06D172F9020005A9149 /* RHActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHActionSheet.h; path = ../../RHTools/RHActionSheet.h; sourceTree = "<group>"; };
-		838AB06E172F9020005A9149 /* RHActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHActionSheet.m; path = ../../RHTools/RHActionSheet.m; sourceTree = "<group>"; };
-		838AB06F172F9020005A9149 /* RHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHAlertView.h; path = ../../RHTools/RHAlertView.h; sourceTree = "<group>"; };
-		838AB070172F9020005A9149 /* RHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHAlertView.m; path = ../../RHTools/RHAlertView.m; sourceTree = "<group>"; };
-		838AB071172F9020005A9149 /* RHBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHBarButtonItem.h; path = ../../RHTools/RHBarButtonItem.h; sourceTree = "<group>"; };
-		838AB072172F9020005A9149 /* RHBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHBarButtonItem.m; path = ../../RHTools/RHBarButtonItem.m; sourceTree = "<group>"; };
-		838AB073172F9020005A9149 /* RHButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHButton.h; path = ../../RHTools/RHButton.h; sourceTree = "<group>"; };
-		838AB074172F9020005A9149 /* RHButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHButton.m; path = ../../RHTools/RHButton.m; sourceTree = "<group>"; };
-		838AB075172F9020005A9149 /* RHSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHSwitch.h; path = ../../RHTools/RHSwitch.h; sourceTree = "<group>"; };
-		838AB076172F9020005A9149 /* RHSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHSwitch.m; path = ../../RHTools/RHSwitch.m; sourceTree = "<group>"; };
-		838AB077172F9021005A9149 /* RHTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTools.h; path = ../../RHTools/RHTools.h; sourceTree = "<group>"; };
-		838AB087172F9375005A9149 /* UIApplication+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+rhextensions.h"; path = "../../RHTools/UIApplication+rhextensions.h"; sourceTree = "<group>"; };
-		838AB088172F9375005A9149 /* UIApplication+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+rhextensions.m"; path = "../../RHTools/UIApplication+rhextensions.m"; sourceTree = "<group>"; };
 		838AB08B172F9452005A9149 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		838AB08C172F9452005A9149 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		838AB08D172F9452005A9149 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
@@ -202,6 +187,40 @@
 		83D26B35126A4DE400412151 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		83D73F0B13A151E70070D03A /* NSString+truncate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+truncate.h"; sourceTree = "<group>"; };
 		83D73F0C13A151E70070D03A /* NSString+truncate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+truncate.m"; sourceTree = "<group>"; };
+		83D757C8178BD6E600C4CC64 /* WS (3.6).xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WS (3.6).xcdatamodel"; sourceTree = "<group>"; };
+		83D757C9178BE5A200C4CC64 /* NSArray+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+rhextensions.h"; path = "../../RHTools/NSArray+rhextensions.h"; sourceTree = "<group>"; };
+		83D757CA178BE5A200C4CC64 /* NSArray+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+rhextensions.m"; path = "../../RHTools/NSArray+rhextensions.m"; sourceTree = "<group>"; };
+		83D757CB178BE5A200C4CC64 /* NSDate+formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+formatter.h"; path = "../../RHTools/NSDate+formatter.h"; sourceTree = "<group>"; };
+		83D757CC178BE5A200C4CC64 /* NSDate+formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+formatter.m"; path = "../../RHTools/NSDate+formatter.m"; sourceTree = "<group>"; };
+		83D757CD178BE5A200C4CC64 /* NSDate+timesince.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+timesince.h"; path = "../../RHTools/NSDate+timesince.h"; sourceTree = "<group>"; };
+		83D757CE178BE5A200C4CC64 /* NSDate+timesince.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+timesince.m"; path = "../../RHTools/NSDate+timesince.m"; sourceTree = "<group>"; };
+		83D757CF178BE5A200C4CC64 /* NSDictionary+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+rhextensions.h"; path = "../../RHTools/NSDictionary+rhextensions.h"; sourceTree = "<group>"; };
+		83D757D0178BE5A200C4CC64 /* NSDictionary+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+rhextensions.m"; path = "../../RHTools/NSDictionary+rhextensions.m"; sourceTree = "<group>"; };
+		83D757D1178BE5A200C4CC64 /* NSString+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+rhextensions.h"; path = "../../RHTools/NSString+rhextensions.h"; sourceTree = "<group>"; };
+		83D757D2178BE5A200C4CC64 /* NSString+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+rhextensions.m"; path = "../../RHTools/NSString+rhextensions.m"; sourceTree = "<group>"; };
+		83D757D3178BE5A200C4CC64 /* RHActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHActionSheet.h; path = ../../RHTools/RHActionSheet.h; sourceTree = "<group>"; };
+		83D757D4178BE5A200C4CC64 /* RHActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHActionSheet.m; path = ../../RHTools/RHActionSheet.m; sourceTree = "<group>"; };
+		83D757D5178BE5A200C4CC64 /* RHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHAlertView.h; path = ../../RHTools/RHAlertView.h; sourceTree = "<group>"; };
+		83D757D6178BE5A200C4CC64 /* RHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHAlertView.m; path = ../../RHTools/RHAlertView.m; sourceTree = "<group>"; };
+		83D757D7178BE5A200C4CC64 /* RHBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHBarButtonItem.h; path = ../../RHTools/RHBarButtonItem.h; sourceTree = "<group>"; };
+		83D757D8178BE5A200C4CC64 /* RHBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHBarButtonItem.m; path = ../../RHTools/RHBarButtonItem.m; sourceTree = "<group>"; };
+		83D757D9178BE5A200C4CC64 /* RHButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHButton.h; path = ../../RHTools/RHButton.h; sourceTree = "<group>"; };
+		83D757DA178BE5A200C4CC64 /* RHButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHButton.m; path = ../../RHTools/RHButton.m; sourceTree = "<group>"; };
+		83D757DD178BE5A200C4CC64 /* RHSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHSwitch.h; path = ../../RHTools/RHSwitch.h; sourceTree = "<group>"; };
+		83D757DE178BE5A200C4CC64 /* RHSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHSwitch.m; path = ../../RHTools/RHSwitch.m; sourceTree = "<group>"; };
+		83D757DF178BE5A200C4CC64 /* RHTableSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTableSection.h; path = ../../RHTools/RHTableSection.h; sourceTree = "<group>"; };
+		83D757E0178BE5A200C4CC64 /* RHTableSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTableSection.m; path = ../../RHTools/RHTableSection.m; sourceTree = "<group>"; };
+		83D757E1178BE5A200C4CC64 /* RHTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTableView.h; path = ../../RHTools/RHTableView.h; sourceTree = "<group>"; };
+		83D757E2178BE5A200C4CC64 /* RHTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTableView.m; path = ../../RHTools/RHTableView.m; sourceTree = "<group>"; };
+		83D757E3178BE5A200C4CC64 /* RHTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTableViewCell.h; path = ../../RHTools/RHTableViewCell.h; sourceTree = "<group>"; };
+		83D757E4178BE5A200C4CC64 /* RHTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTableViewCell.m; path = ../../RHTools/RHTableViewCell.m; sourceTree = "<group>"; };
+		83D757E5178BE5A200C4CC64 /* RHTableViewCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTableViewCells.h; path = ../../RHTools/RHTableViewCells.h; sourceTree = "<group>"; };
+		83D757E6178BE5A200C4CC64 /* RHTableViewCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTableViewCells.m; path = ../../RHTools/RHTableViewCells.m; sourceTree = "<group>"; };
+		83D757E7178BE5A200C4CC64 /* RHTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTapGestureRecognizer.h; path = ../../RHTools/RHTapGestureRecognizer.h; sourceTree = "<group>"; };
+		83D757E8178BE5A200C4CC64 /* RHTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTapGestureRecognizer.m; path = ../../RHTools/RHTapGestureRecognizer.m; sourceTree = "<group>"; };
+		83D757E9178BE5A200C4CC64 /* RHTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTools.h; path = ../../RHTools/RHTools.h; sourceTree = "<group>"; };
+		83D757EA178BE5A200C4CC64 /* UIApplication+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+rhextensions.h"; path = "../../RHTools/UIApplication+rhextensions.h"; sourceTree = "<group>"; };
+		83D757EB178BE5A200C4CC64 /* UIApplication+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+rhextensions.m"; path = "../../RHTools/UIApplication+rhextensions.m"; sourceTree = "<group>"; };
 		83E605551608477F00C7C50E /* Feedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback.h; sourceTree = "<group>"; };
 		83E605561608477F00C7C50E /* Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feedback.m; sourceTree = "<group>"; };
 		83F00E0215EBC5B400761BC6 /* RHAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHAboutViewController.h; sourceTree = "<group>"; };
@@ -417,27 +436,39 @@
 		83A98DA41646CA5D00F329E8 /* RHTools (referenced) */ = {
 			isa = PBXGroup;
 			children = (
-				838AB065172F9020005A9149 /* NSArray+rhextensions.h */,
-				838AB066172F9020005A9149 /* NSArray+rhextensions.m */,
-				838AB067172F9020005A9149 /* NSDate+formatter.h */,
-				838AB068172F9020005A9149 /* NSDate+formatter.m */,
-				838AB069172F9020005A9149 /* NSDate+timesince.h */,
-				838AB06A172F9020005A9149 /* NSDate+timesince.m */,
-				838AB06B172F9020005A9149 /* NSDictionary+rhextensions.h */,
-				838AB06C172F9020005A9149 /* NSDictionary+rhextensions.m */,
-				838AB06D172F9020005A9149 /* RHActionSheet.h */,
-				838AB06E172F9020005A9149 /* RHActionSheet.m */,
-				838AB06F172F9020005A9149 /* RHAlertView.h */,
-				838AB070172F9020005A9149 /* RHAlertView.m */,
-				838AB071172F9020005A9149 /* RHBarButtonItem.h */,
-				838AB072172F9020005A9149 /* RHBarButtonItem.m */,
-				838AB073172F9020005A9149 /* RHButton.h */,
-				838AB074172F9020005A9149 /* RHButton.m */,
-				838AB075172F9020005A9149 /* RHSwitch.h */,
-				838AB076172F9020005A9149 /* RHSwitch.m */,
-				838AB077172F9021005A9149 /* RHTools.h */,
-				838AB087172F9375005A9149 /* UIApplication+rhextensions.h */,
-				838AB088172F9375005A9149 /* UIApplication+rhextensions.m */,
+				83D757C9178BE5A200C4CC64 /* NSArray+rhextensions.h */,
+				83D757CA178BE5A200C4CC64 /* NSArray+rhextensions.m */,
+				83D757CB178BE5A200C4CC64 /* NSDate+formatter.h */,
+				83D757CC178BE5A200C4CC64 /* NSDate+formatter.m */,
+				83D757CD178BE5A200C4CC64 /* NSDate+timesince.h */,
+				83D757CE178BE5A200C4CC64 /* NSDate+timesince.m */,
+				83D757CF178BE5A200C4CC64 /* NSDictionary+rhextensions.h */,
+				83D757D0178BE5A200C4CC64 /* NSDictionary+rhextensions.m */,
+				83D757D1178BE5A200C4CC64 /* NSString+rhextensions.h */,
+				83D757D2178BE5A200C4CC64 /* NSString+rhextensions.m */,
+				83D757D3178BE5A200C4CC64 /* RHActionSheet.h */,
+				83D757D4178BE5A200C4CC64 /* RHActionSheet.m */,
+				83D757D5178BE5A200C4CC64 /* RHAlertView.h */,
+				83D757D6178BE5A200C4CC64 /* RHAlertView.m */,
+				83D757D7178BE5A200C4CC64 /* RHBarButtonItem.h */,
+				83D757D8178BE5A200C4CC64 /* RHBarButtonItem.m */,
+				83D757D9178BE5A200C4CC64 /* RHButton.h */,
+				83D757DA178BE5A200C4CC64 /* RHButton.m */,
+				83D757DD178BE5A200C4CC64 /* RHSwitch.h */,
+				83D757DE178BE5A200C4CC64 /* RHSwitch.m */,
+				83D757DF178BE5A200C4CC64 /* RHTableSection.h */,
+				83D757E0178BE5A200C4CC64 /* RHTableSection.m */,
+				83D757E1178BE5A200C4CC64 /* RHTableView.h */,
+				83D757E2178BE5A200C4CC64 /* RHTableView.m */,
+				83D757E3178BE5A200C4CC64 /* RHTableViewCell.h */,
+				83D757E4178BE5A200C4CC64 /* RHTableViewCell.m */,
+				83D757E5178BE5A200C4CC64 /* RHTableViewCells.h */,
+				83D757E6178BE5A200C4CC64 /* RHTableViewCells.m */,
+				83D757E7178BE5A200C4CC64 /* RHTapGestureRecognizer.h */,
+				83D757E8178BE5A200C4CC64 /* RHTapGestureRecognizer.m */,
+				83D757E9178BE5A200C4CC64 /* RHTools.h */,
+				83D757EA178BE5A200C4CC64 /* UIApplication+rhextensions.h */,
+				83D757EB178BE5A200C4CC64 /* UIApplication+rhextensions.m */,
 			);
 			name = "RHTools (referenced)";
 			sourceTree = "<group>";
@@ -669,17 +700,23 @@
 				83FD20461646DDB200EC2AD1 /* AFURLConnectionOperation.m in Sources */,
 				83FD20471646DDB200EC2AD1 /* AFXMLRequestOperation.m in Sources */,
 				83FD20481646DDB200EC2AD1 /* UIImageView+AFNetworking.m in Sources */,
-				838AB078172F9021005A9149 /* NSArray+rhextensions.m in Sources */,
-				838AB079172F9021005A9149 /* NSDate+formatter.m in Sources */,
-				838AB07A172F9021005A9149 /* NSDate+timesince.m in Sources */,
-				838AB07B172F9021005A9149 /* NSDictionary+rhextensions.m in Sources */,
-				838AB07C172F9021005A9149 /* RHActionSheet.m in Sources */,
-				838AB07D172F9021005A9149 /* RHAlertView.m in Sources */,
-				838AB07E172F9021005A9149 /* RHBarButtonItem.m in Sources */,
-				838AB07F172F9021005A9149 /* RHButton.m in Sources */,
-				838AB080172F9021005A9149 /* RHSwitch.m in Sources */,
-				838AB089172F9375005A9149 /* UIApplication+rhextensions.m in Sources */,
 				838AB08F172F9452005A9149 /* SVProgressHUD.m in Sources */,
+				83D757EC178BE5A200C4CC64 /* NSArray+rhextensions.m in Sources */,
+				83D757ED178BE5A200C4CC64 /* NSDate+formatter.m in Sources */,
+				83D757EE178BE5A200C4CC64 /* NSDate+timesince.m in Sources */,
+				83D757EF178BE5A200C4CC64 /* NSDictionary+rhextensions.m in Sources */,
+				83D757F0178BE5A200C4CC64 /* NSString+rhextensions.m in Sources */,
+				83D757F1178BE5A200C4CC64 /* RHActionSheet.m in Sources */,
+				83D757F2178BE5A200C4CC64 /* RHAlertView.m in Sources */,
+				83D757F3178BE5A200C4CC64 /* RHBarButtonItem.m in Sources */,
+				83D757F4178BE5A200C4CC64 /* RHButton.m in Sources */,
+				83D757F6178BE5A200C4CC64 /* RHSwitch.m in Sources */,
+				83D757F7178BE5A200C4CC64 /* RHTableSection.m in Sources */,
+				83D757F8178BE5A200C4CC64 /* RHTableView.m in Sources */,
+				83D757F9178BE5A200C4CC64 /* RHTableViewCell.m in Sources */,
+				83D757FA178BE5A200C4CC64 /* RHTableViewCells.m in Sources */,
+				83D757FB178BE5A200C4CC64 /* RHTapGestureRecognizer.m in Sources */,
+				83D757FC178BE5A200C4CC64 /* UIApplication+rhextensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -809,9 +846,10 @@
 		28D3F201112F7DC200FD0661 /* WS.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				83D757C8178BD6E600C4CC64 /* WS (3.6).xcdatamodel */,
 				28860B760F44E54D00985440 /* WS.xcdatamodel */,
 			);
-			currentVersion = 28860B760F44E54D00985440 /* WS.xcdatamodel */;
+			currentVersion = 83D757C8178BD6E600C4CC64 /* WS (3.6).xcdatamodel */;
 			name = WS.xcdatamodeld;
 			path = ../WS.xcdatamodeld;
 			sourceTree = "<group>";

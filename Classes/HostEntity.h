@@ -45,6 +45,7 @@
 @property (nonatomic, strong) NSNumber * bed;
 @property (nonatomic, strong) NSString * preferred_notice;
 @property (nonatomic, strong) NSString * homephone;
+@property (nonatomic, strong) NSString * mobilephone;
 @property (nonatomic, strong) NSNumber * sag;
 @property (nonatomic, strong) NSSet *feedback;
 @end

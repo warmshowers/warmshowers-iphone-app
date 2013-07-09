@@ -18,6 +18,7 @@
 
 +(Host *)hostWithID:(NSNumber *)hostID;
 +(NSArray *)hostsClosestToLocation:(CLLocation *)location withLimit:(int)limit;
++(NSString *)trimmedPhoneNumber:(NSString *)phoneNumber;
 
 -(NSString *)title;
 -(NSString *)subtitle;
@@ -31,7 +32,7 @@
 
 -(NSUInteger)pinColour;
 
--(NSString *)trimmedPhoneNumber;
+
 -(CLLocation *)location;
 -(NSString *)address;
 

@@ -124,13 +124,14 @@
                                                  host.food = [NSNumber numberWithInt:[[user objectForKey:@"food"] intValue]];
                                                  host.fullname = [user objectForKey:@"fullname"];
                                                  host.homephone = [user objectForKey:@"homephone"];
+												 host.mobilephone = [user objectForKey:@"mobilephone"];
                                                  host.kitchenuse = [NSNumber numberWithInt:[[user objectForKey:@"kitchenuse"] intValue]];
                                                  host.laundry = [NSNumber numberWithInt:[[user objectForKey:@"laundry"] intValue]];
                                                  host.lawnspace = [NSNumber numberWithInt:[[user objectForKey:@"lawnspace"] intValue]];
                                                  host.maxcyclists = [NSNumber numberWithInt:[[user objectForKey:@"maxcyclists"] intValue]];
                                                  host.motel = [user objectForKey:@"motel"];
                                                  host.name = [user objectForKey:@"name"];
-                                                 host.notcurrentlyavailable = [NSNumber numberWithInteger:[[user objectForKey:@"notcurrentlyavailable"] integerValue]];
+                                                 host.notcurrentlyavailable = [NSNumber numberWithInteger:[[user objectForKey:@"notcurrentlyavailable"] intValue]];
                                                  host.postal_code = [user objectForKey:@"postal_code"];
                                                  host.province = [user objectForKey:@"province"];
                                                  host.sag = [NSNumber numberWithInt:[[user objectForKey:@"sag"] intValue]];

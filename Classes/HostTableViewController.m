@@ -27,7 +27,7 @@
 -(void)viewDidLoad {
 	[super viewDidLoad];
 	
-	UIBarButtonItem *helpButton = [[UIBarButtonItem alloc] initWithTitle:@"Help" style:UIBarButtonItemStyleBordered target:self action:@selector(helpButtonPressed:)];
+	UIBarButtonItem *helpButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Help", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(helpButtonPressed:)];
 	
 	NSArray *toolbarItems = [NSArray arrayWithObjects:
 							 // searchButton,
@@ -38,7 +38,7 @@
 
 	[self setToolbarItems:toolbarItems animated:YES];
     
-    [self addSearchBarWithPlaceHolder:@"Filter Cached Hosts"];
+    [self addSearchBarWithPlaceHolder:NSLocalizedString(@"Filter Cached Hosts", nil)];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -68,12 +68,7 @@
 */
 
 -(void)helpButtonPressed:(id)sender {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Help"
-													message:@"Hosts are sorted by proximity to your location.\n\nA green dot indicates a host is marked as a favourite.  A purple dot indicates the host details are cached and can be accessed offline.  A red dot indicates the host is not cached."
-												   delegate:nil
-										  cancelButtonTitle:nil
-										  otherButtonTitles:@"OK", nil];
-	[alert show];
+	[[RHAlertView alertWithOKButtonWithTitle:NSLocalizedString(@"Help", nil) message:NSLocalizedString(@"Hosts are sorted by proximity to your location.\n\nA green dot indicates a host is marked as a favourite.  A purple dot indicates the host details are cached and can be accessed offline.  A red dot indicates the host is not cached.", nil)] show];
 }
 
 // too many entries to do pretty animations
@@ -153,13 +148,13 @@
 	
 	switch ([host pinColour]) {
 		case MKPinAnnotationColorRed:
-			cell.imageView.image = [UIImage imageNamed:@"DotRed.png"];
+			cell.imageView.image = [UIImage imageNamed:@"DotRed"];
 			break;
 		case MKPinAnnotationColorPurple:
-			cell.imageView.image = [UIImage imageNamed:@"DotPurple.png"];
+			cell.imageView.image = [UIImage imageNamed:@"DotPurple"];
 			break;
 		case MKPinAnnotationColorGreen:
-			cell.imageView.image = [UIImage imageNamed:@"DotGreen.png"];
+			cell.imageView.image = [UIImage imageNamed:@"DotGreen"];
 			break;
 		default:
 			cell.imageView.image = nil;
@@ -196,6 +191,5 @@
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
 }
-
 
 @end

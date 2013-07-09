@@ -43,6 +43,7 @@
 @dynamic bed;
 @dynamic preferred_notice;
 @dynamic homephone;
+@dynamic mobilephone;
 @dynamic sag;
 @dynamic feedback;
 

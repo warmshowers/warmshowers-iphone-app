@@ -34,27 +34,27 @@
 
 -(void)viewDidLoad {
 	[super viewDidLoad];
-	
-	self.title = @"Host Info";
-	
+
+	self.title = NSLocalizedString(@"Host Info", nil);
+
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
 																						   target:self
 																						   action:@selector(showActions:)];
-	
+
 	self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 200, 20)];
 	[self.statusLabel setBackgroundColor:[UIColor clearColor]];
 	[self.statusLabel setFont:[UIFont systemFontOfSize:14]];
 	[self.statusLabel setTextAlignment:UITextAlignmentCenter];
-	
+
 	if IsIPad {
 		[self.statusLabel setTextColor:[UIColor darkGrayColor]];
 	} else {
 		[self.statusLabel setTextColor:[UIColor whiteColor]];
 	}
-	
+
 	UIBarButtonItem *fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
 	[fixed setWidth:18];
-	
+
 	NSArray *toolbarItems = [NSArray arrayWithObjects:
 							 [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshHost)],
 							 [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
@@ -62,10 +62,10 @@
 							 [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
 							 fixed,
 							 nil];
-	
+
 
 	[self setToolbarItems:toolbarItems animated:YES];
-    
+
 	[self.host addObserver:self forKeyPath:@"last_updated_details" options:0 context:nil];
 }
 
@@ -81,9 +81,8 @@
 
 -(void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	
 	[self refreshTableView:NO];
-	
+	[self refreshHost];
 	if ([self.host needsUpdate]) {
 		[self refreshHost];
 	}
@@ -97,23 +96,23 @@
 
 
 -(void)refreshHost {
-	
+
 	[self refreshTableView:YES];
-	
+
 	if ([[WSHTTPClient sharedHTTPClient] reachable]) {
 		[WSRequests hostDetailsWithHost:self.host];
 		[WSRequests hostFeedbackWithHost:self.host];
-		
+
 	} else if (self.host.last_updated_details == nil) {
-        RHAlertView *alert = [RHAlertView alertWithTitle:nil message:@"An error occurred while loading the host details. Please check your network connection and try again."];
-        
-        [alert addButtonWithTitle:@"OK" block:^{
+        RHAlertView *alert = [RHAlertView alertWithTitle:nil message:NSLocalizedString(@"An error occurred while loading the host details. Please check your network connection and try again.", nil)];
+
+        [alert addButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
             [self.navigationController popViewControllerAnimated:YES];
         }];
-        
+
         [alert show];
 	} else if ([self.host isStale]) {
-        [[RHAlertView alertWithOKButtonWithTitle:nil message:@"This host hasn't been updated in a while and might be out of date. Please connect to a network and refresh before attempting to contact this host."] show];
+        [[RHAlertView alertWithOKButtonWithTitle:nil message:NSLocalizedString(@"This host hasn't been updated in a while and might be out of date. Please connect to a network and refresh before attempting to contact this host.", nil)] show];
 		[self refreshTableView:NO];
 	} else {
 		[self refreshTableView:NO];
@@ -122,8 +121,8 @@
 
 -(void)setLastUpdatedDate {
 	if (self.host.last_updated_details) {
-		NSString *updated = [NSString stringWithFormat:@"%@ ago", [self.host.last_updated_details timesinceWithDepth:1]];
-		[self.statusLabel setText:[NSString stringWithFormat:@"Updated: %@", updated]];
+		NSString *updated = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), [self.host.last_updated_details timesinceWithDepth:1]];
+		[self.statusLabel setText:[NSString stringWithFormat:NSLocalizedString(@"Updated: %@", nil), updated]];
 	} else {
 		[self.statusLabel setText:@""];
 	}
@@ -140,26 +139,23 @@
 
 
 -(void)refreshTableView:(BOOL)show {
-	
+
 	if ([self.host.notcurrentlyavailable boolValue]) {
-        
-        [[RHAlertView alertWithOKButtonWithTitle:@"Host no longer available" message:@"This host is no longer available and will no longer be displayed on the map or in the host list."] show];
-        
-		[self.navigationController popViewControllerAnimated:YES];
-		
+
+		/* [[RHAlertView alertWithOKButtonWithTitle:NSLocalizedString(@"Host no longer available", nil) message:NSLocalizedString(@"This host is no longer available and will no longer be displayed on the map or in the host list.", nil)] show];
+		 */
+
+		__weak UINavigationController *bNavigationController = self.navigationController;
+
+		RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Host no longer available", nil) message:NSLocalizedString(@"This host is no longer available and will no longer be displayed on the map or in the host list.", nil)];
+
+		[alert addButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
+			[bNavigationController popViewControllerAnimated:YES];
+		}];
+
+		[alert show];
 	} else {
-		
-		/*
-		 self.showingLoadingIndicator = show;
-		
-		if (self.isShowingLoadingIndicator) {
-			[SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeGradient];
-		} else {
-			[SVProgressHUD dismiss];
-		}
-		  */
-		
-		
+
 		[self setLastUpdatedDate];
 		self.showingLoadingIndicator = show;
 		[self.tableView reloadData];
@@ -172,7 +168,7 @@
         case 0:
             return 1;
 		case 1:
-			return 8;
+			return 9;
 		case 2:
 			return 1;
 		default:
@@ -183,9 +179,9 @@
 
 // Customize the appearance of table view cells.
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     static NSString *CellIdentifier = @"Cell";
-    
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
@@ -193,123 +189,127 @@
 		[cell.detailTextLabel setNumberOfLines:0];
 		[cell.detailTextLabel setLineBreakMode:UILineBreakModeWordWrap];
     }
-	
+
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
-	
+
 	switch (indexPath.section) {
         case 0:
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-            
+
             [cell.imageView setImage:[UIImage imageNamed:@"Icon-72-rounded"]];
-            
+
             [cell.textLabel setText:[self.host title]];
             [cell setBackgroundColor:[UIColor clearColor]];
             [cell setBackgroundView:[[UIView alloc] initWithFrame:CGRectZero]];
             [cell.textLabel setNumberOfLines:0];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            
+
             return cell;
-            
-            
+
 		case 1:
-			/*if (indexPath.row == 0) {
-             cell.textLabel.text = @"Name";
-             cell.detailTextLabel.text = [self.host title];
-             
-             } else
-             */
+
             if (indexPath.row == 0) {
-				// cell = self.addressCell;
-				cell.textLabel.text = @"Address";
+				cell.textLabel.text = NSLocalizedString(@"Address", nil);
 				cell.detailTextLabel.text = [[self.host address] trim];
-				
+
 			} else if (indexPath.row == 1) {
-				cell.textLabel.text = @"Phone";
-				cell.detailTextLabel.text = self.host.homephone;
+				cell.textLabel.text = NSLocalizedString(@"Phone", nil);
+
 				if (self.host.homephone) {
+					cell.detailTextLabel.text = self.host.homephone;
 					cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-				}
-				
-			} else if (indexPath.row == 2) {
-				cell.textLabel.text = @"Comments";
-				cell.detailTextLabel.text = [self.host.comments trim];
-				
-			} else if (indexPath.row == 3) {
-				cell.textLabel.text = @"Notice";
-				cell.detailTextLabel.text = self.host.preferred_notice;
-				
-			} else if (indexPath.row == 4) {
-				cell.textLabel.text = @"Status";
-				if ([self.host.notcurrentlyavailable boolValue]) {
-					cell.detailTextLabel.text = @"Not available";
 				} else {
-					cell.detailTextLabel.text = @"Available";
+					cell.detailTextLabel.text = NSLocalizedString(@"n/a", nil);
 				}
-				
+			} else if (indexPath.row == 2) {
+				cell.textLabel.text = NSLocalizedString(@"Mobile", nil);
+
+				if (self.host.mobilephone) {
+					cell.detailTextLabel.text = self.host.mobilephone;
+					cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+				} else {
+					cell.detailTextLabel.text = NSLocalizedString(@"n/a", nil);
+				}
+			} else if (indexPath.row == 3) {
+				cell.textLabel.text = NSLocalizedString(@"Comments", nil);
+				cell.detailTextLabel.text = [self.host.comments trim];
+
+			} else if (indexPath.row == 4) {
+				cell.textLabel.text = NSLocalizedString(@"Notice", nil);
+				cell.detailTextLabel.text = self.host.preferred_notice;
+
 			} else if (indexPath.row == 5) {
- 				cell.textLabel.text = @"Distance";
+				cell.textLabel.text = NSLocalizedString(@"Status", nil);
+				if ([self.host.notcurrentlyavailable boolValue]) {
+					cell.detailTextLabel.text = NSLocalizedString(@"Not available", nil);
+				} else {
+					cell.detailTextLabel.text = NSLocalizedString(@"Available", nil);
+				}
+
+			} else if (indexPath.row == 6) {
+ 				cell.textLabel.text = NSLocalizedString(@"Distance", nil);
 				cell.detailTextLabel.text = [self.host subtitle];
-                
-            } else if (indexPath.row == 6) {
-				cell.textLabel.text = @"Mbr Since";
+
+            } else if (indexPath.row == 7) {
+				cell.textLabel.text = NSLocalizedString(@"Mbr Since", nil);
 				cell.detailTextLabel.text = [self.host.member_since formatWithUTCTimeZone];
-				
-				
-			} else if (indexPath.row == 7) {
-				cell.textLabel.text = @"Last Login";
-				cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ ago", [self.host.last_login timesince]];
+
+
+			} else if (indexPath.row == 8) {
+				cell.textLabel.text = NSLocalizedString(@"Last Login", nil);
+				cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), [self.host.last_login timesince]];
             }
-			
+
 			break;
 		case 2:
 			if (indexPath.row == 0) {
 				cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"FeedbackCell"];
-				cell.textLabel.text = [NSString stringWithFormat:@"Feedback (%i)", [self.host.feedback count]];
+				cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Feedback (%i)", nil), [self.host.feedback count]];
 				cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			}
 			break;
 		case 3:
 			if (indexPath.row == 0) {
-				cell.textLabel.text = @"Max Guest";
+				cell.textLabel.text = NSLocalizedString(@"Max Guest", nil);
 				cell.detailTextLabel.text = [NSString stringWithFormat:@"%i", [self.host.maxcyclists intValue]];
 			} else if (indexPath.row == 1) {
-				cell.textLabel.text = @"Motel";
+				cell.textLabel.text = NSLocalizedString(@"Motel", nil);
 				cell.detailTextLabel.text = self.host.motel;
 			} else if (indexPath.row == 2) {
-				cell.textLabel.text = @"Camping";
+				cell.textLabel.text = NSLocalizedString(@"Camping", nil);
 				cell.detailTextLabel.text = self.host.campground;
 			} else if (indexPath.row == 3) {
-				cell.textLabel.text = @"Bike Shop";
+				cell.textLabel.text = NSLocalizedString(@"Bike Shop", nil);
 				cell.detailTextLabel.text = self.host.bikeshop;
 			} else if (indexPath.row == 4) {
-				cell.textLabel.text = @"Bed";
-				cell.detailTextLabel.text = [self.host.bed boolValue] ? @"Yes" : @"No";
+				cell.textLabel.text = NSLocalizedString(@"Bed", nil);
+				cell.detailTextLabel.text = [self.host.bed boolValue] ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 			} else if (indexPath.row == 5) {
-				cell.textLabel.text = @"Laundry";
-				cell.detailTextLabel.text = [self.host.laundry boolValue] ? @"Yes" : @"No";
+				cell.textLabel.text = NSLocalizedString(@"Laundry", nil);
+				cell.detailTextLabel.text = [self.host.laundry boolValue] ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 			} else if (indexPath.row == 6) {
-				cell.textLabel.text = @"Kitchen";
-				cell.detailTextLabel.text = [self.host.kitchenuse boolValue] ? @"Yes" : @"No";
+				cell.textLabel.text = NSLocalizedString(@"Kitchen", nil);
+				cell.detailTextLabel.text = [self.host.kitchenuse boolValue] ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 			} else if (indexPath.row == 7) {
-				cell.textLabel.text = @"Lawnspace";
-				cell.detailTextLabel.text = [self.host.lawnspace boolValue] ? @"Yes" : @"No";
+				cell.textLabel.text = NSLocalizedString(@"Lawnspace", nil);
+				cell.detailTextLabel.text = [self.host.lawnspace boolValue] ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 			} else if (indexPath.row == 8) {
-				cell.textLabel.text = @"Storage";
-				cell.detailTextLabel.text = [self.host.storage boolValue] ? @"Yes" : @"No";
+				cell.textLabel.text = NSLocalizedString(@"Storage", nil);
+				cell.detailTextLabel.text = [self.host.storage boolValue] ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 			} else if (indexPath.row == 9) {
-				cell.textLabel.text = @"Shower";
-				cell.detailTextLabel.text = [self.host.shower boolValue] ? @"Yes" : @"No";
+				cell.textLabel.text = NSLocalizedString(@"Shower", nil);
+				cell.detailTextLabel.text = [self.host.shower boolValue] ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 			} else if (indexPath.row == 10) {
-				cell.textLabel.text = @"SAG";
-				cell.detailTextLabel.text = [self.host.sag boolValue] ? @"Yes" : @"No";
+				cell.textLabel.text = NSLocalizedString(@"SAG", nil);
+				cell.detailTextLabel.text = [self.host.sag boolValue] ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 			} else if (indexPath.row == 11) {
-				cell.textLabel.text = @"Food";
-				cell.detailTextLabel.text = [self.host.food boolValue] ? @"Yes" : @"No";
+				cell.textLabel.text = NSLocalizedString(@"Food", nil);
+				cell.detailTextLabel.text = [self.host.food boolValue] ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 			}
 		default:
 			break;
 	}
-	
+
     return cell;
 }
 
@@ -318,28 +318,41 @@
 #pragma mark Table view delegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	
+
 	if ((indexPath.section == 0) && (indexPath.row == 1)) {
 		[self showActions:self.navigationItem.rightBarButtonItem];
-		
+
 	} else if (IsIPhone && (indexPath.section == 1) && (indexPath.row == 1) && (self.host.homephone)) {
-        
-        RHAlertView *alert = [RHAlertView alertWithTitle:@"Contact Host" message:[NSString stringWithFormat:@"Dial %@?", self.host.homephone]];
-        
-        [alert addButtonWithTitle:@"OK" block:^{
-            NSString *tel = [NSString stringWithFormat:@"tel://%@", [self.host trimmedPhoneNumber]];
+
+        RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Contact Host", nil) message:[NSString stringWithFormat:NSLocalizedString(@"Dial %@?", nil), self.host.homephone]];
+
+		[alert addCancelButton];
+
+        [alert addButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
+            NSString *tel = [NSString stringWithFormat:@"tel://%@", [Host trimmedPhoneNumber:self.host.homephone]];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tel]];
         }];
-        
-        [alert addCancelButton];
+
         [alert show];
-        
+
+	} else if (IsIPhone && (indexPath.section == 1) && (indexPath.row == 2) && (self.host.mobilephone)) {
+		RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Contact Host", nil) message:[NSString stringWithFormat:NSLocalizedString(@"Dial %@?", nil), self.host.mobilephone]];
+
+		[alert addCancelButton];
+
+        [alert addButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
+            NSString *tel = [NSString stringWithFormat:@"tel://%@", [Host trimmedPhoneNumber:self.host.mobilephone]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tel]];
+        }];
+
+        [alert show];
+
 	} else if (indexPath.section == 2) {
 		FeedbackTableViewController *controller = [[FeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
 		[controller setHost:self.host];
 		[self.navigationController pushViewController:controller animated:YES];
 	}
-	
+
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -348,33 +361,37 @@
             // case 0:
 			// return @"Contact";
 		case 2:
-			return @"Member Information";
+			return NSLocalizedString(@"Member Information", nil);
 		default:
 			break;
 	}
-	
+
 	return @"";
 }
 
 -(CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     UITableViewCell *_cell = [self tableView:_tableView cellForRowAtIndexPath:indexPath];
 	UILineBreakMode lineBreakMode = _cell.detailTextLabel.lineBreakMode;
-    
+
     if (indexPath.section == 0) {
         return 80;
     } else if (lineBreakMode == UILineBreakModeWordWrap) {
 		NSString *text = _cell.detailTextLabel.text;
 		UIFont *font = _cell.detailTextLabel.font;
-		
+
 		CGRect table_frame = self.tableView.frame;
 		float margin = IsIPad ? 183 : 113;
-		CGSize withinSize = CGSizeMake(table_frame.size.width-margin, MAXFLOAT);
+
+		CGFloat tableFrameWidth = table_frame.size.width;
+		CGFloat newSize = tableFrameWidth-margin;
+
+		CGSize withinSize = CGSizeMake(newSize, MAXFLOAT);
 		CGSize size = [text sizeWithFont:font constrainedToSize:withinSize lineBreakMode:lineBreakMode];
-		
+
 		return MAX(44, size.height + 22);
 	}
-	
+
 	return 44;
 }
 
@@ -384,52 +401,52 @@
 -(void)showActions:(id)sender {
 	if (self.host.last_updated_details != nil) {
 		self.popoverActionsheet = [[RHActionSheet alloc] init];
-		
+
 		__weak Host *bHost = self.host;
 		__weak UINavigationController *bNavController = self.navigationController;
-		
+
 		if ([self.host.favourite boolValue]) {
-			[self.popoverActionsheet addButtonWithTitle:@"Unmark as Favourite" block:^{
+			[self.popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Unmark as Favourite", nil) block:^{
 				bHost.favourite = [NSNumber numberWithBool:NO];
 				[Host commit];
 				[[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:bHost forKey:@"host"]];
-				
-				[SVProgressHUD showSuccessWithStatus:@"Unmarked as favourite"];
+
+				[SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Unmarked as favourite", nil)];
 			}];
 		} else {
-			[self.popoverActionsheet addButtonWithTitle:@"Mark as Favourite" block:^{
+			[self.popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Mark as Favourite", nil) block:^{
 				bHost.favourite = [NSNumber numberWithBool:YES];
 				[Host commit];
 				[[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:bHost forKey:@"host"]];
-				[SVProgressHUD showSuccessWithStatus:@"Marked as favourite"];
+				[SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Marked as favourite", nil)];
 			}];
 		}
-		
-		[self.popoverActionsheet addButtonWithTitle:@"View in Maps" block:^{
+
+		[self.popoverActionsheet addButtonWithTitle:NSLocalizedString(@"View in Maps", nil) block:^{
             [MKMapView openInMapsWithAnnotation:bHost];
 		}];
-		
-		[self.popoverActionsheet addButtonWithTitle:@"View Online" block:^{
+
+		[self.popoverActionsheet addButtonWithTitle:NSLocalizedString(@"View Online", nil) block:^{
 			RHWebViewController *controller = [[RHWebViewController alloc] init];
 			[controller setUrl:[NSURL URLWithString:[bHost infoURL]]];
 			[controller setShouldShowDoneButton:YES];
-			
+
 			UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 			[bNavController presentModalViewController:navController animated:YES];
-			
+
 		}];
-		
-		[self.popoverActionsheet addButtonWithTitle:@"Contact Host" block:^{
+
+		[self.popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Contact Host", nil) block:^{
 			ContactHostViewController *controller = [[ContactHostViewController alloc] initWithNibName:@"ContactHostViewController" bundle:nil];
 			[controller setHost:bHost];
-			
+
 			UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 			[navController setModalPresentationStyle:UIModalPresentationPageSheet];
 			[bNavController presentModalViewController:navController animated:YES];
 		}];
-		
-		[self.popoverActionsheet addCancelButtonWithTitle:@"Cancel"];
-		
+
+		[self.popoverActionsheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+
 		[self.popoverActionsheet showFromBarButtonItem:sender animated:YES];
 	}
 }
@@ -442,11 +459,8 @@
 #pragma mark -
 #pragma mark Memory management
 
-- (void)dealloc {
-	
+-(void)dealloc {
 	[self.host removeObserver:self forKeyPath:@"last_updated_details"];
-	
-	
 }
 
 @end

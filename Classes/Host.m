@@ -79,6 +79,20 @@
 	return [Host fetchWithPredicate:predicate];
 }
 
++(NSString *)trimmedPhoneNumber:(NSString *)phoneNumber {
+
+	NSArray *comps = [phoneNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+	NSMutableArray *words = [NSMutableArray array];
+	for (NSString *comp in comps) {
+		if([comp length] > 0) {
+			[words addObject:comp];
+		}
+	}
+
+	return [words componentsJoinedByString:@""];
+}
+
 
 -(NSString *)title {
 	return self.fullname ? self.fullname : self.name;
@@ -146,7 +160,7 @@
 }
 
 -(NSString *)infoURL {
-	return [NSString stringWithFormat:@"http://www.warmshowers.org/user/%@/", self.hostid];
+	return [NSString stringWithFormat:@"https://www.warmshowers.org/user/%@/", self.hostid];
 }
 
 /*
@@ -184,19 +198,7 @@
 	return NO;
 }
 
--(NSString *)trimmedPhoneNumber {
-	// return [self.homephone stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-	NSArray *comps = [self.homephone componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-	NSMutableArray *words = [NSMutableArray array];
-	for (NSString *comp in comps) {
-		if([comp length] > 0) {
-			[words addObject:comp];
-		}
-	}
-	
-	return [words componentsJoinedByString:@""];
-}
+
 
 
 -(void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {

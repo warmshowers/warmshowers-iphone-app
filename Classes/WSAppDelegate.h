@@ -13,9 +13,6 @@
 #define kAuthenticationStatusChangedNotificationName @"AuthenticationHasChanged"
 #define kNetworkError @"Check your network connection"
 
-#define IsIPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-#define IsIPhone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-
 #import <MapKit/MapKit.h>
 #import "AFHTTPClient.h"
 
@@ -33,10 +30,7 @@
 
 -(void)loginWithoutPrompt;
 -(void)loginWithPrompt:(BOOL)prompt;
-
-
 -(BOOL)isLoggedIn;
-
 -(CLLocation *)userLocation;
 
 @end

@@ -21,6 +21,7 @@
 #import "WSHTTPClient.h"
 
 @interface WSAppDelegate ()
+// -(BOOL)postApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 -(NSArray *)segmentViewControllers;
 -(void)loginWithUsername:(NSString *)_username password:(NSString *)_password;
 -(void)loginSuccess;
@@ -41,34 +42,66 @@
 	return (WSAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
+// See http://schwiiz.org/?p=1734
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];	
+    // Setup the window, but don't add the rootViewController yet
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.window makeKeyAndVisible];
+
+    // -doesRequireMigration is a method in my RHManagedObject Core Data framework. Function should be self explanatory.
+    if ([Host doesRequireMigration]) {
+        // SVProgressHUD displays an animated spinner
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"Upgrading...", nil) maskType:SVProgressHUDMaskTypeGradient];
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+
+			// Just accessing the Core Data stack forces the schema upgrade
+			[Host managedObjectContextForCurrentThread];
+
+			// Show long enough to see what's going on.
+			[NSThread sleepForTimeInterval:1.0];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!",nil)];
+                [self postApplication:application didFinishLaunchingWithOptions:launchOptions];
+            });
+        });
+
+    } else {
+        [self postApplication:application didFinishLaunchingWithOptions:launchOptions];
+    }
+
+    return YES;
+}
+
+-(BOOL)postApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	self.navigationController = [[UINavigationController alloc] initWithRootViewController:[self.segmentViewControllers objectAtIndex:0]];
 	self.window.rootViewController = self.navigationController;
 	[self.window makeKeyAndVisible];
-	    
+
 	[[NSUserDefaults standardUserDefaults] setInteger:kVersion forKey:@"ws-version"];
-    
+
 	[self.navigationController setToolbarHidden:NO];
 	[self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:46/255.0 green:116/255.0 blue:165/255.0 alpha:1]];
-	
+
 	self.segmentsController = [[SegmentsController alloc] initWithNavigationController:self.navigationController viewControllers:[self segmentViewControllers]];
-	
+
 	self.locationManager = [[CLLocationManager alloc] init];
 	self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-	
+
 	if ([CLLocationManager locationServicesEnabled]) {
 		[self.locationManager startUpdatingLocation];
 	}
-    
+
     if ([self isLoggedIn]) {
         [RHPromptForReview sharedInstance];
     } else {
 		[self logout];
     }
-    
+
 	[[NSDate formatter] setTimeStyle:NSDateFormatterNoStyle];
-	
+
     return YES;
 }
 
@@ -79,7 +112,7 @@
 		UIViewController *list2 = [[FavouriteHostTableViewController alloc] initWithStyle:UITableViewStylePlain];
 		self.segmentViewControllers = [NSArray arrayWithObjects:map, list, list2, nil];
 	}
-	
+
 	return segmentViewControllers;
 }
 
@@ -94,15 +127,15 @@
 #pragma mark Authentication
 -(void)loginWithPrompt:(BOOL)prompt {
     dispatch_async(dispatch_get_main_queue(), ^{
-        
+
 		// Sessions MUST be cleared before attemping authentication.
 		NSURL *baseURL = [[WSHTTPClient sharedHTTPClient] baseURL];
 		NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:baseURL];
-		
+
 		for (NSHTTPCookie *cookie in cookies) {
 			[[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
 		}
-		
+
         if (prompt) {
             [self promptForUsernameAndPassword];
         } else {
@@ -110,7 +143,7 @@
             NSString *password = [[NSUserDefaults standardUserDefaults] stringForKey:@"ws-password"];
             [self loginWithUsername:username password:password];
         }
-        
+
     });
 }
 
@@ -120,88 +153,89 @@
 }
 
 -(void)logout {
-    
+
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ws-password"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ws-loggedin"];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAuthenticationStatusChangedNotificationName object:nil userInfo:nil];
-    
+
     [self loginWithPrompt:YES];
 }
 
 -(void)promptForUsernameAndPassword {
-    RHAlertView *alert = [RHAlertView alertWithTitle:@"Warmshowers Login" message:@"Enter your username and password:"];
+    RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warmshowers Login", nil) message:NSLocalizedString(@"Enter your username and password:", nil)];
     [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-    
+
     NSString *name = [[NSUserDefaults standardUserDefaults] stringForKey:@"ws-name"];
     [[alert textFieldAtIndex:0] setText:name];
-    
+
     __weak RHAlertView *bAlert = alert;
-	
-	[alert addButtonWithTitle:@"Login" block:^{
-        NSString *name = [[bAlert textFieldAtIndex:0] text];
-        NSString *password = [[bAlert textFieldAtIndex:1] text];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"ws-name"];
-        [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"ws-password"];
-        
-        [self loginWithUsername:name password:password];
-    }];
-	
-    [alert addButtonWithTitle:@"Sign Up" block:^{
-        RHAlertView *alert2 = [RHAlertView alertWithTitle:@"Warmshowers Sign Up" message:@"You will be redirected to the sign up page on Warmshowers.org."];
-        
-        [alert2 addButtonWithTitle:@"OK" block:^{
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.warmshowers.org/user/register"]];
+
+    [alert addButtonWithTitle:NSLocalizedString(@"Sign Up", nil) block:^{
+        RHAlertView *alert2 = [RHAlertView alertWithTitle:@"Warmshowers Sign Up" message:NSLocalizedString(@"You will be redirected to the sign up page on Warmshowers.org.", nil)];
+
+        [alert2 addButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:^{
             [self logout];
         }];
-                
-        [alert2 addButtonWithTitle:@"Cancel" block:^{
+
+        [alert2 addButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.warmshowers.org/user/register"]];
             [self logout];
         }];
-        
+
         [alert2 show];
     }];
-	
 
-    
+	[alert addButtonWithTitle:NSLocalizedString(@"Login", nil) block:^{
+        NSString *name = [[bAlert textFieldAtIndex:0] text];
+        NSString *password = [[bAlert textFieldAtIndex:1] text];
+
+        [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"ws-name"];
+        [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"ws-password"];
+
+        [self loginWithUsername:name password:password];
+    }];
+
     [alert show];
 }
 
 
 -(void)loginWithUsername:(NSString *)_username password:(NSString *)_password {
-		
+
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             _username, @"username",
                             _password, @"password", nil];
-    
+
     NSURLRequest *urlrequest = [[WSHTTPClient sharedHTTPClient] requestWithMethod:@"POST" path:@"/services/rest/user/login" parameters:params];
-    
+
     AFJSONRequestOperation *request = [AFJSONRequestOperation JSONRequestOperationWithRequest:urlrequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
 
         if ([self isLoggedIn] == NO) {
-            [SVProgressHUD showSuccessWithStatus:@"Success!"];
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
         }
 
         [self loginSuccess];
-        
+
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        
+
 		[SVProgressHUD dismiss];
-		
-		RHAlertView *alert = [RHAlertView alertWithTitle:@"Warmshowers" message:@"Login failed. Please check your username and password and try again.  If you don't have an account you can tap the Sign Up button to register."];
-		
-		[alert addButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
-			[self logout];
-		}];
-		
-		[alert show];
-	
+
+		if ([response statusCode] == 401) {
+
+			RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warmshowers", nil) message:NSLocalizedString(@"Login failed. Please check your username and password and try again. If you don't have an account you can tap the Sign Up button to register.", nil)];
+
+			[alert addButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
+				[self logout];
+			}];
+
+			[alert show];
+		}
+
     }];
-    
+
     [[WSHTTPClient sharedHTTPClient] enqueueHTTPRequestOperation:request];
-    
+
     if ([self isLoggedIn] == NO) {
-        [SVProgressHUD showWithStatus:@"Logging in..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeBlack];
     }
 }
 
@@ -225,7 +259,7 @@
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
-	
+
     // [[RHManagedObjectContextManager sharedInstance] commit];
 }
 

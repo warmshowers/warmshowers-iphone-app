@@ -18,7 +18,7 @@
 	static dispatch_once_t oncePredicate;
 	
     dispatch_once(&oncePredicate, ^{
-        _sharedClient = [[WSHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://www.warmshowers.org/"]];
+        _sharedClient = [[WSHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://www.warmshowers.org/"]];
 		
 		[[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
         // [__httpClient setParameterEncoding:AFJSONParameterEncoding];
