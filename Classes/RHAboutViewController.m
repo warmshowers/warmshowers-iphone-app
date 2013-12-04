@@ -86,7 +86,7 @@
 
 -(UITableViewCell *)subHeaderCell {
 	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-	[cell.textLabel setTextAlignment:UITextAlignmentCenter];
+	[cell.textLabel setTextAlignment:NSTextAlignmentCenter];
 	[cell.textLabel setText:@"by Christopher Meyer"];
 	[cell setBackgroundColor:[UIColor clearColor]];
 	[cell setBackgroundView:[[UIView alloc] initWithFrame:CGRectZero]];

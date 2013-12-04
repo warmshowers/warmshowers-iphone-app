@@ -14,6 +14,12 @@
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		28C286E10D94DF7D0034E888 /* HostMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* HostMapViewController.m */; };
 		28D3F202112F7DC200FD0661 /* WS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28D3F201112F7DC200FD0661 /* WS.xcdatamodeld */; };
+		8316C5DC184F03020016EE7E /* RHCoreDataCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8316C5D1184F03020016EE7E /* RHCoreDataCollectionViewController.m */; };
+		8316C5DD184F03020016EE7E /* RHCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8316C5D3184F03020016EE7E /* RHCoreDataTableViewController.m */; };
+		8316C5DE184F03020016EE7E /* RHFetchedResultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8316C5D5184F03020016EE7E /* RHFetchedResultsManager.m */; };
+		8316C5DF184F03020016EE7E /* RHManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8316C5D7184F03020016EE7E /* RHManagedObject.m */; };
+		8316C5E0184F03020016EE7E /* RHManagedObject+legacy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8316C5D9184F03020016EE7E /* RHManagedObject+legacy.m */; };
+		8316C5E1184F03020016EE7E /* RHManagedObjectContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8316C5DB184F03020016EE7E /* RHManagedObjectContextManager.m */; };
 		831FBAA1160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m in Sources */ = {isa = PBXBuildFile; fileRef = 831FBAA0160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m */; };
 		8324D707162E227C00E0E82A /* Icon-72-rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 8324D705162E227C00E0E82A /* Icon-72-rounded.png */; };
 		8324D708162E227C00E0E82A /* Icon-72-rounded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8324D706162E227C00E0E82A /* Icon-72-rounded@2x.png */; };
@@ -32,6 +38,34 @@
 		83533E2F1622F782003788C5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83533E2E1622F782003788C5 /* Default@2x.png */; };
 		83533E311622F7AF003788C5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83533E301622F7AF003788C5 /* Default-568h@2x.png */; };
 		8355479B1642DFFE00D2A0B5 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8355479A1642DFFE00D2A0B5 /* Settings.bundle */; };
+		835696DA1847D18B00F5B999 /* FrameAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696A81847D18B00F5B999 /* FrameAccessor.m */; };
+		835696DB1847D18B00F5B999 /* NSArray+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696AA1847D18B00F5B999 /* NSArray+rhextensions.m */; };
+		835696DC1847D18B00F5B999 /* NSDate+formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696AC1847D18B00F5B999 /* NSDate+formatter.m */; };
+		835696DD1847D18B00F5B999 /* NSDate+timesince.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696AE1847D18B00F5B999 /* NSDate+timesince.m */; };
+		835696DE1847D18B00F5B999 /* NSDictionary+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696B01847D18B00F5B999 /* NSDictionary+rhextensions.m */; };
+		835696DF1847D18B00F5B999 /* NSString+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696B21847D18B00F5B999 /* NSString+rhextensions.m */; };
+		835696E01847D18B00F5B999 /* RHActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696B41847D18B00F5B999 /* RHActionSheet.m */; };
+		835696E11847D18B00F5B999 /* RHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696B61847D18B00F5B999 /* RHAlertView.m */; };
+		835696E21847D18B00F5B999 /* RHBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696B81847D18B00F5B999 /* RHBarButtonItem.m */; };
+		835696E31847D18B00F5B999 /* RHButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696BA1847D18B00F5B999 /* RHButton.m */; };
+		835696E41847D18B00F5B999 /* RHImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696BC1847D18B00F5B999 /* RHImagePickerController.m */; };
+		835696E51847D18B00F5B999 /* RHKeyboardSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696BE1847D18B00F5B999 /* RHKeyboardSlideView.m */; };
+		835696E61847D18B00F5B999 /* RHSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696C01847D18B00F5B999 /* RHSegmentedControl.m */; };
+		835696E71847D18B00F5B999 /* RHSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696C21847D18B00F5B999 /* RHSwitch.m */; };
+		835696E81847D18B00F5B999 /* RHTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696C41847D18B00F5B999 /* RHTableView.m */; };
+		835696E91847D18B00F5B999 /* RHTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696C61847D18B00F5B999 /* RHTableViewCell.m */; };
+		835696EA1847D18B00F5B999 /* RHTableViewCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696C81847D18B00F5B999 /* RHTableViewCells.m */; };
+		835696EB1847D18B00F5B999 /* RHTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696CA1847D18B00F5B999 /* RHTapGestureRecognizer.m */; };
+		835696EC1847D18B00F5B999 /* RHTextAreaInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696CC1847D18B00F5B999 /* RHTextAreaInputViewController.m */; };
+		835696ED1847D18B00F5B999 /* RHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696CE1847D18B00F5B999 /* RHTextField.m */; };
+		835696EE1847D18B00F5B999 /* UIApplication+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696D11847D18B00F5B999 /* UIApplication+rhextensions.m */; };
+		835696EF1847D18B00F5B999 /* UIColor+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696D31847D18B00F5B999 /* UIColor+rhextensions.m */; };
+		835696F01847D18B00F5B999 /* UITableView+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696D51847D18B00F5B999 /* UITableView+rhextensions.m */; };
+		835696F11847D18B00F5B999 /* UIView+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696D71847D18B00F5B999 /* UIView+rhextensions.m */; };
+		835696F21847D18B00F5B999 /* UIViewController+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 835696D91847D18B00F5B999 /* UIViewController+rhextensions.m */; };
+		835696F41847D1CB00F5B999 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 835696F31847D1CB00F5B999 /* AssetsLibrary.framework */; };
+		835696F61847D1EC00F5B999 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 835696F51847D1EC00F5B999 /* Security.framework */; };
+		835696F81847D23100F5B999 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 835696F71847D23100F5B999 /* ImageIO.framework */; };
 		83576CCF16396108000FBE93 /* pagecurl.png in Resources */ = {isa = PBXBuildFile; fileRef = 83576CCD16396108000FBE93 /* pagecurl.png */; };
 		83576CD016396108000FBE93 /* pagecurl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83576CCE16396108000FBE93 /* pagecurl@2x.png */; };
 		836CCF0114ABB3D1000EDC51 /* HostMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF0014ABB3D1000EDC51 /* HostMapViewController.xib */; };
@@ -44,7 +78,6 @@
 		836CCF1B14ABB4C4000EDC51 /* DotPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF0F14ABB4C4000EDC51 /* DotPurple.png */; };
 		836CCF1C14ABB4C4000EDC51 /* DotRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF1014ABB4C4000EDC51 /* DotRed.png */; };
 		83708C1A145C79CF00B15150 /* SegmentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83708C19145C79CF00B15150 /* SegmentsController.m */; };
-		83708C1D145C7CA400B15150 /* NSArray+PerformSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 83708C1C145C7CA400B15150 /* NSArray+PerformSelector.m */; };
 		8388B1371458A8100079ACE3 /* HostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388B1361458A8100079ACE3 /* HostTableViewController.m */; };
 		8389E0FC14C4BF2400B0E900 /* UIScrollView+autoContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 8389E0FB14C4BF2400B0E900 /* UIScrollView+autoContentSize.m */; };
 		838AB08E172F9452005A9149 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 838AB08B172F9452005A9149 /* SVProgressHUD.bundle */; };
@@ -52,9 +85,6 @@
 		838AB091172F94FA005A9149 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838AB090172F94FA005A9149 /* QuartzCore.framework */; };
 		838AB093172F9500005A9149 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838AB092172F9500005A9149 /* MobileCoreServices.framework */; };
 		839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */; };
-		83A98DC11646CAA300F329E8 /* RHCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A98DBC1646CAA300F329E8 /* RHCoreDataTableViewController.m */; };
-		83A98DC21646CAA300F329E8 /* RHManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A98DBE1646CAA300F329E8 /* RHManagedObject.m */; };
-		83A98DC31646CAA300F329E8 /* RHManagedObjectContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A98DC01646CAA300F329E8 /* RHManagedObjectContextManager.m */; };
 		83BE50B6126B4E7B00B5A65A /* HostInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BE50B4126B4E7B00B5A65A /* HostInfoViewController.m */; };
 		83C78E801474DE3D00274616 /* CLLocation+Bearing.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C78E7F1474DE3D00274616 /* CLLocation+Bearing.m */; };
 		83CB0A941608914C00433BF0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CB0A931608914C00433BF0 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -63,22 +93,6 @@
 		83CF4474126A01A200DF3CFD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF4473126A01A200DF3CFD /* MapKit.framework */; };
 		83D26B36126A4DE400412151 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D26B35126A4DE400412151 /* CoreLocation.framework */; };
 		83D73F0D13A151E70070D03A /* NSString+truncate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D73F0C13A151E70070D03A /* NSString+truncate.m */; };
-		83D757EC178BE5A200C4CC64 /* NSArray+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757CA178BE5A200C4CC64 /* NSArray+rhextensions.m */; };
-		83D757ED178BE5A200C4CC64 /* NSDate+formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757CC178BE5A200C4CC64 /* NSDate+formatter.m */; };
-		83D757EE178BE5A200C4CC64 /* NSDate+timesince.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757CE178BE5A200C4CC64 /* NSDate+timesince.m */; };
-		83D757EF178BE5A200C4CC64 /* NSDictionary+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757D0178BE5A200C4CC64 /* NSDictionary+rhextensions.m */; };
-		83D757F0178BE5A200C4CC64 /* NSString+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757D2178BE5A200C4CC64 /* NSString+rhextensions.m */; };
-		83D757F1178BE5A200C4CC64 /* RHActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757D4178BE5A200C4CC64 /* RHActionSheet.m */; };
-		83D757F2178BE5A200C4CC64 /* RHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757D6178BE5A200C4CC64 /* RHAlertView.m */; };
-		83D757F3178BE5A200C4CC64 /* RHBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757D8178BE5A200C4CC64 /* RHBarButtonItem.m */; };
-		83D757F4178BE5A200C4CC64 /* RHButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757DA178BE5A200C4CC64 /* RHButton.m */; };
-		83D757F6178BE5A200C4CC64 /* RHSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757DE178BE5A200C4CC64 /* RHSwitch.m */; };
-		83D757F7178BE5A200C4CC64 /* RHTableSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757E0178BE5A200C4CC64 /* RHTableSection.m */; };
-		83D757F8178BE5A200C4CC64 /* RHTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757E2178BE5A200C4CC64 /* RHTableView.m */; };
-		83D757F9178BE5A200C4CC64 /* RHTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757E4178BE5A200C4CC64 /* RHTableViewCell.m */; };
-		83D757FA178BE5A200C4CC64 /* RHTableViewCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757E6178BE5A200C4CC64 /* RHTableViewCells.m */; };
-		83D757FB178BE5A200C4CC64 /* RHTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757E8178BE5A200C4CC64 /* RHTapGestureRecognizer.m */; };
-		83D757FC178BE5A200C4CC64 /* UIApplication+rhextensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D757EB178BE5A200C4CC64 /* UIApplication+rhextensions.m */; };
 		83E605571608477F00C7C50E /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E605561608477F00C7C50E /* Feedback.m */; };
 		83F00E0415EBC6E000761BC6 /* RHAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E0315EBC5B400761BC6 /* RHAboutViewController.m */; };
 		83F00E0D15EBC73900761BC6 /* RHPromptForReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E0C15EBC73900761BC6 /* RHPromptForReview.m */; };
@@ -117,6 +131,18 @@
 		28C286DF0D94DF7D0034E888 /* HostMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostMapViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* HostMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostMapViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8316C5D0184F03020016EE7E /* RHCoreDataCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHCoreDataCollectionViewController.h; path = ../../RHManagedObject/RHCoreDataCollectionViewController.h; sourceTree = "<group>"; };
+		8316C5D1184F03020016EE7E /* RHCoreDataCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHCoreDataCollectionViewController.m; path = ../../RHManagedObject/RHCoreDataCollectionViewController.m; sourceTree = "<group>"; };
+		8316C5D2184F03020016EE7E /* RHCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHCoreDataTableViewController.h; path = ../../RHManagedObject/RHCoreDataTableViewController.h; sourceTree = "<group>"; };
+		8316C5D3184F03020016EE7E /* RHCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHCoreDataTableViewController.m; path = ../../RHManagedObject/RHCoreDataTableViewController.m; sourceTree = "<group>"; };
+		8316C5D4184F03020016EE7E /* RHFetchedResultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHFetchedResultsManager.h; path = ../../RHManagedObject/RHFetchedResultsManager.h; sourceTree = "<group>"; };
+		8316C5D5184F03020016EE7E /* RHFetchedResultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHFetchedResultsManager.m; path = ../../RHManagedObject/RHFetchedResultsManager.m; sourceTree = "<group>"; };
+		8316C5D6184F03020016EE7E /* RHManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHManagedObject.h; path = ../../RHManagedObject/RHManagedObject.h; sourceTree = "<group>"; };
+		8316C5D7184F03020016EE7E /* RHManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHManagedObject.m; path = ../../RHManagedObject/RHManagedObject.m; sourceTree = "<group>"; };
+		8316C5D8184F03020016EE7E /* RHManagedObject+legacy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RHManagedObject+legacy.h"; path = "../../RHManagedObject/RHManagedObject+legacy.h"; sourceTree = "<group>"; };
+		8316C5D9184F03020016EE7E /* RHManagedObject+legacy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RHManagedObject+legacy.m"; path = "../../RHManagedObject/RHManagedObject+legacy.m"; sourceTree = "<group>"; };
+		8316C5DA184F03020016EE7E /* RHManagedObjectContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHManagedObjectContextManager.h; path = ../../RHManagedObject/RHManagedObjectContextManager.h; sourceTree = "<group>"; };
+		8316C5DB184F03020016EE7E /* RHManagedObjectContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHManagedObjectContextManager.m; path = ../../RHManagedObject/RHManagedObjectContextManager.m; sourceTree = "<group>"; };
 		831FBA9F160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+disablesAutomaticKeyboardDismissal.h"; sourceTree = "<group>"; };
 		831FBAA0160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+disablesAutomaticKeyboardDismissal.m"; sourceTree = "<group>"; };
 		8324D705162E227C00E0E82A /* Icon-72-rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72-rounded.png"; sourceTree = "<group>"; };
@@ -140,6 +166,60 @@
 		83533E2E1622F782003788C5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		83533E301622F7AF003788C5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		8355479A1642DFFE00D2A0B5 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		835696A71847D18B00F5B999 /* FrameAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FrameAccessor.h; path = ../../RHTools/FrameAccessor.h; sourceTree = "<group>"; };
+		835696A81847D18B00F5B999 /* FrameAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FrameAccessor.m; path = ../../RHTools/FrameAccessor.m; sourceTree = "<group>"; };
+		835696A91847D18B00F5B999 /* NSArray+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+rhextensions.h"; path = "../../RHTools/NSArray+rhextensions.h"; sourceTree = "<group>"; };
+		835696AA1847D18B00F5B999 /* NSArray+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+rhextensions.m"; path = "../../RHTools/NSArray+rhextensions.m"; sourceTree = "<group>"; };
+		835696AB1847D18B00F5B999 /* NSDate+formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+formatter.h"; path = "../../RHTools/NSDate+formatter.h"; sourceTree = "<group>"; };
+		835696AC1847D18B00F5B999 /* NSDate+formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+formatter.m"; path = "../../RHTools/NSDate+formatter.m"; sourceTree = "<group>"; };
+		835696AD1847D18B00F5B999 /* NSDate+timesince.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+timesince.h"; path = "../../RHTools/NSDate+timesince.h"; sourceTree = "<group>"; };
+		835696AE1847D18B00F5B999 /* NSDate+timesince.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+timesince.m"; path = "../../RHTools/NSDate+timesince.m"; sourceTree = "<group>"; };
+		835696AF1847D18B00F5B999 /* NSDictionary+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+rhextensions.h"; path = "../../RHTools/NSDictionary+rhextensions.h"; sourceTree = "<group>"; };
+		835696B01847D18B00F5B999 /* NSDictionary+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+rhextensions.m"; path = "../../RHTools/NSDictionary+rhextensions.m"; sourceTree = "<group>"; };
+		835696B11847D18B00F5B999 /* NSString+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+rhextensions.h"; path = "../../RHTools/NSString+rhextensions.h"; sourceTree = "<group>"; };
+		835696B21847D18B00F5B999 /* NSString+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+rhextensions.m"; path = "../../RHTools/NSString+rhextensions.m"; sourceTree = "<group>"; };
+		835696B31847D18B00F5B999 /* RHActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHActionSheet.h; path = ../../RHTools/RHActionSheet.h; sourceTree = "<group>"; };
+		835696B41847D18B00F5B999 /* RHActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHActionSheet.m; path = ../../RHTools/RHActionSheet.m; sourceTree = "<group>"; };
+		835696B51847D18B00F5B999 /* RHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHAlertView.h; path = ../../RHTools/RHAlertView.h; sourceTree = "<group>"; };
+		835696B61847D18B00F5B999 /* RHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHAlertView.m; path = ../../RHTools/RHAlertView.m; sourceTree = "<group>"; };
+		835696B71847D18B00F5B999 /* RHBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHBarButtonItem.h; path = ../../RHTools/RHBarButtonItem.h; sourceTree = "<group>"; };
+		835696B81847D18B00F5B999 /* RHBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHBarButtonItem.m; path = ../../RHTools/RHBarButtonItem.m; sourceTree = "<group>"; };
+		835696B91847D18B00F5B999 /* RHButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHButton.h; path = ../../RHTools/RHButton.h; sourceTree = "<group>"; };
+		835696BA1847D18B00F5B999 /* RHButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHButton.m; path = ../../RHTools/RHButton.m; sourceTree = "<group>"; };
+		835696BB1847D18B00F5B999 /* RHImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHImagePickerController.h; path = ../../RHTools/RHImagePickerController.h; sourceTree = "<group>"; };
+		835696BC1847D18B00F5B999 /* RHImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHImagePickerController.m; path = ../../RHTools/RHImagePickerController.m; sourceTree = "<group>"; };
+		835696BD1847D18B00F5B999 /* RHKeyboardSlideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHKeyboardSlideView.h; path = ../../RHTools/RHKeyboardSlideView.h; sourceTree = "<group>"; };
+		835696BE1847D18B00F5B999 /* RHKeyboardSlideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHKeyboardSlideView.m; path = ../../RHTools/RHKeyboardSlideView.m; sourceTree = "<group>"; };
+		835696BF1847D18B00F5B999 /* RHSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHSegmentedControl.h; path = ../../RHTools/RHSegmentedControl.h; sourceTree = "<group>"; };
+		835696C01847D18B00F5B999 /* RHSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHSegmentedControl.m; path = ../../RHTools/RHSegmentedControl.m; sourceTree = "<group>"; };
+		835696C11847D18B00F5B999 /* RHSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHSwitch.h; path = ../../RHTools/RHSwitch.h; sourceTree = "<group>"; };
+		835696C21847D18B00F5B999 /* RHSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHSwitch.m; path = ../../RHTools/RHSwitch.m; sourceTree = "<group>"; };
+		835696C31847D18B00F5B999 /* RHTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTableView.h; path = ../../RHTools/RHTableView.h; sourceTree = "<group>"; };
+		835696C41847D18B00F5B999 /* RHTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTableView.m; path = ../../RHTools/RHTableView.m; sourceTree = "<group>"; };
+		835696C51847D18B00F5B999 /* RHTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTableViewCell.h; path = ../../RHTools/RHTableViewCell.h; sourceTree = "<group>"; };
+		835696C61847D18B00F5B999 /* RHTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTableViewCell.m; path = ../../RHTools/RHTableViewCell.m; sourceTree = "<group>"; };
+		835696C71847D18B00F5B999 /* RHTableViewCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTableViewCells.h; path = ../../RHTools/RHTableViewCells.h; sourceTree = "<group>"; };
+		835696C81847D18B00F5B999 /* RHTableViewCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTableViewCells.m; path = ../../RHTools/RHTableViewCells.m; sourceTree = "<group>"; };
+		835696C91847D18B00F5B999 /* RHTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTapGestureRecognizer.h; path = ../../RHTools/RHTapGestureRecognizer.h; sourceTree = "<group>"; };
+		835696CA1847D18B00F5B999 /* RHTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTapGestureRecognizer.m; path = ../../RHTools/RHTapGestureRecognizer.m; sourceTree = "<group>"; };
+		835696CB1847D18B00F5B999 /* RHTextAreaInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTextAreaInputViewController.h; path = ../../RHTools/RHTextAreaInputViewController.h; sourceTree = "<group>"; };
+		835696CC1847D18B00F5B999 /* RHTextAreaInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTextAreaInputViewController.m; path = ../../RHTools/RHTextAreaInputViewController.m; sourceTree = "<group>"; };
+		835696CD1847D18B00F5B999 /* RHTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTextField.h; path = ../../RHTools/RHTextField.h; sourceTree = "<group>"; };
+		835696CE1847D18B00F5B999 /* RHTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTextField.m; path = ../../RHTools/RHTextField.m; sourceTree = "<group>"; };
+		835696CF1847D18B00F5B999 /* RHTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTools.h; path = ../../RHTools/RHTools.h; sourceTree = "<group>"; };
+		835696D01847D18B00F5B999 /* UIApplication+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+rhextensions.h"; path = "../../RHTools/UIApplication+rhextensions.h"; sourceTree = "<group>"; };
+		835696D11847D18B00F5B999 /* UIApplication+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+rhextensions.m"; path = "../../RHTools/UIApplication+rhextensions.m"; sourceTree = "<group>"; };
+		835696D21847D18B00F5B999 /* UIColor+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+rhextensions.h"; path = "../../RHTools/UIColor+rhextensions.h"; sourceTree = "<group>"; };
+		835696D31847D18B00F5B999 /* UIColor+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+rhextensions.m"; path = "../../RHTools/UIColor+rhextensions.m"; sourceTree = "<group>"; };
+		835696D41847D18B00F5B999 /* UITableView+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+rhextensions.h"; path = "../../RHTools/UITableView+rhextensions.h"; sourceTree = "<group>"; };
+		835696D51847D18B00F5B999 /* UITableView+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+rhextensions.m"; path = "../../RHTools/UITableView+rhextensions.m"; sourceTree = "<group>"; };
+		835696D61847D18B00F5B999 /* UIView+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+rhextensions.h"; path = "../../RHTools/UIView+rhextensions.h"; sourceTree = "<group>"; };
+		835696D71847D18B00F5B999 /* UIView+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+rhextensions.m"; path = "../../RHTools/UIView+rhextensions.m"; sourceTree = "<group>"; };
+		835696D81847D18B00F5B999 /* UIViewController+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+rhextensions.h"; path = "../../RHTools/UIViewController+rhextensions.h"; sourceTree = "<group>"; };
+		835696D91847D18B00F5B999 /* UIViewController+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+rhextensions.m"; path = "../../RHTools/UIViewController+rhextensions.m"; sourceTree = "<group>"; };
+		835696F31847D1CB00F5B999 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		835696F51847D1EC00F5B999 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		835696F71847D23100F5B999 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		83576CCD16396108000FBE93 /* pagecurl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pagecurl.png; sourceTree = "<group>"; };
 		83576CCE16396108000FBE93 /* pagecurl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pagecurl@2x.png"; sourceTree = "<group>"; };
 		836CCF0014ABB3D1000EDC51 /* HostMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostMapViewController.xib; sourceTree = "<group>"; };
@@ -154,8 +234,6 @@
 		836CCF1014ABB4C4000EDC51 /* DotRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DotRed.png; sourceTree = "<group>"; };
 		83708C18145C79CF00B15150 /* SegmentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentsController.h; sourceTree = "<group>"; };
 		83708C19145C79CF00B15150 /* SegmentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentsController.m; sourceTree = "<group>"; };
-		83708C1B145C7CA400B15150 /* NSArray+PerformSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PerformSelector.h"; sourceTree = "<group>"; };
-		83708C1C145C7CA400B15150 /* NSArray+PerformSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PerformSelector.m"; sourceTree = "<group>"; };
 		8388B1351458A8100079ACE3 /* HostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostTableViewController.h; sourceTree = "<group>"; };
 		8388B1361458A8100079ACE3 /* HostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostTableViewController.m; sourceTree = "<group>"; };
 		8389E0FA14C4BF2400B0E900 /* UIScrollView+autoContentSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+autoContentSize.h"; sourceTree = "<group>"; };
@@ -167,12 +245,6 @@
 		838AB092172F9500005A9149 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		839FD6F1126AED0A00C008F8 /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
 		839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
-		83A98DBB1646CAA300F329E8 /* RHCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHCoreDataTableViewController.h; path = ../../RHManagedObject/RHCoreDataTableViewController.h; sourceTree = "<group>"; };
-		83A98DBC1646CAA300F329E8 /* RHCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHCoreDataTableViewController.m; path = ../../RHManagedObject/RHCoreDataTableViewController.m; sourceTree = "<group>"; };
-		83A98DBD1646CAA300F329E8 /* RHManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHManagedObject.h; path = ../../RHManagedObject/RHManagedObject.h; sourceTree = "<group>"; };
-		83A98DBE1646CAA300F329E8 /* RHManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHManagedObject.m; path = ../../RHManagedObject/RHManagedObject.m; sourceTree = "<group>"; };
-		83A98DBF1646CAA300F329E8 /* RHManagedObjectContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHManagedObjectContextManager.h; path = ../../RHManagedObject/RHManagedObjectContextManager.h; sourceTree = "<group>"; };
-		83A98DC01646CAA300F329E8 /* RHManagedObjectContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHManagedObjectContextManager.m; path = ../../RHManagedObject/RHManagedObjectContextManager.m; sourceTree = "<group>"; };
 		83BE50B3126B4E7B00B5A65A /* HostInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostInfoViewController.h; sourceTree = "<group>"; };
 		83BE50B4126B4E7B00B5A65A /* HostInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostInfoViewController.m; sourceTree = "<group>"; };
 		83C78E7E1474DE3D00274616 /* CLLocation+Bearing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+Bearing.h"; sourceTree = "<group>"; };
@@ -187,40 +259,7 @@
 		83D26B35126A4DE400412151 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		83D73F0B13A151E70070D03A /* NSString+truncate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+truncate.h"; sourceTree = "<group>"; };
 		83D73F0C13A151E70070D03A /* NSString+truncate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+truncate.m"; sourceTree = "<group>"; };
-		83D757C8178BD6E600C4CC64 /* WS (3.6).xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WS (3.6).xcdatamodel"; sourceTree = "<group>"; };
-		83D757C9178BE5A200C4CC64 /* NSArray+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+rhextensions.h"; path = "../../RHTools/NSArray+rhextensions.h"; sourceTree = "<group>"; };
-		83D757CA178BE5A200C4CC64 /* NSArray+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+rhextensions.m"; path = "../../RHTools/NSArray+rhextensions.m"; sourceTree = "<group>"; };
-		83D757CB178BE5A200C4CC64 /* NSDate+formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+formatter.h"; path = "../../RHTools/NSDate+formatter.h"; sourceTree = "<group>"; };
-		83D757CC178BE5A200C4CC64 /* NSDate+formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+formatter.m"; path = "../../RHTools/NSDate+formatter.m"; sourceTree = "<group>"; };
-		83D757CD178BE5A200C4CC64 /* NSDate+timesince.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+timesince.h"; path = "../../RHTools/NSDate+timesince.h"; sourceTree = "<group>"; };
-		83D757CE178BE5A200C4CC64 /* NSDate+timesince.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+timesince.m"; path = "../../RHTools/NSDate+timesince.m"; sourceTree = "<group>"; };
-		83D757CF178BE5A200C4CC64 /* NSDictionary+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+rhextensions.h"; path = "../../RHTools/NSDictionary+rhextensions.h"; sourceTree = "<group>"; };
-		83D757D0178BE5A200C4CC64 /* NSDictionary+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+rhextensions.m"; path = "../../RHTools/NSDictionary+rhextensions.m"; sourceTree = "<group>"; };
-		83D757D1178BE5A200C4CC64 /* NSString+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+rhextensions.h"; path = "../../RHTools/NSString+rhextensions.h"; sourceTree = "<group>"; };
-		83D757D2178BE5A200C4CC64 /* NSString+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+rhextensions.m"; path = "../../RHTools/NSString+rhextensions.m"; sourceTree = "<group>"; };
-		83D757D3178BE5A200C4CC64 /* RHActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHActionSheet.h; path = ../../RHTools/RHActionSheet.h; sourceTree = "<group>"; };
-		83D757D4178BE5A200C4CC64 /* RHActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHActionSheet.m; path = ../../RHTools/RHActionSheet.m; sourceTree = "<group>"; };
-		83D757D5178BE5A200C4CC64 /* RHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHAlertView.h; path = ../../RHTools/RHAlertView.h; sourceTree = "<group>"; };
-		83D757D6178BE5A200C4CC64 /* RHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHAlertView.m; path = ../../RHTools/RHAlertView.m; sourceTree = "<group>"; };
-		83D757D7178BE5A200C4CC64 /* RHBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHBarButtonItem.h; path = ../../RHTools/RHBarButtonItem.h; sourceTree = "<group>"; };
-		83D757D8178BE5A200C4CC64 /* RHBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHBarButtonItem.m; path = ../../RHTools/RHBarButtonItem.m; sourceTree = "<group>"; };
-		83D757D9178BE5A200C4CC64 /* RHButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHButton.h; path = ../../RHTools/RHButton.h; sourceTree = "<group>"; };
-		83D757DA178BE5A200C4CC64 /* RHButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHButton.m; path = ../../RHTools/RHButton.m; sourceTree = "<group>"; };
-		83D757DD178BE5A200C4CC64 /* RHSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHSwitch.h; path = ../../RHTools/RHSwitch.h; sourceTree = "<group>"; };
-		83D757DE178BE5A200C4CC64 /* RHSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHSwitch.m; path = ../../RHTools/RHSwitch.m; sourceTree = "<group>"; };
-		83D757DF178BE5A200C4CC64 /* RHTableSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTableSection.h; path = ../../RHTools/RHTableSection.h; sourceTree = "<group>"; };
-		83D757E0178BE5A200C4CC64 /* RHTableSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTableSection.m; path = ../../RHTools/RHTableSection.m; sourceTree = "<group>"; };
-		83D757E1178BE5A200C4CC64 /* RHTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTableView.h; path = ../../RHTools/RHTableView.h; sourceTree = "<group>"; };
-		83D757E2178BE5A200C4CC64 /* RHTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTableView.m; path = ../../RHTools/RHTableView.m; sourceTree = "<group>"; };
-		83D757E3178BE5A200C4CC64 /* RHTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTableViewCell.h; path = ../../RHTools/RHTableViewCell.h; sourceTree = "<group>"; };
-		83D757E4178BE5A200C4CC64 /* RHTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTableViewCell.m; path = ../../RHTools/RHTableViewCell.m; sourceTree = "<group>"; };
-		83D757E5178BE5A200C4CC64 /* RHTableViewCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTableViewCells.h; path = ../../RHTools/RHTableViewCells.h; sourceTree = "<group>"; };
-		83D757E6178BE5A200C4CC64 /* RHTableViewCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTableViewCells.m; path = ../../RHTools/RHTableViewCells.m; sourceTree = "<group>"; };
-		83D757E7178BE5A200C4CC64 /* RHTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTapGestureRecognizer.h; path = ../../RHTools/RHTapGestureRecognizer.h; sourceTree = "<group>"; };
-		83D757E8178BE5A200C4CC64 /* RHTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHTapGestureRecognizer.m; path = ../../RHTools/RHTapGestureRecognizer.m; sourceTree = "<group>"; };
-		83D757E9178BE5A200C4CC64 /* RHTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHTools.h; path = ../../RHTools/RHTools.h; sourceTree = "<group>"; };
-		83D757EA178BE5A200C4CC64 /* UIApplication+rhextensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+rhextensions.h"; path = "../../RHTools/UIApplication+rhextensions.h"; sourceTree = "<group>"; };
-		83D757EB178BE5A200C4CC64 /* UIApplication+rhextensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+rhextensions.m"; path = "../../RHTools/UIApplication+rhextensions.m"; sourceTree = "<group>"; };
+		83D757C8178BD6E600C4CC64 /* WS (3.6).xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WS (3.6).xcdatamodel"; sourceTree = "<group>"; };
 		83E605551608477F00C7C50E /* Feedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback.h; sourceTree = "<group>"; };
 		83E605561608477F00C7C50E /* Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feedback.m; sourceTree = "<group>"; };
 		83F00E0215EBC5B400761BC6 /* RHAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHAboutViewController.h; sourceTree = "<group>"; };
@@ -269,6 +308,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				835696F81847D23100F5B999 /* ImageIO.framework in Frameworks */,
+				835696F61847D1EC00F5B999 /* Security.framework in Frameworks */,
+				835696F41847D1CB00F5B999 /* AssetsLibrary.framework in Frameworks */,
 				838AB093172F9500005A9149 /* MobileCoreServices.framework in Frameworks */,
 				838AB091172F94FA005A9149 /* QuartzCore.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -350,6 +392,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				835696F71847D23100F5B999 /* ImageIO.framework */,
+				835696F51847D1EC00F5B999 /* Security.framework */,
+				835696F31847D1CB00F5B999 /* AssetsLibrary.framework */,
 				838AB092172F9500005A9149 /* MobileCoreServices.framework */,
 				838AB090172F94FA005A9149 /* QuartzCore.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
@@ -436,39 +481,57 @@
 		83A98DA41646CA5D00F329E8 /* RHTools (referenced) */ = {
 			isa = PBXGroup;
 			children = (
-				83D757C9178BE5A200C4CC64 /* NSArray+rhextensions.h */,
-				83D757CA178BE5A200C4CC64 /* NSArray+rhextensions.m */,
-				83D757CB178BE5A200C4CC64 /* NSDate+formatter.h */,
-				83D757CC178BE5A200C4CC64 /* NSDate+formatter.m */,
-				83D757CD178BE5A200C4CC64 /* NSDate+timesince.h */,
-				83D757CE178BE5A200C4CC64 /* NSDate+timesince.m */,
-				83D757CF178BE5A200C4CC64 /* NSDictionary+rhextensions.h */,
-				83D757D0178BE5A200C4CC64 /* NSDictionary+rhextensions.m */,
-				83D757D1178BE5A200C4CC64 /* NSString+rhextensions.h */,
-				83D757D2178BE5A200C4CC64 /* NSString+rhextensions.m */,
-				83D757D3178BE5A200C4CC64 /* RHActionSheet.h */,
-				83D757D4178BE5A200C4CC64 /* RHActionSheet.m */,
-				83D757D5178BE5A200C4CC64 /* RHAlertView.h */,
-				83D757D6178BE5A200C4CC64 /* RHAlertView.m */,
-				83D757D7178BE5A200C4CC64 /* RHBarButtonItem.h */,
-				83D757D8178BE5A200C4CC64 /* RHBarButtonItem.m */,
-				83D757D9178BE5A200C4CC64 /* RHButton.h */,
-				83D757DA178BE5A200C4CC64 /* RHButton.m */,
-				83D757DD178BE5A200C4CC64 /* RHSwitch.h */,
-				83D757DE178BE5A200C4CC64 /* RHSwitch.m */,
-				83D757DF178BE5A200C4CC64 /* RHTableSection.h */,
-				83D757E0178BE5A200C4CC64 /* RHTableSection.m */,
-				83D757E1178BE5A200C4CC64 /* RHTableView.h */,
-				83D757E2178BE5A200C4CC64 /* RHTableView.m */,
-				83D757E3178BE5A200C4CC64 /* RHTableViewCell.h */,
-				83D757E4178BE5A200C4CC64 /* RHTableViewCell.m */,
-				83D757E5178BE5A200C4CC64 /* RHTableViewCells.h */,
-				83D757E6178BE5A200C4CC64 /* RHTableViewCells.m */,
-				83D757E7178BE5A200C4CC64 /* RHTapGestureRecognizer.h */,
-				83D757E8178BE5A200C4CC64 /* RHTapGestureRecognizer.m */,
-				83D757E9178BE5A200C4CC64 /* RHTools.h */,
-				83D757EA178BE5A200C4CC64 /* UIApplication+rhextensions.h */,
-				83D757EB178BE5A200C4CC64 /* UIApplication+rhextensions.m */,
+				835696CF1847D18B00F5B999 /* RHTools.h */,
+				835696A71847D18B00F5B999 /* FrameAccessor.h */,
+				835696A81847D18B00F5B999 /* FrameAccessor.m */,
+				835696A91847D18B00F5B999 /* NSArray+rhextensions.h */,
+				835696AA1847D18B00F5B999 /* NSArray+rhextensions.m */,
+				835696AB1847D18B00F5B999 /* NSDate+formatter.h */,
+				835696AC1847D18B00F5B999 /* NSDate+formatter.m */,
+				835696AD1847D18B00F5B999 /* NSDate+timesince.h */,
+				835696AE1847D18B00F5B999 /* NSDate+timesince.m */,
+				835696AF1847D18B00F5B999 /* NSDictionary+rhextensions.h */,
+				835696B01847D18B00F5B999 /* NSDictionary+rhextensions.m */,
+				835696B11847D18B00F5B999 /* NSString+rhextensions.h */,
+				835696B21847D18B00F5B999 /* NSString+rhextensions.m */,
+				835696B31847D18B00F5B999 /* RHActionSheet.h */,
+				835696B41847D18B00F5B999 /* RHActionSheet.m */,
+				835696B51847D18B00F5B999 /* RHAlertView.h */,
+				835696B61847D18B00F5B999 /* RHAlertView.m */,
+				835696B71847D18B00F5B999 /* RHBarButtonItem.h */,
+				835696B81847D18B00F5B999 /* RHBarButtonItem.m */,
+				835696B91847D18B00F5B999 /* RHButton.h */,
+				835696BA1847D18B00F5B999 /* RHButton.m */,
+				835696BB1847D18B00F5B999 /* RHImagePickerController.h */,
+				835696BC1847D18B00F5B999 /* RHImagePickerController.m */,
+				835696BD1847D18B00F5B999 /* RHKeyboardSlideView.h */,
+				835696BE1847D18B00F5B999 /* RHKeyboardSlideView.m */,
+				835696BF1847D18B00F5B999 /* RHSegmentedControl.h */,
+				835696C01847D18B00F5B999 /* RHSegmentedControl.m */,
+				835696C11847D18B00F5B999 /* RHSwitch.h */,
+				835696C21847D18B00F5B999 /* RHSwitch.m */,
+				835696C31847D18B00F5B999 /* RHTableView.h */,
+				835696C41847D18B00F5B999 /* RHTableView.m */,
+				835696C51847D18B00F5B999 /* RHTableViewCell.h */,
+				835696C61847D18B00F5B999 /* RHTableViewCell.m */,
+				835696C71847D18B00F5B999 /* RHTableViewCells.h */,
+				835696C81847D18B00F5B999 /* RHTableViewCells.m */,
+				835696C91847D18B00F5B999 /* RHTapGestureRecognizer.h */,
+				835696CA1847D18B00F5B999 /* RHTapGestureRecognizer.m */,
+				835696CB1847D18B00F5B999 /* RHTextAreaInputViewController.h */,
+				835696CC1847D18B00F5B999 /* RHTextAreaInputViewController.m */,
+				835696CD1847D18B00F5B999 /* RHTextField.h */,
+				835696CE1847D18B00F5B999 /* RHTextField.m */,
+				835696D01847D18B00F5B999 /* UIApplication+rhextensions.h */,
+				835696D11847D18B00F5B999 /* UIApplication+rhextensions.m */,
+				835696D21847D18B00F5B999 /* UIColor+rhextensions.h */,
+				835696D31847D18B00F5B999 /* UIColor+rhextensions.m */,
+				835696D41847D18B00F5B999 /* UITableView+rhextensions.h */,
+				835696D51847D18B00F5B999 /* UITableView+rhextensions.m */,
+				835696D61847D18B00F5B999 /* UIView+rhextensions.h */,
+				835696D71847D18B00F5B999 /* UIView+rhextensions.m */,
+				835696D81847D18B00F5B999 /* UIViewController+rhextensions.h */,
+				835696D91847D18B00F5B999 /* UIViewController+rhextensions.m */,
 			);
 			name = "RHTools (referenced)";
 			sourceTree = "<group>";
@@ -476,12 +539,18 @@
 		83A98DA51646CA6900F329E8 /* RHCoreData (referenced) */ = {
 			isa = PBXGroup;
 			children = (
-				83A98DBB1646CAA300F329E8 /* RHCoreDataTableViewController.h */,
-				83A98DBC1646CAA300F329E8 /* RHCoreDataTableViewController.m */,
-				83A98DBD1646CAA300F329E8 /* RHManagedObject.h */,
-				83A98DBE1646CAA300F329E8 /* RHManagedObject.m */,
-				83A98DBF1646CAA300F329E8 /* RHManagedObjectContextManager.h */,
-				83A98DC01646CAA300F329E8 /* RHManagedObjectContextManager.m */,
+				8316C5D0184F03020016EE7E /* RHCoreDataCollectionViewController.h */,
+				8316C5D1184F03020016EE7E /* RHCoreDataCollectionViewController.m */,
+				8316C5D2184F03020016EE7E /* RHCoreDataTableViewController.h */,
+				8316C5D3184F03020016EE7E /* RHCoreDataTableViewController.m */,
+				8316C5D4184F03020016EE7E /* RHFetchedResultsManager.h */,
+				8316C5D5184F03020016EE7E /* RHFetchedResultsManager.m */,
+				8316C5D6184F03020016EE7E /* RHManagedObject.h */,
+				8316C5D7184F03020016EE7E /* RHManagedObject.m */,
+				8316C5D8184F03020016EE7E /* RHManagedObject+legacy.h */,
+				8316C5D9184F03020016EE7E /* RHManagedObject+legacy.m */,
+				8316C5DA184F03020016EE7E /* RHManagedObjectContextManager.h */,
+				8316C5DB184F03020016EE7E /* RHManagedObjectContextManager.m */,
 			);
 			name = "RHCoreData (referenced)";
 			sourceTree = "<group>";
@@ -512,8 +581,6 @@
 		83F168BF14685B17003D3E3F /* RH */ = {
 			isa = PBXGroup;
 			children = (
-				83708C1B145C7CA400B15150 /* NSArray+PerformSelector.h */,
-				83708C1C145C7CA400B15150 /* NSArray+PerformSelector.m */,
 				83708C18145C79CF00B15150 /* SegmentsController.h */,
 				83708C19145C79CF00B15150 /* SegmentsController.m */,
 			);
@@ -660,63 +727,74 @@
 			buildActionMask = 2147483647;
 			files = (
 				83F00E0415EBC6E000761BC6 /* RHAboutViewController.m in Sources */,
+				835696EC1847D18B00F5B999 /* RHTextAreaInputViewController.m in Sources */,
+				835696E91847D18B00F5B999 /* RHTableViewCell.m in Sources */,
 				83518606152C0C1F009E558F /* MKMapView+Utils.m in Sources */,
+				835696E21847D18B00F5B999 /* RHBarButtonItem.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				835696F21847D18B00F5B999 /* UIViewController+rhextensions.m in Sources */,
+				835696E61847D18B00F5B999 /* RHSegmentedControl.m in Sources */,
 				1D3623260D0F684500981E51 /* WSAppDelegate.m in Sources */,
 				28C286E10D94DF7D0034E888 /* HostMapViewController.m in Sources */,
 				28D3F202112F7DC200FD0661 /* WS.xcdatamodeld in Sources */,
 				8330B481126A0775008B2EC4 /* WSRequests.m in Sources */,
 				839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */,
 				83BE50B6126B4E7B00B5A65A /* HostInfoViewController.m in Sources */,
+				835696E41847D18B00F5B999 /* RHImagePickerController.m in Sources */,
+				835696DB1847D18B00F5B999 /* NSArray+rhextensions.m in Sources */,
+				8316C5DE184F03020016EE7E /* RHFetchedResultsManager.m in Sources */,
+				835696DC1847D18B00F5B999 /* NSDate+formatter.m in Sources */,
+				835696E11847D18B00F5B999 /* RHAlertView.m in Sources */,
+				835696EE1847D18B00F5B999 /* UIApplication+rhextensions.m in Sources */,
 				83D73F0D13A151E70070D03A /* NSString+truncate.m in Sources */,
 				8388B1371458A8100079ACE3 /* HostTableViewController.m in Sources */,
 				83708C1A145C79CF00B15150 /* SegmentsController.m in Sources */,
-				83708C1D145C7CA400B15150 /* NSArray+PerformSelector.m in Sources */,
 				83CE1361147455CB006EED95 /* FavouriteHostTableViewController.m in Sources */,
+				835696DE1847D18B00F5B999 /* NSDictionary+rhextensions.m in Sources */,
+				835696E71847D18B00F5B999 /* RHSwitch.m in Sources */,
 				83C78E801474DE3D00274616 /* CLLocation+Bearing.m in Sources */,
 				83FBB25E148B6FDB002042B0 /* RHWebViewController.m in Sources */,
 				836CCF0614ABB3E6000EDC51 /* Host.m in Sources */,
 				8389E0FC14C4BF2400B0E900 /* UIScrollView+autoContentSize.m in Sources */,
 				83F8C187152B8B280084E380 /* ContactHostViewController.m in Sources */,
 				83F00E0D15EBC73900761BC6 /* RHPromptForReview.m in Sources */,
+				835696E51847D18B00F5B999 /* RHKeyboardSlideView.m in Sources */,
 				83F00E1B15EBD3FE00761BC6 /* NSString+analytics.m in Sources */,
 				83F00E2415EBD76100761BC6 /* UIColor+utils.m in Sources */,
 				83E605571608477F00C7C50E /* Feedback.m in Sources */,
 				83441AD51608694900468716 /* WSHTTPClient.m in Sources */,
+				8316C5DF184F03020016EE7E /* RHManagedObject.m in Sources */,
 				83CB0A941608914C00433BF0 /* JSONKit.m in Sources */,
 				83CDACE0160A310000B5DC83 /* FeedbackTableViewController.m in Sources */,
 				831FBAA1160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m in Sources */,
 				83F051281618ED83001317D6 /* FeedbackEntity.m in Sources */,
 				83F0512B1618ED84001317D6 /* HostEntity.m in Sources */,
-				83A98DC11646CAA300F329E8 /* RHCoreDataTableViewController.m in Sources */,
-				83A98DC21646CAA300F329E8 /* RHManagedObject.m in Sources */,
-				83A98DC31646CAA300F329E8 /* RHManagedObjectContextManager.m in Sources */,
 				83FD20401646DDB200EC2AD1 /* AFHTTPClient.m in Sources */,
+				835696EA1847D18B00F5B999 /* RHTableViewCells.m in Sources */,
+				835696E31847D18B00F5B999 /* RHButton.m in Sources */,
 				83FD20411646DDB200EC2AD1 /* AFHTTPRequestOperation.m in Sources */,
+				835696F11847D18B00F5B999 /* UIView+rhextensions.m in Sources */,
+				835696EF1847D18B00F5B999 /* UIColor+rhextensions.m in Sources */,
+				835696F01847D18B00F5B999 /* UITableView+rhextensions.m in Sources */,
+				835696E01847D18B00F5B999 /* RHActionSheet.m in Sources */,
+				835696ED1847D18B00F5B999 /* RHTextField.m in Sources */,
 				83FD20421646DDB200EC2AD1 /* AFImageRequestOperation.m in Sources */,
+				8316C5DC184F03020016EE7E /* RHCoreDataCollectionViewController.m in Sources */,
 				83FD20431646DDB200EC2AD1 /* AFJSONRequestOperation.m in Sources */,
+				835696E81847D18B00F5B999 /* RHTableView.m in Sources */,
 				83FD20441646DDB200EC2AD1 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				835696DD1847D18B00F5B999 /* NSDate+timesince.m in Sources */,
 				83FD20451646DDB200EC2AD1 /* AFPropertyListRequestOperation.m in Sources */,
+				8316C5DD184F03020016EE7E /* RHCoreDataTableViewController.m in Sources */,
 				83FD20461646DDB200EC2AD1 /* AFURLConnectionOperation.m in Sources */,
+				8316C5E1184F03020016EE7E /* RHManagedObjectContextManager.m in Sources */,
 				83FD20471646DDB200EC2AD1 /* AFXMLRequestOperation.m in Sources */,
+				835696DF1847D18B00F5B999 /* NSString+rhextensions.m in Sources */,
+				835696DA1847D18B00F5B999 /* FrameAccessor.m in Sources */,
+				8316C5E0184F03020016EE7E /* RHManagedObject+legacy.m in Sources */,
 				83FD20481646DDB200EC2AD1 /* UIImageView+AFNetworking.m in Sources */,
 				838AB08F172F9452005A9149 /* SVProgressHUD.m in Sources */,
-				83D757EC178BE5A200C4CC64 /* NSArray+rhextensions.m in Sources */,
-				83D757ED178BE5A200C4CC64 /* NSDate+formatter.m in Sources */,
-				83D757EE178BE5A200C4CC64 /* NSDate+timesince.m in Sources */,
-				83D757EF178BE5A200C4CC64 /* NSDictionary+rhextensions.m in Sources */,
-				83D757F0178BE5A200C4CC64 /* NSString+rhextensions.m in Sources */,
-				83D757F1178BE5A200C4CC64 /* RHActionSheet.m in Sources */,
-				83D757F2178BE5A200C4CC64 /* RHAlertView.m in Sources */,
-				83D757F3178BE5A200C4CC64 /* RHBarButtonItem.m in Sources */,
-				83D757F4178BE5A200C4CC64 /* RHButton.m in Sources */,
-				83D757F6178BE5A200C4CC64 /* RHSwitch.m in Sources */,
-				83D757F7178BE5A200C4CC64 /* RHTableSection.m in Sources */,
-				83D757F8178BE5A200C4CC64 /* RHTableView.m in Sources */,
-				83D757F9178BE5A200C4CC64 /* RHTableViewCell.m in Sources */,
-				83D757FA178BE5A200C4CC64 /* RHTableViewCells.m in Sources */,
-				83D757FB178BE5A200C4CC64 /* RHTapGestureRecognizer.m in Sources */,
-				83D757FC178BE5A200C4CC64 /* UIApplication+rhextensions.m in Sources */,
+				835696EB1847D18B00F5B999 /* RHTapGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,7 +825,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = WS;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5EAD0BA8-8409-4CA1-8AD9-ECCA94399586";
@@ -779,7 +857,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = WS;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7863B5EE-AC5E-4D62-8FED-141925B2F0B5";
@@ -810,7 +888,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = WS;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D0DA06DF-AF2A-4916-8C52-CBF31CC81AFC";
 				SDKROOT = iphoneos;

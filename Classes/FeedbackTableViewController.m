@@ -127,7 +127,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
 		[cell.detailTextLabel setFont:[UIFont systemFontOfSize:13]];
 		[cell.detailTextLabel setNumberOfLines:0];
-		[cell.detailTextLabel setLineBreakMode:UILineBreakModeWordWrap];
+		[cell.detailTextLabel setLineBreakMode:NSLineBreakByWordWrapping];
 		[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 	}
 	
@@ -143,7 +143,7 @@
 	
 	UILineBreakMode lineBreakMode = _cell.detailTextLabel.lineBreakMode;
 	
-	if (lineBreakMode == UILineBreakModeWordWrap) {
+	if (lineBreakMode == NSLineBreakByWordWrapping) {
 		NSString *text = _cell.detailTextLabel.text;
 		UIFont *font = _cell.detailTextLabel.font;
 		

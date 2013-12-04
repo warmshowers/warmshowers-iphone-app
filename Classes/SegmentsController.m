@@ -7,7 +7,6 @@
 //
 
 #import "SegmentsController.h"
-#import "NSArray+PerformSelector.h"
 
 @interface SegmentsController ()
 @property (nonatomic, strong, readwrite) NSArray *viewControllers;

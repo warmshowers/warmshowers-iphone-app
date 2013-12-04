@@ -296,7 +296,7 @@
 	navController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 	navController.modalPresentationStyle = UIModalPresentationFormSheet;
 	
-	[self.navigationController presentModalViewController:navController animated:YES];
+	[self.navigationController presentViewController:navController animated:YES completion:nil];
 }
 
 -(void)authenticationChanged:(id)notification {

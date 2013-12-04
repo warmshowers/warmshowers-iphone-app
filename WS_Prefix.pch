@@ -21,4 +21,6 @@
     #import "WSHTTPClient.h"
     #import "AFJSONRequestOperation.h"
 	#import "RHTools.h"
+	#import "RHManagedObject+legacy.h"
+
 #endif

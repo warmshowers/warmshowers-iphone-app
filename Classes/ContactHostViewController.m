@@ -114,8 +114,8 @@
     
 	CGSize constraint = CGSizeMake(self.textView.frame.size.width, INT_MAX);
 	
-	CGSize singleHeight = [@"one" sizeWithFont:self.textView.font constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-	CGSize size = [self.textView.text sizeWithFont:self.textView.font constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+	CGSize singleHeight = [@"one" sizeWithFont:self.textView.font constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
+	CGSize size = [self.textView.text sizeWithFont:self.textView.font constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
 	
 	CGRect frame = self.textView.frame;
 	frame.size.height = size.height + ( singleHeight.height*2 );
