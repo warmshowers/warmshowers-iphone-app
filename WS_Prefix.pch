@@ -19,8 +19,9 @@
 
     #import "SVProgressHUD.h"
     #import "WSHTTPClient.h"
-    #import "AFJSONRequestOperation.h"
 	#import "RHTools.h"
 	#import "RHManagedObject+legacy.h"
+	#import "AFNetworking.h"
+	#import "UIKit+AFNetworking.h"
 
 #endif

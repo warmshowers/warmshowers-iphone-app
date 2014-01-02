@@ -15,6 +15,7 @@
 @interface RHAboutViewController ()
 -(UITableViewCell *)headerCell;
 -(UITableViewCell *)subHeaderCell;
+-(void)showMeTheApp:(NSString *)appid;
 @end
 
 @implementation RHAboutViewController
@@ -153,10 +154,16 @@
 			
 		default:
 			if (indexPath.row == 0) {
+
+				[self showMeTheApp:@"307303960"];
+
+				/*
 				NSString *tmt = @"http://trackmytour.com/get/";
 				NSString *url = [tmt stringByAppendingSource:@"warmshowers" medium:@"app" campaign:@"trackmytour"];
 				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+				*/
 				break;
+
 			}
 	}
 	
@@ -199,8 +206,19 @@
 	
 }
 
--(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
+-(void)showMeTheApp:(NSString *)appid {
+    NSDictionary *appParameters = @{SKStoreProductParameterITunesItemIdentifier:appid};
+    SKStoreProductViewController *productViewController = [[SKStoreProductViewController alloc] init];
+
+    [productViewController setDelegate:self];
+
+    [productViewController loadProductWithParameters:appParameters completionBlock:^(BOOL result, NSError *error) {
+        [self.navigationController presentViewController:productViewController animated:YES completion:nil];
+    }];
+}
+
+-(void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
+    [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

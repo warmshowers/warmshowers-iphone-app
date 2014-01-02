@@ -16,32 +16,11 @@
 @end
 
 @implementation FeedbackTableViewController
-@synthesize host;
-
-/*
- -(void)viewDidAppear:(BOOL)animated {
- [super viewDidAppear:animated];
- [self.navigationController setToolbarHidden:YES animated:animated];
- }
- */
 
 
 -(void)viewDidLoad  {
 	[super viewDidLoad];
 	[self setTitle:@"Feedback"];
-	/*
-     UIBarButtonItem *recommendButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Add Feedback", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(showAddWaypointModal:)];
-     [recommendButton setWidth:200];
-     
-     NSArray *toolbarItems = [NSArray arrayWithObjects:
-     [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-     recommendButton,
-     [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-     nil];
-     
-     [toolbarItems makeObjectsPerformSelector:@selector(release)];
-     [self setToolbarItems:toolbarItems animated:YES];
-     */
 }
 
 
@@ -68,8 +47,6 @@
 																			managedObjectContext:[Feedback managedObjectContextForCurrentThread]
 																			  sectionNameKeyPath:nil
 																					   cacheName:nil];
-		// [fetchedResultsController setDelegate:self];
-		
 		
 		NSError *error = nil;
 		if (![fetchedResultsController performFetch:&error]) {
@@ -105,24 +82,24 @@
 	
 	switch (indexPath.row) {
 		case 0:
-			[cell.textLabel setText:@"From"];
+			[cell.textLabel setText:NSLocalizedString(@"From", nil)];
 			[cell.detailTextLabel setText:rec.fullname];
 			break;
 		case 1:
-			[cell.textLabel setText:@"Comments"];
+			[cell.textLabel setText:NSLocalizedString(@"Comments", nil)];
 			[cell.detailTextLabel setText:rec.body];
 			break;
 		case 2:
-			[cell.textLabel setText:@"Date"];
+			[cell.textLabel setText:NSLocalizedString(@"Date", nil)];
 			[cell.detailTextLabel setText:[rec.date formatWithUTCTimeZone]];
 			break;
 	}
 }
 
--(UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	static NSString *CellIdentifier = @"Cell";
 	
-	UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
 		[cell.detailTextLabel setFont:[UIFont systemFontOfSize:13]];
@@ -137,30 +114,34 @@
 }
 
 
--(CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	UITableViewCell *_cell = [self tableView:_tableView cellForRowAtIndexPath:indexPath];
-	
-	UILineBreakMode lineBreakMode = _cell.detailTextLabel.lineBreakMode;
+	UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];	
+	UILineBreakMode lineBreakMode = cell.detailTextLabel.lineBreakMode;
 	
 	if (lineBreakMode == NSLineBreakByWordWrapping) {
-		NSString *text = _cell.detailTextLabel.text;
-		UIFont *font = _cell.detailTextLabel.font;
-		
-		CGRect table_frame = self.tableView.frame;
-		float margin = IsIPad ? 183 : 113;
-		CGSize withinSize = CGSizeMake(table_frame.size.width-margin, MAXFLOAT);
-		CGSize size = [text sizeWithFont:font constrainedToSize:withinSize lineBreakMode:lineBreakMode];
-		
-		return MAX(44, size.height + 22);
+
+		NSString *text = cell.detailTextLabel.text;
+		UIFont *font   = cell.detailTextLabel.font;
+
+		// 20 is the left and right margins
+		// 111 is trial-and-error with iOS7
+		CGFloat detailLabelWidth = tableView.width - 20 - 110;
+
+		CGSize withinSize = CGSizeMake(detailLabelWidth, MAXFLOAT);
+
+		CGRect textRect = [text boundingRectWithSize:withinSize
+											 options:NSStringDrawingUsesLineFragmentOrigin
+										  attributes:@{NSFontAttributeName:font}
+											 context:nil];
+
+		CGSize size = textRect.size;
+
+		return MAX(kRHDefaultCellHeight, size.height + kRHTopBottomMargin*2);
+
 	}
 	
-	return 44;
+	return kRHDefaultCellHeight;
 }
-
-
-
-
-
 
 @end

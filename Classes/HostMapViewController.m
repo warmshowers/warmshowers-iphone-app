@@ -15,7 +15,6 @@
 #import "HostInfoViewController.h"
 #import "RHAboutViewController.h"
 #import "HostTableViewController.h"
-#import "AFXMLRequestOperation.h"
 #import "WSHTTPClient.h"
 
 
@@ -52,7 +51,7 @@
     
 	UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStyleBordered target:self action:@selector(logoutActionSheet:)];
     
-	UIBarButtonItem *locateButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"193-location-arrow"] style:UIBarButtonItemStyleBordered target: self action:@selector(zoomToCurrentLocation:)];
+	UIBarButtonItem *locateButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ios7-navigate-outline"] style:UIBarButtonItemStyleBordered target: self action:@selector(zoomToCurrentLocation:)];
 	
 	// UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:[UIButton buttonWithType:UIButtonTypeInfoDark]];
 	

@@ -6,11 +6,12 @@
 //  Copyright (c) 2012 Red House Consulting GmbH. All rights reserved.
 //
 
-#import "AFHTTPClient.h"
+#import "AFHTTPSessionManager.h"
 
-@interface WSHTTPClient : AFHTTPClient
+@interface WSHTTPClient : AFHTTPSessionManager
 
 +(WSHTTPClient *)sharedHTTPClient;
 -(BOOL)reachable;
+-(void)cancelAllOperations;
 
 @end

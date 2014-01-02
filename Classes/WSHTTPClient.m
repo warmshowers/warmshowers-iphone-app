@@ -7,8 +7,6 @@
 //
 
 #import "WSHTTPClient.h"
-#import "AFXMLRequestOperation.h"
-#import "AFNetworkActivityIndicatorManager.h"
 
 @implementation WSHTTPClient
 
@@ -31,7 +29,11 @@
 
 
 -(BOOL)reachable {
-	return ([self networkReachabilityStatus] != AFNetworkReachabilityStatusNotReachable);
+	return [[AFNetworkReachabilityManager sharedManager] isReachable];
+}
+
+-(void)cancelAllOperations {
+    [[self.operationQueue operations] makeObjectsPerformSelector:@selector(cancel)];
 }
 
 @end

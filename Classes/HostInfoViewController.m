@@ -15,12 +15,8 @@
 #import "NSDate+timesince.h"
 #import "NSString+truncate.h"
 #import "ContactHostViewController.h"
-
 #import "WSHTTPClient.h"
-#import "AFJSONRequestOperation.h"
-
 #import "FeedbackTableViewController.h"
-#import "SVProgressHUD.h"
 #import "MKMapView+Utils.h"
 
 @implementation HostInfoViewController
@@ -42,15 +38,9 @@
 																						   action:@selector(showActions:)];
 
 	self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 200, 20)];
-	[self.statusLabel setBackgroundColor:[UIColor clearColor]];
-	[self.statusLabel setFont:[UIFont systemFontOfSize:14]];
-	[self.statusLabel setTextAlignment:UITextAlignmentCenter];
 
-	if IsIPad {
-		[self.statusLabel setTextColor:[UIColor darkGrayColor]];
-	} else {
-		[self.statusLabel setTextColor:[UIColor whiteColor]];
-	}
+	[self.statusLabel setFont:[UIFont systemFontOfSize:[UIFont smallSystemFontSize]]];
+	[self.statusLabel setTextAlignment:NSTextAlignmentCenter];
 
 	UIBarButtonItem *fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
 	[fixed setWidth:18];
@@ -187,7 +177,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
 		[cell.detailTextLabel setFont:[UIFont systemFontOfSize:13]];
 		[cell.detailTextLabel setNumberOfLines:0];
-		[cell.detailTextLabel setLineBreakMode:UILineBreakModeWordWrap];
+		[cell.detailTextLabel setLineBreakMode:NSLineBreakByTruncatingTail];
     }
 
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -233,6 +223,9 @@
 			} else if (indexPath.row == 3) {
 				cell.textLabel.text = NSLocalizedString(@"Comments", nil);
 				cell.detailTextLabel.text = [self.host.comments trim];
+				[cell.detailTextLabel setLineBreakMode:NSLineBreakByWordWrapping];
+
+
 
 			} else if (indexPath.row == 4) {
 				cell.textLabel.text = NSLocalizedString(@"Notice", nil);
@@ -369,32 +362,36 @@
 	return @"";
 }
 
--(CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    UITableViewCell *_cell = [self tableView:_tableView cellForRowAtIndexPath:indexPath];
-	UILineBreakMode lineBreakMode = _cell.detailTextLabel.lineBreakMode;
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+	UILineBreakMode lineBreakMode = cell.detailTextLabel.lineBreakMode;
 
     if (indexPath.section == 0) {
         return 80;
-    } else if (lineBreakMode == UILineBreakModeWordWrap) {
-		NSString *text = _cell.detailTextLabel.text;
-		UIFont *font = _cell.detailTextLabel.font;
+    } else if (lineBreakMode == NSLineBreakByWordWrapping) {
 
-		CGRect table_frame = self.tableView.frame;
-		float margin = IsIPad ? 183 : 113;
+		NSString *text = cell.detailTextLabel.text;
+		UIFont *font   = cell.detailTextLabel.font;
 
-		CGFloat tableFrameWidth = table_frame.size.width;
-		CGFloat newSize = tableFrameWidth-margin;
+		// 20 is the left and right margins
+		// 111 is trial-and-error with iOS7
+		CGFloat detailLabelWidth = tableView.width - 20 - 110;
 
-		CGSize withinSize = CGSizeMake(newSize, MAXFLOAT);
-		CGSize size = [text sizeWithFont:font constrainedToSize:withinSize lineBreakMode:lineBreakMode];
+		CGSize withinSize = CGSizeMake(detailLabelWidth, MAXFLOAT);
 
-		return MAX(44, size.height + 22);
+		CGRect textRect = [text boundingRectWithSize:withinSize
+											 options:NSStringDrawingUsesLineFragmentOrigin
+										  attributes:@{NSFontAttributeName:font}
+											 context:nil];
+
+		CGSize size = textRect.size;
+
+		return MAX(kRHDefaultCellHeight, size.height + kRHTopBottomMargin*2);
 	}
 
 	return 44;
 }
-
 
 #pragma mark AlertView Delegate
 
@@ -432,8 +429,7 @@
 			[controller setShouldShowDoneButton:YES];
 
 			UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-			[bNavController presentModalViewController:navController animated:YES];
-
+			[bNavController presentViewController:navController animated:YES completion:nil];
 		}];
 
 		[self.popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Contact Host", nil) block:^{
@@ -442,7 +438,7 @@
 
 			UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 			[navController setModalPresentationStyle:UIModalPresentationPageSheet];
-			[bNavController presentModalViewController:navController animated:YES];
+			[bNavController presentViewController:navController animated:YES completion:nil];
 		}];
 
 		[self.popoverActionsheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil)];

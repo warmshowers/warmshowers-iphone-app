@@ -14,7 +14,6 @@
 #define kNetworkError @"Check your network connection"
 
 #import <MapKit/MapKit.h>
-#import "AFHTTPClient.h"
 
 @class LoginViewController, SegmentsController;
 

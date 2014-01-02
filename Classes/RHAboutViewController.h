@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Red House Consulting GmbH. All rights reserved.
 //
 
-@interface RHAboutViewController : UITableViewController
+#import <StoreKit/StoreKit.h>
+
+@interface RHAboutViewController : UITableViewController<SKStoreProductViewControllerDelegate>
 
 @end

@@ -15,7 +15,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) IBOutlet UITextField *subjectTextField;
-@property (strong, nonatomic) UISwipeGestureRecognizer *swipeGesture;
+// @property (strong, nonatomic) UISwipeGestureRecognizer *swipeGesture;
 
 @property (strong, nonatomic) NSString *token;
 
