@@ -22,15 +22,9 @@
 	if (self=[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-
-		if (IsIPhone) {
-			// Swiping down keyboard only works with iPhone
-			// [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-		}
 	}
 
 	return self;
-
 }
 
 
@@ -46,39 +40,6 @@
 
     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStylePlain target:self action:@selector(sendButtonPressed:)];
     self.navigationItem.rightBarButtonItem = sendButton;
-
-
-	/*
-	 UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStylePlain target:self action:@selector(sendButtonPressed:)];
-	 self.navigationItem.rightBarButtonItem = sendButton;
-	 [sendButton release];
-	 */
-
-	//	NSURL *contactURL = [NSURL URLWithString:[self.host contactURL]];
-
-	/*
-     [[WSHTTPClient sharedHTTPClient]
-	 getPath:[self.host contactURL]
-	 parameters:nil
-	 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-     NSString *responseString = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] autorelease];
-     NSError *error = NULL;
-
-     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"id=\"edit-form-token\" value=\"([0-9a-f]+)\"" options:NSRegularExpressionCaseInsensitive error:&error];
-     NSTextCheckingResult *checkingResult = [regex firstMatchInString:responseString options:0 range:NSMakeRange(0, [responseString length])];
-
-     self.token = [responseString substringWithRange:[checkingResult rangeAtIndex:1]];
-
-     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStylePlain target:self action:@selector(sendButtonPressed:)];
-     self.navigationItem.rightBarButtonItem = sendButton;
-     [sendButton release];
-
-	 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
-	 }];
-     */
 }
 
 
@@ -127,7 +88,6 @@
 	// [self.textView setBackgroundColor:[UIColor greenColor]];
 
 	[self.scrollView autoContentSize];
-
 }
 
 -(void)keyboardWillShow:(NSNotification *)notification {
@@ -153,10 +113,6 @@
 }
 
 -(void)keyboardWillHide:(NSNotification *)notification {
-
-    // UIView *keyboardView = [[UIApplication sharedApplication] keyboardView];
-    // [keyboardView removeGestureRecognizer:self.swipeGesture];
-    /*********/
 
 	NSDictionary  *userInfo = [notification userInfo];
 
@@ -221,13 +177,7 @@
 }
 
 -(void)dealloc {
-
-	/*
-	 UIView *keyboardView = [[UIApplication sharedApplication] keyboardView];
-	 [keyboardView removeGestureRecognizer:self.swipeGesture];
-	 */
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-	
 }
 
 @end

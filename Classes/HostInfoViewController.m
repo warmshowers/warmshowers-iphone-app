@@ -54,38 +54,65 @@ static NSString *CellIdentifier = @"Cell";
     
 	[self setToolbarItems:toolbarItems animated:YES];
     
-	[self.host addObserver:self forKeyPath:@"last_updated_details" options:0 context:nil];
-    
-    
-    
     [self.tableView registerClass:[RHTableViewCellStyleValue2 class] forCellReuseIdentifier:CellIdentifier];
     [self.tableView setTableHeaderView:self.topView];
 }
 
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	[self refreshTableView:NO];
+	// [self refreshTableView:NO];
+    
+    NSNumber *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
+    NSNumber *newValue = [change objectForKey:NSKeyValueChangeNewKey];
+    
+    if ([oldValue isEqualToNumber:newValue]) {
+        // nothing changed, do nothing
+    } else if ([newValue boolValue]) {
+        RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Host no longer available", nil) message:NSLocalizedString(@"This host is no longer available and will no longer be displayed on the map or in the host list.", nil)];
+        
+        __weak HostInfoViewController *bself = self;
+        
+		[alert addButtonWithTitle:kOK block:^{
+			[bself.navigationController popViewControllerAnimated:YES];
+		}];
+        
+		[alert show];
+    }
+    
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.host addObserver:self forKeyPath:@"notcurrentlyavailable" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    
+    __weak HostInfoViewController *bself = self;
+    [self.host setDidUpdateBlock:^() {
+        [bself refreshTableView:NO];
+    }];
+    
+    if ([self.host needsUpdate]) {
+		[self refreshHost];
+	} else {
+        [self refreshTableView:NO];
+    }
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self.navigationController setToolbarHidden:NO animated:animated];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	[self refreshTableView:NO];
-	[self refreshHost];
     
-	if ([self.host needsUpdate]) {
-		[self refreshHost];
-	}
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	[SVProgressHUD dismiss];
 	[self.popoverActionsheet dismissWithClickedButtonIndex:[self.popoverActionsheet cancelButtonIndex] animated:YES];
+    
+    [self.host removeObserver:self forKeyPath:@"notcurrentlyavailable"];
+    [self.host setDidUpdateBlock:nil];
 }
 
 
@@ -100,7 +127,7 @@ static NSString *CellIdentifier = @"Cell";
 	} else if (self.host.last_updated_details == nil) {
         RHAlertView *alert = [RHAlertView alertWithTitle:nil message:NSLocalizedString(@"An error occurred while loading the host details. Please check your network connection and try again.", nil)];
         
-        [alert addButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
+        [alert addButtonWithTitle:kOK block:^{
             [self.navigationController popViewControllerAnimated:YES];
         }];
         
@@ -122,7 +149,6 @@ static NSString *CellIdentifier = @"Cell";
 	}
 }
 
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	if (self.isShowingLoadingIndicator) {
 		return 0;
@@ -131,31 +157,18 @@ static NSString *CellIdentifier = @"Cell";
 	}
 }
 
-
 -(void)refreshTableView:(BOOL)show {
+    [self setLastUpdatedDate];
+    [self setShowingLoadingIndicator:show];
     
-	if ([self.host.notcurrentlyavailable boolValue]) {
-        
-		/* [[RHAlertView alertWithOKButtonWithTitle:NSLocalizedString(@"Host no longer available", nil) message:NSLocalizedString(@"This host is no longer available and will no longer be displayed on the map or in the host list.", nil)] show];
-		 */
-        
-		__weak UINavigationController *bNavigationController = self.navigationController;
-        
-		RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Host no longer available", nil) message:NSLocalizedString(@"This host is no longer available and will no longer be displayed on the map or in the host list.", nil)];
-        
-		[alert addButtonWithTitle:kOK block:^{
-			[bNavigationController popViewControllerAnimated:YES];
-		}];
-        
-		[alert show];
-	} else {
-        
-		[self setLastUpdatedDate];
-		self.showingLoadingIndicator = show;
-		[self.tableView reloadData];
-	}
+    if (show) {
+        [self.tableView setTableHeaderView:nil];
+    } else {
+        [self.tableView setTableHeaderView:self.topView];
+    }
+    
+    [self.tableView reloadData];
 }
-
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	switch (section) {
@@ -173,7 +186,7 @@ static NSString *CellIdentifier = @"Cell";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
+    
     [cell.detailTextLabel setNumberOfLines:0];
     [cell.detailTextLabel setLineBreakMode:NSLineBreakByWordWrapping];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -442,7 +455,8 @@ static NSString *CellIdentifier = @"Cell";
 -(UIView *)topView {
     if (_topView == nil) {
         
-        CGFloat baseHeight = 120;
+        // max 240
+        CGFloat baseHeight = IsIPad ? 180 : 120;
         
         _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, baseHeight)];
         [_topView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
@@ -457,7 +471,7 @@ static NSString *CellIdentifier = @"Cell";
          ];
         
         [imageView setContentMode:UIViewContentModeScaleAspectFit];
-      
+        
         [_topView addSubview:imageView];
         
         
@@ -480,7 +494,7 @@ static NSString *CellIdentifier = @"Cell";
 #pragma mark Memory management
 
 -(void)dealloc {
-	[self.host removeObserver:self forKeyPath:@"last_updated_details"];
+	// [self.host removeObserver:self forKeyPath:@"last_updated_details"];
 }
 
 @end

@@ -23,5 +23,6 @@
 	#import "RHManagedObject+legacy.h"
 	#import "AFNetworking.h"
 	#import "UIKit+AFNetworking.h"
+    #import "NSObject+KVOBlocks.h"
 
 #endif

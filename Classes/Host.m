@@ -162,25 +162,17 @@
 }
 
 -(NSString *)imageURL {
-	return [NSString stringWithFormat:@"https://www.warmshowers.org//files/imagecache/profile_picture/pictures/picture-%@.jpg", self.hostid];
+	return [NSString stringWithFormat:@"https://www.warmshowers.org/files/imagecache/profile_picture/pictures/picture-%@.jpg", self.hostid];
 }
 
-
-/*
- -(NSString *)contactURL {
- // return [NSString stringWithFormat:@"http://www.warmshowers.org/user/%@/contact", self.hostid];
- return [NSString stringWithFormat:@"/user/%@/contact", self.hostid];
- }*/
 
 -(BOOL)needsUpdate {
 	// one week
 	return ([self isStale] || (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 604800 ));
-	
-	// two weeks
-	// return (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 1209600 );
 }
 
 -(BOOL)isStale {
+    return YES;
 	// return (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 60 );
 	// two weeks
 	return (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 1209600 );
@@ -200,9 +192,6 @@
 -(BOOL)animatesDrop {
 	return NO;
 }
-
-
-
 
 -(void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
     self.latitude = [NSNumber numberWithFloat:newCoordinate.latitude];

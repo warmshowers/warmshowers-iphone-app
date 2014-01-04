@@ -23,7 +23,7 @@
         self.viewControllers = _viewControllers;
 
 		UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[self.viewControllers arrayByPerformingSelector:@selector(title)]];
-		[segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+
 
 		for (int i=0; i < segmentedControl.numberOfSegments; i++) {
 			[segmentedControl setWidth:80.0 forSegmentAtIndex:i];

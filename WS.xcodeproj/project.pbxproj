@@ -69,8 +69,6 @@
 		836CCF1C14ABB4C4000EDC51 /* DotRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF1014ABB4C4000EDC51 /* DotRed.png */; };
 		83708C1A145C79CF00B15150 /* SegmentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83708C19145C79CF00B15150 /* SegmentsController.m */; };
 		8388B1371458A8100079ACE3 /* HostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388B1361458A8100079ACE3 /* HostTableViewController.m */; };
-		8389008A1878765E008639AE /* ws.png in Resources */ = {isa = PBXBuildFile; fileRef = 838900881878765E008639AE /* ws.png */; };
-		8389008B1878765E008639AE /* ws@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 838900891878765E008639AE /* ws@2x.png */; };
 		838AB091172F94FA005A9149 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838AB090172F94FA005A9149 /* QuartzCore.framework */; };
 		838AB093172F9500005A9149 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838AB092172F9500005A9149 /* MobileCoreServices.framework */; };
 		839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */; };
@@ -97,6 +95,9 @@
 		83CF4474126A01A200DF3CFD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF4473126A01A200DF3CFD /* MapKit.framework */; };
 		83D26B36126A4DE400412151 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D26B35126A4DE400412151 /* CoreLocation.framework */; };
 		83D73F0D13A151E70070D03A /* NSString+truncate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D73F0C13A151E70070D03A /* NSString+truncate.m */; };
+		83E205611878A69A0067738B /* NSObject+KVOBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E205601878A69A0067738B /* NSObject+KVOBlocks.m */; };
+		83E205681878B3550067738B /* ws.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E205661878B3550067738B /* ws.png */; };
+		83E205691878B3550067738B /* ws@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E205671878B3550067738B /* ws@2x.png */; };
 		83E605571608477F00C7C50E /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E605561608477F00C7C50E /* Feedback.m */; };
 		83F00E0415EBC6E000761BC6 /* RHAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E0315EBC5B400761BC6 /* RHAboutViewController.m */; };
 		83F00E0D15EBC73900761BC6 /* RHPromptForReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E0C15EBC73900761BC6 /* RHPromptForReview.m */; };
@@ -224,8 +225,6 @@
 		83708C19145C79CF00B15150 /* SegmentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentsController.m; sourceTree = "<group>"; };
 		8388B1351458A8100079ACE3 /* HostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostTableViewController.h; sourceTree = "<group>"; };
 		8388B1361458A8100079ACE3 /* HostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostTableViewController.m; sourceTree = "<group>"; };
-		838900881878765E008639AE /* ws.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ws.png; sourceTree = "<group>"; };
-		838900891878765E008639AE /* ws@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ws@2x.png"; sourceTree = "<group>"; };
 		838AB090172F94FA005A9149 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		838AB092172F9500005A9149 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		839FD6F1126AED0A00C008F8 /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
@@ -277,6 +276,10 @@
 		83D73F0B13A151E70070D03A /* NSString+truncate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+truncate.h"; sourceTree = "<group>"; };
 		83D73F0C13A151E70070D03A /* NSString+truncate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+truncate.m"; sourceTree = "<group>"; };
 		83D757C8178BD6E600C4CC64 /* WS (3.6).xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WS (3.6).xcdatamodel"; sourceTree = "<group>"; };
+		83E2055F1878A69A0067738B /* NSObject+KVOBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+KVOBlocks.h"; sourceTree = "<group>"; };
+		83E205601878A69A0067738B /* NSObject+KVOBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KVOBlocks.m"; sourceTree = "<group>"; };
+		83E205661878B3550067738B /* ws.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ws.png; sourceTree = "<group>"; };
+		83E205671878B3550067738B /* ws@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ws@2x.png"; sourceTree = "<group>"; };
 		83E605551608477F00C7C50E /* Feedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback.h; sourceTree = "<group>"; };
 		83E605561608477F00C7C50E /* Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feedback.m; sourceTree = "<group>"; };
 		83F00E0215EBC5B400761BC6 /* RHAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHAboutViewController.h; sourceTree = "<group>"; };
@@ -328,6 +331,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				83E2055E1878A69A0067738B /* KVO Blocks */,
 				83A98DA51646CA6900F329E8 /* RHCoreData (referenced) */,
 				8348AE391872C1DF0097DF24 /* SVProgressHUD (referenced) */,
 				83A98DA41646CA5D00F329E8 /* RHTools (referenced) */,
@@ -436,8 +440,8 @@
 		836CCF0814ABB425000EDC51 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				838900881878765E008639AE /* ws.png */,
-				838900891878765E008639AE /* ws@2x.png */,
+				83E205661878B3550067738B /* ws.png */,
+				83E205671878B3550067738B /* ws@2x.png */,
 				83F00E1515EBD11B00761BC6 /* trackmytour.png */,
 				83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */,
 				83576CCD16396108000FBE93 /* pagecurl.png */,
@@ -590,6 +594,15 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		83E2055E1878A69A0067738B /* KVO Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				83E2055F1878A69A0067738B /* NSObject+KVOBlocks.h */,
+				83E205601878A69A0067738B /* NSObject+KVOBlocks.m */,
+			);
+			path = "KVO Blocks";
+			sourceTree = "<group>";
+		};
 		83F168BF14685B17003D3E3F /* RH */ = {
 			isa = PBXGroup;
 			children = (
@@ -705,13 +718,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8389008B1878765E008639AE /* ws@2x.png in Resources */,
+				83E205691878B3550067738B /* ws@2x.png in Resources */,
 				8348AE431872C2360097DF24 /* ios7-navigate-outline@2x.png in Resources */,
 				836CCF0114ABB3D1000EDC51 /* HostMapViewController.xib in Resources */,
 				8348AE3E1872C1DF0097DF24 /* SVProgressHUD.bundle in Resources */,
 				836CCF1A14ABB4C4000EDC51 /* DotGreen.png in Resources */,
 				836CCF1B14ABB4C4000EDC51 /* DotPurple.png in Resources */,
-				8389008A1878765E008639AE /* ws.png in Resources */,
+				83E205681878B3550067738B /* ws.png in Resources */,
 				836CCF1C14ABB4C4000EDC51 /* DotRed.png in Resources */,
 				83F8C188152B8B280084E380 /* ContactHostViewController.xib in Resources */,
 				83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */,
@@ -731,6 +744,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83E205611878A69A0067738B /* NSObject+KVOBlocks.m in Sources */,
 				83F00E0415EBC6E000761BC6 /* RHAboutViewController.m in Sources */,
 				835696EC1847D18B00F5B999 /* RHTextAreaInputViewController.m in Sources */,
 				835696E91847D18B00F5B999 /* RHTableViewCell.m in Sources */,

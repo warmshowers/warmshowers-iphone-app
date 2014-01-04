@@ -173,11 +173,11 @@
     [alert addButtonWithTitle:NSLocalizedString(@"Sign Up", nil) block:^{
         RHAlertView *alert2 = [RHAlertView alertWithTitle:@"Warmshowers Sign Up" message:NSLocalizedString(@"You will be redirected to the sign up page on Warmshowers.org.", nil)];
 
-        [alert2 addButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:^{
+        [alert2 addButtonWithTitle:kCancel block:^{
             [self logout];
         }];
 
-        [alert2 addButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
+        [alert2 addButtonWithTitle:kOK block:^{
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.warmshowers.org/user/register"]];
             [self logout];
         }];
@@ -223,7 +223,7 @@
 
 			RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warmshowers", nil) message:NSLocalizedString(@"Login failed. Please check your username and password and try again. If you don't have an account you can tap the Sign Up button to register.", nil)];
 
-			[alert addButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
+			[alert addButtonWithTitle:kOK block:^{
 				[self logout];
 			}];
 
