@@ -12,13 +12,11 @@
 #import "WSAppDelegate.h"
 
 @implementation HostTableViewController
-@synthesize searchController;
-@synthesize searchString;
 
 #pragma mark - View lifecycle
 -(id)initWithStyle:(UITableViewStyle)style {
 	if (self=[super initWithStyle:style]) {
-		self.title = @"List";
+		self.title = NSLocalizedString(@"List", nil);
 	}
 	
 	return self;
@@ -35,7 +33,7 @@
 							 helpButton,
 							 nil];
 	
-
+    
 	[self setToolbarItems:toolbarItems animated:YES];
     
     [self addSearchBarWithPlaceHolder:NSLocalizedString(@"Filter Cached Hosts", nil)];
@@ -43,8 +41,11 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	
+    [self setFetchedResultsController:nil];
     [self.tableView reloadData];
-	[self updateDistances];
+    [self updateDistances];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -52,41 +53,21 @@
 	self.navigationItem.hidesBackButton = YES;
 }
 
-/*
--(BOOL)searchDisplayController:(UISearchDisplayController *)_controller shouldReloadTableForSearchString:(NSString *)_searchString {
-	self.searchString = _searchString;
-	self.fetchedResultsController = nil;
-	
-	return YES;
-}
-
--(void)searchDisplayController:(UISearchDisplayController *)controller willUnloadSearchResultsTableView:(UITableView *)tableView {
-	self.searchString = nil;
-	self.fetchedResultsController = nil;
-	[self.tableView reloadData];
-}
-*/
-
 -(void)helpButtonPressed:(id)sender {
 	[[RHAlertView alertWithOKButtonWithTitle:NSLocalizedString(@"Help", nil) message:NSLocalizedString(@"Hosts are sorted by proximity to your location.\n\nA green dot indicates a host is marked as a favourite.  A purple dot indicates the host details are cached and can be accessed offline.  A red dot indicates the host is not cached.", nil)] show];
-}
-
-// too many entries to do pretty animations
--(void)resetMassUpdate {
-	self.massUpdate = YES;
 }
 
 
 -(void)updateDistances {
 	CLLocation *current_location = [[WSAppDelegate sharedInstance] userLocation];
-
+    
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		// Merge the closests 50 and what the system thinks is currently the closest 50
 		NSArray *hosts1 = [Host hostsClosestToLocation:current_location withLimit:100];
 		NSArray *hosts2 = [Host fetchWithPredicate:[NSPredicate predicateWithFormat:@"distance != nil AND notcurrentlyavailable != 1"] sortDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES] withLimit:100];
 		
 		NSMutableArray *hosts = [NSMutableArray arrayWithArray:hosts1];
-		[hosts addObjectsFromArray:hosts2];
+        [hosts addObjectsFromArray:hosts2];
 		
 		for (Host *host in hosts) {
 			[host updateDistanceFromLocation:current_location];
@@ -112,23 +93,26 @@
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES];
 		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 		[fetchRequest setSortDescriptors:sortDescriptors];
-				
+        
 		NSPredicate *predicate;
+        
 		if (self.searchString) {
-			predicate = [NSPredicate predicateWithFormat:@"(distance != nil AND notcurrentlyavailable != 1) AND (comments CONTAINS[cd] %@ OR name CONTAINS[cd] %@ OR fullname CONTAINS[cd] %@ OR city CONTAINS[cd] %@ OR province CONTAINS[cd] %@)", self.searchString, self.searchString, self.searchString, self.searchString, self.searchString];
+			              predicate = [NSPredicate predicateWithFormat:@"(notcurrentlyavailable != 1) AND (comments CONTAINS[cd] %@ OR name CONTAINS[cd] %@ OR fullname CONTAINS[cd] %@ OR city CONTAINS[cd] %@ OR province CONTAINS[cd] %@)", self.searchString, self.searchString, self.searchString, self.searchString, self.searchString];
+            
 		} else {
-			predicate = [NSPredicate predicateWithFormat:@"distance != nil AND notcurrentlyavailable != 1"];
+			predicate = [NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1 AND distance != nil"];
 		}
+        
 		[fetchRequest setPredicate:predicate];
 		
 		// Edit the section name key path and cache name if appropriate.
 		// nil for section name key path means "no sections".
-		self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
+		self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
 																			managedObjectContext:[Host managedObjectContextForCurrentThread]
-																			  sectionNameKeyPath:nil 
+																			  sectionNameKeyPath:nil
 																					   cacheName:nil];
 		[fetchedResultsController setDelegate:self];
-	
+        
 		
 		NSError *error = nil;
 		if (![fetchedResultsController performFetch:&error]) {
@@ -137,7 +121,7 @@
     }
 	
     return fetchedResultsController;
-} 
+}
 
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -163,10 +147,10 @@
 	
 }
 
--(UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	static NSString *CellIdentifier = @"Cell"; // NB: matches identifier in XIB
 	
-	UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -184,12 +168,8 @@
 }
 
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {	
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	return 54;
-}
-
--(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
 }
 
 @end

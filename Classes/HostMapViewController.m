@@ -32,7 +32,7 @@
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if (self=[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-		self.title = @"Map";
+		self.title = NSLocalizedString(@"Map", nil);
 		self.locationUpdated = NO;
 		self.hasRunOnce = NO;
 	}
@@ -49,13 +49,13 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redrawAnnotation:) name:kShouldRedrawMapAnnotation object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authenticationChanged:) name:kAuthenticationStatusChangedNotificationName object:nil];
     
-	UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStyleBordered target:self action:@selector(logoutActionSheet:)];
+	UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Logout",nil) style:UIBarButtonItemStyleBordered target:self action:@selector(logoutActionSheet:)];
     
 	UIBarButtonItem *locateButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ios7-navigate-outline"] style:UIBarButtonItemStyleBordered target: self action:@selector(zoomToCurrentLocation:)];
 	
 	// UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:[UIButton buttonWithType:UIButtonTypeInfoDark]];
 	
-	UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithTitle:@"About" style:UIBarButtonItemStyleBordered target:self action:@selector(infoButtonPressed:)];
+	UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(infoButtonPressed:)];
 	
 	NSArray *toolbarItems = [NSArray arrayWithObjects:
                              logoutButton,
@@ -91,12 +91,12 @@
 -(void)logoutActionSheet:(id)sender {
 	self.popoverActionsheet = [RHActionSheet actionSheetWithTitle:nil];
 	
-	[self.popoverActionsheet addDestructiveButtonWithTitle:@"Logout" block:^{
+	[self.popoverActionsheet addDestructiveButtonWithTitle:NSLocalizedString(@"Logout", nil) block:^{
 		[[WSAppDelegate sharedInstance] performSelector:@selector(logout)];
         // [[RHAlertView alertWithOKButtonWithTitle:@"Logged Out" message:@"You have been logged out. You will need to login again to continue using the app."] show];
 	}];
 	
-	[self.popoverActionsheet addCancelButtonWithTitle:@"Cancel"];
+	[self.popoverActionsheet addCancelButtonWithTitle:kCancel];
 	[self.popoverActionsheet showFromBarButtonItem:sender animated:YES];
     
 }
@@ -272,7 +272,7 @@
 		[button addTarget:self action:@selector(accessoryTapped:) forControlEvents:UIControlEventTouchUpInside];
 		pinView.rightCalloutAccessoryView = button;
     } else {
-        [mapView.userLocation setTitle:@"Your location"];
+        [mapView.userLocation setTitle:NSLocalizedString(@"Your location", nil)];
     }
 	
 	return pinView;
@@ -325,18 +325,8 @@
 }
 
 -(IBAction)showMapProperties:(id)sender {
-	[self presentModalViewController:self.mapPropertiesViewController animated:YES];
+	// [self presentModalViewController:self.mapPropertiesViewController animated:YES];
+    [self presentViewController:self.mapPropertiesViewController animated:YES completion:nil];
 }
 
--(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return YES;
-}
-
-#pragma mark -
-#pragma mark Memory management
-
-- (void)viewDidUnload {
-    [self setMapPropertiesViewController:nil];
-    [super viewDidUnload];
-}
 @end

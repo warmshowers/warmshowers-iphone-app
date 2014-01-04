@@ -7,15 +7,9 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
-
 #import "RHCoreDataTableViewController.h"
 
 @interface HostTableViewController : RHCoreDataTableViewController<UISearchDisplayDelegate, UISearchBarDelegate>
-
-@property (nonatomic, strong) UISearchDisplayController *searchController;
-@property (nonatomic, strong) NSString *searchString;
-// @property (nonatomic, retain) IBOuUITableViewCell *tempCell;
-
 
 -(void)updateDistances;
 

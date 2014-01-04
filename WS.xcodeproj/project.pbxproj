@@ -22,8 +22,6 @@
 		8316C5E0184F03020016EE7E /* RHManagedObject+legacy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8316C5D9184F03020016EE7E /* RHManagedObject+legacy.m */; };
 		8316C5E1184F03020016EE7E /* RHManagedObjectContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8316C5DB184F03020016EE7E /* RHManagedObjectContextManager.m */; };
 		831FBAA1160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m in Sources */ = {isa = PBXBuildFile; fileRef = 831FBAA0160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m */; };
-		8324D707162E227C00E0E82A /* Icon-72-rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 8324D705162E227C00E0E82A /* Icon-72-rounded.png */; };
-		8324D708162E227C00E0E82A /* Icon-72-rounded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8324D706162E227C00E0E82A /* Icon-72-rounded@2x.png */; };
 		8330B481126A0775008B2EC4 /* WSRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8330B480126A0775008B2EC4 /* WSRequests.m */; };
 		83441AD51608694900468716 /* WSHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AD41608694900468716 /* WSHTTPClient.m */; };
 		8348AE361872A0CF0097DF24 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8348AE351872A0CF0097DF24 /* StoreKit.framework */; };
@@ -66,13 +64,13 @@
 		83576CD016396108000FBE93 /* pagecurl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83576CCE16396108000FBE93 /* pagecurl@2x.png */; };
 		836CCF0114ABB3D1000EDC51 /* HostMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF0014ABB3D1000EDC51 /* HostMapViewController.xib */; };
 		836CCF0614ABB3E6000EDC51 /* Host.m in Sources */ = {isa = PBXBuildFile; fileRef = 836CCF0314ABB3E6000EDC51 /* Host.m */; };
-		836CCF1714ABB4C4000EDC51 /* 193-location-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF0B14ABB4C4000EDC51 /* 193-location-arrow.png */; };
-		836CCF1814ABB4C4000EDC51 /* 193-location-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF0C14ABB4C4000EDC51 /* 193-location-arrow@2x.png */; };
 		836CCF1A14ABB4C4000EDC51 /* DotGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF0E14ABB4C4000EDC51 /* DotGreen.png */; };
 		836CCF1B14ABB4C4000EDC51 /* DotPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF0F14ABB4C4000EDC51 /* DotPurple.png */; };
 		836CCF1C14ABB4C4000EDC51 /* DotRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF1014ABB4C4000EDC51 /* DotRed.png */; };
 		83708C1A145C79CF00B15150 /* SegmentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83708C19145C79CF00B15150 /* SegmentsController.m */; };
 		8388B1371458A8100079ACE3 /* HostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388B1361458A8100079ACE3 /* HostTableViewController.m */; };
+		8389008A1878765E008639AE /* ws.png in Resources */ = {isa = PBXBuildFile; fileRef = 838900881878765E008639AE /* ws.png */; };
+		8389008B1878765E008639AE /* ws@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 838900891878765E008639AE /* ws@2x.png */; };
 		838AB091172F94FA005A9149 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838AB090172F94FA005A9149 /* QuartzCore.framework */; };
 		838AB093172F9500005A9149 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838AB092172F9500005A9149 /* MobileCoreServices.framework */; };
 		839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */; };
@@ -144,8 +142,6 @@
 		8316C5DB184F03020016EE7E /* RHManagedObjectContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHManagedObjectContextManager.m; path = ../../RHManagedObject/RHManagedObjectContextManager.m; sourceTree = "<group>"; };
 		831FBA9F160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+disablesAutomaticKeyboardDismissal.h"; sourceTree = "<group>"; };
 		831FBAA0160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+disablesAutomaticKeyboardDismissal.m"; sourceTree = "<group>"; };
-		8324D705162E227C00E0E82A /* Icon-72-rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72-rounded.png"; sourceTree = "<group>"; };
-		8324D706162E227C00E0E82A /* Icon-72-rounded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72-rounded@2x.png"; sourceTree = "<group>"; };
 		8330B47F126A0775008B2EC4 /* WSRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSRequests.h; sourceTree = "<group>"; };
 		8330B480126A0775008B2EC4 /* WSRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSRequests.m; sourceTree = "<group>"; };
 		8330B4C8126A092E008B2EC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -221,8 +217,6 @@
 		836CCF0014ABB3D1000EDC51 /* HostMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostMapViewController.xib; sourceTree = "<group>"; };
 		836CCF0214ABB3E6000EDC51 /* Host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Host.h; sourceTree = "<group>"; };
 		836CCF0314ABB3E6000EDC51 /* Host.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Host.m; sourceTree = "<group>"; };
-		836CCF0B14ABB4C4000EDC51 /* 193-location-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "193-location-arrow.png"; sourceTree = "<group>"; };
-		836CCF0C14ABB4C4000EDC51 /* 193-location-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "193-location-arrow@2x.png"; sourceTree = "<group>"; };
 		836CCF0E14ABB4C4000EDC51 /* DotGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DotGreen.png; sourceTree = "<group>"; };
 		836CCF0F14ABB4C4000EDC51 /* DotPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DotPurple.png; sourceTree = "<group>"; };
 		836CCF1014ABB4C4000EDC51 /* DotRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DotRed.png; sourceTree = "<group>"; };
@@ -230,6 +224,8 @@
 		83708C19145C79CF00B15150 /* SegmentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentsController.m; sourceTree = "<group>"; };
 		8388B1351458A8100079ACE3 /* HostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostTableViewController.h; sourceTree = "<group>"; };
 		8388B1361458A8100079ACE3 /* HostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostTableViewController.m; sourceTree = "<group>"; };
+		838900881878765E008639AE /* ws.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ws.png; sourceTree = "<group>"; };
+		838900891878765E008639AE /* ws@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ws@2x.png"; sourceTree = "<group>"; };
 		838AB090172F94FA005A9149 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		838AB092172F9500005A9149 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		839FD6F1126AED0A00C008F8 /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
@@ -440,14 +436,12 @@
 		836CCF0814ABB425000EDC51 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				8324D705162E227C00E0E82A /* Icon-72-rounded.png */,
-				8324D706162E227C00E0E82A /* Icon-72-rounded@2x.png */,
+				838900881878765E008639AE /* ws.png */,
+				838900891878765E008639AE /* ws@2x.png */,
 				83F00E1515EBD11B00761BC6 /* trackmytour.png */,
 				83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */,
 				83576CCD16396108000FBE93 /* pagecurl.png */,
 				83576CCE16396108000FBE93 /* pagecurl@2x.png */,
-				836CCF0B14ABB4C4000EDC51 /* 193-location-arrow.png */,
-				836CCF0C14ABB4C4000EDC51 /* 193-location-arrow@2x.png */,
 				8348AE401872C2360097DF24 /* ios7-navigate-outline.png */,
 				8348AE411872C2360097DF24 /* ios7-navigate-outline@2x.png */,
 				836CCF0E14ABB4C4000EDC51 /* DotGreen.png */,
@@ -711,20 +705,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8389008B1878765E008639AE /* ws@2x.png in Resources */,
 				8348AE431872C2360097DF24 /* ios7-navigate-outline@2x.png in Resources */,
 				836CCF0114ABB3D1000EDC51 /* HostMapViewController.xib in Resources */,
 				8348AE3E1872C1DF0097DF24 /* SVProgressHUD.bundle in Resources */,
-				836CCF1714ABB4C4000EDC51 /* 193-location-arrow.png in Resources */,
-				836CCF1814ABB4C4000EDC51 /* 193-location-arrow@2x.png in Resources */,
 				836CCF1A14ABB4C4000EDC51 /* DotGreen.png in Resources */,
 				836CCF1B14ABB4C4000EDC51 /* DotPurple.png in Resources */,
+				8389008A1878765E008639AE /* ws.png in Resources */,
 				836CCF1C14ABB4C4000EDC51 /* DotRed.png in Resources */,
 				83F8C188152B8B280084E380 /* ContactHostViewController.xib in Resources */,
 				83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */,
 				83F00E1815EBD11B00761BC6 /* trackmytour@2x.png in Resources */,
-				8324D707162E227C00E0E82A /* Icon-72-rounded.png in Resources */,
 				8348AE421872C2360097DF24 /* ios7-navigate-outline.png in Resources */,
-				8324D708162E227C00E0E82A /* Icon-72-rounded@2x.png in Resources */,
 				83576CCF16396108000FBE93 /* pagecurl.png in Resources */,
 				83576CD016396108000FBE93 /* pagecurl@2x.png in Resources */,
 				8348AE381872A2AD0097DF24 /* Images.xcassets in Resources */,

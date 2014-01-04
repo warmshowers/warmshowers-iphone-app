@@ -7,7 +7,7 @@
 //
 
 #import "RHActionSheet.h"
-@class Host, DynamicHeightTextTableViewCell, AFJSONRequestOperation;
+@class Host;
 
 @interface HostInfoViewController : UITableViewController
 
@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UILabel *statusLabel;
 @property (nonatomic, assign, getter = isShowingLoadingIndicator) BOOL showingLoadingIndicator;
 @property (nonatomic, strong) RHActionSheet *popoverActionsheet;
+@property (nonatomic, strong) UIView *topView;
 
 -(void)refreshHost;
 -(void)setLastUpdatedDate;

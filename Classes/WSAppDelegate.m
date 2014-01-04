@@ -23,7 +23,7 @@
 @interface WSAppDelegate ()
 // -(BOOL)postApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 -(NSArray *)segmentViewControllers;
--(void)loginWithUsername:(NSString *)_username password:(NSString *)_password;
+-(void)loginWithUsername:(NSString *)username password:(NSString *)password;
 -(void)loginSuccess;
 -(void)logout;
 @end
@@ -199,11 +199,11 @@
 }
 
 
--(void)loginWithUsername:(NSString *)_username password:(NSString *)_password {
+-(void)loginWithUsername:(NSString *)username password:(NSString *)password {
 
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            _username, @"username",
-                            _password, @"password", nil];
+                            username, @"username",
+                            password, @"password", nil];
 
 
 	WSHTTPClient *manager = [WSHTTPClient sharedHTTPClient];
@@ -231,36 +231,7 @@
 		}
 	}];
 
-	/*
-    NSURLRequest *urlrequest = [[WSHTTPClient sharedHTTPClient] requestWithMethod:@"POST" path:@"/services/rest/user/login" parameters:params];
 
-    AFJSONRequestOperation *request = [AFJSONRequestOperation JSONRequestOperationWithRequest:urlrequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-
-        if ([self isLoggedIn] == NO) {
-            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
-        }
-
-        [self loginSuccess];
-
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-
-		[SVProgressHUD dismiss];
-
-		if ([response statusCode] == 401) {
-
-			RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warmshowers", nil) message:NSLocalizedString(@"Login failed. Please check your username and password and try again. If you don't have an account you can tap the Sign Up button to register.", nil)];
-
-			[alert addButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
-				[self logout];
-			}];
-
-			[alert show];
-		}
-
-    }];
-
-    [[WSHTTPClient sharedHTTPClient] enqueueHTTPRequestOperation:request];
-*/
     if ([self isLoggedIn] == NO) {
         [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeBlack];
     }

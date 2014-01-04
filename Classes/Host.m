@@ -40,7 +40,6 @@
 
 +(Host *)hostWithID:(NSNumber *)hostID {
 
-	
 	Host *host = [Host getWithPredicate:[NSPredicate predicateWithFormat:@"hostid=%i", [hostID intValue]]];
 	
 	if (host) {
@@ -98,14 +97,13 @@
 	return self.fullname ? self.fullname : self.name;
 }
 
--(void)updateDistanceFromLocation:(CLLocation *)_location {
+-(void)updateDistanceFromLocation:(CLLocation *)location {
 	CLLocationCoordinate2D coord = [self coordinate];
 	CLLocation *host_location = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
     
-	double distance = [_location distanceFromLocation:host_location];
+	CLLocationDistance distance = [location distanceFromLocation:host_location];
 	
 	self.distance = [NSNumber numberWithDouble:distance];
-	
 }
 
 -(NSString *)subtitle {
@@ -117,7 +115,7 @@
 		CLLocation *host_location = [self location];
 		
 		NSString *bearing = NSLocalizedStringFromBearing( [userLocation bearingToLocation:host_location] );
-		double distance = [host_location distanceFromLocation:userLocation];
+		CLLocationDistance distance = [host_location distanceFromLocation:userLocation];
 		
 		NSInteger units = [[NSUserDefaults standardUserDefaults] integerForKey:@"units"];
 		
@@ -162,6 +160,11 @@
 -(NSString *)infoURL {
 	return [NSString stringWithFormat:@"https://www.warmshowers.org/user/%@/", self.hostid];
 }
+
+-(NSString *)imageURL {
+	return [NSString stringWithFormat:@"https://www.warmshowers.org//files/imagecache/profile_picture/pictures/picture-%@.jpg", self.hostid];
+}
+
 
 /*
  -(NSString *)contactURL {

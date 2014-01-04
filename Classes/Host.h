@@ -26,6 +26,7 @@
 -(void)updateDistanceFromLocation:(CLLocation *)_location;
 
 -(NSString *)infoURL;
+-(NSString *)imageURL;
 // -(NSString *)contactURL;
 -(BOOL)needsUpdate;
 -(BOOL)isStale;
