@@ -172,7 +172,6 @@
 }
 
 -(BOOL)isStale {
-    return YES;
 	// return (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 60 );
 	// two weeks
 	return (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 1209600 );

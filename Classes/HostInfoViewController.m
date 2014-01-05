@@ -102,8 +102,6 @@ static NSString *CellIdentifier = @"Cell";
 -(void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self.navigationController setToolbarHidden:NO animated:animated];
-    
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
