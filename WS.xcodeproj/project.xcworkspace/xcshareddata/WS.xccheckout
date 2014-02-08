@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>33888973-CE18-4EE6-B323-FF2C741C1F25</string>
+	<string>3E3E8FF2-4831-4A8A-8C90-A58C34A4F6F1</string>
 	<key>IDESourceControlProjectName</key>
 	<string>WS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -16,8 +16,10 @@
 		<string>https://github.com/chriscdn/RHTools.git</string>
 		<key>5D2E70B9-5FC7-4ECA-8506-E6BD250B599D</key>
 		<string>https://github.com/AFNetworking/AFNetworking.git</string>
-		<key>6A45EDBF-3352-4FFD-90A0-12782196F08C</key>
-		<string>https://github.com/chriscdn/warmshowers-iphone-app.git</string>
+		<key>8B207C5D-F9F6-4F50-BC4C-3D45943CD3A5</key>
+		<string>https://github.com/samvermette/SVProgressHUD.git</string>
+		<key>E0C6A28D-5325-4664-B885-A039DEFE826D</key>
+		<string>https://github.com/warmshowers/warmshowers-iphone-app.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>WS.xcodeproj/project.xcworkspace</string>
@@ -29,15 +31,17 @@
 		<string>../../../RHTools</string>
 		<key>5D2E70B9-5FC7-4ECA-8506-E6BD250B599D</key>
 		<string>../../../AFNetworking</string>
-		<key>6A45EDBF-3352-4FFD-90A0-12782196F08C</key>
+		<key>8B207C5D-F9F6-4F50-BC4C-3D45943CD3A5</key>
+		<string>../../../SVProgressHUD</string>
+		<key>E0C6A28D-5325-4664-B885-A039DEFE826D</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/chriscdn/warmshowers-iphone-app.git</string>
+	<string>https://github.com/warmshowers/warmshowers-iphone-app.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>6A45EDBF-3352-4FFD-90A0-12782196F08C</string>
+	<string>E0C6A28D-5325-4664-B885-A039DEFE826D</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -68,7 +72,15 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>6A45EDBF-3352-4FFD-90A0-12782196F08C</string>
+			<string>8B207C5D-F9F6-4F50-BC4C-3D45943CD3A5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SVProgressHUD</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E0C6A28D-5325-4664-B885-A039DEFE826D</string>
 			<key>IDESourceControlWCCName</key>
 			<string>warmshowers-iphone-app</string>
 		</dict>

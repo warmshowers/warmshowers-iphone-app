@@ -17,11 +17,8 @@
 	
     dispatch_once(&oncePredicate, ^{
         _sharedClient = [[WSHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://www.warmshowers.org/"]];
-		
+		[[_sharedClient reachabilityManager] startMonitoring];
 		[[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-        // [__httpClient setParameterEncoding:AFJSONParameterEncoding];
-        // [__httpClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
-		// [_sharedClient registerHTTPOperationClass:[AFXMLRequestOperation class]];
     });
 	
     return _sharedClient;

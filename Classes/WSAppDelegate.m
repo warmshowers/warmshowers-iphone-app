@@ -19,6 +19,7 @@
 
 #import "UIColor+utils.h"
 #import "WSHTTPClient.h"
+#import "Crittercism.h"
 
 @interface WSAppDelegate ()
 // -(BOOL)postApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
@@ -44,7 +45,19 @@
 
 // See http://schwiiz.org/?p=1734
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Setup the window, but don't add the rootViewController yet
+
+#ifdef DEBUG
+#else
+	NSString *cPath = [[NSBundle mainBundle] pathForResource:@"crittercism" ofType:@"plist"];
+	NSDictionary *cSettings = [[NSDictionary alloc] initWithContentsOfFile:cPath];
+	NSString *appid = [cSettings objectForKey:@"appid"];
+	if (appid) {
+		[Crittercism enableWithAppID:appid];
+	}
+#endif
+
+
+	// Setup the window, but don't add the rootViewController yet
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
 

@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="mapPropertiesViewController" destination="30" id="33"/>
                 <outlet property="mapView" destination="7" id="27"/>
+                <outlet property="pageCurlImageButton" destination="29" id="Ts9-Mi-clH"/>
                 <outlet property="view" destination="6" id="12"/>
             </connections>
         </placeholder>
@@ -21,7 +22,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </mapView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="29">
-                    <rect key="frame" x="278" y="416" width="42" height="64"/>
+                    <rect key="frame" x="278" y="355" width="42" height="64"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" title="Button" image="pagecurl.png">
@@ -46,21 +47,20 @@
                 <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <segmentedControl opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="32">
-                        <rect key="frame" x="20" y="367" width="280" height="30"/>
+                    <segmentedControl opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="32" userLabel="Bordered Segmented Control - Standard, Satellite, Hybrid">
+                        <rect key="frame" x="20" y="368" width="280" height="29"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                         <segments>
                             <segment title="Standard"/>
                             <segment title="Satellite"/>
                             <segment title="Hybrid"/>
                         </segments>
-                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
                             <action selector="mapTypeSegmentedControl:" destination="-1" eventType="valueChanged" id="35"/>
                         </connections>
                     </segmentedControl>
                 </subviews>
-                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             </view>
             <extendedEdge key="edgesForExtendedLayout"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

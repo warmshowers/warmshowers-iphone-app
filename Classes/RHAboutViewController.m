@@ -14,19 +14,10 @@
 
 @interface RHAboutViewController ()
 -(UITableViewCell *)headerCell;
--(UITableViewCell *)subHeaderCell;
 -(void)showMeTheApp:(NSString *)appid;
 @end
 
 @implementation RHAboutViewController
-
--(id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 -(void)viewDidLoad {
     [super viewDidLoad];
@@ -36,8 +27,6 @@
 	
 	self.navigationItem.leftBarButtonItem = doneButton;
 	self.navigationController.navigationBar.tintColor = [UIColor colorFromHexString:@"2E74A5"];
-	
-	
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -64,7 +53,7 @@
 -(UITableViewCell *)headerCell {
 	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
 	
-	[cell.imageView setImage:[UIImage imageNamed:@"Icon-72-rounded"]];
+	[cell.imageView setImage:[UIImage imageNamed:@"ws-50"]];
 	
 	[cell.textLabel setFont:[UIFont boldSystemFontOfSize:20]];
 	[cell.detailTextLabel setFont:[UIFont systemFontOfSize:14]];
@@ -78,31 +67,17 @@
 	
 	[cell.textLabel setText:appName];
 	[cell.detailTextLabel setText:versionLabel];
-	[cell setBackgroundColor:[UIColor clearColor]];
-	[cell setBackgroundView:[[UIView alloc] initWithFrame:CGRectZero]];
+	// [cell setBackgroundColor:[UIColor clearColor]];
+	// [cell setBackgroundView:[[UIView alloc] initWithFrame:CGRectZero]];
 	[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 	
-	return cell;
-}
-
--(UITableViewCell *)subHeaderCell {
-	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-	[cell.textLabel setTextAlignment:NSTextAlignmentCenter];
-	[cell.textLabel setText:@"by Christopher Meyer"];
-	[cell setBackgroundColor:[UIColor clearColor]];
-	[cell setBackgroundView:[[UIView alloc] initWithFrame:CGRectZero]];
-	[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 	return cell;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	if (indexPath.section == 0) {
-		if (indexPath.row == 0) {
-			return [self headerCell];
-		} else {
-			return [self subHeaderCell];
-		}
+		return [self headerCell];
 	}
 	
 	UITableViewCell *cell;
@@ -127,7 +102,7 @@
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
 			[cell.imageView setImage:[UIImage imageNamed:@"trackmytour"]];
 			[cell.textLabel setText:@"TrackMyTour"];
-			[cell.detailTextLabel setText:@"A tracking app for bike touring"];
+			[cell.detailTextLabel setText:NSLocalizedString(@"A tracking app for bike touring", nil)];
 			[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 			
 			break;
@@ -154,16 +129,8 @@
 			
 		default:
 			if (indexPath.row == 0) {
-
 				[self showMeTheApp:@"307303960"];
-
-				/*
-				NSString *tmt = @"http://trackmytour.com/get/";
-				NSString *url = [tmt stringByAppendingSource:@"warmshowers" medium:@"app" campaign:@"trackmytour"];
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-				*/
 				break;
-
 			}
 	}
 	
@@ -198,7 +165,7 @@
 			//case 1:
 			//	return @"\nTrackMyTour is another app";
 		case 2:
-			return @"The Warmshowers and TrackMyTour apps written by Christopher Meyer. Contact me at chris@schwiiz.org.";
+			return NSLocalizedString(@"The Warmshowers and TrackMyTour apps developed by Christopher Meyer. Contact me at chris@schwiiz.org or visit my blog at http://schwiiz.org/.", nil);
 			
 		default:
 			return @"";

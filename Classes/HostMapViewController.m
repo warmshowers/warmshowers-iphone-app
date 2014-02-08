@@ -87,6 +87,13 @@
 	}
 }
 
+-(void)viewWillLayoutSubviews {
+	[super viewWillLayoutSubviews];
+
+	self.pageCurlImageButton.y = self.navigationController.toolbar.y - self.pageCurlImageButton.height;
+
+}
+
 
 -(void)logoutActionSheet:(id)sender {
 	self.popoverActionsheet = [RHActionSheet actionSheetWithTitle:nil];

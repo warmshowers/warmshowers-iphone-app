@@ -67,10 +67,15 @@
 		836CCF1A14ABB4C4000EDC51 /* DotGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF0E14ABB4C4000EDC51 /* DotGreen.png */; };
 		836CCF1B14ABB4C4000EDC51 /* DotPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF0F14ABB4C4000EDC51 /* DotPurple.png */; };
 		836CCF1C14ABB4C4000EDC51 /* DotRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF1014ABB4C4000EDC51 /* DotRed.png */; };
+		836D64A71893BF5B00F0602F /* dsym_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 836D64A51893BF5B00F0602F /* dsym_upload.sh */; };
+		836D64A81893BF5B00F0602F /* libCrittercism_v4_3_1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 836D64A61893BF5B00F0602F /* libCrittercism_v4_3_1.a */; };
+		836D64AA1893BFA000F0602F /* crittercism.plist in Resources */ = {isa = PBXBuildFile; fileRef = 836D64A91893BFA000F0602F /* crittercism.plist */; };
 		83708C1A145C79CF00B15150 /* SegmentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83708C19145C79CF00B15150 /* SegmentsController.m */; };
 		8388B1371458A8100079ACE3 /* HostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388B1361458A8100079ACE3 /* HostTableViewController.m */; };
 		838AB091172F94FA005A9149 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838AB090172F94FA005A9149 /* QuartzCore.framework */; };
 		838AB093172F9500005A9149 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838AB092172F9500005A9149 /* MobileCoreServices.framework */; };
+		838E22F11894037B0097A831 /* ws-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 838E22EF1894037B0097A831 /* ws-50.png */; };
+		838E22F21894037B0097A831 /* ws-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 838E22F01894037B0097A831 /* ws-50@2x.png */; };
 		839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */; };
 		83BD0A16187211C400CBA208 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BD0A04187211C400CBA208 /* AFHTTPRequestOperation.m */; };
 		83BD0A17187211C400CBA208 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BD0A06187211C400CBA208 /* AFHTTPRequestOperationManager.m */; };
@@ -221,12 +226,20 @@
 		836CCF0E14ABB4C4000EDC51 /* DotGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DotGreen.png; sourceTree = "<group>"; };
 		836CCF0F14ABB4C4000EDC51 /* DotPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DotPurple.png; sourceTree = "<group>"; };
 		836CCF1014ABB4C4000EDC51 /* DotRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DotRed.png; sourceTree = "<group>"; };
+		836D64A21893BF5B00F0602F /* CRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRFilter.h; sourceTree = "<group>"; };
+		836D64A31893BF5B00F0602F /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
+		836D64A41893BF5B00F0602F /* CrittercismDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismDelegate.h; sourceTree = "<group>"; };
+		836D64A51893BF5B00F0602F /* dsym_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = dsym_upload.sh; sourceTree = "<group>"; };
+		836D64A61893BF5B00F0602F /* libCrittercism_v4_3_1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercism_v4_3_1.a; sourceTree = "<group>"; };
+		836D64A91893BFA000F0602F /* crittercism.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = crittercism.plist; sourceTree = "<group>"; };
 		83708C18145C79CF00B15150 /* SegmentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentsController.h; sourceTree = "<group>"; };
 		83708C19145C79CF00B15150 /* SegmentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentsController.m; sourceTree = "<group>"; };
 		8388B1351458A8100079ACE3 /* HostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostTableViewController.h; sourceTree = "<group>"; };
 		8388B1361458A8100079ACE3 /* HostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostTableViewController.m; sourceTree = "<group>"; };
 		838AB090172F94FA005A9149 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		838AB092172F9500005A9149 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		838E22EF1894037B0097A831 /* ws-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ws-50.png"; sourceTree = "<group>"; };
+		838E22F01894037B0097A831 /* ws-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ws-50@2x.png"; sourceTree = "<group>"; };
 		839FD6F1126AED0A00C008F8 /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
 		839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
 		83BD0A03187211C400CBA208 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = ../../AFNetworking/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -316,6 +329,7 @@
 				838AB093172F9500005A9149 /* MobileCoreServices.framework in Frameworks */,
 				838AB091172F94FA005A9149 /* QuartzCore.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				836D64A81893BF5B00F0602F /* libCrittercism_v4_3_1.a in Frameworks */,
 				83FFC5F416187B7D00158C5F /* CoreData.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
 				83D26B36126A4DE400412151 /* CoreLocation.framework in Frameworks */,
@@ -331,6 +345,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				836D64A11893BF5B00F0602F /* CrittercismSDK */,
 				83E2055E1878A69A0067738B /* KVO Blocks */,
 				83A98DA51646CA6900F329E8 /* RHCoreData (referenced) */,
 				8348AE391872C1DF0097DF24 /* SVProgressHUD (referenced) */,
@@ -387,6 +402,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				836D64A91893BFA000F0602F /* crittercism.plist */,
 				8348AE371872A2AD0097DF24 /* Images.xcassets */,
 				836CCF0814ABB425000EDC51 /* Images */,
 				8D1107310486CEB800E47090 /* WS-Info.plist */,
@@ -442,6 +458,8 @@
 			children = (
 				83E205661878B3550067738B /* ws.png */,
 				83E205671878B3550067738B /* ws@2x.png */,
+				838E22EF1894037B0097A831 /* ws-50.png */,
+				838E22F01894037B0097A831 /* ws-50@2x.png */,
 				83F00E1515EBD11B00761BC6 /* trackmytour.png */,
 				83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */,
 				83576CCD16396108000FBE93 /* pagecurl.png */,
@@ -453,6 +471,18 @@
 				836CCF1014ABB4C4000EDC51 /* DotRed.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		836D64A11893BF5B00F0602F /* CrittercismSDK */ = {
+			isa = PBXGroup;
+			children = (
+				836D64A21893BF5B00F0602F /* CRFilter.h */,
+				836D64A31893BF5B00F0602F /* Crittercism.h */,
+				836D64A41893BF5B00F0602F /* CrittercismDelegate.h */,
+				836D64A51893BF5B00F0602F /* dsym_upload.sh */,
+				836D64A61893BF5B00F0602F /* libCrittercism_v4_3_1.a */,
+			);
+			path = CrittercismSDK;
 			sourceTree = "<group>";
 		};
 		839E2D551291D587003E2348 /* Model */ = {
@@ -723,14 +753,18 @@
 				836CCF0114ABB3D1000EDC51 /* HostMapViewController.xib in Resources */,
 				8348AE3E1872C1DF0097DF24 /* SVProgressHUD.bundle in Resources */,
 				836CCF1A14ABB4C4000EDC51 /* DotGreen.png in Resources */,
+				838E22F21894037B0097A831 /* ws-50@2x.png in Resources */,
 				836CCF1B14ABB4C4000EDC51 /* DotPurple.png in Resources */,
 				83E205681878B3550067738B /* ws.png in Resources */,
 				836CCF1C14ABB4C4000EDC51 /* DotRed.png in Resources */,
+				836D64AA1893BFA000F0602F /* crittercism.plist in Resources */,
 				83F8C188152B8B280084E380 /* ContactHostViewController.xib in Resources */,
+				836D64A71893BF5B00F0602F /* dsym_upload.sh in Resources */,
 				83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */,
 				83F00E1815EBD11B00761BC6 /* trackmytour@2x.png in Resources */,
 				8348AE421872C2360097DF24 /* ios7-navigate-outline.png in Resources */,
 				83576CCF16396108000FBE93 /* pagecurl.png in Resources */,
+				838E22F11894037B0097A831 /* ws-50.png in Resources */,
 				83576CD016396108000FBE93 /* pagecurl@2x.png in Resources */,
 				8348AE381872A2AD0097DF24 /* Images.xcassets in Resources */,
 				8355479B1642DFFE00D2A0B5 /* Settings.bundle in Resources */,
@@ -842,6 +876,10 @@
 				GCC_PREFIX_HEADER = WS_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "WS-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/chris/Documents/XCode/iPhone\\ Projects/warmshowers-iphone-app/Classes/CrittercismSDK",
+				);
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -877,6 +915,10 @@
 				GCC_PREFIX_HEADER = WS_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "WS-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/chris/Documents/XCode/iPhone\\ Projects/warmshowers-iphone-app/Classes/CrittercismSDK",
+				);
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -912,6 +954,10 @@
 				GCC_PREFIX_HEADER = WS_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "WS-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/chris/Documents/XCode/iPhone\\ Projects/warmshowers-iphone-app/Classes/CrittercismSDK",
+				);
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

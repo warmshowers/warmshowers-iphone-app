@@ -24,7 +24,7 @@
 	CLLocation *current_location = [[WSAppDelegate sharedInstance] userLocation];
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		NSArray *hosts = [Host fetchWithPredicate:[NSPredicate predicateWithFormat:@"favourite=1"]];
+		NSArray *hosts = [Host fetchWithPredicate:[NSPredicate predicateWithFormat:@"favourite=1 AND notcurrentlyavailable != 1"]];
 		
 		for (Host *host in hosts) {
 			[host updateDistanceFromLocation:current_location];
@@ -55,9 +55,9 @@
 		NSPredicate *predicate;
 		if (self.searchString) {
 			//NSPredicate *_myPredicate = [NSPredicate predicateWithFormat:@"(firstname CONTAINS[cd] %@) OR (lastname CONTAINS[cd] %@)", _mySearchKey, _mySearchKey];
-			predicate = [NSPredicate predicateWithFormat:@"(distance != nil AND favourite=1) AND (comments CONTAINS[cd] %@ OR name CONTAINS[cd] %@ OR fullname CONTAINS[cd] %@ OR city CONTAINS[cd] %@)", self.searchString, self.searchString, self.searchString, self.searchString];
+			predicate = [NSPredicate predicateWithFormat:@"(notcurrentlyavailable != 1) AND (distance != nil AND favourite=1) AND (comments CONTAINS[cd] %@ OR name CONTAINS[cd] %@ OR fullname CONTAINS[cd] %@ OR city CONTAINS[cd] %@)", self.searchString, self.searchString, self.searchString, self.searchString];
 		} else {
-			predicate = [NSPredicate predicateWithFormat:@"distance != nil AND favourite=1"];
+			predicate = [NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1 AND distance != nil AND favourite=1"];
 		}
 		
 		

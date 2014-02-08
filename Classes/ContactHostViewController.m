@@ -32,14 +32,31 @@
     [super viewDidLoad];
 	[self setTitle:@"Contact Host"];
 
-	[self.messageToTextLabel setText:[NSString stringWithFormat:@"Message to: %@", [self.host fullname]]];
+	[self.messageToTextLabel setText:[NSString stringWithFormat:@"To: %@", [self.host fullname]]];
 	[self.textView setText:[NSString stringWithFormat:@"Hello %@,\n\n", [self.host fullname]]];
 
 	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed:)];
 	self.navigationItem.leftBarButtonItem = cancelButton;
 
-    UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStylePlain target:self action:@selector(sendButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = sendButton;
+	/*  UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStylePlain target:self action:@selector(sendButtonPressed:)];
+	 self.navigationItem.rightBarButtonItem = sendButton;
+	 */
+
+	__weak ContactHostViewController *bself = self;
+
+	self.navigationItem.rightBarButtonItem = [RHBarButtonItem itemWithTitle:NSLocalizedString(@"Send", nil) block:^{
+
+		RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Confirm", nil) message:NSLocalizedString(@"Send message?", nil)];
+
+		[alert addCancelButton];
+		[alert addButtonWithTitle:NSLocalizedString(@"Send", nil) block:^{
+			[bself sendButtonPressed:nil];
+		}];
+
+		[alert show];
+
+	}];
+
 }
 
 

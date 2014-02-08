@@ -87,7 +87,7 @@ const float PPRWebViewControllerFadeDuration = 0.5;
 #pragma mark -
 #pragma mark Actions
 - (void)doneButtonTapped:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)fadeWebViewIn {
