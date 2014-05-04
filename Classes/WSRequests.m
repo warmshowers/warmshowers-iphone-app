@@ -11,7 +11,6 @@
 #import "Host.h"
 #import "MKMapView+Utils.h"
 #import "Feedback.h"
-#import "NSString+truncate.h"
 #import "WSHTTPClient.h"
 
 @implementation WSRequests

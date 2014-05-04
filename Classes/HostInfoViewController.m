@@ -13,7 +13,6 @@
 #import "RHWebViewController.h"
 #import "WSAppDelegate.h"
 #import "NSDate+timesince.h"
-#import "NSString+truncate.h"
 #import "ContactHostViewController.h"
 #import "WSHTTPClient.h"
 #import "FeedbackTableViewController.h"

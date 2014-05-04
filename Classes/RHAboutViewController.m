@@ -10,7 +10,6 @@
 #import "NSString+analytics.h"
 #import "RHWebViewController.h"
 #import "RHPromptForReview.h"
-#import "UIColor+utils.h"
 
 @interface RHAboutViewController ()
 -(UITableViewCell *)headerCell;

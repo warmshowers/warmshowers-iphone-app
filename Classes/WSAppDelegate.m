@@ -16,8 +16,6 @@
 #import "RHPromptForReview.h"
 #import "SVProgressHUD.h"
 #import "Host.h"
-
-#import "UIColor+utils.h"
 #import "WSHTTPClient.h"
 #import "Crittercism.h"
 
