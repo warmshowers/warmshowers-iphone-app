@@ -16,7 +16,6 @@
 		28D3F202112F7DC200FD0661 /* WS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28D3F201112F7DC200FD0661 /* WS.xcdatamodeld */; };
 		3102391F8DDD4D1FAC5382A5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D09F2CAA216B49BAA5EEDCA7 /* libPods.a */; };
 		8317805B191650C2007DC9F7 /* libCrittercism_v4_3_3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8317805A191650C2007DC9F7 /* libCrittercism_v4_3_3.a */; };
-		831FBAA1160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m in Sources */ = {isa = PBXBuildFile; fileRef = 831FBAA0160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m */; };
 		8330B481126A0775008B2EC4 /* WSRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8330B480126A0775008B2EC4 /* WSRequests.m */; };
 		83441AD51608694900468716 /* WSHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AD41608694900468716 /* WSHTTPClient.m */; };
 		8348AE361872A0CF0097DF24 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8348AE351872A0CF0097DF24 /* StoreKit.framework */; };
@@ -49,7 +48,6 @@
 		83CE1361147455CB006EED95 /* FavouriteHostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE1360147455CB006EED95 /* FavouriteHostTableViewController.m */; };
 		83CF4474126A01A200DF3CFD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF4473126A01A200DF3CFD /* MapKit.framework */; };
 		83D26B36126A4DE400412151 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D26B35126A4DE400412151 /* CoreLocation.framework */; };
-		83D73F0D13A151E70070D03A /* NSString+truncate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D73F0C13A151E70070D03A /* NSString+truncate.m */; };
 		83E205681878B3550067738B /* ws.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E205661878B3550067738B /* ws.png */; };
 		83E205691878B3550067738B /* ws@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E205671878B3550067738B /* ws@2x.png */; };
 		83E605571608477F00C7C50E /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E605561608477F00C7C50E /* Feedback.m */; };
@@ -58,7 +56,6 @@
 		83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1515EBD11B00761BC6 /* trackmytour.png */; };
 		83F00E1815EBD11B00761BC6 /* trackmytour@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */; };
 		83F00E1B15EBD3FE00761BC6 /* NSString+analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E1A15EBD3FE00761BC6 /* NSString+analytics.m */; };
-		83F00E2415EBD76100761BC6 /* UIColor+utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E2315EBD76100761BC6 /* UIColor+utils.m */; };
 		83F051281618ED83001317D6 /* FeedbackEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F051271618ED83001317D6 /* FeedbackEntity.m */; };
 		83F0512B1618ED84001317D6 /* HostEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F0512A1618ED84001317D6 /* HostEntity.m */; };
 		83F8C187152B8B280084E380 /* ContactHostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F8C185152B8B280084E380 /* ContactHostViewController.m */; };
@@ -83,8 +80,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4FD7DBCE639F4FDEB65184EE /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		8317805A191650C2007DC9F7 /* libCrittercism_v4_3_3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercism_v4_3_3.a; sourceTree = "<group>"; };
-		831FBA9F160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+disablesAutomaticKeyboardDismissal.h"; sourceTree = "<group>"; };
-		831FBAA0160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+disablesAutomaticKeyboardDismissal.m"; sourceTree = "<group>"; };
 		8330B47F126A0775008B2EC4 /* WSRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSRequests.h; sourceTree = "<group>"; };
 		8330B480126A0775008B2EC4 /* WSRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSRequests.m; sourceTree = "<group>"; };
 		8330B4C8126A092E008B2EC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -132,8 +127,6 @@
 		83CE1360147455CB006EED95 /* FavouriteHostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteHostTableViewController.m; sourceTree = "<group>"; };
 		83CF4473126A01A200DF3CFD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		83D26B35126A4DE400412151 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		83D73F0B13A151E70070D03A /* NSString+truncate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+truncate.h"; sourceTree = "<group>"; };
-		83D73F0C13A151E70070D03A /* NSString+truncate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+truncate.m"; sourceTree = "<group>"; };
 		83D757C8178BD6E600C4CC64 /* WS (3.6).xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WS (3.6).xcdatamodel"; sourceTree = "<group>"; };
 		83E205661878B3550067738B /* ws.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ws.png; sourceTree = "<group>"; };
 		83E205671878B3550067738B /* ws@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ws@2x.png"; sourceTree = "<group>"; };
@@ -147,8 +140,6 @@
 		83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trackmytour@2x.png"; sourceTree = "<group>"; };
 		83F00E1915EBD3FE00761BC6 /* NSString+analytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+analytics.h"; sourceTree = "<group>"; };
 		83F00E1A15EBD3FE00761BC6 /* NSString+analytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+analytics.m"; sourceTree = "<group>"; };
-		83F00E2215EBD76100761BC6 /* UIColor+utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+utils.h"; sourceTree = "<group>"; };
-		83F00E2315EBD76100761BC6 /* UIColor+utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+utils.m"; sourceTree = "<group>"; };
 		83F051261618ED83001317D6 /* FeedbackEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackEntity.h; sourceTree = "<group>"; };
 		83F051271618ED83001317D6 /* FeedbackEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackEntity.m; sourceTree = "<group>"; };
 		83F051291618ED84001317D6 /* HostEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostEntity.h; sourceTree = "<group>"; };
@@ -341,12 +332,6 @@
 				839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */,
 				83F00E1915EBD3FE00761BC6 /* NSString+analytics.h */,
 				83F00E1A15EBD3FE00761BC6 /* NSString+analytics.m */,
-				83D73F0B13A151E70070D03A /* NSString+truncate.h */,
-				83D73F0C13A151E70070D03A /* NSString+truncate.m */,
-				83F00E2215EBD76100761BC6 /* UIColor+utils.h */,
-				83F00E2315EBD76100761BC6 /* UIColor+utils.m */,
-				831FBA9F160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.h */,
-				831FBAA0160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -512,7 +497,6 @@
 				8330B481126A0775008B2EC4 /* WSRequests.m in Sources */,
 				839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */,
 				83BE50B6126B4E7B00B5A65A /* HostInfoViewController.m in Sources */,
-				83D73F0D13A151E70070D03A /* NSString+truncate.m in Sources */,
 				8388B1371458A8100079ACE3 /* HostTableViewController.m in Sources */,
 				83708C1A145C79CF00B15150 /* SegmentsController.m in Sources */,
 				83CE1361147455CB006EED95 /* FavouriteHostTableViewController.m in Sources */,
@@ -522,11 +506,9 @@
 				83F8C187152B8B280084E380 /* ContactHostViewController.m in Sources */,
 				83F00E0D15EBC73900761BC6 /* RHPromptForReview.m in Sources */,
 				83F00E1B15EBD3FE00761BC6 /* NSString+analytics.m in Sources */,
-				83F00E2415EBD76100761BC6 /* UIColor+utils.m in Sources */,
 				83E605571608477F00C7C50E /* Feedback.m in Sources */,
 				83441AD51608694900468716 /* WSHTTPClient.m in Sources */,
 				83CDACE0160A310000B5DC83 /* FeedbackTableViewController.m in Sources */,
-				831FBAA1160BAED0003E60D2 /* UIViewController+disablesAutomaticKeyboardDismissal.m in Sources */,
 				83F051281618ED83001317D6 /* FeedbackEntity.m in Sources */,
 				83F0512B1618ED84001317D6 /* HostEntity.m in Sources */,
 			);
