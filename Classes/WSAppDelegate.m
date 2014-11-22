@@ -219,6 +219,8 @@
 
 	WSHTTPClient *manager = [WSHTTPClient sharedHTTPClient];
 
+	// NSLog(@"%@", @"login called");
+
 	[manager POST:@"/services/rest/user/login" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
 		if ([self isLoggedIn] == NO) {
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];

@@ -10,29 +10,29 @@
 	<string>WS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>D182B7DB-ADC3-4013-945C-1585E6F16F9A</key>
+		<key>0676A656A78758FE02F2A2518760C3E3B746B60B</key>
 		<string>https://github.com/warmshowers/warmshowers-iphone-app.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>WS.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>D182B7DB-ADC3-4013-945C-1585E6F16F9A</key>
+		<key>0676A656A78758FE02F2A2518760C3E3B746B60B</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/warmshowers/warmshowers-iphone-app.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D182B7DB-ADC3-4013-945C-1585E6F16F9A</string>
+	<string>0676A656A78758FE02F2A2518760C3E3B746B60B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D182B7DB-ADC3-4013-945C-1585E6F16F9A</string>
+			<string>0676A656A78758FE02F2A2518760C3E3B746B60B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>warmshowers-iphone-app</string>
 		</dict>
