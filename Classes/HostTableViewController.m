@@ -25,7 +25,7 @@
 -(void)viewDidLoad {
 	[super viewDidLoad];
 	
-	UIBarButtonItem *helpButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Help", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(helpButtonPressed:)];
+	UIBarButtonItem *helpButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Help", nil) style:UIBarButtonItemStylePlain target:self action:@selector(helpButtonPressed:)];
 	
 	NSArray *toolbarItems = [NSArray arrayWithObjects:
 							 // searchButton,

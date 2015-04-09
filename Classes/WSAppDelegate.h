@@ -31,5 +31,6 @@
 -(void)loginWithPrompt:(BOOL)prompt;
 -(BOOL)isLoggedIn;
 -(CLLocation *)userLocation;
+-(void)requestLocationAuthorization;
 
 @end

@@ -15,7 +15,6 @@
 		28C286E10D94DF7D0034E888 /* HostMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* HostMapViewController.m */; };
 		28D3F202112F7DC200FD0661 /* WS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28D3F201112F7DC200FD0661 /* WS.xcdatamodeld */; };
 		3102391F8DDD4D1FAC5382A5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D09F2CAA216B49BAA5EEDCA7 /* libPods.a */; };
-		8317805B191650C2007DC9F7 /* libCrittercism_v4_3_3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8317805A191650C2007DC9F7 /* libCrittercism_v4_3_3.a */; };
 		8330B481126A0775008B2EC4 /* WSRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8330B480126A0775008B2EC4 /* WSRequests.m */; };
 		83441AD51608694900468716 /* WSHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AD41608694900468716 /* WSHTTPClient.m */; };
 		8348AE361872A0CF0097DF24 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8348AE351872A0CF0097DF24 /* StoreKit.framework */; };
@@ -66,6 +65,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0DCC95967B6E7593E73282EE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* WSAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* WSAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSAppDelegate.m; sourceTree = "<group>"; };
@@ -78,8 +78,7 @@
 		28C286DF0D94DF7D0034E888 /* HostMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostMapViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* HostMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostMapViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4FD7DBCE639F4FDEB65184EE /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		8317805A191650C2007DC9F7 /* libCrittercism_v4_3_3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercism_v4_3_3.a; sourceTree = "<group>"; };
+		3B04C42F3B42643FDA03D2FB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8330B47F126A0775008B2EC4 /* WSRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSRequests.h; sourceTree = "<group>"; };
 		8330B480126A0775008B2EC4 /* WSRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSRequests.m; sourceTree = "<group>"; };
 		8330B4C8126A092E008B2EC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -103,9 +102,6 @@
 		836CCF0E14ABB4C4000EDC51 /* DotGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DotGreen.png; sourceTree = "<group>"; };
 		836CCF0F14ABB4C4000EDC51 /* DotPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DotPurple.png; sourceTree = "<group>"; };
 		836CCF1014ABB4C4000EDC51 /* DotRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DotRed.png; sourceTree = "<group>"; };
-		836D64A21893BF5B00F0602F /* CRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRFilter.h; sourceTree = "<group>"; };
-		836D64A31893BF5B00F0602F /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
-		836D64A41893BF5B00F0602F /* CrittercismDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismDelegate.h; sourceTree = "<group>"; };
 		836D64A91893BFA000F0602F /* crittercism.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = crittercism.plist; sourceTree = "<group>"; };
 		83708C18145C79CF00B15150 /* SegmentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentsController.h; sourceTree = "<group>"; };
 		83708C19145C79CF00B15150 /* SegmentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentsController.m; sourceTree = "<group>"; };
@@ -151,6 +147,8 @@
 		83FBB25D148B6FDB002042B0 /* RHWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHWebViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* WS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WS-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D09F2CAA216B49BAA5EEDCA7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8BC23EBA708152878C4EBD7 /* Pods.ad-hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods.ad-hoc.xcconfig"; path = "Pods/Target Support Files/Pods/Pods.ad-hoc.xcconfig"; sourceTree = "<group>"; };
+		D90BFBC0537C4D0B37F09E35 /* Pods.distribution app store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods.distribution app store.xcconfig"; path = "Pods/Target Support Files/Pods/Pods.distribution app store.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +161,6 @@
 				835696F61847D1EC00F5B999 /* Security.framework in Frameworks */,
 				835696F41847D1CB00F5B999 /* AssetsLibrary.framework in Frameworks */,
 				838AB093172F9500005A9149 /* MobileCoreServices.framework in Frameworks */,
-				8317805B191650C2007DC9F7 /* libCrittercism_v4_3_3.a in Frameworks */,
 				838AB091172F94FA005A9149 /* QuartzCore.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				83FFC5F416187B7D00158C5F /* CoreData.framework in Frameworks */,
@@ -182,7 +179,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				836D64A11893BF5B00F0602F /* CrittercismSDK */,
 				839E2D551291D587003E2348 /* Model */,
 				83D73F0013A151A40070D03A /* Categories */,
 				8330B476126A075E008B2EC4 /* HTTPRequest */,
@@ -216,7 +212,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				4FD7DBCE639F4FDEB65184EE /* Pods.xcconfig */,
+				9F79C38F32D2A60E92F06A57 /* Pods */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -294,17 +290,6 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
-		836D64A11893BF5B00F0602F /* CrittercismSDK */ = {
-			isa = PBXGroup;
-			children = (
-				836D64A21893BF5B00F0602F /* CRFilter.h */,
-				836D64A31893BF5B00F0602F /* Crittercism.h */,
-				836D64A41893BF5B00F0602F /* CrittercismDelegate.h */,
-				8317805A191650C2007DC9F7 /* libCrittercism_v4_3_3.a */,
-			);
-			path = CrittercismSDK;
-			sourceTree = "<group>";
-		};
 		839E2D551291D587003E2348 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,6 +349,17 @@
 				83CDACDF160A310000B5DC83 /* FeedbackTableViewController.m */,
 			);
 			name = "Host View Controllers";
+			sourceTree = "<group>";
+		};
+		9F79C38F32D2A60E92F06A57 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3B04C42F3B42643FDA03D2FB /* Pods.debug.xcconfig */,
+				D8BC23EBA708152878C4EBD7 /* Pods.ad-hoc.xcconfig */,
+				D90BFBC0537C4D0B37F09E35 /* Pods.distribution app store.xcconfig */,
+				0DCC95967B6E7593E73282EE /* Pods.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -463,7 +459,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		57FD9BCF64C247ED959CC09D /* Check Pods Manifest.lock */ = {
@@ -519,7 +515,7 @@
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4FD7DBCE639F4FDEB65184EE /* Pods.xcconfig */;
+			baseConfigurationReference = 3B04C42F3B42643FDA03D2FB /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -534,13 +530,12 @@
 				GCC_PREFIX_HEADER = WS_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "WS-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/Classes/CrittercismSDK/";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		83A43B8712AFED0600E084E3 /* Distribution App Store */ = {
+		83A43B8712AFED0600E084E3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Christopher Meyer";
@@ -548,16 +543,16 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = WS;
 				SDKROOT = iphoneos;
 			};
-			name = "Distribution App Store";
+			name = Release;
 		};
-		83A43B8812AFED0600E084E3 /* Distribution App Store */ = {
+		83A43B8812AFED0600E084E3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4FD7DBCE639F4FDEB65184EE /* Pods.xcconfig */;
+			baseConfigurationReference = 0DCC95967B6E7593E73282EE /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -571,59 +566,22 @@
 				GCC_PREFIX_HEADER = WS_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "WS-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/Classes/CrittercismSDK/";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Distribution App Store";
-		};
-		83CF43ED1269E7D700DF3CFD /* Ad-Hoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Christopher Meyer";
-				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_THUMB_SUPPORT = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PRODUCT_NAME = WS;
-				SDKROOT = iphoneos;
-			};
-			name = "Ad-Hoc";
-		};
-		83CF43EE1269E7D700DF3CFD /* Ad-Hoc */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4FD7DBCE639F4FDEB65184EE /* Pods.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = WS_Prefix.pch;
-				GCC_THUMB_SUPPORT = NO;
-				INFOPLIST_FILE = "WS-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/Classes/CrittercismSDK/";
-				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Ad-Hoc";
+			name = Release;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Meyer (XV3JT68D49)";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = WS;
 				SDKROOT = iphoneos;
@@ -637,8 +595,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
-				83CF43EE1269E7D700DF3CFD /* Ad-Hoc */,
-				83A43B8812AFED0600E084E3 /* Distribution App Store */,
+				83A43B8812AFED0600E084E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -647,8 +604,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
-				83CF43ED1269E7D700DF3CFD /* Ad-Hoc */,
-				83A43B8712AFED0600E084E3 /* Distribution App Store */,
+				83A43B8712AFED0600E084E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

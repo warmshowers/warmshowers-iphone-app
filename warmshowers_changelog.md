@@ -1,5 +1,7 @@
 # Warmshowers Changelog
 
+v4.0 (build 400+)
+
 v3.6 (build 360)
 
 - Some internationalized strings with `NSLocalizedString`

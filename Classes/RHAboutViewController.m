@@ -25,7 +25,7 @@
 	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self.navigationController action:@selector(dismissModalViewControllerAnimated:)];
 	
 	self.navigationItem.leftBarButtonItem = doneButton;
-	self.navigationController.navigationBar.tintColor = [UIColor colorFromHexString:@"2E74A5"];
+	// self.navigationController.navigationBar.tintColor = [UIColor colorFromHexString:@"2E74A5"];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -60,7 +60,14 @@
 	
 	NSString *build_number = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 	NSString *short_version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-	NSString *versionLabel = [NSString stringWithFormat:@" %@ %@ (%@)", NSLocalizedString(@"Version", nil), short_version, build_number];
+    
+#ifdef DEBUG
+    NSString *debug_string = @"D";
+#else
+    NSString *debug_string = @"";
+#endif
+    
+	NSString *versionLabel = [NSString stringWithFormat:@" %@ %@ (%@)%@", NSLocalizedString(@"Version", nil), short_version, build_number, debug_string];
 	
 	NSString *appName = @"Warmshowers.org";
 	

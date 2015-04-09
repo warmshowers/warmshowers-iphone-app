@@ -168,13 +168,13 @@
 
 -(BOOL)needsUpdate {
 	// one week
-	return ([self isStale] || (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 604800 ));
+	return ([self isStale] || (self.last_updated_details == nil) || (fabs([self.last_updated_details timeIntervalSinceNow]) > 604800 ));
 }
 
 -(BOOL)isStale {
 	// return (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 60 );
 	// two weeks
-	return (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 1209600 );
+	return (self.last_updated_details == nil) || (fabs([self.last_updated_details timeIntervalSinceNow]) > 1209600 );
 }
 
 -(NSUInteger)pinColour {

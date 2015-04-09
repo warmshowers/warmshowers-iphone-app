@@ -10,77 +10,29 @@
 	<string>WS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>35489B4B-C0B8-48EF-AD20-E5282DDBC2E3</key>
-		<string>https://github.com/chriscdn/RHManagedObject.git</string>
-		<key>39FC68EA-323A-487E-9BE2-B0A8FBB08305</key>
-		<string>https://github.com/chriscdn/RHTools.git</string>
-		<key>5D2E70B9-5FC7-4ECA-8506-E6BD250B599D</key>
-		<string>https://github.com/AFNetworking/AFNetworking.git</string>
-		<key>8B207C5D-F9F6-4F50-BC4C-3D45943CD3A5</key>
-		<string>https://github.com/samvermette/SVProgressHUD.git</string>
-		<key>E0C6A28D-5325-4664-B885-A039DEFE826D</key>
+		<key>0676A656A78758FE02F2A2518760C3E3B746B60B</key>
 		<string>https://github.com/warmshowers/warmshowers-iphone-app.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>WS.xcodeproj/project.xcworkspace</string>
+	<string>WS.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>35489B4B-C0B8-48EF-AD20-E5282DDBC2E3</key>
-		<string>../../../RHManagedObject</string>
-		<key>39FC68EA-323A-487E-9BE2-B0A8FBB08305</key>
-		<string>../../../RHTools</string>
-		<key>5D2E70B9-5FC7-4ECA-8506-E6BD250B599D</key>
-		<string>../../../AFNetworking</string>
-		<key>8B207C5D-F9F6-4F50-BC4C-3D45943CD3A5</key>
-		<string>../../../SVProgressHUD</string>
-		<key>E0C6A28D-5325-4664-B885-A039DEFE826D</key>
+		<key>0676A656A78758FE02F2A2518760C3E3B746B60B</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/warmshowers/warmshowers-iphone-app.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>E0C6A28D-5325-4664-B885-A039DEFE826D</string>
+	<string>0676A656A78758FE02F2A2518760C3E3B746B60B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>5D2E70B9-5FC7-4ECA-8506-E6BD250B599D</string>
-			<key>IDESourceControlWCCName</key>
-			<string>AFNetworking</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>35489B4B-C0B8-48EF-AD20-E5282DDBC2E3</string>
-			<key>IDESourceControlWCCName</key>
-			<string>RHManagedObject</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>39FC68EA-323A-487E-9BE2-B0A8FBB08305</string>
-			<key>IDESourceControlWCCName</key>
-			<string>RHTools</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>8B207C5D-F9F6-4F50-BC4C-3D45943CD3A5</string>
-			<key>IDESourceControlWCCName</key>
-			<string>SVProgressHUD</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>E0C6A28D-5325-4664-B885-A039DEFE826D</string>
+			<string>0676A656A78758FE02F2A2518760C3E3B746B60B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>warmshowers-iphone-app</string>
 		</dict>

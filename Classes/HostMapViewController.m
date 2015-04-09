@@ -49,13 +49,13 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redrawAnnotation:) name:kShouldRedrawMapAnnotation object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authenticationChanged:) name:kAuthenticationStatusChangedNotificationName object:nil];
     
-	UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Logout",nil) style:UIBarButtonItemStyleBordered target:self action:@selector(logoutActionSheet:)];
+	UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Logout",nil) style:UIBarButtonItemStylePlain target:self action:@selector(logoutActionSheet:)];
     
-	UIBarButtonItem *locateButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ios7-navigate-outline"] style:UIBarButtonItemStyleBordered target: self action:@selector(zoomToCurrentLocation:)];
+	UIBarButtonItem *locateButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ios7-navigate-outline"] style:UIBarButtonItemStylePlain target: self action:@selector(zoomToCurrentLocation:)];
 	
 	// UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:[UIButton buttonWithType:UIButtonTypeInfoDark]];
 	
-	UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(infoButtonPressed:)];
+	UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", nil) style:UIBarButtonItemStylePlain target:self action:@selector(infoButtonPressed:)];
 	
 	NSArray *toolbarItems = [NSArray arrayWithObjects:
                              logoutButton,
@@ -72,7 +72,6 @@
 
 -(void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	
 	
 	// This might be overly complicated.  The IB MapView has the delegate set to nil
 	// and the showLocation set to false.  We want everything to be initialized before we
@@ -210,7 +209,11 @@
 	Host *host = (Host *)anObject;
     
 	switch(type) {
-		case NSFetchedResultsChangeInsert:
+        case NSFetchedResultsChangeMove:
+            break;
+        case NSFetchedResultsChangeUpdate:
+            break;
+        case NSFetchedResultsChangeInsert:
 			[self.mapView addAnnotation:host];
 			break;
 		case NSFetchedResultsChangeDelete:
