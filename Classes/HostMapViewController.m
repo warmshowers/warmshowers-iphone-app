@@ -313,11 +313,11 @@
             annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"pin"];
             
             if (annotationView == nil) {
-                annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:host reuseIdentifier:@"pin"];
+                annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:@"pin"];
             }
             
             annotationView.pinColor = [host pinColour];
-            annotationView.canShowCallout = YES;
+            // annotationView.canShowCallout = YES;
             
             UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
             [button addTarget:self action:@selector(accessoryTapped:) forControlEvents:UIControlEventTouchUpInside];
