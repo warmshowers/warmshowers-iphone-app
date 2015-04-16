@@ -9,8 +9,9 @@
 #import <MapKit/MapKit.h>
 #import <CoreData/CoreData.h>
 #import "RHActionSheet.h"
+#import "KPClusteringController.h"
 
-@interface HostMapViewController : UIViewController <NSFetchedResultsControllerDelegate, MKMapViewDelegate>
+@interface HostMapViewController : UIViewController <NSFetchedResultsControllerDelegate, MKMapViewDelegate, KPClusteringControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -23,9 +24,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *pageCurlImageButton;
 
 
+
 -(void)zoomToCurrentLocation:(id)sender;
 -(void)redrawAnnotations;
--(void)removeNonVisibleAnnotations;
 -(void)infoButtonPressed:(id)sender;
 
 -(IBAction)mapTypeSegmentedControl:(UISegmentedControl *)sender;

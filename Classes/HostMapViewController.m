@@ -17,15 +17,16 @@
 #import "HostTableViewController.h"
 #import "WSHTTPClient.h"
 
+#import "KPAnnotation.h"
+
+
+
+@interface HostMapViewController()
+@property (nonatomic, strong) KPClusteringController *clusteringController;
+
+@end
 
 @implementation HostMapViewController
-@synthesize mapView;
-@synthesize fetchedResultsController;
-@synthesize lastZoomLevel;
-@synthesize locationUpdated;
-@synthesize hasRunOnce;
-@synthesize popoverActionsheet;
-
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -67,6 +68,9 @@
 	
     // [toolbarItems makeObjectsPerformSelector:@selector(release)];
 	[self setToolbarItems:toolbarItems animated:YES];
+    
+    self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
+    [self.clusteringController setDelegate:self];
 }
 
 
@@ -112,7 +116,7 @@
 
 -(NSFetchedResultsController *)fetchedResultsController {
     
-    if (fetchedResultsController == nil) {
+    if (_fetchedResultsController == nil) {
 		// Create the fetch request for the entity.
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		
@@ -148,11 +152,11 @@
 																			managedObjectContext:[Host managedObjectContextForCurrentThread]
 																			  sectionNameKeyPath:nil
 																					   cacheName:nil];
-		[fetchedResultsController setDelegate:self];
+		[_fetchedResultsController setDelegate:self];
 		
 		
 		NSError *error = nil;
-		if (![fetchedResultsController performFetch:&error]) {
+		if (![_fetchedResultsController performFetch:&error]) {
 			/*
 			 Replace this implementation with code to handle the error appropriately.
 			 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
@@ -162,7 +166,7 @@
 		}
     }
 	
-    return fetchedResultsController;
+    return _fetchedResultsController;
 }
 
 -(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
@@ -188,7 +192,7 @@
 	
 	[self redrawAnnotations];
 	
-	if (newZoomLevel >= lastZoomLevel) {
+	if (newZoomLevel >= self.lastZoomLevel) {
 		// TODO: if the iPhone is offline, revert to the offline cache.
 		[WSRequests requestWithMapView:self.mapView];
 		// [self.request start];
@@ -246,21 +250,91 @@
 	[self.mapView selectAnnotation:host animated:YES];
 }
 
+/*
 -(void)redrawAnnotations {
 	self.fetchedResultsController = nil;
 	
-	[self removeNonVisibleAnnotations];
+	[self.mapView removeAnnotations:[self.mapView nonVisibleAnnotations]];
 	if ([[WSAppDelegate sharedInstance] isLoggedIn]) {
         for (Host *host in [self.fetchedResultsController fetchedObjects]) {
             [self.mapView addAnnotation:host];
         }
     }
 }
+ */
 
--(void)removeNonVisibleAnnotations {
-	[self.mapView removeAnnotations:[self.mapView nonVisibleAnnotations]];
+
+-(void)redrawAnnotations {
+    self.fetchedResultsController = nil;
+    
+    // [self.mapView removeAnnotations:[self.mapView nonVisibleAnnotations]];
+    if ([[WSAppDelegate sharedInstance] isLoggedIn]) {
+        
+        [self.clusteringController setAnnotations:[self.fetchedResultsController fetchedObjects]];
+        
+        // [self.mapView addAnnotations:[self.fetchedResultsController fetchedObjects]];
+        
+    }
 }
 
+-(void)clusteringController:(KPClusteringController *)clusteringController configureAnnotationForDisplay:(KPAnnotation *)annotation {
+
+    if ([annotation isCluster]) {
+        annotation.title = [NSString stringWithFormat:@"%lu hosts", (unsigned long)annotation.annotations.count];
+    } else {
+        Host *host = [[annotation annotations] anyObject];
+        [annotation setTitle:[host title]];
+        [annotation setSubtitle:[host subtitle]];
+    }
+   //  annotation.subtitle = [NSString stringWithFormat:@"%.0f meters", annotation.radius];
+}
+
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    MKPinAnnotationView *annotationView = nil;
+    
+    if ([annotation isKindOfClass:[KPAnnotation class]]) {
+        KPAnnotation *kingpinAnnotation = (KPAnnotation *)annotation;
+        
+        if ([kingpinAnnotation isCluster]) {
+            
+             annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"cluster"];
+            
+            if (annotationView == nil) {
+                annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:@"cluster"];
+            }
+            
+            annotationView.pinColor = MKPinAnnotationColorRed;
+
+        } else {
+            
+            Host *host = (Host *)[[kingpinAnnotation annotations] anyObject];
+
+            annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"pin"];
+            
+            if (annotationView == nil) {
+                annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:host reuseIdentifier:@"pin"];
+            }
+            
+            annotationView.pinColor = [host pinColour];
+            annotationView.canShowCallout = YES;
+            
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            [button addTarget:self action:@selector(accessoryTapped:) forControlEvents:UIControlEventTouchUpInside];
+            annotationView.rightCalloutAccessoryView = button;
+            
+            
+        }
+        
+        annotationView.canShowCallout = YES;
+        
+    }
+    
+    return annotationView;
+}
+
+
+/*
 -(MKAnnotationView *)mapView:(MKMapView *)mV viewForAnnotation:(id<MKAnnotation>)annotation {
     MKPinAnnotationView *pinView = nil;
 	
@@ -269,7 +343,7 @@
 		static NSString *defaultPinID = @"HostAnnotation";
 		
 		Host *host = (Host *)annotation;
-		pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+		pinView = (MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
 		
 		if ( pinView == nil ) {
             pinView = (MKPinAnnotationView *)[[MKPinAnnotationView alloc] initWithAnnotation:host reuseIdentifier:defaultPinID];
@@ -282,23 +356,24 @@
 		[button addTarget:self action:@selector(accessoryTapped:) forControlEvents:UIControlEventTouchUpInside];
 		pinView.rightCalloutAccessoryView = button;
     } else {
-        [mapView.userLocation setTitle:NSLocalizedString(@"Your location", nil)];
+        [self.mapView.userLocation setTitle:NSLocalizedString(@"Your location", nil)];
     }
 	
 	return pinView;
 }
+ */
 
 -(void)accessoryTapped:(id)sender {
-	NSArray *annotations = [mapView selectedAnnotations];
-	Host *host = [annotations objectAtIndex:0];
-	
+	NSArray *annotations = [self.mapView selectedAnnotations];
+    
+    KPAnnotation *kingpinAnnotation = [annotations firstObject];
+	Host *host = [[kingpinAnnotation annotations] anyObject];	
 	HostInfoViewController *controller = [[HostInfoViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	controller.host = host;
 	[self.navigationController pushViewController:controller animated:YES];
 }
 
 -(void)infoButtonPressed:(id)sender {
-	
 	RHAboutViewController *controller = [[RHAboutViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 	
@@ -335,7 +410,6 @@
 }
 
 -(IBAction)showMapProperties:(id)sender {
-	// [self presentModalViewController:self.mapPropertiesViewController animated:YES];
     [self presentViewController:self.mapPropertiesViewController animated:YES completion:nil];
 }
 
