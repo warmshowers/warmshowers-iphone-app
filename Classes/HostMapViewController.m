@@ -19,8 +19,6 @@
 
 #import "KPAnnotation.h"
 
-
-
 @interface HostMapViewController()
 @property (nonatomic, strong) KPClusteringController *clusteringController;
 
@@ -71,6 +69,8 @@
     
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     [self.clusteringController setDelegate:self];
+    
+    [self redrawAnnotations];
 }
 
 
@@ -92,11 +92,8 @@
 
 -(void)viewWillLayoutSubviews {
 	[super viewWillLayoutSubviews];
-
 	self.pageCurlImageButton.y = self.navigationController.toolbar.y - self.pageCurlImageButton.height;
-
 }
-
 
 -(void)logoutActionSheet:(id)sender {
 	self.popoverActionsheet = [RHActionSheet actionSheetWithTitle:nil];
@@ -108,7 +105,6 @@
 	
 	[self.popoverActionsheet addCancelButtonWithTitle:kCancel];
 	[self.popoverActionsheet showFromBarButtonItem:sender animated:YES];
-    
 }
 
 #pragma mark -
@@ -124,7 +120,7 @@
 		NSEntityDescription *entity = [NSEntityDescription entityForName:@"HostEntity" inManagedObjectContext:[Host managedObjectContextForCurrentThread]];
 		[fetchRequest setEntity:entity];
 		// [fetchRequest setFetchBatchSize:20];
-		[fetchRequest setFetchLimit:75];
+		// [fetchRequest setFetchLimit:75];
 		
 		// Edit the sort key as appropriate.
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"last_updated" ascending:NO];
@@ -144,7 +140,8 @@
 		
 		// NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%f < latitude AND latitude < %f AND %f < longitude AND longitude < %f AND last_updated >= %@", b.minLatitude, b.maxLatitude, b.minLongitude, b.maxLongitude, weekago];
 		// NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%f < latitude AND latitude < %f AND %f < longitude AND longitude < %f", b.minLatitude, b.maxLatitude, b.minLongitude, b.maxLongitude];
-		[fetchRequest setPredicate:predicate];
+	
+        //	[fetchRequest setPredicate:predicate];
         
 		// Edit the section name key path and cache name if appropriate.
 		// nil for section name key path means "no sections".
@@ -187,24 +184,38 @@
 
 
 // Called when map is moved or zoomed in or out
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    
+    NSSet *visibleAnnotations = [self.mapView annotationsInMapRect:self.mapView.visibleMapRect];
+   // NSUInteger howMany = [visibleAnnotations count];
+    BOOL animatePin = ([visibleAnnotations count] < 35);
+    
+    [self.clusteringController refresh:animatePin];
+    [WSRequests requestWithMapView:self.mapView];
+}
+
+/*
 -(void)mapView:(MKMapView *)aMapView regionDidChangeAnimated:(BOOL)animated {
 	int newZoomLevel = [self.mapView getZoomLevel];
 	
-	[self redrawAnnotations];
+	// [self redrawAnnotations];
 	
 	if (newZoomLevel >= self.lastZoomLevel) {
 		// TODO: if the iPhone is offline, revert to the offline cache.
-		[WSRequests requestWithMapView:self.mapView];
-		// [self.request start];
+		// [WSRequests requestWithMapView:self.mapView];
 	}
     
 	self.lastZoomLevel = newZoomLevel;
 }
+ */
 
 
 #pragma mark -
 #pragma mark Fetched results controller delegate
 
+
+/*
 -(void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
 	// [self removeAnnotations];
 }
@@ -225,13 +236,20 @@
 			break;
             
             // This is ugly.  Causes annotations to flash.
-            /*
-             case NSFetchedResultsChangeUpdate:
-             [self.mapView removeAnnotation:host];
-             [self.mapView addAnnotation:host];
-             break;
-             */
+ 
+            // case NSFetchedResultsChangeUpdate:
+             // [self.mapView removeAnnotation:host];
+             // [self.mapView addAnnotation:host];
+             // break;
+
 	}
+}
+ */
+
+-(void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    if ([[[controller managedObjectContext] insertedObjects] count] > 0) {
+        [self redrawAnnotations];
+    }
 }
 
 -(void)zoomToCurrentLocation:(id)sender {
@@ -239,7 +257,7 @@
 	[self.mapView setCenterCoordinate:userLocation.coordinate animated:YES];
 }
 
-
+/*
 -(void)redrawAnnotation:(id)notification {
 	NSDictionary *userInfo = [notification userInfo];
     
@@ -249,6 +267,7 @@
 	[self.mapView addAnnotation:host];
 	[self.mapView selectAnnotation:host animated:YES];
 }
+*/
 
 /*
 -(void)redrawAnnotations {
