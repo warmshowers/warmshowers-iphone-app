@@ -188,10 +188,6 @@
 	}
 }
 
--(BOOL)animatesDrop {
-	return NO;
-}
-
 -(void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
     self.latitude = [NSNumber numberWithFloat:newCoordinate.latitude];
     self.longitude = [NSNumber numberWithFloat:newCoordinate.longitude];

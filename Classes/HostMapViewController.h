@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, assign) int lastZoomLevel;
+@property (nonatomic, assign) NSUInteger lastZoomLevel;
 
 @property (nonatomic, assign) BOOL locationUpdated;
 @property (nonatomic, assign) BOOL hasRunOnce;

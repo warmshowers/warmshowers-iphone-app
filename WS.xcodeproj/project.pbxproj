@@ -43,6 +43,7 @@
 		839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */; };
 		83BE50B6126B4E7B00B5A65A /* HostInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BE50B4126B4E7B00B5A65A /* HostInfoViewController.m */; };
 		83C78E801474DE3D00274616 /* CLLocation+Bearing.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C78E7F1474DE3D00274616 /* CLLocation+Bearing.m */; };
+		83CD2F1D1AF9501900519723 /* HostInfoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83CD2F1C1AF9501900519723 /* HostInfoHeaderView.xib */; };
 		83CDACE0160A310000B5DC83 /* FeedbackTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CDACDF160A310000B5DC83 /* FeedbackTableViewController.m */; };
 		83CE1361147455CB006EED95 /* FavouriteHostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE1360147455CB006EED95 /* FavouriteHostTableViewController.m */; };
 		83CF4474126A01A200DF3CFD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF4473126A01A200DF3CFD /* MapKit.framework */; };
@@ -117,6 +118,7 @@
 		83BE50B4126B4E7B00B5A65A /* HostInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostInfoViewController.m; sourceTree = "<group>"; };
 		83C78E7E1474DE3D00274616 /* CLLocation+Bearing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+Bearing.h"; sourceTree = "<group>"; };
 		83C78E7F1474DE3D00274616 /* CLLocation+Bearing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+Bearing.m"; sourceTree = "<group>"; };
+		83CD2F1C1AF9501900519723 /* HostInfoHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostInfoHeaderView.xib; sourceTree = "<group>"; };
 		83CDACDE160A310000B5DC83 /* FeedbackTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackTableViewController.h; sourceTree = "<group>"; };
 		83CDACDF160A310000B5DC83 /* FeedbackTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackTableViewController.m; sourceTree = "<group>"; };
 		83CE135F147455CB006EED95 /* FavouriteHostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteHostTableViewController.h; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				83CE1360147455CB006EED95 /* FavouriteHostTableViewController.m */,
 				83BE50B3126B4E7B00B5A65A /* HostInfoViewController.h */,
 				83BE50B4126B4E7B00B5A65A /* HostInfoViewController.m */,
+				83CD2F1C1AF9501900519723 /* HostInfoHeaderView.xib */,
 				83F8C184152B8B280084E380 /* ContactHostViewController.h */,
 				83F8C185152B8B280084E380 /* ContactHostViewController.m */,
 				83F8C186152B8B280084E380 /* ContactHostViewController.xib */,
@@ -429,6 +432,7 @@
 				836CCF1A14ABB4C4000EDC51 /* DotGreen.png in Resources */,
 				838E22F21894037B0097A831 /* ws-50@2x.png in Resources */,
 				836CCF1B14ABB4C4000EDC51 /* DotPurple.png in Resources */,
+				83CD2F1D1AF9501900519723 /* HostInfoHeaderView.xib in Resources */,
 				83E205681878B3550067738B /* ws.png in Resources */,
 				836CCF1C14ABB4C4000EDC51 /* DotRed.png in Resources */,
 				836D64AA1893BFA000F0602F /* crittercism.plist in Resources */,

@@ -43,7 +43,7 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-	self.lastZoomLevel = [self.mapView getZoomLevel];
+	self.lastZoomLevel = [self.mapView zoomLevel];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redrawAnnotation:) name:kShouldRedrawMapAnnotation object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authenticationChanged:) name:kAuthenticationStatusChangedNotificationName object:nil];
@@ -167,8 +167,7 @@
 }
 
 -(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
-	// NSLog(@"%@", @"Should Cancel");
-	// [[WSHTTPClient sharedHTTPClient] cancelAllHTTPOperationsWithMethod:@"GET" path:@"/wsmap_xml_hosts"];
+    [[WSHTTPClient sharedHTTPClient] cancelAllOperations];
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
@@ -186,30 +185,16 @@
 // Called when map is moved or zoomed in or out
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    
-    NSSet *visibleAnnotations = [self.mapView annotationsInMapRect:self.mapView.visibleMapRect];
-   // NSUInteger howMany = [visibleAnnotations count];
+    NSArray *visibleAnnotations = [self.mapView visibleAnnotations];
     BOOL animatePin = ([visibleAnnotations count] < 35);
     
     [self.clusteringController refresh:animatePin];
     [WSRequests requestWithMapView:self.mapView];
 }
 
-/*
--(void)mapView:(MKMapView *)aMapView regionDidChangeAnimated:(BOOL)animated {
-	int newZoomLevel = [self.mapView getZoomLevel];
-	
-	// [self redrawAnnotations];
-	
-	if (newZoomLevel >= self.lastZoomLevel) {
-		// TODO: if the iPhone is offline, revert to the offline cache.
-		// [WSRequests requestWithMapView:self.mapView];
-	}
-    
-	self.lastZoomLevel = newZoomLevel;
+- (BOOL)clusteringControllerShouldClusterAnnotations:(KPClusteringController *)clusteringController {
+    return self.mapView.zoomLevel < 14; // Find zoom level that suits your dataset
 }
- */
-
 
 #pragma mark -
 #pragma mark Fetched results controller delegate
@@ -257,49 +242,18 @@
 	[self.mapView setCenterCoordinate:userLocation.coordinate animated:YES];
 }
 
-/*
--(void)redrawAnnotation:(id)notification {
-	NSDictionary *userInfo = [notification userInfo];
-    
-	Host *host = [userInfo objectForKey:@"host"];
-	
-	[self.mapView removeAnnotation:host];
-	[self.mapView addAnnotation:host];
-	[self.mapView selectAnnotation:host animated:YES];
-}
-*/
-
-/*
--(void)redrawAnnotations {
-	self.fetchedResultsController = nil;
-	
-	[self.mapView removeAnnotations:[self.mapView nonVisibleAnnotations]];
-	if ([[WSAppDelegate sharedInstance] isLoggedIn]) {
-        for (Host *host in [self.fetchedResultsController fetchedObjects]) {
-            [self.mapView addAnnotation:host];
-        }
-    }
-}
- */
-
-
 -(void)redrawAnnotations {
     self.fetchedResultsController = nil;
     
-    // [self.mapView removeAnnotations:[self.mapView nonVisibleAnnotations]];
     if ([[WSAppDelegate sharedInstance] isLoggedIn]) {
-        
         [self.clusteringController setAnnotations:[self.fetchedResultsController fetchedObjects]];
-        
-        // [self.mapView addAnnotations:[self.fetchedResultsController fetchedObjects]];
-        
     }
 }
 
 -(void)clusteringController:(KPClusteringController *)clusteringController configureAnnotationForDisplay:(KPAnnotation *)annotation {
-
     if ([annotation isCluster]) {
         annotation.title = [NSString stringWithFormat:@"%lu hosts", (unsigned long)annotation.annotations.count];
+        annotation.subtitle = [NSString stringWithFormat:@"within %.0f meters", annotation.radius];
     } else {
         Host *host = [[annotation annotations] anyObject];
         [annotation setTitle:[host title]];
@@ -351,36 +305,6 @@
     
     return annotationView;
 }
-
-
-/*
--(MKAnnotationView *)mapView:(MKMapView *)mV viewForAnnotation:(id<MKAnnotation>)annotation {
-    MKPinAnnotationView *pinView = nil;
-	
-	if ([annotation isKindOfClass:[Host class]]) {
-		
-		static NSString *defaultPinID = @"HostAnnotation";
-		
-		Host *host = (Host *)annotation;
-		pinView = (MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
-		
-		if ( pinView == nil ) {
-            pinView = (MKPinAnnotationView *)[[MKPinAnnotationView alloc] initWithAnnotation:host reuseIdentifier:defaultPinID];
-		}
-        
-		pinView.pinColor = [host pinColour];
-		pinView.canShowCallout = YES;
-		
-		UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-		[button addTarget:self action:@selector(accessoryTapped:) forControlEvents:UIControlEventTouchUpInside];
-		pinView.rightCalloutAccessoryView = button;
-    } else {
-        [self.mapView.userLocation setTitle:NSLocalizedString(@"Your location", nil)];
-    }
-	
-	return pinView;
-}
- */
 
 -(void)accessoryTapped:(id)sender {
 	NSArray *annotations = [self.mapView selectedAnnotations];

@@ -87,7 +87,24 @@
 -(BOOL)postApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:[self.segmentViewControllers objectAtIndex:0]];
-    self.window.rootViewController = self.navigationController;
+ 
+    
+    
+    
+    
+     self.window.rootViewController = self.navigationController;
+    
+    
+    
+    // self.navigationController.tabBarItem.image = [[UIImage imageNamed:@"ws"] scaleImageWithMaxWidth:30.0f maxHeight:30.0f];
+   // self.navigationController.tabBarItem.title = NSLocalizedString(@"Find Hosts", nil);
+    // self.navigationController.tabBarItem.tag = 0;
+
+   // UITabBarController *tabBarController = [[UITabBarController alloc] init];
+   // [tabBarController setViewControllers:@[self.navigationController]];
+   // self.window.rootViewController = tabBarController;
+    
+    
     [self.window makeKeyAndVisible];
     
     [[NSUserDefaults standardUserDefaults] setInteger:kVersion forKey:@"ws-version"];
