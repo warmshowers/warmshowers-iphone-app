@@ -119,7 +119,7 @@
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		
 		// Edit the entity name as appropriate.
-		NSEntityDescription *entity = [NSEntityDescription entityForName:@"HostEntity" inManagedObjectContext:[Host managedObjectContextForCurrentThread]];
+		NSEntityDescription *entity = [Host entityDescription];
 		[fetchRequest setEntity:entity];
 		// [fetchRequest setFetchBatchSize:20];
 		// [fetchRequest setFetchLimit:75];

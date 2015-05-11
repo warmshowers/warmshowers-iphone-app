@@ -7,7 +7,10 @@
 //
 
 #import "RHCoreDataTableViewController.h"
+#import "Thread.h"
 
 @interface SingleThreadTableViewController : RHCoreDataTableViewController
+
+@property (nonatomic, strong) Thread *thread;
 
 @end

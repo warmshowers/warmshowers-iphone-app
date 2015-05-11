@@ -89,7 +89,7 @@
                                    inboxTableViewController.navigationItem.leftBarButtonItem = [self leftMenuButton];
                                    
                                    UISplitViewController *splitViewController = [UISplitViewController new];
-                                   [splitViewController setViewControllers:@[[inboxTableViewController wrapInNavigationController], [UIViewController new]]];
+                                   [splitViewController setViewControllers:@[[inboxTableViewController wrapInNavigationController], [UINavigationController new]]];
                                    [splitViewController setPreferredDisplayMode:UISplitViewControllerDisplayModeAllVisible];
                                    [splitViewController setDelegate:self];
                                    [bself.slidingViewController setTopViewController:splitViewController];

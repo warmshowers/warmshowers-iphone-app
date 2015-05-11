@@ -9,6 +9,7 @@
 #import "AllThreadsTableViewController.h"
 #import "Thread.h"
 #import "Host.h"
+#import "SingleThreadTableViewController.h"
 
 static NSString *CellIdentifier = @"ThreadsTableCell";
 
@@ -68,6 +69,7 @@ static NSString *CellIdentifier = @"ThreadsTableCell";
         }];
     }];
     
+    // refresh on load
     [(RHRefreshControl *)self.refreshControl refresh];
 }
 
@@ -88,6 +90,25 @@ static NSString *CellIdentifier = @"ThreadsTableCell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+        
+    Thread *thread = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    SingleThreadTableViewController *controller = [[SingleThreadTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    [controller setThread:thread];
+    
+    
+    // [self.navigationController pushViewController:controller animated:YES];
+   
+    
+    UISplitViewController *split = self.splitViewController;
+    
+    [split showDetailViewController:[controller wrapInNavigationController] sender:nil];
+    
+   // [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 
 

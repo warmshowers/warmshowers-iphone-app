@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Red House Consulting GmbH. All rights reserved.
 //
 
-#import "ThreadEntity.h"
+#import "_Thread.h"
 
-@interface Thread : ThreadEntity
+@interface Thread : _Thread
 
 @end

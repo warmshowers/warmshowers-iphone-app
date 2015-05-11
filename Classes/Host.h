@@ -8,9 +8,9 @@
 
 #import <CoreData/CoreData.h>
 #import <MapKit/MapKit.h>
-#import "HostEntity.h"
+#import "_Host.h"
 
-@interface Host : HostEntity<MKAnnotation> {
+@interface Host : _Host<MKAnnotation> {
 	CLLocationCoordinate2D coordinate;
 }
 

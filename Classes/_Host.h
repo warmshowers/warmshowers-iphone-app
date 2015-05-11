@@ -2,6 +2,7 @@
 // Make changes to Host.h instead.
 
 #import <CoreData/CoreData.h>
+#import "RHManagedObject.h"
 
 extern const struct HostAttributes {
 	__unsafe_unretained NSString *bed;
@@ -46,13 +47,13 @@ extern const struct HostRelationships {
 } HostRelationships;
 
 @class Feedback;
-@class NSManagedObject;
+@class Message;
 @class Thread;
 
 @interface HostID : NSManagedObjectID {}
 @end
 
-@interface _Host : NSManagedObject {}
+@interface _Host : RHManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
@@ -275,8 +276,8 @@ extern const struct HostRelationships {
 @interface _Host (MessageCoreDataGeneratedAccessors)
 - (void)addMessage:(NSSet*)value_;
 - (void)removeMessage:(NSSet*)value_;
-- (void)addMessageObject:(NSManagedObject*)value_;
-- (void)removeMessageObject:(NSManagedObject*)value_;
+- (void)addMessageObject:(Message*)value_;
+- (void)removeMessageObject:(Message*)value_;
 
 @end
 

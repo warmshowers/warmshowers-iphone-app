@@ -7,8 +7,8 @@
 //
 
 #import "SingleThreadTableViewController.h"
-#import "Thread.h"
 #import "Host.h"
+#import "Message.h"
 
 static NSString *CellIdentifier = @"SingleThreadTableCell";
 
@@ -21,44 +21,52 @@ static NSString *CellIdentifier = @"SingleThreadTableCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setTitle:NSLocalizedString(@"Inbox", nil)];
+    [self setTitle:self.thread.subject];
     
     [self.tableView registerClass:[RHTableViewCellStyleSubtitleLighterDetail class] forCellReuseIdentifier:CellIdentifier];
     
+    
+    __weak Thread *wThread = self.thread;
+    
     self.refreshControl = [RHRefreshControl refreshControlWithBlock:^(RHRefreshControl *refreshControl) {
-        NSString *path = @"/services/rest/message/get";
+        NSString *path = @"/services/rest/message/getThread";
+        NSDictionary *parameters =  @{
+                                      @"thread_id": [self.thread.threadid stringValue],
+                                      };
         
-        [[WSHTTPClient sharedHTTPClient] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        [[WSHTTPClient sharedHTTPClient] POST:path parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
             
-            NSArray *all_ids = [responseObject pluck:@"thread_id"];
+            Thread *bThread = [wThread objectInCurrentThreadContextWithError:nil];
             
-            [Thread deleteWithPredicate:[NSPredicate predicateWithFormat:@"NOT (threadid IN %@)", all_ids]];
+            NSArray *msgs = [responseObject objectForKey:@"messages"];
             
-            for (NSDictionary *dict in responseObject) {
+            NSArray *all_msgids = [msgs pluck:@"mid"];
+            
+            [Message deleteWithPredicate:[NSPredicate predicateWithFormat:@"thread = %@ AND NOT (mid IN %@)", bThread, all_msgids]];
+            
+            
+            for (NSDictionary *dict in msgs) {
                 
-                NSNumber *threadid = @([[dict objectForKey:@"thread_id"] intValue]);
-                NSString *subject = [dict objectForKey:@"subject"];
-                NSArray *participants = [dict objectForKey:@"participants"];
+                NSNumber *mid = @([[dict objectForKey:@"mid"] intValue]);
+                NSString *body = [dict objectForKey:@"body"];
                 
-                Thread *thread = [Thread newOrExistingEntityWithPredicate:[NSPredicate predicateWithFormat:@"threadid=%d", [threadid intValue]]];
+                NSDictionary *author = [dict objectForKey:@"author"];
+                NSNumber *uid = @([[author objectForKey:@"uid"] intValue]);
+                NSString *name = [author objectForKey:@"name"];
                 
-                [thread setThreadid:threadid];
-                [thread setSubject:subject];
+                Message *message = [Message newOrExistingEntityWithPredicate:[NSPredicate predicateWithFormat:@"mid=%d", [mid intValue]]];
+                [message setMid:mid];
+                [message setBody:body];
+                [message setThread:bThread];
                 
-                [thread setParticipants:nil];
+                Host *host = [Host hostWithID:uid];
+                [host setName:name];
+                [host setHostid:uid];
                 
-                for (NSDictionary *participant in participants) {
-                    NSNumber *hostid = @([[participant objectForKey:@"uid"] intValue]);
-                    NSString *name = [participant objectForKey:@"name"];
-                    
-                    Host *host = [Host hostWithID:hostid];
-                    [host setName:name];
-                    
-                    [thread addParticipantsObject:host];
-                }
+                [message setAuthor:host];
             }
             
-            [Thread commit];
+            [Message commit];
             
             [refreshControl endRefreshing];
             
@@ -72,14 +80,8 @@ static NSString *CellIdentifier = @"SingleThreadTableCell";
 
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    Thread *thread = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell.textLabel setText:thread.subject];
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    
-    NSArray *participants = [thread.participants allObjects];
-    NSArray *names = [participants arrayByPerformingSelector:@selector(title)];
-    
-    [cell.detailTextLabel setText:[names componentsJoinedByString:@", "]];
+    Message *message = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [cell.textLabel setText:message.body];
 }
 
 
@@ -89,21 +91,25 @@ static NSString *CellIdentifier = @"SingleThreadTableCell";
     return cell;
 }
 
+-(NSPredicate *)predicate {
+    return [NSPredicate predicateWithFormat:@"thread = %@", self.thread];
+}
+
 
 -(NSFetchedResultsController *)fetchedResultsController {
     
     if (fetchedResultsController == nil) {
-        NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"threadid" ascending:NO];
+        NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"body" ascending:YES];
         
-        NSPredicate *predicate = nil;
+        NSPredicate *predicate = [self predicate];
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        [fetchRequest setEntity:[Thread entityDescription]];
+        [fetchRequest setEntity:[Message entityDescription]];
         [fetchRequest setPredicate:predicate];
         [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sort1, nil]];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                            managedObjectContext:[Thread managedObjectContextForCurrentThread]
+                                                                            managedObjectContext:[Message managedObjectContextForCurrentThread]
                                                                               sectionNameKeyPath:nil
                                                                                        cacheName:nil];
         

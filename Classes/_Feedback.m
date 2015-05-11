@@ -22,16 +22,16 @@ const struct FeedbackRelationships FeedbackRelationships = {
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"FeedbackEntity" inManagedObjectContext:moc_];
+	return [NSEntityDescription insertNewObjectForEntityForName:@"Feedback" inManagedObjectContext:moc_];
 }
 
 + (NSString*)entityName {
-	return @"FeedbackEntity";
+	return @"Feedback";
 }
 
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"FeedbackEntity" inManagedObjectContext:moc_];
+	return [NSEntityDescription entityForName:@"Feedback" inManagedObjectContext:moc_];
 }
 
 - (FeedbackID*)objectID {

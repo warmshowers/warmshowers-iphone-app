@@ -2,6 +2,7 @@
 // Make changes to Feedback.h instead.
 
 #import <CoreData/CoreData.h>
+#import "RHManagedObject.h"
 
 extern const struct FeedbackAttributes {
 	__unsafe_unretained NSString *body;
@@ -20,7 +21,7 @@ extern const struct FeedbackRelationships {
 @interface FeedbackID : NSManagedObjectID {}
 @end
 
-@interface _Feedback : NSManagedObject {}
+@interface _Feedback : RHManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;

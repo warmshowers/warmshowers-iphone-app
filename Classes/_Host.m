@@ -52,16 +52,16 @@ const struct HostRelationships HostRelationships = {
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"HostEntity" inManagedObjectContext:moc_];
+	return [NSEntityDescription insertNewObjectForEntityForName:@"Host" inManagedObjectContext:moc_];
 }
 
 + (NSString*)entityName {
-	return @"HostEntity";
+	return @"Host";
 }
 
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"HostEntity" inManagedObjectContext:moc_];
+	return [NSEntityDescription entityForName:@"Host" inManagedObjectContext:moc_];
 }
 
 - (HostID*)objectID {

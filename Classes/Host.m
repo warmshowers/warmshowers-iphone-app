@@ -18,7 +18,7 @@
 +(void)initialize {
 	
 	if (self == [Host class]) {
-        const static NSInteger schemaVersion = 5;
+        const static NSInteger schemaVersion = 9;
         
         NSString *key = [NSString stringWithFormat:@"RHSchemaVersion-%@", [self modelName]];
         NSInteger version = [[NSUserDefaults standardUserDefaults] integerForKey:key];
@@ -30,17 +30,13 @@
     }
 }
 
-+(NSString *)entityName {
-	return @"HostEntity";
-}
-
 +(NSString *)modelName {
 	return @"WS";
 }
 
 +(Host *)hostWithID:(NSNumber *)hostID {
 
-	Host *host = [Host getWithPredicate:[NSPredicate predicateWithFormat:@"hostid=%i", [hostID intValue]]];
+	Host *host = [Host getWithPredicate:[NSPredicate predicateWithFormat:@"hostid=%d", [hostID intValue]]];
 	
 	if (host) {
 		return host;

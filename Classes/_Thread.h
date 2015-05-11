@@ -2,6 +2,7 @@
 // Make changes to Thread.h instead.
 
 #import <CoreData/CoreData.h>
+#import "RHManagedObject.h"
 
 extern const struct ThreadAttributes {
 	__unsafe_unretained NSString *count;
@@ -14,13 +15,13 @@ extern const struct ThreadRelationships {
 	__unsafe_unretained NSString *participants;
 } ThreadRelationships;
 
-@class NSManagedObject;
+@class Message;
 @class Host;
 
 @interface ThreadID : NSManagedObjectID {}
 @end
 
-@interface _Thread : NSManagedObject {}
+@interface _Thread : RHManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
@@ -59,8 +60,8 @@ extern const struct ThreadRelationships {
 @interface _Thread (MessagesCoreDataGeneratedAccessors)
 - (void)addMessages:(NSSet*)value_;
 - (void)removeMessages:(NSSet*)value_;
-- (void)addMessagesObject:(NSManagedObject*)value_;
-- (void)removeMessagesObject:(NSManagedObject*)value_;
+- (void)addMessagesObject:(Message*)value_;
+- (void)removeMessagesObject:(Message*)value_;
 
 @end
 

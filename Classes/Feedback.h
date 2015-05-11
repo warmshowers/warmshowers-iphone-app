@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Red House Consulting GmbH. All rights reserved.
 //
 
-#import "FeedbackEntity.h"
+#import "_Feedback.h"
 
-@interface Feedback : FeedbackEntity
+@interface Feedback : _Feedback
 
 +(Feedback *)feedbackWithID:(NSNumber *)nid;
 

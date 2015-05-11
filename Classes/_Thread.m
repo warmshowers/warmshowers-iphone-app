@@ -21,16 +21,16 @@ const struct ThreadRelationships ThreadRelationships = {
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"ThreadEntity" inManagedObjectContext:moc_];
+	return [NSEntityDescription insertNewObjectForEntityForName:@"Thread" inManagedObjectContext:moc_];
 }
 
 + (NSString*)entityName {
-	return @"ThreadEntity";
+	return @"Thread";
 }
 
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"ThreadEntity" inManagedObjectContext:moc_];
+	return [NSEntityDescription entityForName:@"Thread" inManagedObjectContext:moc_];
 }
 
 - (ThreadID*)objectID {

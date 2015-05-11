@@ -10,10 +10,6 @@
 
 @implementation Feedback
 
-+(NSString *)entityName {
-	return @"FeedbackEntity";
-}
-
 +(NSString *)modelName {
 	return @"WS";
 }

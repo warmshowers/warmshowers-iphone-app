@@ -27,11 +27,9 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		28C286E10D94DF7D0034E888 /* HostMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* HostMapViewController.m */; };
-		28D3F202112F7DC200FD0661 /* WS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28D3F201112F7DC200FD0661 /* WS.xcdatamodeld */; };
 		3102391F8DDD4D1FAC5382A5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D09F2CAA216B49BAA5EEDCA7 /* libPods.a */; };
 		832198911AFFF49B0041A72F /* SingleThreadTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 832198901AFFF49B0041A72F /* SingleThreadTableViewController.m */; };
 		8330B481126A0775008B2EC4 /* WSRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8330B480126A0775008B2EC4 /* WSRequests.m */; };
-		8343CC8C1AFFE28500EE3A45 /* ThreadEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343CC8B1AFFE28500EE3A45 /* ThreadEntity.m */; };
 		8343CC8F1AFFE2DC00EE3A45 /* Thread.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343CC8E1AFFE2DC00EE3A45 /* Thread.m */; };
 		83441AD51608694900468716 /* WSHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AD41608694900468716 /* WSHTTPClient.m */; };
 		8348AE361872A0CF0097DF24 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8348AE351872A0CF0097DF24 /* StoreKit.framework */; };
@@ -71,13 +69,17 @@
 		83E205691878B3550067738B /* ws@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E205671878B3550067738B /* ws@2x.png */; };
 		83E605571608477F00C7C50E /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E605561608477F00C7C50E /* Feedback.m */; };
 		83E7FF791AFEB8E5000FCAF7 /* AllThreadsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E7FF781AFEB8E5000FCAF7 /* AllThreadsTableViewController.m */; };
+		83EC1DA91B014E25003FD77B /* _Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EC1DA21B014E25003FD77B /* _Feedback.m */; };
+		83EC1DAA1B014E25003FD77B /* _Host.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EC1DA41B014E25003FD77B /* _Host.m */; };
+		83EC1DAB1B014E25003FD77B /* _Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EC1DA61B014E25003FD77B /* _Message.m */; };
+		83EC1DAC1B014E25003FD77B /* _Thread.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EC1DA81B014E25003FD77B /* _Thread.m */; };
+		83EC1DAF1B01508F003FD77B /* WS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83EC1DAD1B01508F003FD77B /* WS.xcdatamodeld */; };
+		83EC1DB21B0155D1003FD77B /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EC1DB11B0155D1003FD77B /* Message.m */; };
 		83F00E0415EBC6E000761BC6 /* RHAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E0315EBC5B400761BC6 /* RHAboutViewController.m */; };
 		83F00E0D15EBC73900761BC6 /* RHPromptForReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E0C15EBC73900761BC6 /* RHPromptForReview.m */; };
 		83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1515EBD11B00761BC6 /* trackmytour.png */; };
 		83F00E1815EBD11B00761BC6 /* trackmytour@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */; };
 		83F00E1B15EBD3FE00761BC6 /* NSString+analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E1A15EBD3FE00761BC6 /* NSString+analytics.m */; };
-		83F051281618ED83001317D6 /* FeedbackEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F051271618ED83001317D6 /* FeedbackEntity.m */; };
-		83F0512B1618ED84001317D6 /* HostEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F0512A1618ED84001317D6 /* HostEntity.m */; };
 		83F8C187152B8B280084E380 /* ContactHostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F8C185152B8B280084E380 /* ContactHostViewController.m */; };
 		83F8C188152B8B280084E380 /* ContactHostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F8C186152B8B280084E380 /* ContactHostViewController.xib */; };
 		83FBB25E148B6FDB002042B0 /* RHWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FBB25D148B6FDB002042B0 /* RHWebViewController.m */; };
@@ -92,7 +94,6 @@
 		1D3623250D0F684500981E51 /* WSAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* WS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		28860B760F44E54D00985440 /* WS.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WS.xcdatamodel; sourceTree = "<group>"; };
 		28860BE40F44EE6400985440 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* WS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WS_Prefix.pch; sourceTree = "<group>"; };
@@ -105,9 +106,6 @@
 		8330B47F126A0775008B2EC4 /* WSRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSRequests.h; sourceTree = "<group>"; };
 		8330B480126A0775008B2EC4 /* WSRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSRequests.m; sourceTree = "<group>"; };
 		8330B4C8126A092E008B2EC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		8343CC891AFFDE0E00EE3A45 /* WS3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WS3.xcdatamodel; sourceTree = "<group>"; };
-		8343CC8A1AFFE28500EE3A45 /* ThreadEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadEntity.h; sourceTree = "<group>"; };
-		8343CC8B1AFFE28500EE3A45 /* ThreadEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadEntity.m; sourceTree = "<group>"; };
 		8343CC8D1AFFE2DC00EE3A45 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
 		8343CC8E1AFFE2DC00EE3A45 /* Thread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Thread.m; sourceTree = "<group>"; };
 		83441AD31608694900468716 /* WSHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSHTTPClient.h; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 		83CE1360147455CB006EED95 /* FavouriteHostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteHostTableViewController.m; sourceTree = "<group>"; };
 		83CF4473126A01A200DF3CFD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		83D26B35126A4DE400412151 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		83D757C8178BD6E600C4CC64 /* WS (3.6).xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WS (3.6).xcdatamodel"; sourceTree = "<group>"; };
 		83DBE6991AFD647D003CFFCD /* menu_black-48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_black-48@2x.png"; sourceTree = "<group>"; };
 		83DBE69B1AFD6607003CFFCD /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
 		83DBE69C1AFD6607003CFFCD /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
@@ -162,6 +159,17 @@
 		83E605561608477F00C7C50E /* Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feedback.m; sourceTree = "<group>"; };
 		83E7FF771AFEB8E5000FCAF7 /* AllThreadsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllThreadsTableViewController.h; sourceTree = "<group>"; };
 		83E7FF781AFEB8E5000FCAF7 /* AllThreadsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllThreadsTableViewController.m; sourceTree = "<group>"; };
+		83EC1DA11B014E25003FD77B /* _Feedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Feedback.h; sourceTree = "<group>"; };
+		83EC1DA21B014E25003FD77B /* _Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Feedback.m; sourceTree = "<group>"; };
+		83EC1DA31B014E25003FD77B /* _Host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Host.h; sourceTree = "<group>"; };
+		83EC1DA41B014E25003FD77B /* _Host.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Host.m; sourceTree = "<group>"; };
+		83EC1DA51B014E25003FD77B /* _Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Message.h; sourceTree = "<group>"; };
+		83EC1DA61B014E25003FD77B /* _Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Message.m; sourceTree = "<group>"; };
+		83EC1DA71B014E25003FD77B /* _Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Thread.h; sourceTree = "<group>"; };
+		83EC1DA81B014E25003FD77B /* _Thread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Thread.m; sourceTree = "<group>"; };
+		83EC1DAE1B01508F003FD77B /* WS3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WS3.xcdatamodel; sourceTree = "<group>"; };
+		83EC1DB01B0155D1003FD77B /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		83EC1DB11B0155D1003FD77B /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		83F00E0215EBC5B400761BC6 /* RHAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHAboutViewController.h; sourceTree = "<group>"; };
 		83F00E0315EBC5B400761BC6 /* RHAboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHAboutViewController.m; sourceTree = "<group>"; };
 		83F00E0B15EBC73900761BC6 /* RHPromptForReview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHPromptForReview.h; sourceTree = "<group>"; };
@@ -170,10 +178,6 @@
 		83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trackmytour@2x.png"; sourceTree = "<group>"; };
 		83F00E1915EBD3FE00761BC6 /* NSString+analytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+analytics.h"; sourceTree = "<group>"; };
 		83F00E1A15EBD3FE00761BC6 /* NSString+analytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+analytics.m"; sourceTree = "<group>"; };
-		83F051261618ED83001317D6 /* FeedbackEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackEntity.h; sourceTree = "<group>"; };
-		83F051271618ED83001317D6 /* FeedbackEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackEntity.m; sourceTree = "<group>"; };
-		83F051291618ED84001317D6 /* HostEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostEntity.h; sourceTree = "<group>"; };
-		83F0512A1618ED84001317D6 /* HostEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostEntity.m; sourceTree = "<group>"; };
 		83F8C184152B8B280084E380 /* ContactHostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactHostViewController.h; sourceTree = "<group>"; };
 		83F8C185152B8B280084E380 /* ContactHostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactHostViewController.m; sourceTree = "<group>"; };
 		83F8C186152B8B280084E380 /* ContactHostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactHostViewController.xib; sourceTree = "<group>"; };
@@ -331,19 +335,23 @@
 		839E2D551291D587003E2348 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				28D3F201112F7DC200FD0661 /* WS.xcdatamodeld */,
-				83F051291618ED84001317D6 /* HostEntity.h */,
-				83F0512A1618ED84001317D6 /* HostEntity.m */,
-				83F051261618ED83001317D6 /* FeedbackEntity.h */,
-				83F051271618ED83001317D6 /* FeedbackEntity.m */,
-				8343CC8A1AFFE28500EE3A45 /* ThreadEntity.h */,
-				8343CC8B1AFFE28500EE3A45 /* ThreadEntity.m */,
+				83EC1DAD1B01508F003FD77B /* WS.xcdatamodeld */,
+				83EC1DA11B014E25003FD77B /* _Feedback.h */,
+				83EC1DA21B014E25003FD77B /* _Feedback.m */,
+				83EC1DA31B014E25003FD77B /* _Host.h */,
+				83EC1DA41B014E25003FD77B /* _Host.m */,
+				83EC1DA51B014E25003FD77B /* _Message.h */,
+				83EC1DA61B014E25003FD77B /* _Message.m */,
+				83EC1DA71B014E25003FD77B /* _Thread.h */,
+				83EC1DA81B014E25003FD77B /* _Thread.m */,
 				836CCF0214ABB3E6000EDC51 /* Host.h */,
 				836CCF0314ABB3E6000EDC51 /* Host.m */,
 				83E605551608477F00C7C50E /* Feedback.h */,
 				83E605561608477F00C7C50E /* Feedback.m */,
 				8343CC8D1AFFE2DC00EE3A45 /* Thread.h */,
 				8343CC8E1AFFE2DC00EE3A45 /* Thread.m */,
+				83EC1DB01B0155D1003FD77B /* Message.h */,
+				83EC1DB11B0155D1003FD77B /* Message.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -548,7 +556,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/mogenerator -m \"${PROJECT_DIR}/WS.xcdatamodeld\" -O \"${PROJECT_DIR}/Modelzzz\" --template-var arc=true";
+			shellScript = "/usr/local/bin/mogenerator -m \"${PROJECT_DIR}/WS.xcdatamodeld\" -O \"${PROJECT_DIR}/Classes\" --template-var arc=true --base-class RHManagedObject";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -557,13 +565,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83EC1DAA1B014E25003FD77B /* _Host.m in Sources */,
 				83F00E0415EBC6E000761BC6 /* RHAboutViewController.m in Sources */,
 				83518606152C0C1F009E558F /* MKMapView+Utils.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				832198911AFFF49B0041A72F /* SingleThreadTableViewController.m in Sources */,
+				83EC1DAB1B014E25003FD77B /* _Message.m in Sources */,
 				1D3623260D0F684500981E51 /* WSAppDelegate.m in Sources */,
+				83EC1DB21B0155D1003FD77B /* Message.m in Sources */,
 				28C286E10D94DF7D0034E888 /* HostMapViewController.m in Sources */,
-				28D3F202112F7DC200FD0661 /* WS.xcdatamodeld in Sources */,
 				8330B481126A0775008B2EC4 /* WSRequests.m in Sources */,
 				839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */,
 				83BE50B6126B4E7B00B5A65A /* HostInfoViewController.m in Sources */,
@@ -571,20 +581,20 @@
 				83DBE69D1AFD6607003CFFCD /* LeftMenuViewController.m in Sources */,
 				83708C1A145C79CF00B15150 /* SegmentsController.m in Sources */,
 				83CE1361147455CB006EED95 /* FavouriteHostTableViewController.m in Sources */,
+				83EC1DAC1B014E25003FD77B /* _Thread.m in Sources */,
 				83C78E801474DE3D00274616 /* CLLocation+Bearing.m in Sources */,
 				8343CC8F1AFFE2DC00EE3A45 /* Thread.m in Sources */,
 				83FBB25E148B6FDB002042B0 /* RHWebViewController.m in Sources */,
 				836CCF0614ABB3E6000EDC51 /* Host.m in Sources */,
 				83F8C187152B8B280084E380 /* ContactHostViewController.m in Sources */,
+				83EC1DAF1B01508F003FD77B /* WS.xcdatamodeld in Sources */,
 				83E7FF791AFEB8E5000FCAF7 /* AllThreadsTableViewController.m in Sources */,
 				83F00E0D15EBC73900761BC6 /* RHPromptForReview.m in Sources */,
 				83F00E1B15EBD3FE00761BC6 /* NSString+analytics.m in Sources */,
-				8343CC8C1AFFE28500EE3A45 /* ThreadEntity.m in Sources */,
+				83EC1DA91B014E25003FD77B /* _Feedback.m in Sources */,
 				83E605571608477F00C7C50E /* Feedback.m in Sources */,
 				83441AD51608694900468716 /* WSHTTPClient.m in Sources */,
 				83CDACE0160A310000B5DC83 /* FeedbackTableViewController.m in Sources */,
-				83F051281618ED83001317D6 /* FeedbackEntity.m in Sources */,
-				83F0512B1618ED84001317D6 /* HostEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,14 +723,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		28D3F201112F7DC200FD0661 /* WS.xcdatamodeld */ = {
+		83EC1DAD1B01508F003FD77B /* WS.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				8343CC891AFFDE0E00EE3A45 /* WS3.xcdatamodel */,
-				83D757C8178BD6E600C4CC64 /* WS (3.6).xcdatamodel */,
-				28860B760F44E54D00985440 /* WS.xcdatamodel */,
+				83EC1DAE1B01508F003FD77B /* WS3.xcdatamodel */,
 			);
-			currentVersion = 8343CC891AFFDE0E00EE3A45 /* WS3.xcdatamodel */;
+			currentVersion = 83EC1DAE1B01508F003FD77B /* WS3.xcdatamodel */;
 			name = WS.xcdatamodeld;
 			path = ../WS.xcdatamodeld;
 			sourceTree = "<group>";
