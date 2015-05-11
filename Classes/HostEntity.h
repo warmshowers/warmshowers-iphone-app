@@ -1,59 +1,64 @@
 //
 //  HostEntity.h
-//  WS
+//  
 //
-//  Created by Christopher Meyer on 2012-09-30.
-//  Copyright (c) 2012 Red House Consulting GmbH. All rights reserved.
+//  Created by Christopher Meyer on 11/05/15.
+//
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "RHManagedObject.h"
 
-@class FeedbackEntity;
+@class Feedback, Thread;
 
 @interface HostEntity : RHManagedObject
 
-@property (nonatomic, strong) NSNumber * latitude;
-@property (nonatomic, strong) NSString * street;
-@property (nonatomic, strong) NSString * country;
-@property (nonatomic, strong) NSNumber * notcurrentlyavailable;
-@property (nonatomic, strong) NSNumber * storage;
-@property (nonatomic, strong) NSString * campground;
-@property (nonatomic, strong) NSString * comments;
-@property (nonatomic, strong) NSString * bikeshop;
-@property (nonatomic, strong) NSNumber * maxcyclists;
-@property (nonatomic, strong) NSString * fullname;
-@property (nonatomic, strong) NSDate * member_since;
-@property (nonatomic, strong) NSNumber * shower;
-@property (nonatomic, strong) NSString * postal_code;
-@property (nonatomic, strong) NSDate * last_updated;
-@property (nonatomic, strong) NSNumber * favourite;
-@property (nonatomic, strong) NSNumber * distance;
-@property (nonatomic, strong) NSString * name;
-@property (nonatomic, strong) NSNumber * longitude;
-@property (nonatomic, strong) NSString * city;
-@property (nonatomic, strong) NSNumber * laundry;
-@property (nonatomic, strong) NSDate * last_updated_details;
-@property (nonatomic, strong) NSString * province;
-@property (nonatomic, strong) NSNumber * food;
-@property (nonatomic, strong) NSDate * last_login;
-@property (nonatomic, strong) NSNumber * hostid;
-@property (nonatomic, strong) NSNumber * lawnspace;
-@property (nonatomic, strong) NSString * motel;
-@property (nonatomic, strong) NSNumber * kitchenuse;
-@property (nonatomic, strong) NSNumber * bed;
-@property (nonatomic, strong) NSString * preferred_notice;
-@property (nonatomic, strong) NSString * homephone;
-@property (nonatomic, strong) NSString * mobilephone;
-@property (nonatomic, strong) NSNumber * sag;
-@property (nonatomic, strong) NSSet *feedback;
+@property (nonatomic, retain) NSNumber * sag;
+@property (nonatomic, retain) NSNumber * latitude;
+@property (nonatomic, retain) NSString * street;
+@property (nonatomic, retain) NSString * country;
+@property (nonatomic, retain) NSNumber * notcurrentlyavailable;
+@property (nonatomic, retain) NSNumber * storage;
+@property (nonatomic, retain) NSString * campground;
+@property (nonatomic, retain) NSString * comments;
+@property (nonatomic, retain) NSString * bikeshop;
+@property (nonatomic, retain) NSNumber * maxcyclists;
+@property (nonatomic, retain) NSString * fullname;
+@property (nonatomic, retain) NSDate * member_since;
+@property (nonatomic, retain) NSNumber * shower;
+@property (nonatomic, retain) NSString * postal_code;
+@property (nonatomic, retain) NSDate * last_updated;
+@property (nonatomic, retain) NSNumber * favourite;
+@property (nonatomic, retain) NSNumber * distance;
+@property (nonatomic, retain) NSString * mobilephone;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * longitude;
+@property (nonatomic, retain) NSString * city;
+@property (nonatomic, retain) NSNumber * laundry;
+@property (nonatomic, retain) NSDate * last_updated_details;
+@property (nonatomic, retain) NSString * province;
+@property (nonatomic, retain) NSNumber * food;
+@property (nonatomic, retain) NSDate * last_login;
+@property (nonatomic, retain) NSNumber * hostid;
+@property (nonatomic, retain) NSNumber * lawnspace;
+@property (nonatomic, retain) NSString * motel;
+@property (nonatomic, retain) NSNumber * kitchenuse;
+@property (nonatomic, retain) NSNumber * bed;
+@property (nonatomic, retain) NSString * preferred_notice;
+@property (nonatomic, retain) NSString * homephone;
+@property (nonatomic, retain) NSSet *thread;
+@property (nonatomic, retain) NSSet *feedback;
 @end
 
 @interface HostEntity (CoreDataGeneratedAccessors)
 
-- (void)addFeedbackObject:(FeedbackEntity *)value;
-- (void)removeFeedbackObject:(FeedbackEntity *)value;
+- (void)addThreadObject:(Thread *)value;
+- (void)removeThreadObject:(Thread *)value;
+- (void)addThread:(NSSet *)values;
+- (void)removeThread:(NSSet *)values;
+
+- (void)addFeedbackObject:(Feedback *)value;
+- (void)removeFeedbackObject:(Feedback *)value;
 - (void)addFeedback:(NSSet *)values;
 - (void)removeFeedback:(NSSet *)values;
 

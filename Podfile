@@ -7,3 +7,5 @@ pod 'kingpin'
 pod 'RHManagedObject', :path => '../RHManagedObject/'
 pod 'RHTools', :path => '../RHTools/'
 # pod 'RHTools', :git => 'https://github.com/chriscdn/RHTools.git'
+
+pod 'ECSlidingViewController'

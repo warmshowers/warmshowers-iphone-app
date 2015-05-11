@@ -1,17 +1,19 @@
 //
 //  HostEntity.m
-//  WS
+//  
 //
-//  Created by Christopher Meyer on 2012-09-30.
-//  Copyright (c) 2012 Red House Consulting GmbH. All rights reserved.
+//  Created by Christopher Meyer on 11/05/15.
+//
 //
 
 #import "HostEntity.h"
-#import "FeedbackEntity.h"
+#import "Feedback.h"
+#import "Thread.h"
 
 
 @implementation HostEntity
 
+@dynamic sag;
 @dynamic latitude;
 @dynamic street;
 @dynamic country;
@@ -28,6 +30,7 @@
 @dynamic last_updated;
 @dynamic favourite;
 @dynamic distance;
+@dynamic mobilephone;
 @dynamic name;
 @dynamic longitude;
 @dynamic city;
@@ -43,8 +46,7 @@
 @dynamic bed;
 @dynamic preferred_notice;
 @dynamic homephone;
-@dynamic mobilephone;
-@dynamic sag;
+@dynamic thread;
 @dynamic feedback;
 
 @end

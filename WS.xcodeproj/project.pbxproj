@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		83BD306D1B01490200936C2E /* Mogenerator */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 83BD30701B01490200936C2E /* Build configuration list for PBXAggregateTarget "Mogenerator" */;
+			buildPhases = (
+				83BD30711B01493100936C2E /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Mogenerator;
+			productName = Mogenerator;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		1D3623260D0F684500981E51 /* WSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* WSAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -15,7 +29,10 @@
 		28C286E10D94DF7D0034E888 /* HostMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* HostMapViewController.m */; };
 		28D3F202112F7DC200FD0661 /* WS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28D3F201112F7DC200FD0661 /* WS.xcdatamodeld */; };
 		3102391F8DDD4D1FAC5382A5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D09F2CAA216B49BAA5EEDCA7 /* libPods.a */; };
+		832198911AFFF49B0041A72F /* SingleThreadTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 832198901AFFF49B0041A72F /* SingleThreadTableViewController.m */; };
 		8330B481126A0775008B2EC4 /* WSRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8330B480126A0775008B2EC4 /* WSRequests.m */; };
+		8343CC8C1AFFE28500EE3A45 /* ThreadEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343CC8B1AFFE28500EE3A45 /* ThreadEntity.m */; };
+		8343CC8F1AFFE2DC00EE3A45 /* Thread.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343CC8E1AFFE2DC00EE3A45 /* Thread.m */; };
 		83441AD51608694900468716 /* WSHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AD41608694900468716 /* WSHTTPClient.m */; };
 		8348AE361872A0CF0097DF24 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8348AE351872A0CF0097DF24 /* StoreKit.framework */; };
 		8348AE381872A2AD0097DF24 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8348AE371872A2AD0097DF24 /* Images.xcassets */; };
@@ -48,9 +65,12 @@
 		83CE1361147455CB006EED95 /* FavouriteHostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE1360147455CB006EED95 /* FavouriteHostTableViewController.m */; };
 		83CF4474126A01A200DF3CFD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF4473126A01A200DF3CFD /* MapKit.framework */; };
 		83D26B36126A4DE400412151 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D26B35126A4DE400412151 /* CoreLocation.framework */; };
+		83DBE69A1AFD647D003CFFCD /* menu_black-48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DBE6991AFD647D003CFFCD /* menu_black-48@2x.png */; };
+		83DBE69D1AFD6607003CFFCD /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBE69C1AFD6607003CFFCD /* LeftMenuViewController.m */; };
 		83E205681878B3550067738B /* ws.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E205661878B3550067738B /* ws.png */; };
 		83E205691878B3550067738B /* ws@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E205671878B3550067738B /* ws@2x.png */; };
 		83E605571608477F00C7C50E /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E605561608477F00C7C50E /* Feedback.m */; };
+		83E7FF791AFEB8E5000FCAF7 /* AllThreadsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E7FF781AFEB8E5000FCAF7 /* AllThreadsTableViewController.m */; };
 		83F00E0415EBC6E000761BC6 /* RHAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E0315EBC5B400761BC6 /* RHAboutViewController.m */; };
 		83F00E0D15EBC73900761BC6 /* RHPromptForReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E0C15EBC73900761BC6 /* RHPromptForReview.m */; };
 		83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1515EBD11B00761BC6 /* trackmytour.png */; };
@@ -80,9 +100,16 @@
 		28C286E00D94DF7D0034E888 /* HostMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostMapViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3B04C42F3B42643FDA03D2FB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		8321988F1AFFF49B0041A72F /* SingleThreadTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleThreadTableViewController.h; sourceTree = "<group>"; };
+		832198901AFFF49B0041A72F /* SingleThreadTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleThreadTableViewController.m; sourceTree = "<group>"; };
 		8330B47F126A0775008B2EC4 /* WSRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSRequests.h; sourceTree = "<group>"; };
 		8330B480126A0775008B2EC4 /* WSRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSRequests.m; sourceTree = "<group>"; };
 		8330B4C8126A092E008B2EC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8343CC891AFFDE0E00EE3A45 /* WS3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WS3.xcdatamodel; sourceTree = "<group>"; };
+		8343CC8A1AFFE28500EE3A45 /* ThreadEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadEntity.h; sourceTree = "<group>"; };
+		8343CC8B1AFFE28500EE3A45 /* ThreadEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadEntity.m; sourceTree = "<group>"; };
+		8343CC8D1AFFE2DC00EE3A45 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
+		8343CC8E1AFFE2DC00EE3A45 /* Thread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Thread.m; sourceTree = "<group>"; };
 		83441AD31608694900468716 /* WSHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSHTTPClient.h; sourceTree = "<group>"; };
 		83441AD41608694900468716 /* WSHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSHTTPClient.m; sourceTree = "<group>"; };
 		8348AE351872A0CF0097DF24 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -126,10 +153,15 @@
 		83CF4473126A01A200DF3CFD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		83D26B35126A4DE400412151 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		83D757C8178BD6E600C4CC64 /* WS (3.6).xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WS (3.6).xcdatamodel"; sourceTree = "<group>"; };
+		83DBE6991AFD647D003CFFCD /* menu_black-48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_black-48@2x.png"; sourceTree = "<group>"; };
+		83DBE69B1AFD6607003CFFCD /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
+		83DBE69C1AFD6607003CFFCD /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
 		83E205661878B3550067738B /* ws.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ws.png; sourceTree = "<group>"; };
 		83E205671878B3550067738B /* ws@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ws@2x.png"; sourceTree = "<group>"; };
 		83E605551608477F00C7C50E /* Feedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback.h; sourceTree = "<group>"; };
 		83E605561608477F00C7C50E /* Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feedback.m; sourceTree = "<group>"; };
+		83E7FF771AFEB8E5000FCAF7 /* AllThreadsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllThreadsTableViewController.h; sourceTree = "<group>"; };
+		83E7FF781AFEB8E5000FCAF7 /* AllThreadsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllThreadsTableViewController.m; sourceTree = "<group>"; };
 		83F00E0215EBC5B400761BC6 /* RHAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHAboutViewController.h; sourceTree = "<group>"; };
 		83F00E0315EBC5B400761BC6 /* RHAboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHAboutViewController.m; sourceTree = "<group>"; };
 		83F00E0B15EBC73900761BC6 /* RHPromptForReview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHPromptForReview.h; sourceTree = "<group>"; };
@@ -186,6 +218,7 @@
 				8330B476126A075E008B2EC4 /* HTTPRequest */,
 				83F168BF14685B17003D3E3F /* RH */,
 				83F168C014685B4F003D3E3F /* Host View Controllers */,
+				83E7FF7A1AFEB8F2000FCAF7 /* New Group */,
 				83FBB25C148B6FDB002042B0 /* RHWebViewController.h */,
 				83FBB25D148B6FDB002042B0 /* RHWebViewController.m */,
 				83F00E0215EBC5B400761BC6 /* RHAboutViewController.h */,
@@ -194,6 +227,8 @@
 				83F00E0C15EBC73900761BC6 /* RHPromptForReview.m */,
 				1D3623240D0F684500981E51 /* WSAppDelegate.h */,
 				1D3623250D0F684500981E51 /* WSAppDelegate.m */,
+				83DBE69B1AFD6607003CFFCD /* LeftMenuViewController.h */,
+				83DBE69C1AFD6607003CFFCD /* LeftMenuViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -275,6 +310,7 @@
 		836CCF0814ABB425000EDC51 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				83DBE6991AFD647D003CFFCD /* menu_black-48@2x.png */,
 				83E205661878B3550067738B /* ws.png */,
 				83E205671878B3550067738B /* ws@2x.png */,
 				838E22EF1894037B0097A831 /* ws-50.png */,
@@ -300,10 +336,14 @@
 				83F0512A1618ED84001317D6 /* HostEntity.m */,
 				83F051261618ED83001317D6 /* FeedbackEntity.h */,
 				83F051271618ED83001317D6 /* FeedbackEntity.m */,
+				8343CC8A1AFFE28500EE3A45 /* ThreadEntity.h */,
+				8343CC8B1AFFE28500EE3A45 /* ThreadEntity.m */,
 				836CCF0214ABB3E6000EDC51 /* Host.h */,
 				836CCF0314ABB3E6000EDC51 /* Host.m */,
 				83E605551608477F00C7C50E /* Feedback.h */,
 				83E605561608477F00C7C50E /* Feedback.m */,
+				8343CC8D1AFFE2DC00EE3A45 /* Thread.h */,
+				8343CC8E1AFFE2DC00EE3A45 /* Thread.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -321,6 +361,17 @@
 				83F00E1A15EBD3FE00761BC6 /* NSString+analytics.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		83E7FF7A1AFEB8F2000FCAF7 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				83E7FF771AFEB8E5000FCAF7 /* AllThreadsTableViewController.h */,
+				83E7FF781AFEB8E5000FCAF7 /* AllThreadsTableViewController.m */,
+				8321988F1AFFF49B0041A72F /* SingleThreadTableViewController.h */,
+				832198901AFFF49B0041A72F /* SingleThreadTableViewController.m */,
+			);
+			name = "New Group";
 			sourceTree = "<group>";
 		};
 		83F168BF14685B17003D3E3F /* RH */ = {
@@ -399,6 +450,9 @@
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = 5BQRNHH2CM;
 					};
+					83BD306D1B01490200936C2E = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
 				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "WS" */;
@@ -417,6 +471,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* WS */,
+				83BD306D1B01490200936C2E /* Mogenerator */,
 			);
 		};
 /* End PBXProject section */
@@ -437,6 +492,7 @@
 				836CCF1C14ABB4C4000EDC51 /* DotRed.png in Resources */,
 				836D64AA1893BFA000F0602F /* crittercism.plist in Resources */,
 				83F8C188152B8B280084E380 /* ContactHostViewController.xib in Resources */,
+				83DBE69A1AFD647D003CFFCD /* menu_black-48@2x.png in Resources */,
 				83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */,
 				83F00E1815EBD11B00761BC6 /* trackmytour@2x.png in Resources */,
 				8348AE421872C2360097DF24 /* ios7-navigate-outline.png in Resources */,
@@ -481,6 +537,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		83BD30711B01493100936C2E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/mogenerator -m \"${PROJECT_DIR}/WS.xcdatamodeld\" -O \"${PROJECT_DIR}/Modelzzz\" --template-var arc=true";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -491,6 +560,7 @@
 				83F00E0415EBC6E000761BC6 /* RHAboutViewController.m in Sources */,
 				83518606152C0C1F009E558F /* MKMapView+Utils.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				832198911AFFF49B0041A72F /* SingleThreadTableViewController.m in Sources */,
 				1D3623260D0F684500981E51 /* WSAppDelegate.m in Sources */,
 				28C286E10D94DF7D0034E888 /* HostMapViewController.m in Sources */,
 				28D3F202112F7DC200FD0661 /* WS.xcdatamodeld in Sources */,
@@ -498,14 +568,18 @@
 				839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */,
 				83BE50B6126B4E7B00B5A65A /* HostInfoViewController.m in Sources */,
 				8388B1371458A8100079ACE3 /* HostTableViewController.m in Sources */,
+				83DBE69D1AFD6607003CFFCD /* LeftMenuViewController.m in Sources */,
 				83708C1A145C79CF00B15150 /* SegmentsController.m in Sources */,
 				83CE1361147455CB006EED95 /* FavouriteHostTableViewController.m in Sources */,
 				83C78E801474DE3D00274616 /* CLLocation+Bearing.m in Sources */,
+				8343CC8F1AFFE2DC00EE3A45 /* Thread.m in Sources */,
 				83FBB25E148B6FDB002042B0 /* RHWebViewController.m in Sources */,
 				836CCF0614ABB3E6000EDC51 /* Host.m in Sources */,
 				83F8C187152B8B280084E380 /* ContactHostViewController.m in Sources */,
+				83E7FF791AFEB8E5000FCAF7 /* AllThreadsTableViewController.m in Sources */,
 				83F00E0D15EBC73900761BC6 /* RHPromptForReview.m in Sources */,
 				83F00E1B15EBD3FE00761BC6 /* NSString+analytics.m in Sources */,
+				8343CC8C1AFFE28500EE3A45 /* ThreadEntity.m in Sources */,
 				83E605571608477F00C7C50E /* Feedback.m in Sources */,
 				83441AD51608694900468716 /* WSHTTPClient.m in Sources */,
 				83CDACE0160A310000B5DC83 /* FeedbackTableViewController.m in Sources */,
@@ -576,6 +650,20 @@
 			};
 			name = Release;
 		};
+		83BD306E1B01490200936C2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		83BD306F1B01490200936C2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -604,6 +692,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
+		83BD30701B01490200936C2E /* Build configuration list for PBXAggregateTarget "Mogenerator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83BD306E1B01490200936C2E /* Debug */,
+				83BD306F1B01490200936C2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "WS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -619,10 +716,11 @@
 		28D3F201112F7DC200FD0661 /* WS.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				8343CC891AFFDE0E00EE3A45 /* WS3.xcdatamodel */,
 				83D757C8178BD6E600C4CC64 /* WS (3.6).xcdatamodel */,
 				28860B760F44E54D00985440 /* WS.xcdatamodel */,
 			);
-			currentVersion = 83D757C8178BD6E600C4CC64 /* WS (3.6).xcdatamodel */;
+			currentVersion = 8343CC891AFFDE0E00EE3A45 /* WS3.xcdatamodel */;
 			name = WS.xcdatamodeld;
 			path = ../WS.xcdatamodeld;
 			sourceTree = "<group>";

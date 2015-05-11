@@ -21,6 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - CrittercismSDK (5.2.0)
+  - ECSlidingViewController (2.0.3)
   - FrameAccessor (2.0)
   - kingpin (0.2.4)
   - RHManagedObject (0.14)
@@ -31,6 +32,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - CrittercismSDK
+  - ECSlidingViewController
   - kingpin
   - RHManagedObject (from `../RHManagedObject/`)
   - RHTools (from `../RHTools/`)
@@ -45,10 +47,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
   CrittercismSDK: a8f09d8f1d9fea3bc0714a954a079062c5c9d914
+  ECSlidingViewController: 6485c14f23b4487e9946535421ca8f111f86cc53
   FrameAccessor: 443a13e58e23a10ff22180da0897b28c3f6abf66
   kingpin: 776d0a0615cde79196e05ac5a9ecde07c0229603
   RHManagedObject: 91970c69fcd088730399abbcc28d2e0b205a0214
-  RHTools: d8b88de04fbabbc4b56d2c7d0dc62aacda701c11
+  RHTools: 140751945c05a841dde9cd869eded2d16207eeae
   SVProgressHUD: 3afb875b9eb23acd1bed9b82495695c68621a8b2
 
 COCOAPODS: 0.36.3

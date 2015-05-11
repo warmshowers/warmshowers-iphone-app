@@ -6,9 +6,6 @@
 //  Copyright 2010 Red House Consulting GmbH. All rights reserved.
 //
 
-#define kVersion 304	// 301 - Added member_since field
-						// 302
-
 #define kShouldRedrawMapAnnotation @"ShouldRedrawMapAnnotations"
 #define kAuthenticationStatusChangedNotificationName @"AuthenticationHasChanged"
 #define kNetworkError @"Check your network connection"

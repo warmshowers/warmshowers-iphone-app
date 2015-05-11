@@ -71,6 +71,8 @@
     [self.clusteringController setDelegate:self];
     
     [self redrawAnnotations];
+    
+     
 }
 
 

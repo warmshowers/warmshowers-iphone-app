@@ -18,9 +18,11 @@
 #import "Host.h"
 #import "WSHTTPClient.h"
 #import "Crittercism.h"
+#import "ECSlidingViewController.h"
+#import "LeftMenuViewController.h"
 
 @interface WSAppDelegate ()
-// -(BOOL)postApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+@property (nonatomic, strong) ECSlidingViewController *slidingViewController;
 -(NSArray *)segmentViewControllers;
 -(void)loginWithUsername:(NSString *)username password:(NSString *)password;
 -(void)loginSuccess;
@@ -31,7 +33,6 @@
 @synthesize window;
 @synthesize navigationController;
 @synthesize segmentsController;
-@synthesize locationManager;
 @synthesize segmentViewControllers;
 
 #pragma mark -
@@ -86,40 +87,64 @@
 
 -(BOOL)postApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:[self.segmentViewControllers objectAtIndex:0]];
- 
     
     
+   //  UIViewController *test = [self.segmentViewControllers objectAtIndex:0];
     
     
-     self.window.rootViewController = self.navigationController;
+   // self.navigationController = [[UINavigationController alloc] initWithRootViewController:test];
     
     
+  
+    /*
+    test.navigationItem.leftBarButtonItem = [RHBarButtonItem itemWithImage:[UIImage imageNamed:@"menu_black-48"] block:^{
+        [self.slidingViewController resetTopViewAnimated:YES];
+        [self.slidingViewController anchorTopViewToRightAnimated:YES];
+    }];
+     */
     
-    // self.navigationController.tabBarItem.image = [[UIImage imageNamed:@"ws"] scaleImageWithMaxWidth:30.0f maxHeight:30.0f];
-   // self.navigationController.tabBarItem.title = NSLocalizedString(@"Find Hosts", nil);
-    // self.navigationController.tabBarItem.tag = 0;
+    
+    LeftMenuViewController *leftMenuViewController = [[LeftMenuViewController alloc] init];
+    
+    self.slidingViewController = [ECSlidingViewController slidingWithTopViewController:[leftMenuViewController.hostMapViewController wrapInNavigationController]];
+    self.slidingViewController.underLeftViewController = [leftMenuViewController wrapInNavigationController];
+ //   self.slidingViewController.anchorRightPeekAmount = 50.0f;
+    
+    self.slidingViewController.anchorRightRevealAmount = 280.0f;
+    
+    //  [navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
+    
+    self.window.rootViewController = self.slidingViewController;
+    
+   // [leftMenuViewController selectFirstItem];
+    
+    
 
-   // UITabBarController *tabBarController = [[UITabBarController alloc] init];
-   // [tabBarController setViewControllers:@[self.navigationController]];
-   // self.window.rootViewController = tabBarController;
-    
     
     [self.window makeKeyAndVisible];
     
-    [[NSUserDefaults standardUserDefaults] setInteger:kVersion forKey:@"ws-version"];
+    
+    
+    [[NSDate formatter] setTimeStyle:NSDateFormatterNoStyle];
+    
+    
     
     [self.navigationController setToolbarHidden:NO];
-   // [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:46/255.0 green:116/255.0 blue:165/255.0 alpha:1]];
     
-    self.segmentsController = [[SegmentsController alloc] initWithNavigationController:self.navigationController viewControllers:[self segmentViewControllers]];
     
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     
-    if ([CLLocationManager locationServicesEnabled]) {
-        [self.locationManager startUpdatingLocation];
-    }
+    // [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:46/255.0 green:116/255.0 blue:165/255.0 alpha:1]];
+    
+    //  self.segmentsController = [[SegmentsController alloc] initWithNavigationController:self.navigationController viewControllers:[self segmentViewControllers]];
+    
+    /*
+     self.locationManager = [[CLLocationManager alloc] init];
+     self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+     
+     if ([CLLocationManager locationServicesEnabled]) {
+     [self.locationManager startUpdatingLocation];
+     }
+     */
     
     if ([self isLoggedIn]) {
         [RHPromptForReview sharedInstance];
@@ -127,15 +152,32 @@
         [self logout];
     }
     
-    [[NSDate formatter] setTimeStyle:NSDateFormatterNoStyle];
+    
     
     return YES;
 }
 
+
+
+-(CLLocationManager *)locationManager {
+    
+    if (_locationManager == nil) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+        
+        if ([CLLocationManager locationServicesEnabled]) {
+            [_locationManager startUpdatingLocation];
+        }
+    }
+    
+    return _locationManager;
+    
+}
+
 -(NSArray *)segmentViewControllers {
     if (segmentViewControllers == nil) {
-        UIViewController *map = [[HostMapViewController alloc] initWithNibName:@"HostMapViewController" bundle:nil];
-        UIViewController *list = [[HostTableViewController alloc] initWithStyle:UITableViewStylePlain];
+        UIViewController *map   = [[HostMapViewController alloc] initWithNibName:@"HostMapViewController" bundle:nil];
+        UIViewController *list  = [[HostTableViewController alloc] initWithStyle:UITableViewStylePlain];
         UIViewController *list2 = [[FavouriteHostTableViewController alloc] initWithStyle:UITableViewStylePlain];
         self.segmentViewControllers = [NSArray arrayWithObjects:map, list, list2, nil];
     }
