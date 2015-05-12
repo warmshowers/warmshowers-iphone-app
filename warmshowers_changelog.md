@@ -4,9 +4,6 @@
 
 - pin clustering
 - iPhone 6 & 6+
-- introduced mogenerator for handling Core Data models
-- new navigation
-- messaging
 
 ## v3.6 (build 360)
 
