@@ -13,5 +13,6 @@
 +(WSHTTPClient *)sharedHTTPClient;
 -(BOOL)reachable;
 -(void)cancelAllOperations;
+-(void)deleteCookies;
 
 @end

@@ -16,6 +16,19 @@
 
 @implementation WSRequests
 
+
++(void)loginWithUsername:(NSString *)username
+                password:(NSString *)password
+                 success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                 failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure {
+
+    [[WSHTTPClient sharedHTTPClient] deleteCookies];
+    
+    NSDictionary *params = @{@"username" : username, @"password" : password};
+    
+    [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/user/login" parameters:params success:success failure:failure];
+}
+
 +(void)requestWithMapView:(MKMapView *)mapView {
     
     if ([[WSAppDelegate sharedInstance] isLoggedIn] == NO) {
@@ -66,14 +79,7 @@
 		}
         
 		[Host commit];
-        
-	} failure:^(NSURLSessionDataTask *task, NSError *error) {
-		NSHTTPURLResponse *response = (NSHTTPURLResponse *)[task response];
-
-		if ([response statusCode] == 401) {
-			[[WSAppDelegate sharedInstance] loginWithoutPrompt];
-		}
-	}];
+    } failure:nil];
 }
 
 

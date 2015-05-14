@@ -170,11 +170,17 @@
 -(BOOL)isStale {
 	// return (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 60 );
 	// two weeks
-	return (self.last_updated_details == nil) || (fabs([self.last_updated_details timeIntervalSinceNow]) > 1209600 );
+	return (self.last_updated_details == nil) || (fabs([self.last_updated_details timeIntervalSinceNow]) > kWeek*2 );
 }
 
 -(NSUInteger)pinColour {
-	if ([self.favourite boolValue]) {
+    if ([self.favourite boolValue]) {
+        return MKPinAnnotationColorGreen;
+    } else {
+        return MKPinAnnotationColorRed;
+    }
+    /*
+     if ([self.favourite boolValue]) {
 		return MKPinAnnotationColorGreen;
 	} else if (self.last_updated_details != nil) {
 		// indicates we have cached data
@@ -182,6 +188,7 @@
 	} else {
 		return MKPinAnnotationColorRed;
 	}
+     */
 }
 
 -(void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {

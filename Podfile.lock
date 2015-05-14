@@ -24,6 +24,7 @@ PODS:
   - ECSlidingViewController (2.0.3)
   - FrameAccessor (2.0)
   - kingpin (0.2.4)
+  - Lockbox (2.1.0)
   - RHManagedObject (0.15)
   - RHTools (0.1.0):
     - FrameAccessor
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - CrittercismSDK
   - ECSlidingViewController
   - kingpin
+  - Lockbox
   - RHManagedObject (from `../RHManagedObject/`)
   - RHTools (from `../RHTools/`)
   - SVProgressHUD (= 1.1.2)
@@ -50,6 +52,7 @@ SPEC CHECKSUMS:
   ECSlidingViewController: 6485c14f23b4487e9946535421ca8f111f86cc53
   FrameAccessor: 443a13e58e23a10ff22180da0897b28c3f6abf66
   kingpin: 776d0a0615cde79196e05ac5a9ecde07c0229603
+  Lockbox: 16442da35d9d4286966936763be728a931d589c3
   RHManagedObject: 459c86e4a257bec738e421c3051bb541f3aeabb8
   RHTools: 140751945c05a841dde9cd869eded2d16207eeae
   SVProgressHUD: 3afb875b9eb23acd1bed9b82495695c68621a8b2

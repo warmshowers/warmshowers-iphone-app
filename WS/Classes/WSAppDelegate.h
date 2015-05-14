@@ -24,10 +24,17 @@
 
 +(WSAppDelegate *)sharedInstance;
 
--(void)loginWithoutPrompt;
--(void)loginWithPrompt:(BOOL)prompt;
+-(NSString *)username;
+-(void)setUsername:(NSString *)username;
+-(NSString *)password;
+-(void)setPassword:(NSString *)password;
 -(BOOL)isLoggedIn;
+-(void)setIsLoggedIn:(BOOL)isLoggedIn;
+
+-(void)presentLoginPrompt;
+-(void)logout;
 -(CLLocation *)userLocation;
 -(void)requestLocationAuthorization;
+-(void)autologin;
 
 @end

@@ -12,7 +12,7 @@
 #import "HostTableViewController.h"
 #import "FavouriteHostTableViewController.h"
 #import "AllThreadsTableViewController.h"
-
+#import "WSAppDelegate.h"
 
 @interface LeftMenuViewController ()
 @property (nonatomic, strong) RHTableView *tableView;
@@ -28,7 +28,7 @@
     
     //   [self.tableView setDeselectRowAfterSelect:NO];
     
-    [self.tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Find Hosts", nil)];
+    [self.tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Warmshowers", nil)];
     
     __weak LeftMenuViewController *bself = self;
     
@@ -78,7 +78,7 @@
     
     
     
-    
+    /*
     [self.tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Messages", nil)];
     
     cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"Inbox", nil)
@@ -101,7 +101,7 @@
                                         image:nil
                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator];
     [self.tableView addCell:cell];
-    
+    */
     
     [self.tableView addSectionWithSectionHeaderText:nil];
     
@@ -123,6 +123,7 @@
     cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"Logout", nil)
                               detailLabelText:nil
                                didSelectBlock:^{
+                                   [[WSAppDelegate sharedInstance] logout];
                                    [bself.slidingViewController resetTopViewAnimated:YES];
                                    
                                }

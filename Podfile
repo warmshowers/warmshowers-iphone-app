@@ -9,3 +9,4 @@ pod 'RHTools', :path => '../RHTools/'
 # pod 'RHTools', :git => 'https://github.com/chriscdn/RHTools.git'
 
 pod 'ECSlidingViewController'
+pod 'Lockbox'

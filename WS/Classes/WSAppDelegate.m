@@ -20,13 +20,16 @@
 #import "Crittercism.h"
 #import "ECSlidingViewController.h"
 #import "LeftMenuViewController.h"
+#import "Lockbox.h"
+#import "WSRequests.h"
 
 @interface WSAppDelegate ()
 @property (nonatomic, strong) ECSlidingViewController *slidingViewController;
+@property (nonatomic, assign) BOOL isPresentingLoginPrompt;
 -(NSArray *)segmentViewControllers;
--(void)loginWithUsername:(NSString *)username password:(NSString *)password;
 -(void)loginSuccess;
 -(void)logout;
+-(void)promptForUsernameAndPassword;
 @end
 
 @implementation WSAppDelegate
@@ -41,7 +44,40 @@
 +(WSAppDelegate *)sharedInstance {
     return (WSAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
+/*
+ NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"ws-name"];
+ NSString *password = [[NSUserDefaults standardUserDefaults] stringForKey:@"ws-password"];
+ */
 
+
+#pragma mark -
+#pragma mark Setters/Getters
+
+-(NSString *)username {
+    return [Lockbox stringForKey:@"ws-username"] ? [Lockbox stringForKey:@"ws-username"] : @"";
+}
+
+-(void)setUsername:(NSString *)username {
+    [Lockbox setString:username forKey:@"ws-username"];
+}
+
+-(NSString *)password {
+    return [Lockbox stringForKey:@"ws-password"] ? [Lockbox stringForKey:@"ws-password"] : @"";
+}
+
+-(void)setPassword:(NSString *)password {
+    [Lockbox setString:password forKey:@"ws-password"];
+}
+
+-(BOOL)isLoggedIn {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"ws-loggedin"];
+}
+
+-(void)setIsLoggedIn:(BOOL)isLoggedIn {
+    [[NSUserDefaults standardUserDefaults] setBool:isLoggedIn forKey:@"ws-loggedin"];
+}
+
+#pragma mark -
 // See http://schwiiz.org/?p=1734
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -88,71 +124,31 @@
 -(BOOL)postApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    
-   //  UIViewController *test = [self.segmentViewControllers objectAtIndex:0];
-    
-    
-   // self.navigationController = [[UINavigationController alloc] initWithRootViewController:test];
-    
-    
-  
-    /*
-    test.navigationItem.leftBarButtonItem = [RHBarButtonItem itemWithImage:[UIImage imageNamed:@"menu_black-48"] block:^{
-        [self.slidingViewController resetTopViewAnimated:YES];
-        [self.slidingViewController anchorTopViewToRightAnimated:YES];
-    }];
-     */
-    
-    
     LeftMenuViewController *leftMenuViewController = [[LeftMenuViewController alloc] init];
     
     self.slidingViewController = [ECSlidingViewController slidingWithTopViewController:[leftMenuViewController.hostMapViewController wrapInNavigationController]];
-    self.slidingViewController.underLeftViewController = [leftMenuViewController wrapInNavigationController];
- //   self.slidingViewController.anchorRightPeekAmount = 50.0f;
-    
+    self.slidingViewController.underLeftViewController = leftMenuViewController; // [leftMenuViewController wrapInNavigationController];
+    //   self.slidingViewController.anchorRightPeekAmount = 50.0f;
     self.slidingViewController.anchorRightRevealAmount = 280.0f;
     
-    //  [navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
     
     self.window.rootViewController = self.slidingViewController;
     
-   // [leftMenuViewController selectFirstItem];
-    
-    
-
-    
     [self.window makeKeyAndVisible];
-    
-    
     
     [[NSDate formatter] setTimeStyle:NSDateFormatterNoStyle];
     
-    
-    
+    // is this the right place for this?
     [self.navigationController setToolbarHidden:NO];
     
     
-    
-    // [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:46/255.0 green:116/255.0 blue:165/255.0 alpha:1]];
-    
-    //  self.segmentsController = [[SegmentsController alloc] initWithNavigationController:self.navigationController viewControllers:[self segmentViewControllers]];
-    
-    /*
-     self.locationManager = [[CLLocationManager alloc] init];
-     self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-     
-     if ([CLLocationManager locationServicesEnabled]) {
-     [self.locationManager startUpdatingLocation];
-     }
-     */
+    [self setIsPresentingLoginPrompt:NO];
     
     if ([self isLoggedIn]) {
         [RHPromptForReview sharedInstance];
     } else {
         [self logout];
     }
-    
-    
     
     return YES;
 }
@@ -195,53 +191,48 @@
     return [self.locationManager location];
 }
 
--(void)loginWithoutPrompt {
-    return [self loginWithPrompt:NO];
+-(void)autologin {
+    if (self.isLoggedIn) {
+        [self setIsLoggedIn:NO];
+
+        [WSRequests loginWithUsername:[self username]
+                             password:[self password]
+                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                  [self setIsLoggedIn:YES];
+                              }
+                              failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                  [[WSAppDelegate sharedInstance] autologin];
+                              }];
+    } else {
+        [self presentLoginPrompt];
+    }
 }
 
+
 #pragma mark Authentication
--(void)loginWithPrompt:(BOOL)prompt {
+-(void)presentLoginPrompt {
     dispatch_async(dispatch_get_main_queue(), ^{
-        
-        // Sessions MUST be cleared before attemping authentication.
-        NSURL *baseURL = [[WSHTTPClient sharedHTTPClient] baseURL];
-        NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:baseURL];
-        
-        for (NSHTTPCookie *cookie in cookies) {
-            [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
-        }
-        
-        if (prompt) {
-            [self promptForUsernameAndPassword];
-        } else {
-            NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"ws-name"];
-            NSString *password = [[NSUserDefaults standardUserDefaults] stringForKey:@"ws-password"];
-            [self loginWithUsername:username password:password];
-        }
-        
+        [self promptForUsernameAndPassword];
     });
 }
 
 -(void)loginSuccess {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ws-loggedin"];
+    [self setIsLoggedIn:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAuthenticationStatusChangedNotificationName object:nil userInfo:nil];
     [self requestLocationAuthorization];
 }
 
 -(void)logout {
-    
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ws-password"];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ws-loggedin"];
+    [self setIsLoggedIn:NO];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAuthenticationStatusChangedNotificationName object:nil userInfo:nil];
-    
-    [self loginWithPrompt:YES];
+    [self presentLoginPrompt];
 }
 
 -(void)promptForUsernameAndPassword {
     RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warmshowers Login", nil) message:NSLocalizedString(@"Enter your username and password:", nil)];
     [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
     
-    NSString *name = [[NSUserDefaults standardUserDefaults] stringForKey:@"ws-name"];
+    NSString *name = [self username];
     [[alert textFieldAtIndex:0] setText:name];
     
     __weak RHAlertView *bAlert = alert;
@@ -265,101 +256,31 @@
         NSString *name = [[bAlert textFieldAtIndex:0] text];
         NSString *password = [[bAlert textFieldAtIndex:1] text];
         
-        [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"ws-name"];
-        [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"ws-password"];
+        [self setUsername:name];
+        [self setPassword:password];
         
-        [self loginWithUsername:name password:password];
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeBlack];
+        
+        [WSRequests loginWithUsername:[self username]
+                             password:[self password]
+                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                  [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
+
+                                   [self loginSuccess];
+                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                  RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warmshowers", nil)
+                                                                           message:NSLocalizedString(@"Login failed. Please check your username and password and try again. If you don't have an account you can tap the Sign Up button to register.", nil)];
+                                  
+                                  [alert addButtonWithTitle:kOK block:^{
+                                      [self logout];
+                                  }];
+                                  
+                                  [alert show];
+                              }];
+        
     }];
     
     [alert show];
 }
-
-
--(void)loginWithUsername:(NSString *)username password:(NSString *)password {
-    
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            username, @"username",
-                            password, @"password", nil];
-    
-    
-    WSHTTPClient *manager = [WSHTTPClient sharedHTTPClient];
-    
-    NSLog(@"%@", @"login called");
-    
-    [manager POST:@"/services/rest/user/login" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        if ([self isLoggedIn] == NO) {
-            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
-        }
-        
-        [self loginSuccess];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [SVProgressHUD dismiss];
-        
-        NSHTTPURLResponse *response = (NSHTTPURLResponse *)[task response];
-        
-        if ([response statusCode] == 401) {
-            
-            RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warmshowers", nil) message:NSLocalizedString(@"Login failed. Please check your username and password and try again. If you don't have an account you can tap the Sign Up button to register.", nil)];
-            
-            [alert addButtonWithTitle:kOK block:^{
-                [self logout];
-            }];
-            
-            [alert show];
-        }
-    }];
-    
-    
-    if ([self isLoggedIn] == NO) {
-        [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeBlack];
-    }
-}
-
--(BOOL)isLoggedIn {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"ws-loggedin"];
-}
-
-#pragma mark App Delegate
-
--(void)applicationWillResignActive:(UIApplication *)application {
-    /*
-     Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-     Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-     */
-    // [[RHManagedObjectContextManager sharedInstance] commit];
-}
-
-
--(void)applicationDidEnterBackground:(UIApplication *)application {
-    /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-     If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
-     */
-    
-    // [[RHManagedObjectContextManager sharedInstance] commit];
-}
-
-
--(void)applicationWillEnterForeground:(UIApplication *)application {
-    /*
-     Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
-     */
-}
-
-
--(void)applicationDidBecomeActive:(UIApplication *)application {
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
-}
-
-
-/**
- applicationWillTerminate: saves changes in the application's managed object context before the application terminates.
- */
--(void)applicationWillTerminate:(UIApplication *)application {
-    // [[RHManagedObjectContextManager sharedInstance] commit];
-}
-
 
 @end

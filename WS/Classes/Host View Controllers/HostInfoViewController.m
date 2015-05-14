@@ -83,6 +83,8 @@ static NSString *CellIdentifier = @"Cell";
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self.navigationController setToolbarHidden:NO animated:animated];
+    
     [self.host addObserver:self forKeyPath:@"notcurrentlyavailable" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
     __weak HostInfoViewController *bself = self;
@@ -98,10 +100,6 @@ static NSString *CellIdentifier = @"Cell";
     
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self.navigationController setToolbarHidden:NO animated:animated];
-}
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -109,6 +107,8 @@ static NSString *CellIdentifier = @"Cell";
     
     [self.host removeObserver:self forKeyPath:@"notcurrentlyavailable"];
     [self.host setDidUpdateBlock:nil];
+    
+     [self.navigationController setToolbarHidden:YES animated:animated];
 }
 
 -(void)refreshHost {

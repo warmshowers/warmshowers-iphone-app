@@ -24,7 +24,7 @@
 
 -(void)viewDidLoad {
 	[super viewDidLoad];
-	
+	/*
 	UIBarButtonItem *helpButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Help", nil) style:UIBarButtonItemStylePlain target:self action:@selector(helpButtonPressed:)];
 	
 	NSArray *toolbarItems = [NSArray arrayWithObjects:
@@ -35,7 +35,7 @@
 	
     
 	[self setToolbarItems:toolbarItems animated:YES];
-    
+    */
     [self addSearchBarWithPlaceHolder:NSLocalizedString(@"Filter Cached Hosts", nil)];
 }
 
@@ -53,10 +53,11 @@
 	self.navigationItem.hidesBackButton = YES;
 }
 
+/*
 -(void)helpButtonPressed:(id)sender {
 	[[RHAlertView alertWithOKButtonWithTitle:NSLocalizedString(@"Help", nil) message:NSLocalizedString(@"Hosts are sorted by proximity to your location.\n\nA green dot indicates a host is marked as a favourite.  A purple dot indicates the host details are cached and can be accessed offline.  A red dot indicates the host is not cached.", nil)] show];
 }
-
+*/
 
 -(void)updateDistances {
 	CLLocation *current_location = [[WSAppDelegate sharedInstance] userLocation];
@@ -130,7 +131,8 @@
 	cell.textLabel.text= [host title];
 	cell.detailTextLabel.text = [host subtitle];
 	
-	switch ([host pinColour]) {
+	/*
+     switch ([host pinColour]) {
 		case MKPinAnnotationColorRed:
 			cell.imageView.image = [UIImage imageNamed:@"DotRed"];
 			break;
@@ -144,6 +146,9 @@
 			cell.imageView.image = nil;
 			break;
 	}
+     */
+    
+    [cell.imageView setImageWithURL:[NSURL URLWithString:host.imageURL] placeholderImage:[UIImage imageNamed:@"ws"]];
 	
 }
 

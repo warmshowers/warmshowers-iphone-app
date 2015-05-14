@@ -13,8 +13,15 @@
 
 @interface WSRequests : NSObject<NSXMLParserDelegate>
 
++(void)loginWithUsername:(NSString *)username
+                password:(NSString *)password
+                success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                 failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+
+
 +(void)requestWithMapView:(MKMapView *)mapView;
 +(void)hostDetailsWithHost:(Host *)host;
 +(void)hostFeedbackWithHost:(Host *)host;
 
 @end
+
