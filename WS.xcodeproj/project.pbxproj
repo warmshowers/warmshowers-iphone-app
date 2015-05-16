@@ -38,6 +38,8 @@
 		8348AE381872A2AD0097DF24 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8348AE371872A2AD0097DF24 /* Images.xcassets */; };
 		8348AE421872C2360097DF24 /* ios7-navigate-outline.png in Resources */ = {isa = PBXBuildFile; fileRef = 8348AE401872C2360097DF24 /* ios7-navigate-outline.png */; };
 		8348AE431872C2360097DF24 /* ios7-navigate-outline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8348AE411872C2360097DF24 /* ios7-navigate-outline@2x.png */; };
+		834C9CBA1B0683E200C735F4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 834C9CB81B0683E200C735F4 /* LoginViewController.m */; };
+		834C9CBB1B0683E200C735F4 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834C9CB91B0683E200C735F4 /* LoginViewController.xib */; };
 		83518606152C0C1F009E558F /* MKMapView+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 835185FF152C0B0B009E558F /* MKMapView+Utils.m */; };
 		8355479B1642DFFE00D2A0B5 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8355479A1642DFFE00D2A0B5 /* Settings.bundle */; };
 		835696F41847D1CB00F5B999 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 835696F31847D1CB00F5B999 /* AssetsLibrary.framework */; };
@@ -113,6 +115,9 @@
 		8348AE371872A2AD0097DF24 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8348AE401872C2360097DF24 /* ios7-navigate-outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-navigate-outline.png"; sourceTree = "<group>"; };
 		8348AE411872C2360097DF24 /* ios7-navigate-outline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-navigate-outline@2x.png"; sourceTree = "<group>"; };
+		834C9CB71B0683E200C735F4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		834C9CB81B0683E200C735F4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		834C9CB91B0683E200C735F4 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		835185FE152C0B0B009E558F /* MKMapView+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Utils.h"; sourceTree = "<group>"; };
 		835185FF152C0B0B009E558F /* MKMapView+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Utils.m"; sourceTree = "<group>"; };
 		8355479A1642DFFE00D2A0B5 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -229,6 +234,9 @@
 				1D3623250D0F684500981E51 /* WSAppDelegate.m */,
 				83DBE69B1AFD6607003CFFCD /* LeftMenuViewController.h */,
 				83DBE69C1AFD6607003CFFCD /* LeftMenuViewController.m */,
+				834C9CB71B0683E200C735F4 /* LoginViewController.h */,
+				834C9CB81B0683E200C735F4 /* LoginViewController.m */,
+				834C9CB91B0683E200C735F4 /* LoginViewController.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -501,6 +509,7 @@
 				83E205681878B3550067738B /* ws.png in Resources */,
 				836D64AA1893BFA000F0602F /* crittercism.plist in Resources */,
 				833198E41B02717C008E76F0 /* ios7-information-outline.png in Resources */,
+				834C9CBB1B0683E200C735F4 /* LoginViewController.xib in Resources */,
 				83DBE69A1AFD647D003CFFCD /* menu_black-48@2x.png in Resources */,
 				83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */,
 				83F00E1815EBD11B00761BC6 /* trackmytour@2x.png in Resources */,
@@ -596,6 +605,7 @@
 				83E605571608477F00C7C50E /* Feedback.m in Sources */,
 				83441AD51608694900468716 /* WSHTTPClient.m in Sources */,
 				83CDACE0160A310000B5DC83 /* FeedbackTableViewController.m in Sources */,
+				834C9CBA1B0683E200C735F4 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

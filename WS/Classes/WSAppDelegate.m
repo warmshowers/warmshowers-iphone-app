@@ -22,6 +22,7 @@
 #import "LeftMenuViewController.h"
 #import "Lockbox.h"
 #import "WSRequests.h"
+#import "LoginViewController.h"
 
 @interface WSAppDelegate ()
 @property (nonatomic, strong) ECSlidingViewController *slidingViewController;
@@ -33,10 +34,6 @@
 @end
 
 @implementation WSAppDelegate
-@synthesize window;
-@synthesize navigationController;
-@synthesize segmentsController;
-@synthesize segmentViewControllers;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -171,14 +168,14 @@
 }
 
 -(NSArray *)segmentViewControllers {
-    if (segmentViewControllers == nil) {
+    if (_segmentViewControllers == nil) {
         UIViewController *map   = [[HostMapViewController alloc] initWithNibName:@"HostMapViewController" bundle:nil];
         UIViewController *list  = [[HostTableViewController alloc] initWithStyle:UITableViewStylePlain];
         UIViewController *list2 = [[FavouriteHostTableViewController alloc] initWithStyle:UITableViewStylePlain];
         self.segmentViewControllers = [NSArray arrayWithObjects:map, list, list2, nil];
     }
     
-    return segmentViewControllers;
+    return _segmentViewControllers;
 }
 
 -(void)requestLocationAuthorization {
@@ -229,6 +226,14 @@
 }
 
 -(void)promptForUsernameAndPassword {
+    
+    LoginViewController *loginController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    
+    [loginController setModalPresentationStyle:UIModalPresentationFormSheet];
+    
+    [self.slidingViewController presentViewController:loginController animated:YES completion:nil];
+    
+    /*
     RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warmshowers Login", nil) message:NSLocalizedString(@"Enter your username and password:", nil)];
     [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
     
@@ -281,6 +286,7 @@
     }];
     
     [alert show];
+     */
 }
 
 @end

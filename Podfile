@@ -1,7 +1,7 @@
 platform :ios, '8.3'
 pod 'SVProgressHUD', '1.1.2'
 pod 'AFNetworking' 
-
+pod 'BButton'
 pod 'CrittercismSDK'
 pod 'kingpin'
 pod 'RHManagedObject', :path => '../RHManagedObject/'
