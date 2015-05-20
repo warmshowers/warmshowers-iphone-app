@@ -22,18 +22,16 @@
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     });
     
-    
-    
-    
-    
     [_sharedClient setDataTaskDidReceiveResponseBlock:^NSURLSessionResponseDisposition(NSURLSession *session, NSURLSessionDataTask *dataTask, NSURLResponse *response) {
         
         NSHTTPURLResponse *r = (NSHTTPURLResponse *)response;
         NSInteger statusCode = r.statusCode;
         
         if (statusCode >= 400) {
-            NSLog(@"autologin called");
-            [[WSAppDelegate sharedInstance] autologin];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[WSAppDelegate sharedInstance] autologin];
+            });
             
             return NSURLSessionResponseCancel;
         } else {
@@ -54,6 +52,19 @@
 
 -(void)cancelAllOperations {
     [[self.operationQueue operations] makeObjectsPerformSelector:@selector(cancel)];
+}
+
+-(BOOL)hasWSSessionCookie {
+    NSURL *baseURL = [self baseURL];
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:baseURL];
+    
+    for (NSHTTPCookie *cookie in cookies) {
+        if ([cookie.name isEqualToString:@"SESSca3ec806b9aee9140beb6c03142b4638"]) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 -(void)deleteCookies {

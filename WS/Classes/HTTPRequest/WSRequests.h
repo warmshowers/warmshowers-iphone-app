@@ -23,5 +23,7 @@
 +(void)hostDetailsWithHost:(Host *)host;
 +(void)hostFeedbackWithHost:(Host *)host;
 
++(void)searchHostsWithKeyword:(NSString *)keyword;
+
 @end
 

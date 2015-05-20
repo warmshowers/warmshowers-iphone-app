@@ -7,6 +7,7 @@
 extern const struct MessageAttributes {
 	__unsafe_unretained NSString *body;
 	__unsafe_unretained NSString *mid;
+	__unsafe_unretained NSString *timestamp;
 } MessageAttributes;
 
 extern const struct MessageRelationships {
@@ -38,6 +39,10 @@ extern const struct MessageRelationships {
 
 //- (BOOL)validateMid:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) NSDate* timestamp;
+
+//- (BOOL)validateTimestamp:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) Host *author;
 
 //- (BOOL)validateAuthor:(id*)value_ error:(NSError**)error_;
@@ -58,6 +63,9 @@ extern const struct MessageRelationships {
 
 - (int32_t)primitiveMidValue;
 - (void)setPrimitiveMidValue:(int32_t)value_;
+
+- (NSDate*)primitiveTimestamp;
+- (void)setPrimitiveTimestamp:(NSDate*)value;
 
 - (Host*)primitiveAuthor;
 - (void)setPrimitiveAuthor:(Host*)value;

@@ -11,32 +11,15 @@
 #import "HostInfoViewController.h"
 #import "WSAppDelegate.h"
 
+#import "WSRequests.h"
+
 @implementation HostTableViewController
 
 #pragma mark - View lifecycle
--(id)initWithStyle:(UITableViewStyle)style {
-	if (self=[super initWithStyle:style]) {
-		self.title = NSLocalizedString(@"List", nil);
-	}
-	
-	return self;
-}
-
 -(void)viewDidLoad {
 	[super viewDidLoad];
-	/*
-	UIBarButtonItem *helpButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Help", nil) style:UIBarButtonItemStylePlain target:self action:@selector(helpButtonPressed:)];
-	
-	NSArray *toolbarItems = [NSArray arrayWithObjects:
-							 // searchButton,
-							 [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-							 helpButton,
-							 nil];
-	
-    
-	[self setToolbarItems:toolbarItems animated:YES];
-    */
-    [self addSearchBarWithPlaceHolder:NSLocalizedString(@"Filter Cached Hosts", nil)];
+    self.title = NSLocalizedString(@"List", nil);
+    [self addSearchBarWithPlaceHolder:NSLocalizedString(@"Search", nil)];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -58,6 +41,18 @@
 	[[RHAlertView alertWithOKButtonWithTitle:NSLocalizedString(@"Help", nil) message:NSLocalizedString(@"Hosts are sorted by proximity to your location.\n\nA green dot indicates a host is marked as a favourite.  A purple dot indicates the host details are cached and can be accessed offline.  A red dot indicates the host is not cached.", nil)] show];
 }
 */
+
+
+-(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    
+    [super updateSearchResultsForSearchController:searchController];
+    
+    NSString *searchString = searchController.searchBar.text;
+    
+    [WSRequests searchHostsWithKeyword:searchString];
+    
+    
+}
 
 -(void)updateDistances {
 	CLLocation *current_location = [[WSAppDelegate sharedInstance] userLocation];

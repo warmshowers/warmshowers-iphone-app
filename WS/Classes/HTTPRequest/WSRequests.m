@@ -140,8 +140,7 @@
         host.member_since = [NSDate dateWithTimeIntervalSince1970:member_since];
         
         host.last_updated_details = [NSDate date];
-        // }
-        
+ 
         [Host commit];
         
         [SVProgressHUD dismiss];
@@ -169,41 +168,71 @@
     
     NSString *path = [NSString stringWithFormat:@"/user/%i/json_recommendations", [host.hostid intValue]];
     
-    [[WSHTTPClient sharedHTTPClient] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        // We don't know when stuff gets deleted,
-        // so we purge the feedback before updating.
-        [host purgeFeedback];
-        
-        NSArray *recommendations = [responseObject objectForKey:@"recommendations"];
-        
-        for (NSDictionary *feedback in recommendations) {
-            
-            NSDictionary *dict = [feedback objectForKey:@"recommendation"];
-            
-            NSString *snid = [dict objectForKey:@"nid"];
-            NSString *recommender = [dict objectForKey:@"fullname"];
-            NSString *body = [[dict objectForKey:@"body"] trim];
-            NSString *hostOrGuest = [dict objectForKey:@"field_guest_or_host_value"];
-            NSNumber *recommendationDate = [dict objectForKey:@"field_hosting_date_value"];
-            
-            NSNumber *nid = [NSNumber numberWithInteger:[snid integerValue]];
-            NSDate *rDate = [NSDate dateWithTimeIntervalSince1970:[recommendationDate doubleValue]];
-            
-            Feedback *feedback = [Feedback feedbackWithID:nid];
-            [feedback setBody:body];
-            [feedback setFullname:recommender];
-            [feedback setHostOrGuest:hostOrGuest];
-            [feedback setDate:rDate];
-            
-            [host addFeedbackObject:feedback];
-        }
-        
-        [Feedback commit];
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        // NSHTTPURLResponse *response = (NSHTTPURLResponse *)[task response];
-        
-    }];
+    [[WSHTTPClient sharedHTTPClient] GET:path
+                              parameters:nil
+                                 success:^(NSURLSessionDataTask *task, id responseObject) {
+                                     // We don't know when stuff gets deleted,
+                                     // so we purge the feedback before updating.
+                                     [host purgeFeedback];
+                                     
+                                     NSArray *recommendations = [responseObject objectForKey:@"recommendations"];
+                                     
+                                     for (NSDictionary *feedback in recommendations) {
+                                         
+                                         NSDictionary *dict = [feedback objectForKey:@"recommendation"];
+                                         
+                                         NSString *snid = [dict objectForKey:@"nid"];
+                                         NSString *recommender = [dict objectForKey:@"fullname"];
+                                         NSString *body = [[dict objectForKey:@"body"] trim];
+                                         NSString *hostOrGuest = [dict objectForKey:@"field_guest_or_host_value"];
+                                         NSNumber *recommendationDate = [dict objectForKey:@"field_hosting_date_value"];
+                                         
+                                         NSNumber *nid = [NSNumber numberWithInteger:[snid integerValue]];
+                                         NSDate *rDate = [NSDate dateWithTimeIntervalSince1970:[recommendationDate doubleValue]];
+                                         
+                                         Feedback *feedback = [Feedback feedbackWithID:nid];
+                                         [feedback setBody:body];
+                                         [feedback setFullname:recommender];
+                                         [feedback setHostOrGuest:hostOrGuest];
+                                         [feedback setDate:rDate];
+                                         
+                                         [host addFeedbackObject:feedback];
+                                     }
+                                     
+                                     [Feedback commit];
+                                     
+                                 }
+                                 failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                     // NSHTTPURLResponse *response = (NSHTTPURLResponse *)[task response];
+                                     
+                                 }];
+}
+
+
++(void)searchHostsWithKeyword:(NSString *)keyword {
+    NSString *path = @"/services/rest/hosts/by_keyword";
+    
+    NSDictionary *parms = @{
+                            @"keyword" : keyword,
+                            @"limit" : @5,
+                            @"page" : @0
+                            };
+    
+    [[WSHTTPClient sharedHTTPClient] POST:path
+                               parameters:parms
+                                  success:^(NSURLSessionDataTask *task, id responseObject) {
+                                      NSLog(@"%@", responseObject);
+                                      NSArray *hosts = [[responseObject objectForKey:@"accounts"] allObjects];
+                                      
+                                      for (NSDictionary *dict in hosts) {
+                                         // create a general function for consuming this data
+                                      }
+                                      
+                                  }
+                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                      
+                                  }];
+    
 }
 
 @end

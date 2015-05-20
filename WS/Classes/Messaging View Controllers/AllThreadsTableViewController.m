@@ -41,13 +41,19 @@ static NSString *CellIdentifier = @"ThreadsTableCell";
                 NSNumber *threadid = @([[dict objectForKey:@"thread_id"] intValue]);
                 NSString *subject = [dict objectForKey:@"subject"];
                 NSArray *participants = [dict objectForKey:@"participants"];
+                NSNumber *is_new= @([[dict objectForKey:@"is_new"] intValue]);
+//                NSNumber *count = [NSNumber numberWithInt:0]; // @([[dict objectForKey:@"count"] intValue]);
+                
+                NSNumber *count = @([[dict objectForKey:@"count"] intValue]);
+                
                 
                 Thread *thread = [Thread newOrExistingEntityWithPredicate:[NSPredicate predicateWithFormat:@"threadid=%d", [threadid intValue]]];
                 
                 [thread setThreadid:threadid];
                 [thread setSubject:subject];
-                
+                [thread setIs_new:is_new];
                 [thread setParticipants:nil];
+                [thread setCount:count];
                 
                 for (NSDictionary *participant in participants) {
                     NSNumber *hostid = @([[participant objectForKey:@"uid"] intValue]);
@@ -76,7 +82,10 @@ static NSString *CellIdentifier = @"ThreadsTableCell";
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Thread *thread = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell.textLabel setText:thread.subject];
+
+    NSString *title = [NSString stringWithFormat:@"%@ (%ld)", thread.subject, (long)[thread.count integerValue]];
+    
+    [cell.textLabel setText:title];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     NSArray *participants = [thread.participants allObjects];
@@ -96,18 +105,13 @@ static NSString *CellIdentifier = @"ThreadsTableCell";
         
     Thread *thread = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    SingleThreadTableViewController *controller = [[SingleThreadTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    SingleThreadTableViewController *controller = [[SingleThreadTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [controller setThread:thread];
-    
-    
-    // [self.navigationController pushViewController:controller animated:YES];
-   
+
     
     UISplitViewController *split = self.splitViewController;
     
     [split showDetailViewController:[controller wrapInNavigationController] sender:nil];
-    
-   // [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 

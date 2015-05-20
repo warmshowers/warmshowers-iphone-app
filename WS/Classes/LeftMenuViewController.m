@@ -13,6 +13,7 @@
 #import "FavouriteHostTableViewController.h"
 #import "AllThreadsTableViewController.h"
 #import "WSAppDelegate.h"
+#import "RHAboutViewController.h"
 
 @interface LeftMenuViewController ()
 @property (nonatomic, strong) RHTableView *tableView;
@@ -24,11 +25,11 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setTitle:NSLocalizedString(@"Warmshowers", nil)];
+    [self setTitle:NSLocalizedString(@"Warm Showers", nil)];
     
     //   [self.tableView setDeselectRowAfterSelect:NO];
     
-    [self.tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Warmshowers", nil)];
+    [self.tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Find a Host", nil)];
     
     __weak LeftMenuViewController *bself = self;
     
@@ -78,7 +79,7 @@
     
     
     
-    /*
+    
     [self.tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Messages", nil)];
     
     cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"Inbox", nil)
@@ -101,7 +102,7 @@
                                         image:nil
                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator];
     [self.tableView addCell:cell];
-    */
+    
     
     [self.tableView addSectionWithSectionHeaderText:nil];
     
@@ -109,8 +110,17 @@
     cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"About", nil)
                               detailLabelText:nil
                                didSelectBlock:^{
-                                   [bself.slidingViewController resetTopViewAnimated:YES];
                                    
+                                   
+                                   RHAboutViewController *controller = [[RHAboutViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                                   UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+                                   
+                                  // navController.modalTransitionStyle   = UIModalTransitionStyleFlipHorizontal;
+                                   navController.modalPresentationStyle = UIModalPresentationFormSheet;
+                                   
+                                   [bself presentViewController:navController animated:YES completion:nil];
+                                   
+                                   [bself.slidingViewController resetTopViewAnimated:YES];
                                }
                                         style:UITableViewCellStyleDefault
                                         image:nil

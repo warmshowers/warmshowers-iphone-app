@@ -23,7 +23,7 @@
 -(NSString *)title;
 -(NSString *)subtitle;
 
--(void)updateDistanceFromLocation:(CLLocation *)_location;
+-(void)updateDistanceFromLocation:(CLLocation *)location;
 
 -(NSString *)infoURL;
 -(NSString *)imageURL;

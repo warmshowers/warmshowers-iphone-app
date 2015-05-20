@@ -46,12 +46,14 @@
     self.lastZoomLevel = [self.mapView zoomLevel];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redrawAnnotations) name:kShouldRedrawMapAnnotation object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authenticationChanged:) name:kAuthenticationStatusChangedNotificationName object:nil];
+
     
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     [self.clusteringController setDelegate:self];
     
     [self redrawAnnotations];
+    
+    
 }
 
 
@@ -69,6 +71,7 @@
         
         self.hasRunOnce = YES;
     }
+    
 }
 
 -(void)logoutActionSheet:(id)sender {
@@ -262,14 +265,6 @@
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     
     [self.navigationController presentViewController:navController animated:YES completion:nil];
-}
-
--(void)authenticationChanged:(id)notification {
-    if ([[WSAppDelegate sharedInstance] isLoggedIn]) {
-        [self redrawAnnotations];
-    } else {
-        [self.mapView removeAnnotations:[self.mapView annotations]];
-    }
 }
 
 -(IBAction)mapTypeSegmentedControl:(UISegmentedControl *)sender {

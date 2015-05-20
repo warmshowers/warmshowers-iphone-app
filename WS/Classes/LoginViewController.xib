@@ -8,6 +8,9 @@
             <connections>
                 <outlet property="contentView" destination="j5i-IC-MIr" id="QPD-Lr-ahQ"/>
                 <outlet property="loginButton" destination="UX3-zf-xRQ" id="M0J-u9-ZeQ"/>
+                <outlet property="passwordTextField" destination="TTz-ze-QIw" id="a4k-ny-GZO"/>
+                <outlet property="scrunchView" destination="j5i-IC-MIr" id="UWh-c8-LMj"/>
+                <outlet property="usernameTextField" destination="API-e5-408" id="jHJ-xw-e3e"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,58 +19,77 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j5i-IC-MIr" userLabel="ContentView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j5i-IC-MIr" userLabel="ContentView" customClass="RHKeyboardScrunchView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="API-e5-408" userLabel="Username">
-                            <rect key="frame" x="10" y="231" width="300" height="30"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="API-e5-408" userLabel="Username" customClass="RHTextField">
+                            <rect key="frame" x="10" y="224" width="300" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="300" id="4vR-BS-zQE"/>
-                                <constraint firstAttribute="height" constant="30" id="Ia8-pd-UgC"/>
+                                <constraint firstAttribute="height" constant="35" id="Ia8-pd-UgC"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TTz-ze-QIw" userLabel="Password">
-                            <rect key="frame" x="10" y="269" width="300" height="30"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TTz-ze-QIw" userLabel="Password" customClass="RHTextField">
+                            <rect key="frame" x="10" y="267" width="300" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="300" id="fPI-7I-EPr"/>
-                                <constraint firstAttribute="height" constant="30" id="tmf-nj-wD6"/>
+                                <constraint firstAttribute="height" constant="35" id="tmf-nj-wD6"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UX3-zf-xRQ" customClass="BButton">
-                            <rect key="frame" x="10" y="307" width="300" height="30"/>
+                            <rect key="frame" x="10" y="310" width="300" height="35"/>
                             <constraints>
+                                <constraint firstAttribute="height" constant="35" id="mVv-5A-sqg"/>
                                 <constraint firstAttribute="width" constant="300" id="sDh-JB-1FC"/>
                             </constraints>
                             <state key="normal" title="Log in">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="loginButtonTapped:" destination="-1" eventType="touchUpInside" id="jXr-6H-3C4"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PiL-Mz-Yj3">
                             <rect key="frame" x="20" y="528" width="280" height="30"/>
-                            <state key="normal" title="Sign up for Warmshowers">
+                            <state key="normal" title="Learn about Warm Showers">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="learnAboutButtonTapped:" destination="-1" eventType="touchUpInside" id="NQH-fl-atq"/>
+                            </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ws.png" translatesAutoresizingMaskIntoConstraints="NO" id="oES-sl-Few">
-                            <rect key="frame" x="110" y="75" width="100" height="100"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ws.png" translatesAutoresizingMaskIntoConstraints="NO" id="oES-sl-Few">
+                            <rect key="frame" x="110" y="116" width="100" height="100"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="cVR-pc-ISq"/>
                                 <constraint firstAttribute="height" constant="100" id="sZ6-Ll-AAd"/>
                             </constraints>
                         </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nH8-SD-7Q8">
+                            <rect key="frame" x="20" y="490" width="280" height="30"/>
+                            <state key="normal" title="Create an account">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="createAccountButtonTapped:" destination="-1" eventType="touchUpInside" id="eaE-FL-oIi"/>
+                            </connections>
+                        </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="PiL-Mz-Yj3" secondAttribute="trailing" constant="20" symbolic="YES" id="2ho-P8-zD2"/>
                         <constraint firstAttribute="centerX" secondItem="TTz-ze-QIw" secondAttribute="centerX" id="2hv-Je-qrs"/>
+                        <constraint firstAttribute="trailing" secondItem="nH8-SD-7Q8" secondAttribute="trailing" constant="20" symbolic="YES" id="3xN-6e-gZn"/>
+                        <constraint firstItem="PiL-Mz-Yj3" firstAttribute="top" secondItem="nH8-SD-7Q8" secondAttribute="bottom" constant="8" symbolic="YES" id="BjZ-W4-9Gb"/>
                         <constraint firstAttribute="centerX" secondItem="API-e5-408" secondAttribute="centerX" id="Ho2-PX-70s"/>
                         <constraint firstAttribute="bottom" secondItem="PiL-Mz-Yj3" secondAttribute="bottom" constant="10" id="W1I-BY-0oe"/>
                         <constraint firstAttribute="centerX" secondItem="UX3-zf-xRQ" secondAttribute="centerX" id="YRC-IF-R6G"/>
+                        <constraint firstItem="nH8-SD-7Q8" firstAttribute="leading" secondItem="j5i-IC-MIr" secondAttribute="leading" constant="20" id="d0D-Bg-GaA"/>
                         <constraint firstItem="API-e5-408" firstAttribute="top" secondItem="oES-sl-Few" secondAttribute="bottom" constant="8" symbolic="YES" id="eb5-uN-81I"/>
                         <constraint firstAttribute="centerY" secondItem="TTz-ze-QIw" secondAttribute="centerY" id="fvN-TB-fIE"/>
                         <constraint firstAttribute="centerX" secondItem="oES-sl-Few" secondAttribute="centerX" id="gj9-ZC-rQo"/>
@@ -84,7 +106,7 @@
                 <constraint firstItem="j5i-IC-MIr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" placeholder="YES" id="FZK-RS-uuk"/>
                 <constraint firstItem="j5i-IC-MIr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" placeholder="YES" id="z2N-es-NsT"/>
             </constraints>
-            <point key="canvasLocation" x="362" y="379"/>
+            <point key="canvasLocation" x="101" y="314"/>
         </view>
     </objects>
     <resources>

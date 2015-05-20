@@ -10,4 +10,6 @@
 
 @interface Thread : _Thread
 
+-(void)refresh;
+
 @end

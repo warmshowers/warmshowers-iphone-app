@@ -12,12 +12,9 @@
 
 @implementation FavouriteHostTableViewController
 
--(id)initWithStyle:(UITableViewStyle)style {
-	if (self=[super initWithStyle:style]) {
-        self.title = @"Favourites";
-    }
- 
-	return self;
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = NSLocalizedString(@"Favourites", nil);
 }
 
 -(void)updateDistances {

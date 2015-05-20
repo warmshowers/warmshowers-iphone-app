@@ -13,7 +13,6 @@
 #import "HostMapViewController.h"
 #import "HostTableViewController.h"
 #import "FavouriteHostTableViewController.h"
-#import "RHPromptForReview.h"
 #import "SVProgressHUD.h"
 #import "Host.h"
 #import "WSHTTPClient.h"
@@ -26,10 +25,7 @@
 
 @interface WSAppDelegate ()
 @property (nonatomic, strong) ECSlidingViewController *slidingViewController;
-@property (nonatomic, assign) BOOL isPresentingLoginPrompt;
 -(NSArray *)segmentViewControllers;
--(void)loginSuccess;
--(void)logout;
 -(void)promptForUsernameAndPassword;
 @end
 
@@ -119,8 +115,6 @@
 }
 
 -(BOOL)postApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
     LeftMenuViewController *leftMenuViewController = [[LeftMenuViewController alloc] init];
     
     self.slidingViewController = [ECSlidingViewController slidingWithTopViewController:[leftMenuViewController.hostMapViewController wrapInNavigationController]];
@@ -129,23 +123,21 @@
     self.slidingViewController.anchorRightRevealAmount = 280.0f;
     
     
+    [self.window setTintColor:kWSBaseColour];
     self.window.rootViewController = self.slidingViewController;
+    
     
     [self.window makeKeyAndVisible];
     
-    [[NSDate formatter] setTimeStyle:NSDateFormatterNoStyle];
+    // [[NSDate formatter] setTimeStyle:NSDateFormatterNoStyle];
     
     // is this the right place for this?
     [self.navigationController setToolbarHidden:NO];
     
     
-    [self setIsPresentingLoginPrompt:NO];
     
-    if ([self isLoggedIn]) {
-        [RHPromptForReview sharedInstance];
-    } else {
-        [self logout];
-    }
+    
+    [self autologin];
     
     return YES;
 }
@@ -188,105 +180,43 @@
     return [self.locationManager location];
 }
 
+// does this belong here?
 -(void)autologin {
+    NSLog(@"%@", @"Auto Login Called");
     if (self.isLoggedIn) {
-        [self setIsLoggedIn:NO];
-
         [WSRequests loginWithUsername:[self username]
                              password:[self password]
                               success:^(NSURLSessionDataTask *task, id responseObject) {
-                                  [self setIsLoggedIn:YES];
+                                  [self loginSuccess];
                               }
                               failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                  [[WSAppDelegate sharedInstance] autologin];
+                                  [[WSAppDelegate sharedInstance] logout];
                               }];
     } else {
-        [self presentLoginPrompt];
+        [self logout];
     }
 }
 
 
 #pragma mark Authentication
 -(void)presentLoginPrompt {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self promptForUsernameAndPassword];
-    });
+    [self promptForUsernameAndPassword];
 }
 
 -(void)loginSuccess {
     [self setIsLoggedIn:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAuthenticationStatusChangedNotificationName object:nil userInfo:nil];
     [self requestLocationAuthorization];
 }
 
 -(void)logout {
     [self setIsLoggedIn:NO];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAuthenticationStatusChangedNotificationName object:nil userInfo:nil];
     [self presentLoginPrompt];
 }
 
 -(void)promptForUsernameAndPassword {
-    
     LoginViewController *loginController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-    
-    [loginController setModalPresentationStyle:UIModalPresentationFormSheet];
-    
+    [loginController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     [self.slidingViewController presentViewController:loginController animated:YES completion:nil];
-    
-    /*
-    RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warmshowers Login", nil) message:NSLocalizedString(@"Enter your username and password:", nil)];
-    [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-    
-    NSString *name = [self username];
-    [[alert textFieldAtIndex:0] setText:name];
-    
-    __weak RHAlertView *bAlert = alert;
-    
-    [alert addButtonWithTitle:NSLocalizedString(@"Sign Up", nil) block:^{
-        RHAlertView *alert2 = [RHAlertView alertWithTitle:@"Warmshowers Sign Up" message:NSLocalizedString(@"You will be redirected to the sign up page on Warmshowers.org.", nil)];
-        
-        [alert2 addButtonWithTitle:kCancel block:^{
-            [self logout];
-        }];
-        
-        [alert2 addButtonWithTitle:kOK block:^{
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.warmshowers.org/user/register"]];
-            [self logout];
-        }];
-        
-        [alert2 show];
-    }];
-    
-    [alert addButtonWithTitle:NSLocalizedString(@"Login", nil) block:^{
-        NSString *name = [[bAlert textFieldAtIndex:0] text];
-        NSString *password = [[bAlert textFieldAtIndex:1] text];
-        
-        [self setUsername:name];
-        [self setPassword:password];
-        
-        [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeBlack];
-        
-        [WSRequests loginWithUsername:[self username]
-                             password:[self password]
-                              success:^(NSURLSessionDataTask *task, id responseObject) {
-                                  [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
-
-                                   [self loginSuccess];
-                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                  RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warmshowers", nil)
-                                                                           message:NSLocalizedString(@"Login failed. Please check your username and password and try again. If you don't have an account you can tap the Sign Up button to register.", nil)];
-                                  
-                                  [alert addButtonWithTitle:kOK block:^{
-                                      [self logout];
-                                  }];
-                                  
-                                  [alert show];
-                              }];
-        
-    }];
-    
-    [alert show];
-     */
 }
 
 @end

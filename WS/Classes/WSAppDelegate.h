@@ -6,8 +6,8 @@
 //  Copyright 2010 Red House Consulting GmbH. All rights reserved.
 //
 
+#define kWSBaseColour [UIColor colorFromHexString:@"2196F3"]
 #define kShouldRedrawMapAnnotation @"ShouldRedrawMapAnnotations"
-#define kAuthenticationStatusChangedNotificationName @"AuthenticationHasChanged"
 #define kNetworkError @"Check your network connection"
 
 #import <MapKit/MapKit.h>
@@ -30,6 +30,9 @@
 -(void)setPassword:(NSString *)password;
 -(BOOL)isLoggedIn;
 -(void)setIsLoggedIn:(BOOL)isLoggedIn;
+
+-(void)loginSuccess;
+-(void)logout;
 
 -(void)presentLoginPrompt;
 -(void)logout;

@@ -5,6 +5,7 @@
 
 const struct ThreadAttributes ThreadAttributes = {
 	.count = @"count",
+	.is_new = @"is_new",
 	.subject = @"subject",
 	.threadid = @"threadid",
 };
@@ -45,6 +46,11 @@ const struct ThreadRelationships ThreadRelationships = {
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
+	if ([key isEqualToString:@"is_newValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"is_new"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"threadidValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"threadid"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -72,6 +78,26 @@ const struct ThreadRelationships ThreadRelationships = {
 
 - (void)setPrimitiveCountValue:(int32_t)value_ {
 	[self setPrimitiveCount:[NSNumber numberWithInt:value_]];
+}
+
+@dynamic is_new;
+
+- (BOOL)is_newValue {
+	NSNumber *result = [self is_new];
+	return [result boolValue];
+}
+
+- (void)setIs_newValue:(BOOL)value_ {
+	[self setIs_new:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveIs_newValue {
+	NSNumber *result = [self primitiveIs_new];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveIs_newValue:(BOOL)value_ {
+	[self setPrimitiveIs_new:[NSNumber numberWithBool:value_]];
 }
 
 @dynamic subject;

@@ -13,6 +13,7 @@
 +(WSHTTPClient *)sharedHTTPClient;
 -(BOOL)reachable;
 -(void)cancelAllOperations;
+-(BOOL)hasWSSessionCookie;
 -(void)deleteCookies;
 
 @end

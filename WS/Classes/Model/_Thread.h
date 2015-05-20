@@ -6,6 +6,7 @@
 
 extern const struct ThreadAttributes {
 	__unsafe_unretained NSString *count;
+	__unsafe_unretained NSString *is_new;
 	__unsafe_unretained NSString *subject;
 	__unsafe_unretained NSString *threadid;
 } ThreadAttributes;
@@ -34,6 +35,14 @@ extern const struct ThreadRelationships {
 - (void)setCountValue:(int32_t)value_;
 
 //- (BOOL)validateCount:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSNumber* is_new;
+
+@property (atomic) BOOL is_newValue;
+- (BOOL)is_newValue;
+- (void)setIs_newValue:(BOOL)value_;
+
+//- (BOOL)validateIs_new:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSString* subject;
 
@@ -80,6 +89,12 @@ extern const struct ThreadRelationships {
 
 - (int32_t)primitiveCountValue;
 - (void)setPrimitiveCountValue:(int32_t)value_;
+
+- (NSNumber*)primitiveIs_new;
+- (void)setPrimitiveIs_new:(NSNumber*)value;
+
+- (BOOL)primitiveIs_newValue;
+- (void)setPrimitiveIs_newValue:(BOOL)value_;
 
 - (NSString*)primitiveSubject;
 - (void)setPrimitiveSubject:(NSString*)value;

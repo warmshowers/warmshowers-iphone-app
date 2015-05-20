@@ -154,7 +154,7 @@
 -(void)sendButtonPressed:(id)sender {
     
     NSString *subject = self.subjectTextField.text;
-    NSString *message = [NSString stringWithFormat:@"%@\n\nSent from the <a href='http://itunes.com/apps/warmshowers'>Warmshowers App for iPhone/iPad</a>", self.textView.text];
+    NSString *message = [NSString stringWithFormat:@"%@\n\nSent from the <a href='http://itunes.com/apps/warmshowers'>Warm Showers App for iPhone/iPad</a>", self.textView.text];
     
     if ([subject length] == 0) {
         // [RHNotificationView notificationMessage:@"Subject is required" withNavigationController:self.navigationController];

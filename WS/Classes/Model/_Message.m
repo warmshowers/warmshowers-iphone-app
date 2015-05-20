@@ -6,6 +6,7 @@
 const struct MessageAttributes MessageAttributes = {
 	.body = @"body",
 	.mid = @"mid",
+	.timestamp = @"timestamp",
 };
 
 const struct MessageRelationships MessageRelationships = {
@@ -69,6 +70,8 @@ const struct MessageRelationships MessageRelationships = {
 - (void)setPrimitiveMidValue:(int32_t)value_ {
 	[self setPrimitiveMid:[NSNumber numberWithInt:value_]];
 }
+
+@dynamic timestamp;
 
 @dynamic author;
 

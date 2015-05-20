@@ -7,7 +7,8 @@
 //
 
 #import "LoginViewController.h"
-
+#import "WSRequests.h"
+#import "WSAppDelegate.h"
 
 @interface LoginViewController ()
 @property (nonatomic, strong) NSLayoutConstraint *bottomConstraint;
@@ -19,65 +20,80 @@
     [super viewDidLoad];
     
     [self.loginButton setType:BButtonTypePrimary];
+    [self.scrunchView setBackgroundColor:kWSBaseColour];
+    __weak LoginViewController *bself = self;
     
-    /* Create constraints explicitly.  Constraints are of the form "view1.attr1 = view2.attr2 * multiplier + constant"
-     If your equation does not have a second view and attribute, use nil and NSLayoutAttributeNotAnAttribute.
-     */
-    /*
-     +(instancetype)constraintWithItem:(id)view1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toItem:(id)view2 attribute:(NSLayoutAttribute)attr2 multiplier:(CGFloat)multiplier constant:(CGFloat)c;
-     */
+    [self.usernameTextField setText:[[WSAppDelegate sharedInstance] username]];
     
-    self.bottomConstraint = [NSLayoutConstraint
-                             constraintWithItem:self.view
-                             attribute:NSLayoutAttributeBottom
-                             relatedBy:NSLayoutRelationEqual
-                             toItem:self.contentView
-                             attribute:NSLayoutAttributeBottom
-                             multiplier:1.0f
-                             constant:0];
+    [self.usernameTextField setShouldReturnBlock:^BOOL(RHTextField *textField) {
+        [bself.passwordTextField becomeFirstResponder];
+        return YES;
+    }];
     
-    
-    [self.view addConstraint:self.bottomConstraint];
-    
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0]];
-    
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeRight multiplier:1.0f constant:0]];
-    
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0f constant:0]];
-    
-    
-  //  [self.contentView setBackgroundColor:[UIColor greenColor]];
-    
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
-    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateView) name:UITextFieldTextDidBeginEditingNotification object:nil];
-}
-
--(void)keyboardDidChangeFrame:(NSNotification *)notification {
-    NSDictionary *userInfo = [notification userInfo];
-    CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    CGRect keyboardFrame = [self.view convertRect:keyboardEndFrame fromView:nil];
-    
-    self.bottomConstraint.constant = (self.view.height-keyboardFrame.origin.y);
-    [self.view setNeedsUpdateConstraints];
-    
-    
-    
-    NSTimeInterval animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    UIViewAnimationOptions animationCurve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue];
-    
-    [UIView animateWithDuration:animationDuration
-                          delay:0
-                        options:animationCurve
-                     animations:^{
-                         [self.view layoutIfNeeded];
-                     }
-                     completion:nil];
+    [self.passwordTextField setShouldReturnBlock:^BOOL(RHTextField *textField) {
+        [bself loginButtonTapped:nil];
+        return YES;
+    }];
     
 }
 
+// things get tight when the keyboard shows on the iPhone in landscape mode
+-(NSUInteger)supportedInterfaceOrientations {
+    if IsIPhone {
+        return UIInterfaceOrientationMaskPortrait;
+    } else {
+        return UIInterfaceOrientationMaskAll;
+    }
+    
+}
+
+-(IBAction)loginButtonTapped:(id)sender {
+    
+    NSString *username = self.usernameTextField.text;
+    NSString *password = self.passwordTextField.text;
+    
+    [self.usernameTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+    
+    __weak LoginViewController *bself = self;
+    
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeBlack];
+    
+    [WSRequests loginWithUsername:username
+                         password:password
+                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                              
+                              [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
+                              
+                              [[WSAppDelegate sharedInstance] setUsername:username];
+                              [[WSAppDelegate sharedInstance] setPassword:password];
+                              [[WSAppDelegate sharedInstance] loginSuccess];
+                              
+                              [bself dismissViewControllerAnimated:YES completion:^{
+                                  
+                              }];
+                              
+                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                              [SVProgressHUD dismiss];
+                              RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warm Showers", nil)
+                                                                       message:NSLocalizedString(@"Login failed. Please check your username and password and try again. If you don't have an account you can tap the Sign Up button to register.", nil)];
+                              
+                              [alert addButtonWithTitle:kOK block:^{
+                                  //  [self logout];
+                              }];
+                              
+                              [alert show];
+                          }];
+    
+}
+
+-(IBAction)createAccountButtonTapped:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.warmshowers.org/user/register"]];
+}
+
+-(IBAction)learnAboutButtonTapped:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.warmshowers.org/faq"]];
+}
 
 
 @end
