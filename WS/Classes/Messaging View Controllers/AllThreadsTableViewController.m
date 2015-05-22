@@ -85,6 +85,7 @@ static NSString *CellIdentifier = @"ThreadsTableCell";
 
     NSString *title = [NSString stringWithFormat:@"%@ (%ld)", thread.subject, (long)[thread.count integerValue]];
     
+    
     [cell.textLabel setText:title];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     

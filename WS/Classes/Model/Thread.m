@@ -17,8 +17,6 @@
     return @"WS";
 }
 
-
-
 -(void)refresh {
     NSString *path = @"/services/rest/message/getThread";
     NSDictionary *parameters =  @{
