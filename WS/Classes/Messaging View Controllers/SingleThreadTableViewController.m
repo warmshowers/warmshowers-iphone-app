@@ -25,7 +25,7 @@ static NSString *CellIdentifier = @"SingleThreadTableCell";
     [self setTitle:self.thread.subject];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageTableViewCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
-    [self.tableView setHeight:UITableViewAutomaticDimension];
+    [self.tableView setRowHeight:UITableViewAutomaticDimension];
     [self.tableView setEstimatedRowHeight:44];
     
    
