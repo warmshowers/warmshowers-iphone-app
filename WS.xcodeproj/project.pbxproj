@@ -29,8 +29,6 @@
 		28C286E10D94DF7D0034E888 /* HostMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* HostMapViewController.m */; };
 		3102391F8DDD4D1FAC5382A5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D09F2CAA216B49BAA5EEDCA7 /* libPods.a */; };
 		832198911AFFF49B0041A72F /* SingleThreadTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 832198901AFFF49B0041A72F /* SingleThreadTableViewController.m */; };
-		8329380C1B09273600D3F245 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8329380A1B09273600D3F245 /* MessageTableViewCell.m */; };
-		8329380D1B09273600D3F245 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8329380B1B09273600D3F245 /* MessageTableViewCell.xib */; };
 		8330B481126A0775008B2EC4 /* WSRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8330B480126A0775008B2EC4 /* WSRequests.m */; };
 		833198E41B02717C008E76F0 /* ios7-information-outline.png in Resources */ = {isa = PBXBuildFile; fileRef = 833198E21B02717C008E76F0 /* ios7-information-outline.png */; };
 		833198E51B02717C008E76F0 /* ios7-information-outline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 833198E31B02717C008E76F0 /* ios7-information-outline@2x.png */; };
@@ -56,7 +54,7 @@
 		838E22F11894037B0097A831 /* ws-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 838E22EF1894037B0097A831 /* ws-50.png */; };
 		838E22F21894037B0097A831 /* ws-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 838E22F01894037B0097A831 /* ws-50@2x.png */; };
 		839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */; };
-		83B3348F1B046DE900A2A1FB /* ContactHostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83B3348E1B046DE900A2A1FB /* ContactHostViewController.xib */; };
+		83B3348F1B046DE900A2A1FB /* ComposeMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83B3348E1B046DE900A2A1FB /* ComposeMessageViewController.xib */; };
 		83B334941B046F2600A2A1FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83B334921B046F2600A2A1FB /* Localizable.strings */; };
 		83BE50B6126B4E7B00B5A65A /* HostInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BE50B4126B4E7B00B5A65A /* HostInfoViewController.m */; };
 		83BF0ECA1B07895D00972204 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8348AE351872A0CF0097DF24 /* StoreKit.framework */; };
@@ -81,7 +79,7 @@
 		83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1515EBD11B00761BC6 /* trackmytour.png */; };
 		83F00E1815EBD11B00761BC6 /* trackmytour@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */; };
 		83F00E1B15EBD3FE00761BC6 /* NSString+analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E1A15EBD3FE00761BC6 /* NSString+analytics.m */; };
-		83F8C187152B8B280084E380 /* ContactHostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F8C185152B8B280084E380 /* ContactHostViewController.m */; };
+		83F8C187152B8B280084E380 /* ComposeMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F8C185152B8B280084E380 /* ComposeMessageViewController.m */; };
 		83FBB25E148B6FDB002042B0 /* RHWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FBB25D148B6FDB002042B0 /* RHWebViewController.m */; };
 		83FFC5F316187AC300158C5F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8330B4C8126A092E008B2EC4 /* SystemConfiguration.framework */; };
 		83FFC5F416187B7D00158C5F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28860BE40F44EE6400985440 /* CoreData.framework */; };
@@ -103,9 +101,6 @@
 		3B04C42F3B42643FDA03D2FB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8321988F1AFFF49B0041A72F /* SingleThreadTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleThreadTableViewController.h; sourceTree = "<group>"; };
 		832198901AFFF49B0041A72F /* SingleThreadTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleThreadTableViewController.m; sourceTree = "<group>"; };
-		832938091B09273600D3F245 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
-		8329380A1B09273600D3F245 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
-		8329380B1B09273600D3F245 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		8330B47F126A0775008B2EC4 /* WSRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSRequests.h; sourceTree = "<group>"; };
 		8330B480126A0775008B2EC4 /* WSRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSRequests.m; sourceTree = "<group>"; };
 		8330B4C8126A092E008B2EC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -145,7 +140,7 @@
 		83A4D2AB1B0472B4008ACB08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		83A4D2AC1B0472DE008ACB08 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		83A4D2AD1B0472E3008ACB08 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		83B3348E1B046DE900A2A1FB /* ContactHostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactHostViewController.xib; sourceTree = "<group>"; };
+		83B3348E1B046DE900A2A1FB /* ComposeMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ComposeMessageViewController.xib; path = "../Host View Controllers/ComposeMessageViewController.xib"; sourceTree = "<group>"; };
 		83BE50B3126B4E7B00B5A65A /* HostInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostInfoViewController.h; sourceTree = "<group>"; };
 		83BE50B4126B4E7B00B5A65A /* HostInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostInfoViewController.m; sourceTree = "<group>"; };
 		83C78E7E1474DE3D00274616 /* CLLocation+Bearing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+Bearing.h"; sourceTree = "<group>"; };
@@ -182,8 +177,8 @@
 		83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trackmytour@2x.png"; sourceTree = "<group>"; };
 		83F00E1915EBD3FE00761BC6 /* NSString+analytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+analytics.h"; sourceTree = "<group>"; };
 		83F00E1A15EBD3FE00761BC6 /* NSString+analytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+analytics.m"; sourceTree = "<group>"; };
-		83F8C184152B8B280084E380 /* ContactHostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactHostViewController.h; sourceTree = "<group>"; };
-		83F8C185152B8B280084E380 /* ContactHostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactHostViewController.m; sourceTree = "<group>"; };
+		83F8C184152B8B280084E380 /* ComposeMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComposeMessageViewController.h; path = "../Host View Controllers/ComposeMessageViewController.h"; sourceTree = "<group>"; };
+		83F8C185152B8B280084E380 /* ComposeMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComposeMessageViewController.m; path = "../Host View Controllers/ComposeMessageViewController.m"; sourceTree = "<group>"; };
 		83FBB25C148B6FDB002042B0 /* RHWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHWebViewController.h; sourceTree = "<group>"; };
 		83FBB25D148B6FDB002042B0 /* RHWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHWebViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* WS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WS-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -384,13 +379,13 @@
 		83E7FF7A1AFEB8F2000FCAF7 /* Messaging View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				83F8C184152B8B280084E380 /* ComposeMessageViewController.h */,
+				83F8C185152B8B280084E380 /* ComposeMessageViewController.m */,
+				83B3348E1B046DE900A2A1FB /* ComposeMessageViewController.xib */,
 				83E7FF771AFEB8E5000FCAF7 /* AllThreadsTableViewController.h */,
 				83E7FF781AFEB8E5000FCAF7 /* AllThreadsTableViewController.m */,
 				8321988F1AFFF49B0041A72F /* SingleThreadTableViewController.h */,
 				832198901AFFF49B0041A72F /* SingleThreadTableViewController.m */,
-				832938091B09273600D3F245 /* MessageTableViewCell.h */,
-				8329380A1B09273600D3F245 /* MessageTableViewCell.m */,
-				8329380B1B09273600D3F245 /* MessageTableViewCell.xib */,
 			);
 			path = "Messaging View Controllers";
 			sourceTree = "<group>";
@@ -416,9 +411,6 @@
 				83CE1360147455CB006EED95 /* FavouriteHostTableViewController.m */,
 				83BE50B3126B4E7B00B5A65A /* HostInfoViewController.h */,
 				83BE50B4126B4E7B00B5A65A /* HostInfoViewController.m */,
-				83F8C184152B8B280084E380 /* ContactHostViewController.h */,
-				83F8C185152B8B280084E380 /* ContactHostViewController.m */,
-				83B3348E1B046DE900A2A1FB /* ContactHostViewController.xib */,
 				83CDACDE160A310000B5DC83 /* FeedbackTableViewController.h */,
 				83CDACDF160A310000B5DC83 /* FeedbackTableViewController.m */,
 			);
@@ -509,7 +501,6 @@
 				8348AE431872C2360097DF24 /* ios7-navigate-outline@2x.png in Resources */,
 				836CCF0114ABB3D1000EDC51 /* HostMapViewController.xib in Resources */,
 				838E22F21894037B0097A831 /* ws-50@2x.png in Resources */,
-				8329380D1B09273600D3F245 /* MessageTableViewCell.xib in Resources */,
 				83E205681878B3550067738B /* ws.png in Resources */,
 				836D64AA1893BFA000F0602F /* crittercism.plist in Resources */,
 				833198E41B02717C008E76F0 /* ios7-information-outline.png in Resources */,
@@ -521,7 +512,7 @@
 				838E22F11894037B0097A831 /* ws-50.png in Resources */,
 				8348AE381872A2AD0097DF24 /* Images.xcassets in Resources */,
 				833198E51B02717C008E76F0 /* ios7-information-outline@2x.png in Resources */,
-				83B3348F1B046DE900A2A1FB /* ContactHostViewController.xib in Resources */,
+				83B3348F1B046DE900A2A1FB /* ComposeMessageViewController.xib in Resources */,
 				8355479B1642DFFE00D2A0B5 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -599,9 +590,8 @@
 				83C78E801474DE3D00274616 /* CLLocation+Bearing.m in Sources */,
 				8343CC8F1AFFE2DC00EE3A45 /* Thread.m in Sources */,
 				83FBB25E148B6FDB002042B0 /* RHWebViewController.m in Sources */,
-				8329380C1B09273600D3F245 /* MessageTableViewCell.m in Sources */,
 				836CCF0614ABB3E6000EDC51 /* Host.m in Sources */,
-				83F8C187152B8B280084E380 /* ContactHostViewController.m in Sources */,
+				83F8C187152B8B280084E380 /* ComposeMessageViewController.m in Sources */,
 				83EC1DAF1B01508F003FD77B /* WS.xcdatamodeld in Sources */,
 				83E7FF791AFEB8E5000FCAF7 /* AllThreadsTableViewController.m in Sources */,
 				83F00E1B15EBD3FE00761BC6 /* NSString+analytics.m in Sources */,

@@ -13,7 +13,7 @@
 #import "RHWebViewController.h"
 #import "WSAppDelegate.h"
 #import "NSDate+timesince.h"
-#import "ContactHostViewController.h"
+#import "ComposeMessageViewController.h"
 #import "WSHTTPClient.h"
 #import "FeedbackTableViewController.h"
 #import "MKMapView+Utils.h"
@@ -413,7 +413,7 @@ static NSString *CellIdentifier = @"Cell";
         }];
         
         [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Contact Host", nil) block:^{
-            ContactHostViewController *controller = [[ContactHostViewController alloc] initWithNibName:@"ContactHostViewController" bundle:nil];
+            ComposeMessageViewController *controller = [[ComposeMessageViewController alloc] initWithNibName:@"ComposeMessageViewController" bundle:nil];
             [controller setHost:bHost];
             
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];

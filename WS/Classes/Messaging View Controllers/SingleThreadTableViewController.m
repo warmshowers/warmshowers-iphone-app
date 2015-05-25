@@ -9,7 +9,6 @@
 #import "SingleThreadTableViewController.h"
 #import "Host.h"
 #import "Message.h"
-#import "MessageTableViewCell.h"
 
 static NSString *CellIdentifier = @"SingleThreadTableCell";
 
@@ -24,11 +23,11 @@ static NSString *CellIdentifier = @"SingleThreadTableCell";
     
     [self setTitle:self.thread.subject];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"MessageTableViewCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"RHLabelTableViewCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
+    
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
     [self.tableView setEstimatedRowHeight:44];
     
-   
     [self.thread refresh];
     
 }
@@ -40,11 +39,12 @@ static NSString *CellIdentifier = @"SingleThreadTableCell";
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Message *message = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    MessageTableViewCell *mcell = (MessageTableViewCell *)cell;
+    RHLabelTableViewCell *mcell = (RHLabelTableViewCell *)cell;
 
-    [mcell.bodyLabel setText:[message.body stripHTML]];
-    [mcell.fromLabel setText:message.author.title];
-    [mcell.dateLabel setText:[message.timestamp formatWithLocalTimeZone]];
+   // [mcell.bodyLabel setText:[message.body stripHTML]];
+   // [mcell.fromLabel setText:message.author.title];
+   // [mcell.dateLabel setText:[message.timestamp formatWithLocalTimeZone]];
+    [mcell.label setText:[message.body stripHTML]];
 }
 
 
@@ -89,7 +89,14 @@ static NSString *CellIdentifier = @"SingleThreadTableCell";
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return nil;
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+    Message *msg = [self.fetchedResultsController objectAtIndexPath:indexPath];
+
+    
+    return [NSString stringWithFormat:@"%@: %@ / %@", NSLocalizedString(@"From", nil), msg.author.title, [msg.timestamp formatWithLocalTimeZone]];
+    
+    
 }
 
 @end

@@ -10,6 +10,7 @@
 
 #import "Host.h"
 #import "Message.h"
+#import "WSHTTPClient.h"
 
 @implementation Thread
 
@@ -69,6 +70,21 @@
 
     }];
 
+}
+
+-(void)replyWithBody:(NSString *)body
+             success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure {
+    
+    NSDictionary *params = @{
+                             @"body" : body,
+                             @"thread_id" : self.threadid
+                              };
+    
+    [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/message/reply"
+                               parameters:params
+                                  success:success
+                                  failure:failure];    
 }
 
 @end

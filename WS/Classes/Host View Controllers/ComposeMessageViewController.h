@@ -7,12 +7,11 @@
 //
 @class Host;
 
-@interface ContactHostViewController : UIViewController<UITextViewDelegate>
+@interface ComposeMessageViewController : UIViewController
 
 @property (strong, nonatomic) Host *host;
 
 @property (strong, nonatomic) IBOutlet UILabel *messageToTextLabel;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) IBOutlet UITextField *subjectTextField;
 // @property (strong, nonatomic) UISwipeGestureRecognizer *swipeGesture;

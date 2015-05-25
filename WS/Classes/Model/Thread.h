@@ -11,5 +11,8 @@
 @interface Thread : _Thread
 
 -(void)refresh;
+-(void)replyWithBody:(NSString *)body
+             success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
 @end
