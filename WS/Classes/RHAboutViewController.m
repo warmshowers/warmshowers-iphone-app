@@ -8,7 +8,6 @@
 
 #import "RHAboutViewController.h"
 #import "NSString+analytics.h"
-#import "RHWebViewController.h"
 
 @interface RHAboutViewController ()
 -(UITableViewCell *)headerCell;

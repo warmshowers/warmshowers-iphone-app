@@ -10,13 +10,17 @@
 #import "Host.h"
 
 #import "WSRequests.h"
-#import "RHWebViewController.h"
 #import "WSAppDelegate.h"
 #import "NSDate+timesince.h"
 #import "ComposeMessageViewController.h"
 #import "WSHTTPClient.h"
 #import "FeedbackTableViewController.h"
 #import "MKMapView+Utils.h"
+
+
+@interface HostInfoViewController()
+-(void)presentComposeViewController;
+@end
 
 @implementation HostInfoViewController
 
@@ -30,6 +34,10 @@ static NSString *CellIdentifier = @"Cell";
     
     [self setTitle:NSLocalizedString(@"Host Info", nil)];
     
+    [self.tableView registerClass:[RHTableViewCellStyleValue2 class] forCellReuseIdentifier:CellIdentifier];
+    [self.tableView setTableHeaderView:self.topView];
+    
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                            target:self
                                                                                            action:@selector(showActions:)];
@@ -39,28 +47,32 @@ static NSString *CellIdentifier = @"Cell";
     [self.statusLabel setFont:[UIFont systemFontOfSize:[UIFont smallSystemFontSize]]];
     [self.statusLabel setTextAlignment:NSTextAlignmentCenter];
     
-    UIBarButtonItem *fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    [fixed setWidth:18];
+   // UIBarButtonItem *fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+   // [fixed setWidth:18];
+    
+    __weak HostInfoViewController *bself = self;
+    
+    RHBarButtonItem *compose = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose block:^{
+        [bself presentComposeViewController];
+    }];
     
     NSArray *toolbarItems = [NSArray arrayWithObjects:
                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshHost)],
                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                              [[UIBarButtonItem alloc] initWithCustomView:self.statusLabel],
                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                             fixed,
+                             compose,
                              nil];
     
     
     [self setToolbarItems:toolbarItems animated:YES];
     
-    [self.tableView registerClass:[RHTableViewCellStyleValue2 class] forCellReuseIdentifier:CellIdentifier];
-    
-    [self.tableView setTableHeaderView:self.topView];
+
 }
 
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-  
+    
     NSNumber *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
     NSNumber *newValue = [change objectForKey:NSKeyValueChangeNewKey];
     
@@ -108,7 +120,7 @@ static NSString *CellIdentifier = @"Cell";
     [self.host removeObserver:self forKeyPath:@"notcurrentlyavailable"];
     [self.host setDidUpdateBlock:nil];
     
-     [self.navigationController setToolbarHidden:YES animated:animated];
+    [self.navigationController setToolbarHidden:YES animated:animated];
 }
 
 -(void)refreshHost {
@@ -208,7 +220,7 @@ static NSString *CellIdentifier = @"Cell";
                 }
             } else if (indexPath.row == 2) {
                 cell.textLabel.text = NSLocalizedString(@"Mobile", nil);
-                    cell.detailTextLabel.text = self.host.mobilephone;
+                cell.detailTextLabel.text = self.host.mobilephone;
                 if ((self.host.mobilephone) && IsIPhone) {
                     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
                 } else {
@@ -377,10 +389,11 @@ static NSString *CellIdentifier = @"Cell";
 
 -(void)showActions:(id)sender {
     if (self.host.last_updated_details != nil) {
+        
         RHActionSheet *popoverActionsheet = [[RHActionSheet alloc] init];
         
         __weak Host *bHost = self.host;
-        __weak UINavigationController *bNavController = self.navigationController;
+        __weak HostInfoViewController *bself = self;
         
         if ([self.host.favourite boolValue]) {
             [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Unmark as Favourite", nil) block:^{
@@ -403,25 +416,15 @@ static NSString *CellIdentifier = @"Cell";
             [MKMapView openInMapsWithAnnotation:bHost];
         }];
         
-        [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"View Online", nil) block:^{
-            RHWebViewController *controller = [[RHWebViewController alloc] init];
-            [controller setUrl:[NSURL URLWithString:[bHost infoURL]]];
-            [controller setShouldShowDoneButton:YES];
-            
-            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-            [bNavController presentViewController:navController animated:YES completion:nil];
+        [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Open in Safari", nil) block:^{
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[bHost infoURL]]];
         }];
         
         [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Contact Host", nil) block:^{
-            ComposeMessageViewController *controller = [[ComposeMessageViewController alloc] initWithNibName:@"ComposeMessageViewController" bundle:nil];
-            [controller setHost:bHost];
-            
-            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-            [navController setModalPresentationStyle:UIModalPresentationPageSheet];
-            [bNavController presentViewController:navController animated:YES completion:nil];
+            [bself presentComposeViewController];
         }];
         
-        [popoverActionsheet addCancelButtonWithTitle:kCancel];
+        [popoverActionsheet addCancelButton];
         
         [popoverActionsheet showFromBarButtonItem:sender animated:YES];
     }
@@ -459,6 +462,13 @@ static NSString *CellIdentifier = @"Cell";
     
     return _topView;
     
+}
+
+
+-(void)presentComposeViewController {
+    ComposeMessageViewController *controller = [ComposeMessageViewController controllerWithHost:self.host];
+    UINavigationController *navController = [controller wrapInNavigationControllerWithPresentationStyle:UIModalPresentationPageSheet];
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 @end

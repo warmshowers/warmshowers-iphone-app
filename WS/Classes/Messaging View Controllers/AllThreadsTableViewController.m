@@ -10,6 +10,7 @@
 #import "Thread.h"
 #import "Host.h"
 #import "SingleThreadTableViewController.h"
+#import "WSRequests.h"
 
 static NSString *CellIdentifier = @"ThreadsTableCell";
 
@@ -21,6 +22,7 @@ static NSString *CellIdentifier = @"ThreadsTableCell";
 @implementation AllThreadsTableViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self setTitle:NSLocalizedString(@"Inbox", nil)];
@@ -28,51 +30,13 @@ static NSString *CellIdentifier = @"ThreadsTableCell";
     [self.tableView registerClass:[RHTableViewCellStyleSubtitleLighterDetail class] forCellReuseIdentifier:CellIdentifier];
     
     self.refreshControl = [RHRefreshControl refreshControlWithBlock:^(RHRefreshControl *refreshControl) {
-        NSString *path = @"/services/rest/message/get";
-        
-        [[WSHTTPClient sharedHTTPClient] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-            
-            NSArray *all_ids = [responseObject pluck:@"thread_id"];
-            
-            [Thread deleteWithPredicate:[NSPredicate predicateWithFormat:@"NOT (threadid IN %@)", all_ids]];
-            
-            for (NSDictionary *dict in responseObject) {
-                
-                NSNumber *threadid = @([[dict objectForKey:@"thread_id"] intValue]);
-                NSString *subject = [dict objectForKey:@"subject"];
-                NSArray *participants = [dict objectForKey:@"participants"];
-                NSNumber *is_new= @([[dict objectForKey:@"is_new"] intValue]);
-//                NSNumber *count = [NSNumber numberWithInt:0]; // @([[dict objectForKey:@"count"] intValue]);
-                
-                NSNumber *count = @([[dict objectForKey:@"count"] intValue]);
-                
-                
-                Thread *thread = [Thread newOrExistingEntityWithPredicate:[NSPredicate predicateWithFormat:@"threadid=%d", [threadid intValue]]];
-                
-                [thread setThreadid:threadid];
-                [thread setSubject:subject];
-                [thread setIs_new:is_new];
-                [thread setParticipants:nil];
-                [thread setCount:count];
-                
-                for (NSDictionary *participant in participants) {
-                    NSNumber *hostid = @([[participant objectForKey:@"uid"] intValue]);
-                    NSString *name = [participant objectForKey:@"name"];
-                    
-                    Host *host = [Host hostWithID:hostid];
-                    [host setName:name];
-                    
-                    [thread addParticipantsObject:host];
-                }
-            }
-            
-            [Thread commit];
-            
+     
+        [WSRequests refreshThreadsSuccess:^(NSURLSessionDataTask *task, id responseObject) {
             [refreshControl endRefreshing];
-            
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
             [refreshControl endRefreshing];
         }];
+       
     }];
     
     // refresh on load
@@ -82,17 +46,23 @@ static NSString *CellIdentifier = @"ThreadsTableCell";
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Thread *thread = [self.fetchedResultsController objectAtIndexPath:indexPath];
-
+    
     NSString *title = [NSString stringWithFormat:@"%@ (%ld)", thread.subject, (long)[thread.count integerValue]];
     
     
     [cell.textLabel setText:title];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
-    NSArray *participants = [thread.participants allObjects];
+    [cell.detailTextLabel setText:thread.user.title];
+    
+    /*
+     NSArray *participants = [thread.participants allObjects];
     NSArray *names = [participants arrayByPerformingSelector:@selector(title)];
     
+    
+    
     [cell.detailTextLabel setText:[names componentsJoinedByString:@", "]];
+     */
 }
 
 
@@ -103,12 +73,12 @@ static NSString *CellIdentifier = @"ThreadsTableCell";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-        
+    
     Thread *thread = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     SingleThreadTableViewController *controller = [[SingleThreadTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [controller setThread:thread];
-
+    
     
     UISplitViewController *split = self.splitViewController;
     

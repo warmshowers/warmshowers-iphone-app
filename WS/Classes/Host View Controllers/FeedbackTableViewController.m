@@ -7,28 +7,28 @@
 //
 
 #import "WSAppDelegate.h"
-#import "Host.h"
 #import "FeedbackTableViewController.h"
 #import "Feedback.h"
 
-@interface FeedbackTableViewController ()
+static NSString *CellIdentifier = @"1c8416b1-fe7d-4fbb-af58-d18b8efca04d";
 
+@interface FeedbackTableViewController ()
 @end
 
 @implementation FeedbackTableViewController
 
-
 -(void)viewDidLoad  {
 	[super viewDidLoad];
-	[self setTitle:@"Feedback"];
+	[self setTitle:NSLocalizedString(@"Feedback", nil)];
+    [self.tableView registerNib:[UINib nibWithNibName:@"RHLabelTableViewCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
+    [self.tableView setRowHeight:UITableViewAutomaticDimension];
+    [self.tableView setEstimatedRowHeight:44];
 }
-
 
 -(void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self.navigationController setToolbarHidden:YES animated:YES];
 }
-
 
 -(NSFetchedResultsController *)fetchedResultsController {
     if (fetchedResultsController == nil) {
@@ -62,86 +62,26 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    Feedback *rec = [[self.fetchedResultsController fetchedObjects] objectAtIndex:section];
-    NSDate *ninetyseventy = [NSDate dateWithTimeIntervalSince1970:0];
-    
-    if ([rec.date isEqualToDate:ninetyseventy]) {
-        return 2;
-    } else {
-        return 3;
-    }
+    return 1;
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	return @"";
-}
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-	Feedback *rec = [[self.fetchedResultsController fetchedObjects] objectAtIndex:indexPath.section];
-	
-	switch (indexPath.row) {
-		case 0:
-			[cell.textLabel setText:NSLocalizedString(@"From", nil)];
-			[cell.detailTextLabel setText:rec.fullname];
-			break;
-		case 1:
-			[cell.textLabel setText:NSLocalizedString(@"Comments", nil)];
-			[cell.detailTextLabel setText:rec.body];
-			break;
-		case 2:
-			[cell.textLabel setText:NSLocalizedString(@"Date", nil)];
-			[cell.detailTextLabel setText:[rec.date formatWithUTCTimeZone]];
-			break;
-	}
+    Feedback *rec = [[self.fetchedResultsController fetchedObjects] objectAtIndex:indexPath.section];
+    RHLabelTableViewCell *mcell = (RHLabelTableViewCell *)cell;
+    [mcell.label setText:rec.body];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	static NSString *CellIdentifier = @"Cell";
-	
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
-		[cell.detailTextLabel setFont:[UIFont systemFontOfSize:13]];
-		[cell.detailTextLabel setNumberOfLines:0];
-		[cell.detailTextLabel setLineBreakMode:NSLineBreakByWordWrapping];
-		[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-	}
-	
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	[self configureCell:cell atIndexPath:indexPath];
-	
 	return cell;
 }
 
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	
-	UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];	
-	UILineBreakMode lineBreakMode = cell.detailTextLabel.lineBreakMode;
-	
-	if (lineBreakMode == NSLineBreakByWordWrapping) {
-
-		NSString *text = cell.detailTextLabel.text;
-		UIFont *font   = cell.detailTextLabel.font;
-
-		// 20 is the left and right margins
-		// 111 is trial-and-error with iOS7
-		CGFloat detailLabelWidth = tableView.width - 20 - 110;
-
-		CGSize withinSize = CGSizeMake(detailLabelWidth, MAXFLOAT);
-
-		CGRect textRect = [text boundingRectWithSize:withinSize
-											 options:NSStringDrawingUsesLineFragmentOrigin
-										  attributes:@{NSFontAttributeName:font}
-											 context:nil];
-
-		CGSize size = textRect.size;
-
-		return MAX(kRHDefaultCellHeight, size.height + kRHTopBottomMargin*2);
-
-	}
-	
-	return kRHDefaultCellHeight;
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+    Feedback *feedback = [[self.fetchedResultsController fetchedObjects] objectAtIndex:indexPath.section];
+    return [NSString stringWithFormat:@"%@ / %@ (%@)", feedback.fullname, [feedback.date formatWithLocalTimeZoneWithoutTime], feedback.hostOrGuest];
 }
 
 @end

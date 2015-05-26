@@ -13,7 +13,7 @@ extern const struct ThreadAttributes {
 
 extern const struct ThreadRelationships {
 	__unsafe_unretained NSString *messages;
-	__unsafe_unretained NSString *participants;
+	__unsafe_unretained NSString *user;
 } ThreadRelationships;
 
 @class Message;
@@ -60,9 +60,9 @@ extern const struct ThreadRelationships {
 
 - (NSMutableSet*)messagesSet;
 
-@property (nonatomic, strong) NSSet *participants;
+@property (nonatomic, strong) Host *user;
 
-- (NSMutableSet*)participantsSet;
+//- (BOOL)validateUser:(id*)value_ error:(NSError**)error_;
 
 @end
 
@@ -71,14 +71,6 @@ extern const struct ThreadRelationships {
 - (void)removeMessages:(NSSet*)value_;
 - (void)addMessagesObject:(Message*)value_;
 - (void)removeMessagesObject:(Message*)value_;
-
-@end
-
-@interface _Thread (ParticipantsCoreDataGeneratedAccessors)
-- (void)addParticipants:(NSSet*)value_;
-- (void)removeParticipants:(NSSet*)value_;
-- (void)addParticipantsObject:(Host*)value_;
-- (void)removeParticipantsObject:(Host*)value_;
 
 @end
 
@@ -108,7 +100,7 @@ extern const struct ThreadRelationships {
 - (NSMutableSet*)primitiveMessages;
 - (void)setPrimitiveMessages:(NSMutableSet*)value;
 
-- (NSMutableSet*)primitiveParticipants;
-- (void)setPrimitiveParticipants:(NSMutableSet*)value;
+- (Host*)primitiveUser;
+- (void)setPrimitiveUser:(Host*)value;
 
 @end

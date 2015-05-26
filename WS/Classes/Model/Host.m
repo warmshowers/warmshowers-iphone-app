@@ -18,7 +18,7 @@
 +(void)initialize {
 	
 	if (self == [Host class]) {
-        const static NSInteger schemaVersion = 12;
+        const static NSInteger schemaVersion = 16;
         
         NSString *key = [NSString stringWithFormat:@"RHSchemaVersion-%@", [self modelName]];
         NSInteger version = [[NSUserDefaults standardUserDefaults] integerForKey:key];
@@ -46,6 +46,51 @@
 	host.hostid = hostID;
 	
 	return host;
+}
+
++(Host *)fetchOrCreate:(NSDictionary *)dict {
+    
+    NSNumber *hostid = @([[dict objectForKey:@"uid"] intValue]);
+    
+    Host *host = [Host hostWithID:hostid];
+    
+    host.bed = [NSNumber numberWithInt:[[dict objectForKey:@"bed"] intValue]];
+    host.bikeshop = [dict objectForKey:@"bikeshop"];
+    host.campground = [dict objectForKey:@"campground"];
+    host.city = [dict objectForKey:@"city"];
+    
+    host.comments = [[dict objectForKey:@"comments"] trim];    
+    host.country = [dict objectForKey:@"country"];
+    host.food = [NSNumber numberWithInt:[[dict objectForKey:@"food"] intValue]];
+    host.fullname = [dict objectForKey:@"fullname"];
+    host.homephone = [dict objectForKey:@"homephone"];
+    host.mobilephone = [dict objectForKey:@"mobilephone"];
+    host.kitchenuse = [NSNumber numberWithInt:[[dict objectForKey:@"kitchenuse"] intValue]];
+    host.laundry = [NSNumber numberWithInt:[[dict objectForKey:@"laundry"] intValue]];
+    host.lawnspace = [NSNumber numberWithInt:[[dict objectForKey:@"lawnspace"] intValue]];
+    host.maxcyclists = [NSNumber numberWithInt:[[dict objectForKey:@"maxcyclists"] intValue]];
+    host.motel = [dict objectForKey:@"motel"];
+    host.name = [dict objectForKey:@"name"];
+    host.notcurrentlyavailable = [NSNumber numberWithInteger:[[dict objectForKey:@"notcurrentlyavailable"] intValue]];
+    // TEST
+    // host.notcurrentlyavailable = @YES;
+    host.postal_code = [dict objectForKey:@"postal_code"];
+    host.province = [dict objectForKey:@"province"];
+    host.sag = [NSNumber numberWithInt:[[dict objectForKey:@"sag"] intValue]];
+    host.shower = [NSNumber numberWithInt:[[dict objectForKey:@"shower"] intValue]];
+    host.storage = [NSNumber numberWithInt:[[dict objectForKey:@"storage"] intValue]];
+    host.street = [dict objectForKey:@"street"];
+    host.preferred_notice = [dict objectForKey:@"preferred_notice"];
+    
+    NSTimeInterval last_login_int = [[dict objectForKey:@"login"] doubleValue];
+    host.last_login = [NSDate dateWithTimeIntervalSince1970:last_login_int];
+    
+    NSTimeInterval member_since = [[dict objectForKey:@"created"] doubleValue];
+    host.member_since = [NSDate dateWithTimeIntervalSince1970:member_since];
+    
+    host.last_updated_details = [NSDate date];
+
+    return host;
 }
 
 
@@ -170,7 +215,7 @@
 -(BOOL)isStale {
 	// return (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 60 );
 	// two weeks
-	return (self.last_updated_details == nil) || (fabs([self.last_updated_details timeIntervalSinceNow]) > kWeek*2 );
+	return (self.last_updated_details == nil) || (fabs([self.last_updated_details timeIntervalSinceNow]) > kWeek );
 }
 
 -(NSUInteger)pinColour {

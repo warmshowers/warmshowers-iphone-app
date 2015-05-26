@@ -12,7 +12,7 @@ const struct ThreadAttributes ThreadAttributes = {
 
 const struct ThreadRelationships ThreadRelationships = {
 	.messages = @"messages",
-	.participants = @"participants",
+	.user = @"user",
 };
 
 @implementation ThreadID
@@ -133,16 +133,7 @@ const struct ThreadRelationships ThreadRelationships = {
 	return result;
 }
 
-@dynamic participants;
-
-- (NSMutableSet*)participantsSet {
-	[self willAccessValueForKey:@"participants"];
-
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"participants"];
-
-	[self didAccessValueForKey:@"participants"];
-	return result;
-}
+@dynamic user;
 
 @end
 

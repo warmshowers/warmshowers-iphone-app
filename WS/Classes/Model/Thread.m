@@ -18,18 +18,45 @@
     return @"WS";
 }
 
--(void)refresh {
++(void)newMessageToHost:(Host *)host
+                subject:(NSString *)subject
+                   message:(NSString *)message
+                success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure {
+    
+    NSDictionary *params = @{
+                             @"recipients" : host.name,
+                             @"subject" : subject,
+                             @"body" : message
+                             };
+    
+    [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/message/send" parameters:params success:success failure:failure];
+}
+
+-(void)replyWithMessage:(NSString *)message
+                success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure {
+    
+    NSDictionary *params = @{
+                             @"body" : message,
+                             @"thread_id" : self.threadid
+                             };
+    
+    [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/message/reply"
+                               parameters:params
+                                  success:success
+                                  failure:failure];
+}
+
+-(void)refreshMessages {
     NSString *path = @"/services/rest/message/getThread";
     NSDictionary *parameters =  @{
                                   @"thread_id": [self.threadid stringValue],
                                   };
     
-    
     __weak Thread *bself = self;
     
     [[WSHTTPClient sharedHTTPClient] POST:path parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-       
         
         NSArray *msgs = [responseObject objectForKey:@"messages"];
         
@@ -72,19 +99,6 @@
 
 }
 
--(void)replyWithBody:(NSString *)body
-             success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
-             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure {
-    
-    NSDictionary *params = @{
-                             @"body" : body,
-                             @"thread_id" : self.threadid
-                              };
-    
-    [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/message/reply"
-                               parameters:params
-                                  success:success
-                                  failure:failure];    
-}
+
 
 @end

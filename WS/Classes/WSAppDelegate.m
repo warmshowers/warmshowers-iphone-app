@@ -115,13 +115,16 @@
 }
 
 -(BOOL)postApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
     LeftMenuViewController *leftMenuViewController = [[LeftMenuViewController alloc] init];
     
     self.slidingViewController = [ECSlidingViewController slidingWithTopViewController:[leftMenuViewController.hostMapViewController wrapInNavigationController]];
     self.slidingViewController.underLeftViewController = leftMenuViewController; // [leftMenuViewController wrapInNavigationController];
-    //   self.slidingViewController.anchorRightPeekAmount = 50.0f;
     self.slidingViewController.anchorRightRevealAmount = 280.0f;
     
+    
+    [SVProgressHUD setBackgroundColor:[UIColor darkGrayColor]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     
     [self.window setTintColor:kWSBaseColour];
     self.window.rootViewController = self.slidingViewController;

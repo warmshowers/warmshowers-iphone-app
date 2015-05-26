@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 Red House Consulting GmbH. All rights reserved.
 //
 
-#import <CoreLocation/CoreLocation.h>
+// #import <CoreLocation/CoreLocation.h>
 #import "RHCoreDataTableViewController.h"
 
 @interface HostTableViewController : RHCoreDataTableViewController<UISearchDisplayDelegate, UISearchBarDelegate>

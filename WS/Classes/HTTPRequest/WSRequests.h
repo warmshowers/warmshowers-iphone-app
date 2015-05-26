@@ -24,6 +24,7 @@
 +(void)hostFeedbackWithHost:(Host *)host;
 
 +(void)searchHostsWithKeyword:(NSString *)keyword;
++(void)refreshThreadsSuccess:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
 @end
 

@@ -10,16 +10,19 @@
 #import "Host.h"
 #import "HostInfoViewController.h"
 #import "WSAppDelegate.h"
-
 #import "WSRequests.h"
+
+static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
 
 @implementation HostTableViewController
 
 #pragma mark - View lifecycle
 -(void)viewDidLoad {
 	[super viewDidLoad];
-    self.title = NSLocalizedString(@"List", nil);
+    [self setTitle:NSLocalizedString(@"Search", nil)];
     [self addSearchBarWithPlaceHolder:NSLocalizedString(@"Search", nil)];
+    
+    [self.tableView registerClass:[RHTableViewCellStyleSubtitleLighterDetail class] forCellReuseIdentifier:CellIdentifier];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -44,14 +47,10 @@
 
 
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    
     [super updateSearchResultsForSearchController:searchController];
     
     NSString *searchString = searchController.searchBar.text;
-    
     [WSRequests searchHostsWithKeyword:searchString];
-    
-    
 }
 
 -(void)updateDistances {
@@ -74,35 +73,41 @@
 }
 
 
+-(NSPredicate *)predicate {
+    if (self.searchString) {
+        
+        NSMutableArray *predicates = [NSMutableArray arrayWithObject:[NSPredicate predicateWithFormat:@"(notcurrentlyavailable != 1)"]];
+        
+        for (NSString *term in [self.searchString whitespaceTokenize]) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"comments CONTAINS[cd] %@ OR name CONTAINS[cd] %@ OR fullname CONTAINS[cd] %@ OR city CONTAINS[cd] %@ OR province CONTAINS[cd] %@", term, term, term, term, term];
+            [predicates addObject:predicate];
+        }
+
+        return [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
+    } else {
+        return [NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1 AND distance != nil"];
+    }
+}
+
+
+-(NSArray *)sortDescriptors {
+    if (self.searchString) {
+        return @[[NSSortDescriptor sortDescriptorWithKey:@"fullname" ascending:YES]];
+    } else {
+        return @[[NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES]];
+    }
+}
+
+
 -(NSFetchedResultsController *)fetchedResultsController {
     if (fetchedResultsController == nil) {
-		// Create the fetch request for the entity.
+		
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		
-		// Edit the entity name as appropriate.
 		[fetchRequest setEntity:[Host entityDescription]];
+		[fetchRequest setSortDescriptors:[self sortDescriptors]];
+		[fetchRequest setPredicate:[self predicate]];
 		
-		// [fetchRequest setFetchBatchSize:25];
-		// [fetchRequest setFetchLimit:50];
-		
-		// Edit the sort key as appropriate.
-		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES];
-		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-		[fetchRequest setSortDescriptors:sortDescriptors];
-        
-		NSPredicate *predicate;
-        
-		if (self.searchString) {
-			              predicate = [NSPredicate predicateWithFormat:@"(notcurrentlyavailable != 1) AND (comments CONTAINS[cd] %@ OR name CONTAINS[cd] %@ OR fullname CONTAINS[cd] %@ OR city CONTAINS[cd] %@ OR province CONTAINS[cd] %@)", self.searchString, self.searchString, self.searchString, self.searchString, self.searchString];
-            
-		} else {
-			predicate = [NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1 AND distance != nil"];
-		}
-        
-		[fetchRequest setPredicate:predicate];
-		
-		// Edit the section name key path and cache name if appropriate.
-		// nil for section name key path means "no sections".
 		self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
 																			managedObjectContext:[Host managedObjectContextForCurrentThread]
 																			  sectionNameKeyPath:nil
@@ -121,7 +126,7 @@
 
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    Host *host = (Host *)[self.fetchedResultsController objectAtIndexPath:indexPath];
+    Host *host = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	
 	cell.textLabel.text= [host title];
 	cell.detailTextLabel.text = [host subtitle];
@@ -148,13 +153,8 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	static NSString *CellIdentifier = @"Cell"; // NB: matches identifier in XIB
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	if (cell == nil) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	}
 	
 	[self configureCell:cell atIndexPath:indexPath];
 	

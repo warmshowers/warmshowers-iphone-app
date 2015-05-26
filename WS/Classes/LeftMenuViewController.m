@@ -8,7 +8,6 @@
 
 #import "LeftMenuViewController.h"
 #import "UIViewController+ECSlidingViewController.h"
-
 #import "HostTableViewController.h"
 #import "FavouriteHostTableViewController.h"
 #import "AllThreadsTableViewController.h"
@@ -27,8 +26,6 @@
     
     [self setTitle:NSLocalizedString(@"Warm Showers", nil)];
     
-    //   [self.tableView setDeselectRowAfterSelect:NO];
-    
     [self.tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Find a Host", nil)];
     
     __weak LeftMenuViewController *bself = self;
@@ -37,27 +34,24 @@
                                                detailLabelText:nil
                                                 didSelectBlock:^{
                                                     UIViewController *controller = self.hostMapViewController;
-                                                    
                                                     [bself.slidingViewController setTopViewController:[controller wrapInNavigationController]];
                                                     [bself.slidingViewController resetTopViewAnimated:YES];
                                                 }
                                                          style:UITableViewCellStyleDefault
-                                                         image:nil
+                                                         image:[[UIImage imageNamed:@"193-location-arrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                                                  accessoryType:UITableViewCellAccessoryDisclosureIndicator];
     [self.tableView addCell:cell];
     
-    cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"List", nil)
+    cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"Search", nil)
                               detailLabelText:nil
                                didSelectBlock:^{
                                    UIViewController *controller = [[HostTableViewController alloc] initWithStyle:UITableViewStylePlain];
-                                   
                                    [controller.navigationItem setLeftBarButtonItem:[self leftMenuButton]];
-                                   
                                    [bself.slidingViewController setTopViewController:[controller wrapInNavigationController]];
                                    [bself.slidingViewController resetTopViewAnimated:YES];
                                }
                                         style:UITableViewCellStyleDefault
-                                        image:nil
+                                        image:[[UIImage imageNamed:@"06-magnify"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator];
     [self.tableView addCell:cell];
     
@@ -73,13 +67,10 @@
                                    [bself.slidingViewController resetTopViewAnimated:YES];
                                }
                                         style:UITableViewCellStyleDefault
-                                        image:nil
+                                        image:[[UIImage imageNamed:@"28-star"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator];
     [self.tableView addCell:cell];
-    
-    
-    
-    
+   
     [self.tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Messages", nil)];
     
     cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"Inbox", nil)
@@ -99,7 +90,7 @@
                                    
                                }
                                         style:UITableViewCellStyleDefault
-                                        image:nil
+                                        image:[[UIImage imageNamed:@"40-inbox"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator];
     [self.tableView addCell:cell];
     
@@ -160,7 +151,7 @@
 
 
 -(RHBarButtonItem *)leftMenuButton {
-    return [RHBarButtonItem itemWithImage:[UIImage imageNamed:@"menu_black-48"] block:^{
+    return [RHBarButtonItem itemWithImage:[UIImage imageNamed:@"hamburger"] block:^{
         [self.slidingViewController resetTopViewAnimated:YES];
         [self.slidingViewController anchorTopViewToRightAnimated:YES];
     }];

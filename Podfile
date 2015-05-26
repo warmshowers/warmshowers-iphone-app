@@ -10,3 +10,4 @@ pod 'RHTools', :path => '../RHTools/'
 
 pod 'ECSlidingViewController'
 pod 'Lockbox'
+pod 'MBAutoGrowingTextView', '~> 0.1.0'

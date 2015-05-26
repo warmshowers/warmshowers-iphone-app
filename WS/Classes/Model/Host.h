@@ -17,6 +17,7 @@
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 
 +(Host *)hostWithID:(NSNumber *)hostID;
++(Host *)fetchOrCreate:(NSDictionary *)dict;
 +(NSArray *)hostsClosestToLocation:(CLLocation *)location withLimit:(int)limit;
 +(NSString *)trimmedPhoneNumber:(NSString *)phoneNumber;
 

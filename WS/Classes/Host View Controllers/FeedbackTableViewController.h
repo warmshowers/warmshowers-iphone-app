@@ -7,8 +7,7 @@
 //
 
 #import "RHCoreDataTableViewController.h"
-
-@class Host;
+#import "Host.h"
 
 @interface FeedbackTableViewController : RHCoreDataTableViewController
 

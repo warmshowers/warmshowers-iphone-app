@@ -9,6 +9,7 @@
 #import "SingleThreadTableViewController.h"
 #import "Host.h"
 #import "Message.h"
+#import "ComposeMessageViewController.h"
 
 static NSString *CellIdentifier = @"SingleThreadTableCell";
 
@@ -28,8 +29,22 @@ static NSString *CellIdentifier = @"SingleThreadTableCell";
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
     [self.tableView setEstimatedRowHeight:44];
     
-    [self.thread refresh];
+   
     
+    
+    __weak SingleThreadTableViewController *bself = self;
+    
+    self.navigationItem.rightBarButtonItem = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply block:^{
+        ComposeMessageViewController *controller = [ComposeMessageViewController controllerWithThread:bself.thread];
+        UINavigationController *navController = [controller wrapInNavigationControllerWithPresentationStyle:UIModalPresentationPageSheet];
+        [bself presentViewController:navController animated:YES completion:nil];
+    }];
+    
+}
+
+
+-(void)viewWillAppear:(BOOL)animated {
+     [self.thread refreshMessages];
 }
 
 
@@ -89,14 +104,9 @@ static NSString *CellIdentifier = @"SingleThreadTableCell";
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
     Message *msg = [self.fetchedResultsController objectAtIndexPath:indexPath];
-
-    
     return [NSString stringWithFormat:@"%@: %@ / %@", NSLocalizedString(@"From", nil), msg.author.title, [msg.timestamp formatWithLocalTimeZone]];
-    
-    
 }
 
 @end
