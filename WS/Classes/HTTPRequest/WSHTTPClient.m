@@ -1,9 +1,24 @@
 //
-//  WSHTTPClient.m
-//  WS
+//  Copyright (C) 2015 Warm Showers Foundation
+//  http://warmshowers.org/
 //
-//  Created by Christopher Meyer on 9/18/12.
-//  Copyright (c) 2012 Red House Consulting GmbH. All rights reserved.
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 #import "WSHTTPClient.h"
@@ -20,6 +35,13 @@
         _sharedClient = [[WSHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://www.warmshowers.org/"]];
         [[_sharedClient reachabilityManager] startMonitoring];
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+       
+        //                [_sharedClient setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+        //  _sharedClient.responseSerializer.acceptableContentTypes = nil;
+        
+        [_sharedClient setResponseSerializer:[AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:@[[AFJSONResponseSerializer serializer], [AFHTTPResponseSerializer serializer] ]]];
+//        [_sharedClient.requestSerializer setValue:@"ZZZZ" forHTTPHeaderField:@"X-CSRF"];
+        
     });
     
     [_sharedClient setDataTaskDidReceiveResponseBlock:^NSURLSessionResponseDisposition(NSURLSession *session, NSURLSessionDataTask *dataTask, NSURLResponse *response) {
@@ -54,18 +76,20 @@
     [[self.operationQueue operations] makeObjectsPerformSelector:@selector(cancel)];
 }
 
--(BOOL)hasWSSessionCookie {
-    NSURL *baseURL = [self baseURL];
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:baseURL];
-    
-    for (NSHTTPCookie *cookie in cookies) {
-        if ([cookie.name isEqualToString:@"SESSca3ec806b9aee9140beb6c03142b4638"]) {
-            return YES;
-        }
-    }
-    
-    return NO;
-}
+/*
+ -(BOOL)hasWSSessionCookie {
+ NSURL *baseURL = [self baseURL];
+ NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:baseURL];
+ 
+ for (NSHTTPCookie *cookie in cookies) {
+ if ([cookie.name isEqualToString:@"SESSca3ec806b9aee9140beb6c03142b4638"]) {
+ return YES;
+ }
+ }
+ 
+ return NO;
+ }
+ */
 
 -(void)deleteCookies {
     NSURL *baseURL = [self baseURL];

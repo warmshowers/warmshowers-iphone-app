@@ -1,12 +1,27 @@
 //
-//  HostTableViewController.m
-//  WS
+//  Copyright (C) 2015 Warm Showers Foundation
+//  http://warmshowers.org/
 //
-//  Created by Christopher Meyer on 10/26/11.
-//  Copyright (c) 2011 Red House Consulting GmbH. All rights reserved.
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
-#import "HostTableViewController.h"
+#import "SearchHostsTableViewController.h"
 #import "Host.h"
 #import "HostInfoViewController.h"
 #import "WSAppDelegate.h"
@@ -14,7 +29,7 @@
 
 static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
 
-@implementation HostTableViewController
+@implementation SearchHostsTableViewController
 
 #pragma mark - View lifecycle
 -(void)viewDidLoad {
@@ -23,6 +38,9 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
     [self addSearchBarWithPlaceHolder:NSLocalizedString(@"Search", nil)];
     
     [self.tableView registerClass:[RHTableViewCellStyleSubtitleLighterDetail class] forCellReuseIdentifier:CellIdentifier];
+    
+    [self.tableView setEstimatedRowHeight:44.0f];
+    [self.tableView setRowHeight:UITableViewAutomaticDimension];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -30,7 +48,7 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
 	
     [self setFetchedResultsController:nil];
     [self.tableView reloadData];
-    [self updateDistances];
+  //   [self updateDistances];
 
 }
 
@@ -50,9 +68,13 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
     [super updateSearchResultsForSearchController:searchController];
     
     NSString *searchString = searchController.searchBar.text;
-    [WSRequests searchHostsWithKeyword:searchString];
+
+    if ([searchString length] >= 3) {
+        [WSRequests searchHostsWithKeyword:searchString];
+    }
 }
 
+/*
 -(void)updateDistances {
 	CLLocation *current_location = [[WSAppDelegate sharedInstance] userLocation];
     
@@ -71,7 +93,7 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
 		[Host commit];
 	});
 }
-
+*/
 
 -(NSPredicate *)predicate {
     if (self.searchString) {
@@ -85,17 +107,22 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
 
         return [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
     } else {
-        return [NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1 AND distance != nil"];
+        return [NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1"];
     }
 }
 
 
 -(NSArray *)sortDescriptors {
+    
+    return @[[NSSortDescriptor sortDescriptorWithKey:@"fullname" ascending:YES]];
+    
+    /*
     if (self.searchString) {
         return @[[NSSortDescriptor sortDescriptorWithKey:@"fullname" ascending:YES]];
     } else {
-        return @[[NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES]];
+        return @[[NSSortDescriptor sortDescriptorWithKey:@"fullname" ascending:YES]];
     }
+     */
 }
 
 
@@ -130,26 +157,7 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
 	
 	cell.textLabel.text= [host title];
 	cell.detailTextLabel.text = [host subtitle];
-	
-	/*
-     switch ([host pinColour]) {
-		case MKPinAnnotationColorRed:
-			cell.imageView.image = [UIImage imageNamed:@"DotRed"];
-			break;
-		case MKPinAnnotationColorPurple:
-			cell.imageView.image = [UIImage imageNamed:@"DotPurple"];
-			break;
-		case MKPinAnnotationColorGreen:
-			cell.imageView.image = [UIImage imageNamed:@"DotGreen"];
-			break;
-		default:
-			cell.imageView.image = nil;
-			break;
-	}
-     */
-    
     [cell.imageView setImageWithURL:[NSURL URLWithString:host.imageURL] placeholderImage:[UIImage imageNamed:@"ws"]];
-	
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -162,7 +170,7 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	HostInfoViewController *controller = [[HostInfoViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    HostInfoViewController *controller = [HostInfoViewController new];
 	controller.host = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	[self.navigationController pushViewController:controller animated:YES];
 }

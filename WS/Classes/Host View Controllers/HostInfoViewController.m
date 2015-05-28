@@ -1,9 +1,24 @@
 //
-//  HostInfoViewController.m
-//  WS
+//  Copyright (C) 2015 Warm Showers Foundation
+//  http://warmshowers.org/
 //
-//  Created by Christopher Meyer on 10/17/10.
-//  Copyright 2010 Red House Consulting GmbH. All rights reserved.
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 #import "HostInfoViewController.h"
@@ -16,15 +31,17 @@
 #import "WSHTTPClient.h"
 #import "FeedbackTableViewController.h"
 #import "MKMapView+Utils.h"
-
+#import "NSNumber+WS.h"
 
 @interface HostInfoViewController()
+@property (strong, nonatomic) RHTableView *tableView;
+@property (nonatomic, strong) UIView *topView;
 -(void)presentComposeViewController;
 @end
 
 @implementation HostInfoViewController
 
-static NSString *CellIdentifier = @"Cell";
+static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
 
 #pragma mark -
 #pragma mark Table view data source
@@ -34,21 +51,16 @@ static NSString *CellIdentifier = @"Cell";
     
     [self setTitle:NSLocalizedString(@"Host Info", nil)];
     
-    [self.tableView registerClass:[RHTableViewCellStyleValue2 class] forCellReuseIdentifier:CellIdentifier];
-    [self.tableView setTableHeaderView:self.topView];
-    
+    [self.tableView registerNib:[UINib nibWithNibName:@"RHLabelTableViewCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                            target:self
                                                                                            action:@selector(showActions:)];
     
     self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 200, 20)];
-    
     [self.statusLabel setFont:[UIFont systemFontOfSize:[UIFont smallSystemFontSize]]];
     [self.statusLabel setTextAlignment:NSTextAlignmentCenter];
     
-   // UIBarButtonItem *fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-   // [fixed setWidth:18];
     
     __weak HostInfoViewController *bself = self;
     
@@ -56,85 +68,79 @@ static NSString *CellIdentifier = @"Cell";
         [bself presentComposeViewController];
     }];
     
-    NSArray *toolbarItems = [NSArray arrayWithObjects:
+    NSArray *toolbarItems = @[
                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshHost)],
                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                              [[UIBarButtonItem alloc] initWithCustomView:self.statusLabel],
                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                             compose,
-                             nil];
+                             compose
+                             ];
     
     
     [self setToolbarItems:toolbarItems animated:YES];
     
-
+    
 }
 
-
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
-    NSNumber *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
-    NSNumber *newValue = [change objectForKey:NSKeyValueChangeNewKey];
-    
-    if ([oldValue isEqualToNumber:newValue]) {
-        // nothing changed, do nothing
-    } else if ([newValue boolValue]) {
-        RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Host no longer available", nil) message:NSLocalizedString(@"This host is no longer available and will no longer be displayed on the map or in the host list.", nil)];
-        
-        __weak HostInfoViewController *bself = self;
-        
-        [alert addButtonWithTitle:kOK block:^{
-            [bself.navigationController popViewControllerAnimated:YES];
-        }];
-        
-        [alert show];
-    }
-    
+-(void)loadView {
+    self.tableView = [[RHTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    self.view = self.tableView;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self.navigationController setToolbarHidden:NO animated:animated];
-    
-    [self.host addObserver:self forKeyPath:@"notcurrentlyavailable" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
-    
+
     __weak HostInfoViewController *bself = self;
+    
     [self.host setDidUpdateBlock:^() {
-        [bself refreshTableView:NO];
+        if (bself.host.notcurrentlyavailableValue) {
+            RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Host no longer available", nil)
+                                                     message:NSLocalizedString(@"This host is no longer available and will be removed from the map and host list.", nil)];
+            
+            [alert addButtonWithTitle:kOK block:^{
+                [bself.navigationController popViewControllerAnimated:YES];
+            }];
+            
+            [alert show];
+        } else {
+            [bself refreshTableView];
+        }
+    }];
+    
+    [self.host setDidDeleteBlock:^() {
+       // NSLog(@"%@", @"delete called");
     }];
     
     if ([self.host needsUpdate]) {
         [self refreshHost];
-    } else {
-        [self refreshTableView:NO];
     }
     
+    [self refreshTableView];
 }
 
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [SVProgressHUD dismiss];
     
-    [self.host removeObserver:self forKeyPath:@"notcurrentlyavailable"];
     [self.host setDidUpdateBlock:nil];
+    [self.host setDidDeleteBlock:nil];
     
     [self.navigationController setToolbarHidden:YES animated:animated];
 }
 
 -(void)refreshHost {
     
-    [self refreshTableView:YES];
-    
     __weak UINavigationController *bNavigationController = self.navigationController;
     
     if ([[WSHTTPClient sharedHTTPClient] reachable]) {
+
         [WSRequests hostDetailsWithHost:self.host];
-        [WSRequests hostFeedbackWithHost:self.host];
+        // [WSRequests hostFeedbackWithHost:self.host];
         
     } else if (self.host.last_updated_details == nil) {
-        RHAlertView *alert = [RHAlertView alertWithTitle:nil message:NSLocalizedString(@"An error occurred while loading the host details. Please check your network connection and try again.", nil)];
+        RHAlertView *alert = [RHAlertView alertWithTitle:nil message:NSLocalizedString(@"An error occurred while loading the details of this host. Please check your network connection and try again.", nil)];
         
         [alert addButtonWithTitle:kOK block:^{
             [bNavigationController popViewControllerAnimated:YES];
@@ -142,10 +148,9 @@ static NSString *CellIdentifier = @"Cell";
         
         [alert show];
     } else if ([self.host isStale]) {
-        [[RHAlertView alertWithOKButtonWithTitle:nil message:NSLocalizedString(@"This host hasn't been updated in a while and might be out of date. Please connect to a network and refresh before attempting to contact this host.", nil)] show];
-        [self refreshTableView:NO];
+        [[RHAlertView alertWithOKButtonWithTitle:nil message:NSLocalizedString(@"The details of this host hasn't been updated in a while and might be out of date. Please connect to a network and refresh before attempting to contact this host.", nil)] show];
     } else {
-        [self refreshTableView:NO];
+        
     }
 }
 
@@ -158,158 +163,133 @@ static NSString *CellIdentifier = @"Cell";
     }
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.isShowingLoadingIndicator) {
-        return 0;
-    } else {
-        return 3;
-    }
-}
-
--(void)refreshTableView:(BOOL)show {
+-(void)refreshTableView {
+    
+    __weak HostInfoViewController *bself = self;
+    
     [self setLastUpdatedDate];
-    [self setShowingLoadingIndicator:show];
-    
-    if (show) {
-        [self.tableView setTableHeaderView:nil];
-    } else {
+   
+    [self.tableView reset];
+   
+    if (self.host.last_updated_details) {
+        
         [self.tableView setTableHeaderView:self.topView];
+        
+        [self.tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Actions", nil)];
+        
+        // NSString *feedbackLabel = [NSString stringWithFormat:@"%@ (%i)", NSLocalizedString(@"Feedback (%i)", nil), [self.host.feedback count]];
+        NSString *feedbackLabel = NSLocalizedString(@"Feedback", nil);
+        
+       RHTableViewCell *cell = [self.tableView addCell:feedbackLabel
+                 didSelectBlock:^{
+                     FeedbackTableViewController *controller = [[FeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                     [controller setHost:bself.host];
+                     [bself.navigationController pushViewController:controller animated:YES];
+                 }
+         ];
+        
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        
+        [self.tableView addSectionWithSectionHeaderText:nil];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Address", nil) largeLabel:[[self.host address] trim]]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Phone", nil) largeLabel:self.host.homephone]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Mobile", nil) largeLabel:self.host.mobilephone]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Comments", nil) largeLabel:[self.host.comments trim]]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Notice", nil) largeLabel:self.host.preferred_notice]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Status", nil) largeLabel:self.host.statusString]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Distance", nil) largeLabel:self.host.subtitle]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Mbr Since", nil) largeLabel:[self.host.member_since formatWithUTCTimeZone]]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Last Login", nil) largeLabel:[NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), [self.host.last_login timesince]]]];
+        
+        [self.tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Member Information", nil)];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Max Guests", nil) largeLabel:[NSString stringWithFormat:@"%i", [self.host.maxcyclists intValue]]]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Motel", nil) largeLabel:self.host.motel]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Camping", nil) largeLabel:self.host.campground]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Bike Shop", nil) largeLabel:self.host.bikeshop]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Bed", nil) largeLabel:self.host.bed.boolLabel]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Laundry", nil) largeLabel:self.host.laundry.boolLabel]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Kitchen", nil) largeLabel:self.host.kitchenuse.boolLabel]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Lawnspace", nil) largeLabel:self.host.lawnspace.boolLabel]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Storage", nil) largeLabel:self.host.storage.boolLabel]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Shower", nil) largeLabel:self.host.shower.boolLabel]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"SAG", nil) largeLabel:self.host.sag.boolLabel]];
+        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Food", nil) largeLabel:self.host.food.boolLabel]];
+        
+        [self.tableView reloadData];
     }
-    
-    [self.tableView reloadData];
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return 9;
-        case 1:
-            return 1;
-        default:
-            return 12;
-    }
-}
+
 
 
 // Customize the appearance of table view cells.
+/*
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    [cell.detailTextLabel setNumberOfLines:0];
-    [cell.detailTextLabel setLineBreakMode:NSLineBreakByWordWrapping];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    
+    RHTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     switch (indexPath.section) {
             
         case 0:
             if (indexPath.row == 0) {
                 
-                cell.textLabel.text = NSLocalizedString(@"Address", nil);
-                cell.detailTextLabel.text = [[self.host address] trim];
+                cell.leftLabel.text = NSLocalizedString(@"Address", nil);
+                cell.largeLabel.text = [[self.host address] trim];
                 
             } else if (indexPath.row == 1) {
-                cell.textLabel.text = NSLocalizedString(@"Phone", nil);
+                cell.leftLabel.text = NSLocalizedString(@"Phone", nil);
                 
                 if (self.host.homephone) {
-                    cell.detailTextLabel.text = self.host.homephone;
+                    cell.largeLabel.text = self.host.homephone;
                     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
                 } else {
-                    cell.detailTextLabel.text = NSLocalizedString(@"n/a", nil);
+                    cell.largeLabel.text = NSLocalizedString(@"n/a", nil);
                 }
             } else if (indexPath.row == 2) {
-                cell.textLabel.text = NSLocalizedString(@"Mobile", nil);
-                cell.detailTextLabel.text = self.host.mobilephone;
+                cell.leftLabel.text = NSLocalizedString(@"Mobile", nil);
+                cell.largeLabel.text = self.host.mobilephone;
                 if ((self.host.mobilephone) && IsIPhone) {
                     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
                 } else {
-                    cell.detailTextLabel.text = NSLocalizedString(@"n/a", nil);
+                    cell.largeLabel.text = NSLocalizedString(@"n/a", nil);
                 }
             } else if (indexPath.row == 3) {
-                cell.textLabel.text = NSLocalizedString(@"Comments", nil);
-                cell.detailTextLabel.text = [self.host.comments trim];
-                // [cell.detailTextLabel setLineBreakMode:NSLineBreakByWordWrapping];
+                cell.leftLabel.text = NSLocalizedString(@"Comments", nil);
+                cell.largeLabel.text = [self.host.comments trim];
+                // [cell.largeLabel setLineBreakMode:NSLineBreakByWordWrapping];
             } else if (indexPath.row == 4) {
-                cell.textLabel.text = NSLocalizedString(@"Notice", nil);
-                cell.detailTextLabel.text = self.host.preferred_notice;
+                cell.leftLabel.text = NSLocalizedString(@"Notice", nil);
+                cell.largeLabel.text = self.host.preferred_notice;
             } else if (indexPath.row == 5) {
-                cell.textLabel.text = NSLocalizedString(@"Status", nil);
+                cell.leftLabel.text = NSLocalizedString(@"Status", nil);
                 if ([self.host.notcurrentlyavailable boolValue]) {
-                    cell.detailTextLabel.text = NSLocalizedString(@"Not available", nil);
+                    cell.largeLabel.text = NSLocalizedString(@"Not available", nil);
                 } else {
-                    cell.detailTextLabel.text = NSLocalizedString(@"Available", nil);
+                    cell.largeLabel.text = NSLocalizedString(@"Available", nil);
                 }
             } else if (indexPath.row == 6) {
-                cell.textLabel.text = NSLocalizedString(@"Distance", nil);
-                cell.detailTextLabel.text = [self.host subtitle];
+                cell.leftLabel.text = NSLocalizedString(@"Distance", nil);
+                cell.largeLabel.text = [self.host subtitle];
             } else if (indexPath.row == 7) {
-                cell.textLabel.text = NSLocalizedString(@"Mbr Since", nil);
-                cell.detailTextLabel.text = [self.host.member_since formatWithUTCTimeZone];
+                cell.leftLabel.text = NSLocalizedString(@"Mbr Since", nil);
+                cell.largeLabel.text = [self.host.member_since formatWithUTCTimeZone];
             } else if (indexPath.row == 8) {
-                cell.textLabel.text = NSLocalizedString(@"Last Login", nil);
-                cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), [self.host.last_login timesince]];
+                cell.leftLabel.text = NSLocalizedString(@"Last Login", nil);
+                cell.largeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), [self.host.last_login timesince]];
             }
             
             break;
             
-        case 1:
-            if (indexPath.row == 0) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"FeedbackCell"];
-                cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Feedback (%i)", nil), [self.host.feedback count]];
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            }
-            break;
-            
-        case 2:
-            if (indexPath.row == 0) {
-                cell.textLabel.text = NSLocalizedString(@"Max Guest", nil);
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%i", [self.host.maxcyclists intValue]];
-            } else if (indexPath.row == 1) {
-                cell.textLabel.text = NSLocalizedString(@"Motel", nil);
-                cell.detailTextLabel.text = self.host.motel;
-            } else if (indexPath.row == 2) {
-                cell.textLabel.text = NSLocalizedString(@"Camping", nil);
-                cell.detailTextLabel.text = self.host.campground;
-            } else if (indexPath.row == 3) {
-                cell.textLabel.text = NSLocalizedString(@"Bike Shop", nil);
-                cell.detailTextLabel.text = self.host.bikeshop;
-            } else if (indexPath.row == 4) {
-                cell.textLabel.text = NSLocalizedString(@"Bed", nil);
-                cell.detailTextLabel.text = [self.host.bed boolValue] ? kYes : kNo;
-            } else if (indexPath.row == 5) {
-                cell.textLabel.text = NSLocalizedString(@"Laundry", nil);
-                cell.detailTextLabel.text = [self.host.laundry boolValue] ? kYes : kNo;
-            } else if (indexPath.row == 6) {
-                cell.textLabel.text = NSLocalizedString(@"Kitchen", nil);
-                cell.detailTextLabel.text = [self.host.kitchenuse boolValue] ? kYes : kNo;
-            } else if (indexPath.row == 7) {
-                cell.textLabel.text = NSLocalizedString(@"Lawnspace", nil);
-                cell.detailTextLabel.text = [self.host.lawnspace boolValue] ? kYes : kNo;
-            } else if (indexPath.row == 8) {
-                cell.textLabel.text = NSLocalizedString(@"Storage", nil);
-                cell.detailTextLabel.text = [self.host.storage boolValue] ? kYes : kNo;
-            } else if (indexPath.row == 9) {
-                cell.textLabel.text = NSLocalizedString(@"Shower", nil);
-                cell.detailTextLabel.text = [self.host.shower boolValue] ? kYes : kNo;
-            } else if (indexPath.row == 10) {
-                cell.textLabel.text = NSLocalizedString(@"SAG", nil);
-                cell.detailTextLabel.text = [self.host.sag boolValue] ? kYes : kNo;
-            } else if (indexPath.row == 11) {
-                cell.textLabel.text = NSLocalizedString(@"Food", nil);
-                cell.detailTextLabel.text = [self.host.food boolValue] ? kYes : kNo;
-            }
-        default:
-            break;
-    }
-    
+          
     return cell;
 }
+ */
 
 
 #pragma mark -
 #pragma mark Table view delegate
 
+    /*
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (IsIPhone && (indexPath.section == 0) && (indexPath.row == 1) && (self.host.homephone)) {
@@ -342,53 +322,13 @@ static NSString *CellIdentifier = @"Cell";
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+*/
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    switch (section) {
-            // case 0:
-            // return @"Contact";
-        case 1:
-            return NSLocalizedString(@"Member Information", nil);
-        default:
-            break;
-    }
-    
-    return @"";
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    UILineBreakMode lineBreakMode = cell.detailTextLabel.lineBreakMode;
-    
-    if (lineBreakMode == NSLineBreakByWordWrapping) {
-        
-        NSString *text = cell.detailTextLabel.text;
-        UIFont *font   = cell.detailTextLabel.font;
-        
-        // 20 is the left and right margins
-        // 111 is trial-and-error with iOS7
-        CGFloat detailLabelWidth = tableView.width - 20 - 110;
-        
-        CGSize withinSize = CGSizeMake(detailLabelWidth, CGFLOAT_MAX);
-        
-        CGRect textRect = [text boundingRectWithSize:withinSize
-                                             options:NSStringDrawingUsesLineFragmentOrigin
-                                          attributes:@{NSFontAttributeName:font}
-                                             context:nil];
-        
-        CGSize size = textRect.size;
-        
-        return MAX(kRHDefaultCellHeight, size.height + kRHTopBottomMargin*2);
-    }
-    
-    return 44;
-}
 
 #pragma mark AlertView Delegate
 
 -(void)showActions:(id)sender {
-    if (self.host.last_updated_details != nil) {
+    if (self.host.last_updated_details) {
         
         RHActionSheet *popoverActionsheet = [[RHActionSheet alloc] init];
         
@@ -434,11 +374,11 @@ static NSString *CellIdentifier = @"Cell";
 -(UIView *)topView {
     
     if (_topView == nil) {
-        
         CGFloat viewWidth = self.view.bounds.size.width;
         CGFloat baseHeight =  IsIPad ? 180 : 160;
         
         _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, viewWidth, baseHeight)];
+        [_topView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_topView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         [_topView setBackgroundColor:[UIColor whiteColor]];
         
@@ -457,7 +397,6 @@ static NSString *CellIdentifier = @"Cell";
         [titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
         [titleLabel setText:[self.host title]];
         [_topView addSubview:titleLabel];
-        
     }
     
     return _topView;

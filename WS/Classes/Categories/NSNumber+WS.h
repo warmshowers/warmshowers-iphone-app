@@ -21,11 +21,8 @@
 //  THE SOFTWARE.
 //
 
-#import "RHCoreDataTableViewController.h"
-#import "Thread.h"
+@interface NSNumber (WS)
 
-@interface SingleThreadTableViewController : RHCoreDataTableViewController
-
-@property (nonatomic, strong) Thread *thread;
+-(NSString *)boolLabel;
 
 @end

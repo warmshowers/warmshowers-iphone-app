@@ -1,9 +1,24 @@
 //
-//  MapViewController.m
-//  WS
+//  Copyright (C) 2015 Warm Showers Foundation
+//  http://warmshowers.org/
 //
-//  Created by Christopher Meyer on 10/16/10.
-//  Copyright 2010 Red House Consulting GmbH. All rights reserved.
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 #import "HostMapViewController.h"
@@ -14,7 +29,7 @@
 #import "WSAppDelegate.h"
 #import "HostInfoViewController.h"
 #import "RHAboutViewController.h"
-#import "HostTableViewController.h"
+#import "SearchHostsTableViewController.h"
 #import "WSHTTPClient.h"
 
 #import "KPAnnotation.h"
@@ -45,15 +60,12 @@
     
     self.lastZoomLevel = [self.mapView zoomLevel];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redrawAnnotations) name:kShouldRedrawMapAnnotation object:nil];
+  //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redrawAnnotations) name:kShouldRedrawMapAnnotation object:nil];
 
-    
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     [self.clusteringController setDelegate:self];
     
     [self redrawAnnotations];
-    
-    
 }
 
 
@@ -98,15 +110,13 @@
         // Edit the entity name as appropriate.
         NSEntityDescription *entity = [Host entityDescription];
         [fetchRequest setEntity:entity];
-        // [fetchRequest setFetchBatchSize:20];
-        // [fetchRequest setFetchLimit:75];
         
         // Edit the sort key as appropriate.
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"last_updated" ascending:NO];
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
         [fetchRequest setSortDescriptors:sortDescriptors];
         
-        bounds b = [self.mapView fetchBounds];
+       //  bounds b = [self.mapView fetchBounds];
         
         // NSPredicate * p = [NSPredicate predicateWithFormat:@"last_updated >= NOW() - 86400", aDate]
         // last_updated >= NOW() - 86400
@@ -115,7 +125,7 @@
         
         
         // notcurrentlyavailable=1 means the host is not available.  The value 0 or nil means they are or might be availble.  Only hide if we're certain they are not not available.
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%f < latitude AND latitude < %f AND %f < longitude AND longitude < %f AND notcurrentlyavailable != 1", b.minLatitude, b.maxLatitude, b.minLongitude, b.maxLongitude];
+      //  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%f < latitude AND latitude < %f AND %f < longitude AND longitude < %f AND notcurrentlyavailable != 1", b.minLatitude, b.maxLatitude, b.minLongitude, b.maxLongitude];
         
         // NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%f < latitude AND latitude < %f AND %f < longitude AND longitude < %f AND last_updated >= %@", b.minLatitude, b.maxLatitude, b.minLongitude, b.maxLongitude, weekago];
         // NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%f < latitude AND latitude < %f AND %f < longitude AND longitude < %f", b.minLatitude, b.maxLatitude, b.minLongitude, b.maxLongitude];
@@ -176,9 +186,13 @@
 #pragma mark Fetched results controller delegate
 
 -(void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    if ([[[controller managedObjectContext] insertedObjects] count] > 0) {
-        [self redrawAnnotations];
-    }
+    
+    [self redrawAnnotations];
+    
+    // this doesn't seem to work if the objects are inserted off the main thread (??)
+    //if ([[[controller managedObjectContext] insertedObjects] count] > 0) {
+      //   [self redrawAnnotations];
+   // }
 }
 
 -(void)zoomToCurrentLocation:(id)sender {
@@ -187,11 +201,11 @@
 }
 
 -(void)redrawAnnotations {
+    
     self.fetchedResultsController = nil;
     
-    if ([[WSAppDelegate sharedInstance] isLoggedIn]) {
-        [self.clusteringController setAnnotations:[self.fetchedResultsController fetchedObjects]];
-    }
+    [self.clusteringController setAnnotations:[self.fetchedResultsController fetchedObjects]];
+    
 }
 
 -(void)clusteringController:(KPClusteringController *)clusteringController configureAnnotationForDisplay:(KPAnnotation *)annotation {
@@ -252,7 +266,7 @@
     
     KPAnnotation *kingpinAnnotation = [annotations firstObject];
     Host *host = [[kingpinAnnotation annotations] anyObject];
-    HostInfoViewController *controller = [[HostInfoViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    HostInfoViewController *controller = [HostInfoViewController new];
     controller.host = host;
     [self.navigationController pushViewController:controller animated:YES];
 }

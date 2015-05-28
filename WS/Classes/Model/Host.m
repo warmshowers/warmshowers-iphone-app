@@ -1,9 +1,24 @@
 //
-//  Host.m
-//  WS
+//  Copyright (C) 2015 Warm Showers Foundation
+//  http://warmshowers.org/
 //
-//  Created by Christopher Meyer on 10/16/10.
-//  Copyright 2010 Red House Consulting GmbH. All rights reserved.
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 #import "Host.h"
@@ -18,7 +33,7 @@
 +(void)initialize {
 	
 	if (self == [Host class]) {
-        const static NSInteger schemaVersion = 16;
+        const static NSInteger schemaVersion = 18;
         
         NSString *key = [NSString stringWithFormat:@"RHSchemaVersion-%@", [self modelName]];
         NSInteger version = [[NSUserDefaults standardUserDefaults] integerForKey:key];
@@ -166,7 +181,6 @@
 			return [NSString stringWithFormat:@"%.1f miles %@", distance/1609.344, bearing];
 		}
         
-        
 	} else if ([self.street length] > 0) {
 		return [NSString stringWithFormat:@"%@, %@", self.street, self.city];
 	} else {
@@ -236,6 +250,10 @@
      */
 }
 
+-(NSString *)statusString {
+    return self.notcurrentlyavailableValue ? NSLocalizedString(@"Not Available", nil) : NSLocalizedString(@"Available", nil);
+}
+
 -(void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
     self.latitude = [NSNumber numberWithFloat:newCoordinate.latitude];
     self.longitude = [NSNumber numberWithFloat:newCoordinate.longitude];
@@ -255,10 +273,12 @@
 	return [[CLLocation alloc] initWithLatitude:[self.latitude doubleValue] longitude:[self.longitude doubleValue]];
 }
 
+/*
 -(void)purgeFeedback {
     for (Feedback *feedback in self.feedback) {
         [feedback delete];
     }
 }
+*/
 
 @end

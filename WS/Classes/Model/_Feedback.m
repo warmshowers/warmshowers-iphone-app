@@ -9,6 +9,7 @@ const struct FeedbackAttributes FeedbackAttributes = {
 	.fullname = @"fullname",
 	.hostOrGuest = @"hostOrGuest",
 	.nid = @"nid",
+	.ratingValue = @"ratingValue",
 };
 
 const struct FeedbackRelationships FeedbackRelationships = {
@@ -77,6 +78,8 @@ const struct FeedbackRelationships FeedbackRelationships = {
 - (void)setPrimitiveNidValue:(int32_t)value_ {
 	[self setPrimitiveNid:[NSNumber numberWithInt:value_]];
 }
+
+@dynamic ratingValue;
 
 @dynamic host;
 

@@ -1,17 +1,31 @@
 //
-//  WSAppDelegate.m
-//  WS
+//  Copyright (C) 2015 Warm Showers Foundation
+//  http://warmshowers.org/
 //
-//  Created by Christopher Meyer on 10/16/10.
-//  Copyright 2010 Red House Consulting GmbH. All rights reserved.
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 #import "WSAppDelegate.h"
 #import "HostMapViewController.h"
 #import "RHManagedObjectContextManager.h"
-#import "SegmentsController.h"
 #import "HostMapViewController.h"
-#import "HostTableViewController.h"
+#import "SearchHostsTableViewController.h"
 #import "FavouriteHostTableViewController.h"
 #import "SVProgressHUD.h"
 #import "Host.h"
@@ -123,6 +137,9 @@
     self.slidingViewController.anchorRightRevealAmount = 280.0f;
     
     
+    [RHTableViewCell setSeparatorColour:[UIColor groupTableViewBackgroundColor]];
+    [RHTableViewCell setLeftLabelTextAlignment:NSTextAlignmentRight];
+    
     [SVProgressHUD setBackgroundColor:[UIColor darkGrayColor]];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     
@@ -137,18 +154,12 @@
     // is this the right place for this?
     [self.navigationController setToolbarHidden:NO];
     
-    
-    
-    
     [self autologin];
     
     return YES;
 }
 
-
-
 -(CLLocationManager *)locationManager {
-    
     if (_locationManager == nil) {
         self.locationManager = [[CLLocationManager alloc] init];
         _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
@@ -159,13 +170,12 @@
     }
     
     return _locationManager;
-    
 }
 
 -(NSArray *)segmentViewControllers {
     if (_segmentViewControllers == nil) {
         UIViewController *map   = [[HostMapViewController alloc] initWithNibName:@"HostMapViewController" bundle:nil];
-        UIViewController *list  = [[HostTableViewController alloc] initWithStyle:UITableViewStylePlain];
+        UIViewController *list  = [[SearchHostsTableViewController alloc] initWithStyle:UITableViewStylePlain];
         UIViewController *list2 = [[FavouriteHostTableViewController alloc] initWithStyle:UITableViewStylePlain];
         self.segmentViewControllers = [NSArray arrayWithObjects:map, list, list2, nil];
     }
@@ -183,7 +193,6 @@
     return [self.locationManager location];
 }
 
-// does this belong here?
 -(void)autologin {
     NSLog(@"%@", @"Auto Login Called");
     if (self.isLoggedIn) {
@@ -193,19 +202,18 @@
                                   [self loginSuccess];
                               }
                               failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                  [[WSAppDelegate sharedInstance] logout];
+                                  NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+                                  NSInteger statusCode = response.statusCode;
+                                  if (statusCode > 200) {
+                                      [[WSAppDelegate sharedInstance] logout];
+                                  }
                               }];
     } else {
         [self logout];
     }
 }
 
-
 #pragma mark Authentication
--(void)presentLoginPrompt {
-    [self promptForUsernameAndPassword];
-}
-
 -(void)loginSuccess {
     [self setIsLoggedIn:YES];
     [self requestLocationAuthorization];
@@ -213,7 +221,7 @@
 
 -(void)logout {
     [self setIsLoggedIn:NO];
-    [self presentLoginPrompt];
+    [self promptForUsernameAndPassword];
 }
 
 -(void)promptForUsernameAndPassword {

@@ -1,9 +1,24 @@
 //
-//  SingleThreadTableViewController.m
-//  WS
+//  Copyright (C) 2015 Warm Showers Foundation
+//  http://warmshowers.org/
 //
-//  Created by Christopher Meyer on 10/05/15.
-//  Copyright (c) 2015 Red House Consulting GmbH. All rights reserved.
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 #import "SingleThreadTableViewController.h"
@@ -24,13 +39,10 @@ static NSString *CellIdentifier = @"SingleThreadTableCell";
     
     [self setTitle:self.thread.subject];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"RHLabelTableViewCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"RHSingleLabelTableViewCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
     
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
     [self.tableView setEstimatedRowHeight:44];
-    
-   
-    
     
     __weak SingleThreadTableViewController *bself = self;
     
@@ -39,29 +51,17 @@ static NSString *CellIdentifier = @"SingleThreadTableCell";
         UINavigationController *navController = [controller wrapInNavigationControllerWithPresentationStyle:UIModalPresentationPageSheet];
         [bself presentViewController:navController animated:YES completion:nil];
     }];
-    
 }
-
 
 -(void)viewWillAppear:(BOOL)animated {
      [self.thread refreshMessages];
 }
 
-
-
-
-
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Message *message = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    RHLabelTableViewCell *mcell = (RHLabelTableViewCell *)cell;
-
-   // [mcell.bodyLabel setText:[message.body stripHTML]];
-   // [mcell.fromLabel setText:message.author.title];
-   // [mcell.dateLabel setText:[message.timestamp formatWithLocalTimeZone]];
-    [mcell.label setText:[message.body stripHTML]];
+    RHTableViewCell *mcell = (RHTableViewCell *)cell;
+    [mcell.largeLabel setText:[message.body stripHTML]];
 }
-
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -72,7 +72,6 @@ static NSString *CellIdentifier = @"SingleThreadTableCell";
 -(NSPredicate *)predicate {
     return [NSPredicate predicateWithFormat:@"thread = %@", self.thread];
 }
-
 
 -(NSFetchedResultsController *)fetchedResultsController {
     

@@ -48,8 +48,8 @@
 		836CCF0114ABB3D1000EDC51 /* HostMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF0014ABB3D1000EDC51 /* HostMapViewController.xib */; };
 		836CCF0614ABB3E6000EDC51 /* Host.m in Sources */ = {isa = PBXBuildFile; fileRef = 836CCF0314ABB3E6000EDC51 /* Host.m */; };
 		836D64AA1893BFA000F0602F /* crittercism.plist in Resources */ = {isa = PBXBuildFile; fileRef = 836D64A91893BFA000F0602F /* crittercism.plist */; };
-		83708C1A145C79CF00B15150 /* SegmentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83708C19145C79CF00B15150 /* SegmentsController.m */; };
-		8388B1371458A8100079ACE3 /* HostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388B1361458A8100079ACE3 /* HostTableViewController.m */; };
+		83810A4E1B1667F9001FF02B /* NSNumber+WS.m in Sources */ = {isa = PBXBuildFile; fileRef = 83810A4D1B1667F9001FF02B /* NSNumber+WS.m */; };
+		8388B1371458A8100079ACE3 /* SearchHostsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388B1361458A8100079ACE3 /* SearchHostsTableViewController.m */; };
 		838AB091172F94FA005A9149 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838AB090172F94FA005A9149 /* QuartzCore.framework */; };
 		838AB093172F9500005A9149 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838AB092172F9500005A9149 /* MobileCoreServices.framework */; };
 		838E22F11894037B0097A831 /* ws-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 838E22EF1894037B0097A831 /* ws-50.png */; };
@@ -77,7 +77,6 @@
 		83EC1DB21B0155D1003FD77B /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EC1DB11B0155D1003FD77B /* Message.m */; };
 		83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1515EBD11B00761BC6 /* trackmytour.png */; };
 		83F00E1815EBD11B00761BC6 /* trackmytour@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */; };
-		83F00E1B15EBD3FE00761BC6 /* NSString+analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F00E1A15EBD3FE00761BC6 /* NSString+analytics.m */; };
 		83F78EC41B144DF800BEEBC6 /* 06-magnify.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F78EC21B144DF800BEEBC6 /* 06-magnify.png */; };
 		83F78EC51B144DF800BEEBC6 /* 06-magnify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F78EC31B144DF800BEEBC6 /* 06-magnify@2x.png */; };
 		83F78EC81B144E2500BEEBC6 /* 28-star.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F78EC61B144E2500BEEBC6 /* 28-star.png */; };
@@ -137,10 +136,10 @@
 		836CCF0214ABB3E6000EDC51 /* Host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Host.h; sourceTree = "<group>"; };
 		836CCF0314ABB3E6000EDC51 /* Host.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Host.m; sourceTree = "<group>"; };
 		836D64A91893BFA000F0602F /* crittercism.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = crittercism.plist; sourceTree = "<group>"; };
-		83708C18145C79CF00B15150 /* SegmentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentsController.h; sourceTree = "<group>"; };
-		83708C19145C79CF00B15150 /* SegmentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentsController.m; sourceTree = "<group>"; };
-		8388B1351458A8100079ACE3 /* HostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostTableViewController.h; sourceTree = "<group>"; };
-		8388B1361458A8100079ACE3 /* HostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostTableViewController.m; sourceTree = "<group>"; };
+		83810A4C1B1667F9001FF02B /* NSNumber+WS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+WS.h"; sourceTree = "<group>"; };
+		83810A4D1B1667F9001FF02B /* NSNumber+WS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+WS.m"; sourceTree = "<group>"; };
+		8388B1351458A8100079ACE3 /* SearchHostsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchHostsTableViewController.h; sourceTree = "<group>"; };
+		8388B1361458A8100079ACE3 /* SearchHostsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchHostsTableViewController.m; sourceTree = "<group>"; };
 		838AB090172F94FA005A9149 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		838AB092172F9500005A9149 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		838E22EF1894037B0097A831 /* ws-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ws-50.png"; sourceTree = "<group>"; };
@@ -182,8 +181,6 @@
 		83EC1DB11B0155D1003FD77B /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		83F00E1515EBD11B00761BC6 /* trackmytour.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trackmytour.png; sourceTree = "<group>"; };
 		83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trackmytour@2x.png"; sourceTree = "<group>"; };
-		83F00E1915EBD3FE00761BC6 /* NSString+analytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+analytics.h"; sourceTree = "<group>"; };
-		83F00E1A15EBD3FE00761BC6 /* NSString+analytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+analytics.m"; sourceTree = "<group>"; };
 		83F78EC21B144DF800BEEBC6 /* 06-magnify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06-magnify.png"; sourceTree = "<group>"; };
 		83F78EC31B144DF800BEEBC6 /* 06-magnify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06-magnify@2x.png"; sourceTree = "<group>"; };
 		83F78EC61B144E2500BEEBC6 /* 28-star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star.png"; sourceTree = "<group>"; };
@@ -233,7 +230,6 @@
 				839E2D551291D587003E2348 /* Model */,
 				83D73F0013A151A40070D03A /* Categories */,
 				8330B476126A075E008B2EC4 /* HTTPRequest */,
-				83F168BF14685B17003D3E3F /* RH */,
 				83F168C014685B4F003D3E3F /* Host View Controllers */,
 				83E7FF7A1AFEB8F2000FCAF7 /* Messaging View Controllers */,
 				1D3623240D0F684500981E51 /* WSAppDelegate.h */,
@@ -383,8 +379,8 @@
 				835185FF152C0B0B009E558F /* MKMapView+Utils.m */,
 				839FD6F1126AED0A00C008F8 /* MKMapView+ZoomLevel.h */,
 				839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */,
-				83F00E1915EBD3FE00761BC6 /* NSString+analytics.h */,
-				83F00E1A15EBD3FE00761BC6 /* NSString+analytics.m */,
+				83810A4C1B1667F9001FF02B /* NSNumber+WS.h */,
+				83810A4D1B1667F9001FF02B /* NSNumber+WS.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -403,23 +399,14 @@
 			path = "Messaging View Controllers";
 			sourceTree = "<group>";
 		};
-		83F168BF14685B17003D3E3F /* RH */ = {
-			isa = PBXGroup;
-			children = (
-				83708C18145C79CF00B15150 /* SegmentsController.h */,
-				83708C19145C79CF00B15150 /* SegmentsController.m */,
-			);
-			path = RH;
-			sourceTree = "<group>";
-		};
 		83F168C014685B4F003D3E3F /* Host View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				28C286DF0D94DF7D0034E888 /* HostMapViewController.h */,
 				28C286E00D94DF7D0034E888 /* HostMapViewController.m */,
 				836CCF0014ABB3D1000EDC51 /* HostMapViewController.xib */,
-				8388B1351458A8100079ACE3 /* HostTableViewController.h */,
-				8388B1361458A8100079ACE3 /* HostTableViewController.m */,
+				8388B1351458A8100079ACE3 /* SearchHostsTableViewController.h */,
+				8388B1361458A8100079ACE3 /* SearchHostsTableViewController.m */,
 				83CE135F147455CB006EED95 /* FavouriteHostTableViewController.h */,
 				83CE1360147455CB006EED95 /* FavouriteHostTableViewController.m */,
 				83BE50B3126B4E7B00B5A65A /* HostInfoViewController.h */,
@@ -490,7 +477,7 @@
 				ORGANIZATIONNAME = "Red House Consulting GmbH";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = 5BQRNHH2CM;
+						DevelopmentTeam = 66Q4YB8T6R;
 					};
 					83BD306D1B01490200936C2E = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -620,19 +607,18 @@
 				8330B481126A0775008B2EC4 /* WSRequests.m in Sources */,
 				839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */,
 				83BE50B6126B4E7B00B5A65A /* HostInfoViewController.m in Sources */,
-				8388B1371458A8100079ACE3 /* HostTableViewController.m in Sources */,
+				8388B1371458A8100079ACE3 /* SearchHostsTableViewController.m in Sources */,
 				830922D11B13C62100C29C56 /* RHAboutViewController.m in Sources */,
 				83DBE69D1AFD6607003CFFCD /* LeftMenuViewController.m in Sources */,
-				83708C1A145C79CF00B15150 /* SegmentsController.m in Sources */,
 				83CE1361147455CB006EED95 /* FavouriteHostTableViewController.m in Sources */,
 				83EC1DAC1B014E25003FD77B /* _Thread.m in Sources */,
 				83C78E801474DE3D00274616 /* CLLocation+Bearing.m in Sources */,
 				8343CC8F1AFFE2DC00EE3A45 /* Thread.m in Sources */,
 				836CCF0614ABB3E6000EDC51 /* Host.m in Sources */,
 				83F8C187152B8B280084E380 /* ComposeMessageViewController.m in Sources */,
+				83810A4E1B1667F9001FF02B /* NSNumber+WS.m in Sources */,
 				83EC1DAF1B01508F003FD77B /* WS.xcdatamodeld in Sources */,
 				83E7FF791AFEB8E5000FCAF7 /* AllThreadsTableViewController.m in Sources */,
-				83F00E1B15EBD3FE00761BC6 /* NSString+analytics.m in Sources */,
 				83EC1DA91B014E25003FD77B /* _Feedback.m in Sources */,
 				83E605571608477F00C7C50E /* Feedback.m in Sources */,
 				83441AD51608694900468716 /* WSHTTPClient.m in Sources */,
@@ -702,7 +688,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;

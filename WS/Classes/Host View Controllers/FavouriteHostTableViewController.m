@@ -1,21 +1,44 @@
 //
-//  FavouriteHostTableViewController.m
-//  WS
+//  Copyright (C) 2015 Warm Showers Foundation
+//  http://warmshowers.org/
 //
-//  Created by Christopher Meyer on 11/16/11.
-//  Copyright (c) 2011 Red House Consulting GmbH. All rights reserved.
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 #import "FavouriteHostTableViewController.h"
 #import "WSAppDelegate.h"
 #import "Host.h"
 
+
+@interface FavouriteHostTableViewController()
+-(void)updateDistances;
+@end
+
 @implementation FavouriteHostTableViewController
 
 -(void)viewDidLoad {
     [super viewDidLoad];
     self.title = NSLocalizedString(@"Favourites", nil);
+    
+    [self updateDistances];
 }
+
 
 -(void)updateDistances {
 	CLLocation *current_location = [[WSAppDelegate sharedInstance] userLocation];
@@ -32,42 +55,33 @@
 }
 
 
+-(NSArray *)sortDescriptors {
+    return @[[NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES]];
+}
+
+-(NSPredicate *)predicate {
+    if (self.searchString) {
+        return [NSPredicate predicateWithFormat:@"(notcurrentlyavailable != 1) AND (distance != nil AND favourite=1) AND (comments CONTAINS[cd] %@ OR name CONTAINS[cd] %@ OR fullname CONTAINS[cd] %@ OR city CONTAINS[cd] %@)", self.searchString, self.searchString, self.searchString, self.searchString];
+    } else {
+        return [NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1 AND favourite=1"];
+    }
+
+}
+
 -(NSFetchedResultsController *)fetchedResultsController {
     if (fetchedResultsController == nil) {
-		// Create the fetch request for the entity.
+
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+		[fetchRequest setEntity:[Host entityDescription]];
+		[fetchRequest setSortDescriptors:[self sortDescriptors]];
+		[fetchRequest setPredicate:[self predicate]];
 		
-		// Edit the entity name as appropriate.
-		NSEntityDescription *entity = [Host entityDescription];
-		[fetchRequest setEntity:entity];
-		
-		// [fetchRequest setFetchBatchSize:20];		
-		// [fetchRequest setFetchLimit:50];
-		
-		// Edit the sort key as appropriate.
-		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES];
-		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-		[fetchRequest setSortDescriptors:sortDescriptors];
-		
-		NSPredicate *predicate;
-		if (self.searchString) {
-			//NSPredicate *_myPredicate = [NSPredicate predicateWithFormat:@"(firstname CONTAINS[cd] %@) OR (lastname CONTAINS[cd] %@)", _mySearchKey, _mySearchKey];
-			predicate = [NSPredicate predicateWithFormat:@"(notcurrentlyavailable != 1) AND (distance != nil AND favourite=1) AND (comments CONTAINS[cd] %@ OR name CONTAINS[cd] %@ OR fullname CONTAINS[cd] %@ OR city CONTAINS[cd] %@)", self.searchString, self.searchString, self.searchString, self.searchString];
-		} else {
-			predicate = [NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1 AND distance != nil AND favourite=1"];
-		}
-		
-		
-		[fetchRequest setPredicate:predicate];
-		
-		// Edit the section name key path and cache name if appropriate.
-		// nil for section name key path means "no sections".
-		self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
+        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
 																			managedObjectContext:[Host managedObjectContextForCurrentThread] 
 																			  sectionNameKeyPath:nil 
 																					   cacheName:nil];
 		[fetchedResultsController setDelegate:self];
-		
 		
 		NSError *error = nil;
 		if (![fetchedResultsController performFetch:&error]) {

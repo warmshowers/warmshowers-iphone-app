@@ -10,6 +10,7 @@ extern const struct FeedbackAttributes {
 	__unsafe_unretained NSString *fullname;
 	__unsafe_unretained NSString *hostOrGuest;
 	__unsafe_unretained NSString *nid;
+	__unsafe_unretained NSString *ratingValue;
 } FeedbackAttributes;
 
 extern const struct FeedbackRelationships {
@@ -51,6 +52,10 @@ extern const struct FeedbackRelationships {
 
 //- (BOOL)validateNid:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) NSString* ratingValue;
+
+//- (BOOL)validateRatingValue:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) Host *host;
 
 //- (BOOL)validateHost:(id*)value_ error:(NSError**)error_;
@@ -76,6 +81,9 @@ extern const struct FeedbackRelationships {
 
 - (int32_t)primitiveNidValue;
 - (void)setPrimitiveNidValue:(int32_t)value_;
+
+- (NSString*)primitiveRatingValue;
+- (void)setPrimitiveRatingValue:(NSString*)value;
 
 - (Host*)primitiveHost;
 - (void)setPrimitiveHost:(Host*)value;

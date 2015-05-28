@@ -1,8 +1,6 @@
 //
-//  NSString+analytics.h
-//
-//  Copyright (C) 2012 by Christopher Meyer
-//  http://schwiiz.org/
+//  Copyright (C) 2015 Warm Showers Foundation
+//  http://warmshowers.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -21,9 +19,12 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+//
 
-@interface NSString (analytics)
+#import "RHCoreDataTableViewController.h"
 
--(NSString *)stringByAppendingSource:(NSString *)source medium:(NSString *)medium campaign:(NSString *)campaign;
+@interface SearchHostsTableViewController : RHCoreDataTableViewController<UISearchDisplayDelegate, UISearchBarDelegate>
+
+// -(void)updateDistances;
 
 @end
