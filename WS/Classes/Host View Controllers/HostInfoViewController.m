@@ -69,21 +69,20 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     }];
     
     NSArray *toolbarItems = @[
-                             [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshHost)],
-                             [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                             [[UIBarButtonItem alloc] initWithCustomView:self.statusLabel],
-                             [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                             compose
-                             ];
+                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshHost)],
+                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                              [[UIBarButtonItem alloc] initWithCustomView:self.statusLabel],
+                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                              compose
+                              ];
     
     
     [self setToolbarItems:toolbarItems animated:YES];
-    
-    
 }
 
 -(void)loadView {
     self.tableView = [[RHTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    self.tableView.tableViewCellLayout = [RHTableViewCellLayout formLayout];
     self.view = self.tableView;
 }
 
@@ -91,7 +90,7 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     [super viewWillAppear:animated];
     
     [self.navigationController setToolbarHidden:NO animated:animated];
-
+    
     __weak HostInfoViewController *bself = self;
     
     [self.host setDidUpdateBlock:^() {
@@ -110,7 +109,7 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     }];
     
     [self.host setDidDeleteBlock:^() {
-       // NSLog(@"%@", @"delete called");
+        // NSLog(@"%@", @"delete called");
     }];
     
     if ([self.host needsUpdate]) {
@@ -135,7 +134,7 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     __weak UINavigationController *bNavigationController = self.navigationController;
     
     if ([[WSHTTPClient sharedHTTPClient] reachable]) {
-
+        
         [WSRequests hostDetailsWithHost:self.host];
         // [WSRequests hostFeedbackWithHost:self.host];
         
@@ -168,9 +167,9 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     __weak HostInfoViewController *bself = self;
     
     [self setLastUpdatedDate];
-   
+    
     [self.tableView reset];
-   
+    
     if (self.host.last_updated_details) {
         
         [self.tableView setTableHeaderView:self.topView];
@@ -180,13 +179,13 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
         // NSString *feedbackLabel = [NSString stringWithFormat:@"%@ (%i)", NSLocalizedString(@"Feedback (%i)", nil), [self.host.feedback count]];
         NSString *feedbackLabel = NSLocalizedString(@"Feedback", nil);
         
-       RHTableViewCell *cell = [self.tableView addCell:feedbackLabel
-                 didSelectBlock:^{
-                     FeedbackTableViewController *controller = [[FeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-                     [controller setHost:bself.host];
-                     [bself.navigationController pushViewController:controller animated:YES];
-                 }
-         ];
+        RHTableViewCell *cell = [self.tableView addCell:feedbackLabel
+                                         didSelectBlock:^{
+                                             FeedbackTableViewController *controller = [[FeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                                             [controller setHost:bself.host];
+                                             [bself.navigationController pushViewController:controller animated:YES];
+                                         }
+                                 ];
         
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         
@@ -224,105 +223,105 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
 
 // Customize the appearance of table view cells.
 /*
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    RHTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    switch (indexPath.section) {
-            
-        case 0:
-            if (indexPath.row == 0) {
-                
-                cell.leftLabel.text = NSLocalizedString(@"Address", nil);
-                cell.largeLabel.text = [[self.host address] trim];
-                
-            } else if (indexPath.row == 1) {
-                cell.leftLabel.text = NSLocalizedString(@"Phone", nil);
-                
-                if (self.host.homephone) {
-                    cell.largeLabel.text = self.host.homephone;
-                    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-                } else {
-                    cell.largeLabel.text = NSLocalizedString(@"n/a", nil);
-                }
-            } else if (indexPath.row == 2) {
-                cell.leftLabel.text = NSLocalizedString(@"Mobile", nil);
-                cell.largeLabel.text = self.host.mobilephone;
-                if ((self.host.mobilephone) && IsIPhone) {
-                    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-                } else {
-                    cell.largeLabel.text = NSLocalizedString(@"n/a", nil);
-                }
-            } else if (indexPath.row == 3) {
-                cell.leftLabel.text = NSLocalizedString(@"Comments", nil);
-                cell.largeLabel.text = [self.host.comments trim];
-                // [cell.largeLabel setLineBreakMode:NSLineBreakByWordWrapping];
-            } else if (indexPath.row == 4) {
-                cell.leftLabel.text = NSLocalizedString(@"Notice", nil);
-                cell.largeLabel.text = self.host.preferred_notice;
-            } else if (indexPath.row == 5) {
-                cell.leftLabel.text = NSLocalizedString(@"Status", nil);
-                if ([self.host.notcurrentlyavailable boolValue]) {
-                    cell.largeLabel.text = NSLocalizedString(@"Not available", nil);
-                } else {
-                    cell.largeLabel.text = NSLocalizedString(@"Available", nil);
-                }
-            } else if (indexPath.row == 6) {
-                cell.leftLabel.text = NSLocalizedString(@"Distance", nil);
-                cell.largeLabel.text = [self.host subtitle];
-            } else if (indexPath.row == 7) {
-                cell.leftLabel.text = NSLocalizedString(@"Mbr Since", nil);
-                cell.largeLabel.text = [self.host.member_since formatWithUTCTimeZone];
-            } else if (indexPath.row == 8) {
-                cell.leftLabel.text = NSLocalizedString(@"Last Login", nil);
-                cell.largeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), [self.host.last_login timesince]];
-            }
-            
-            break;
-            
-          
-    return cell;
-}
+ -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+ 
+ RHTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+ 
+ switch (indexPath.section) {
+ 
+ case 0:
+ if (indexPath.row == 0) {
+ 
+ cell.leftLabel.text = NSLocalizedString(@"Address", nil);
+ cell.largeLabel.text = [[self.host address] trim];
+ 
+ } else if (indexPath.row == 1) {
+ cell.leftLabel.text = NSLocalizedString(@"Phone", nil);
+ 
+ if (self.host.homephone) {
+ cell.largeLabel.text = self.host.homephone;
+ cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+ } else {
+ cell.largeLabel.text = NSLocalizedString(@"n/a", nil);
+ }
+ } else if (indexPath.row == 2) {
+ cell.leftLabel.text = NSLocalizedString(@"Mobile", nil);
+ cell.largeLabel.text = self.host.mobilephone;
+ if ((self.host.mobilephone) && IsIPhone) {
+ cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+ } else {
+ cell.largeLabel.text = NSLocalizedString(@"n/a", nil);
+ }
+ } else if (indexPath.row == 3) {
+ cell.leftLabel.text = NSLocalizedString(@"Comments", nil);
+ cell.largeLabel.text = [self.host.comments trim];
+ // [cell.largeLabel setLineBreakMode:NSLineBreakByWordWrapping];
+ } else if (indexPath.row == 4) {
+ cell.leftLabel.text = NSLocalizedString(@"Notice", nil);
+ cell.largeLabel.text = self.host.preferred_notice;
+ } else if (indexPath.row == 5) {
+ cell.leftLabel.text = NSLocalizedString(@"Status", nil);
+ if ([self.host.notcurrentlyavailable boolValue]) {
+ cell.largeLabel.text = NSLocalizedString(@"Not available", nil);
+ } else {
+ cell.largeLabel.text = NSLocalizedString(@"Available", nil);
+ }
+ } else if (indexPath.row == 6) {
+ cell.leftLabel.text = NSLocalizedString(@"Distance", nil);
+ cell.largeLabel.text = [self.host subtitle];
+ } else if (indexPath.row == 7) {
+ cell.leftLabel.text = NSLocalizedString(@"Mbr Since", nil);
+ cell.largeLabel.text = [self.host.member_since formatWithUTCTimeZone];
+ } else if (indexPath.row == 8) {
+ cell.leftLabel.text = NSLocalizedString(@"Last Login", nil);
+ cell.largeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), [self.host.last_login timesince]];
+ }
+ 
+ break;
+ 
+ 
+ return cell;
+ }
  */
 
 
 #pragma mark -
 #pragma mark Table view delegate
 
-    /*
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (IsIPhone && (indexPath.section == 0) && (indexPath.row == 1) && (self.host.homephone)) {
-        RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Contact Host", nil) message:[NSString stringWithFormat:NSLocalizedString(@"Dial %@?", nil), self.host.homephone]];
-        
-        [alert addCancelButton];
-        
-        [alert addButtonWithTitle:kOK block:^{
-            NSString *tel = [NSString stringWithFormat:@"tel://%@", [Host trimmedPhoneNumber:self.host.homephone]];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tel]];
-        }];
-        
-        [alert show];
-    } else if (IsIPhone && (indexPath.section == 0) && (indexPath.row == 2) && (self.host.mobilephone)) {
-        RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Contact Host", nil) message:[NSString stringWithFormat:NSLocalizedString(@"Dial %@?", nil), self.host.mobilephone]];
-        
-        [alert addCancelButton];
-        
-        [alert addButtonWithTitle:kOK block:^{
-            NSString *tel = [NSString stringWithFormat:@"tel://%@", [Host trimmedPhoneNumber:self.host.mobilephone]];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tel]];
-        }];
-        
-        [alert show];
-    } else if (indexPath.section == 1) {
-        FeedbackTableViewController *controller = [[FeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-        [controller setHost:self.host];
-        [self.navigationController pushViewController:controller animated:YES];
-    }
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-*/
+/*
+ -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+ 
+ if (IsIPhone && (indexPath.section == 0) && (indexPath.row == 1) && (self.host.homephone)) {
+ RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Contact Host", nil) message:[NSString stringWithFormat:NSLocalizedString(@"Dial %@?", nil), self.host.homephone]];
+ 
+ [alert addCancelButton];
+ 
+ [alert addButtonWithTitle:kOK block:^{
+ NSString *tel = [NSString stringWithFormat:@"tel://%@", [Host trimmedPhoneNumber:self.host.homephone]];
+ [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tel]];
+ }];
+ 
+ [alert show];
+ } else if (IsIPhone && (indexPath.section == 0) && (indexPath.row == 2) && (self.host.mobilephone)) {
+ RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Contact Host", nil) message:[NSString stringWithFormat:NSLocalizedString(@"Dial %@?", nil), self.host.mobilephone]];
+ 
+ [alert addCancelButton];
+ 
+ [alert addButtonWithTitle:kOK block:^{
+ NSString *tel = [NSString stringWithFormat:@"tel://%@", [Host trimmedPhoneNumber:self.host.mobilephone]];
+ [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tel]];
+ }];
+ 
+ [alert show];
+ } else if (indexPath.section == 1) {
+ FeedbackTableViewController *controller = [[FeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+ [controller setHost:self.host];
+ [self.navigationController pushViewController:controller animated:YES];
+ }
+ 
+ [tableView deselectRowAtIndexPath:indexPath animated:YES];
+ }
+ */
 
 
 #pragma mark AlertView Delegate

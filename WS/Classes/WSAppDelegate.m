@@ -39,7 +39,6 @@
 
 @interface WSAppDelegate ()
 @property (nonatomic, strong) ECSlidingViewController *slidingViewController;
--(NSArray *)segmentViewControllers;
 -(void)promptForUsernameAndPassword;
 @end
 
@@ -51,11 +50,6 @@
 +(WSAppDelegate *)sharedInstance {
     return (WSAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
-/*
- NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"ws-name"];
- NSString *password = [[NSUserDefaults standardUserDefaults] stringForKey:@"ws-password"];
- */
-
 
 #pragma mark -
 #pragma mark Setters/Getters
@@ -136,18 +130,12 @@
     self.slidingViewController.underLeftViewController = leftMenuViewController; // [leftMenuViewController wrapInNavigationController];
     self.slidingViewController.anchorRightRevealAmount = 280.0f;
     
-    
-    [RHTableViewCell setSeparatorColour:[UIColor groupTableViewBackgroundColor]];
-    [RHTableViewCell setLeftLabelTextAlignment:NSTextAlignmentRight];
-    
-    [SVProgressHUD setBackgroundColor:[UIColor darkGrayColor]];
+
+    [SVProgressHUD setBackgroundColor:kWSBaseColour];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     
     [self.window setTintColor:kWSBaseColour];
     self.window.rootViewController = self.slidingViewController;
-    
-    
-    [self.window makeKeyAndVisible];
     
     // [[NSDate formatter] setTimeStyle:NSDateFormatterNoStyle];
     
@@ -170,17 +158,6 @@
     }
     
     return _locationManager;
-}
-
--(NSArray *)segmentViewControllers {
-    if (_segmentViewControllers == nil) {
-        UIViewController *map   = [[HostMapViewController alloc] initWithNibName:@"HostMapViewController" bundle:nil];
-        UIViewController *list  = [[SearchHostsTableViewController alloc] initWithStyle:UITableViewStylePlain];
-        UIViewController *list2 = [[FavouriteHostTableViewController alloc] initWithStyle:UITableViewStylePlain];
-        self.segmentViewControllers = [NSArray arrayWithObjects:map, list, list2, nil];
-    }
-    
-    return _segmentViewControllers;
 }
 
 -(void)requestLocationAuthorization {
