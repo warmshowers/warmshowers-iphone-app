@@ -38,7 +38,7 @@
                             </segmentedControl>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="WJ0-Ua-8QU"/>
-                        <barButtonItem image="ios7-navigate-outline.png" style="plain" id="6Pb-5Q-fdf">
+                        <barButtonItem image="iconmonstr-navigation-5-icon.png" style="plain" id="6Pb-5Q-fdf">
                             <connections>
                                 <action selector="zoomToCurrentLocation:" destination="-1" id="QhI-d5-uiv"/>
                             </connections>
@@ -53,7 +53,7 @@
         </view>
     </objects>
     <resources>
-        <image name="ios7-navigate-outline.png" width="30" height="30"/>
+        <image name="iconmonstr-navigation-5-icon.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

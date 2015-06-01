@@ -43,13 +43,9 @@
 		830922D11B13C62100C29C56 /* RHAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830922CF1B13C62100C29C56 /* RHAboutViewController.m */; };
 		832198911AFFF49B0041A72F /* SingleThreadTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 832198901AFFF49B0041A72F /* SingleThreadTableViewController.m */; };
 		8330B481126A0775008B2EC4 /* WSRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8330B480126A0775008B2EC4 /* WSRequests.m */; };
-		833198E41B02717C008E76F0 /* ios7-information-outline.png in Resources */ = {isa = PBXBuildFile; fileRef = 833198E21B02717C008E76F0 /* ios7-information-outline.png */; };
-		833198E51B02717C008E76F0 /* ios7-information-outline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 833198E31B02717C008E76F0 /* ios7-information-outline@2x.png */; };
 		8343CC8F1AFFE2DC00EE3A45 /* Thread.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343CC8E1AFFE2DC00EE3A45 /* Thread.m */; };
 		83441AD51608694900468716 /* WSHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AD41608694900468716 /* WSHTTPClient.m */; };
 		8348AE381872A2AD0097DF24 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8348AE371872A2AD0097DF24 /* Images.xcassets */; };
-		8348AE421872C2360097DF24 /* ios7-navigate-outline.png in Resources */ = {isa = PBXBuildFile; fileRef = 8348AE401872C2360097DF24 /* ios7-navigate-outline.png */; };
-		8348AE431872C2360097DF24 /* ios7-navigate-outline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8348AE411872C2360097DF24 /* ios7-navigate-outline@2x.png */; };
 		834C9CBA1B0683E200C735F4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 834C9CB81B0683E200C735F4 /* LoginViewController.m */; };
 		834C9CBB1B0683E200C735F4 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834C9CB91B0683E200C735F4 /* LoginViewController.xib */; };
 		83518606152C0C1F009E558F /* MKMapView+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 835185FF152C0B0B009E558F /* MKMapView+Utils.m */; };
@@ -57,6 +53,8 @@
 		835696F41847D1CB00F5B999 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 835696F31847D1CB00F5B999 /* AssetsLibrary.framework */; };
 		835696F61847D1EC00F5B999 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 835696F51847D1EC00F5B999 /* Security.framework */; };
 		835696F81847D23100F5B999 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 835696F71847D23100F5B999 /* ImageIO.framework */; };
+		835B882F1B1D07D100A8E838 /* iconmonstr-navigation-5-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 835B882D1B1D07D100A8E838 /* iconmonstr-navigation-5-icon@2x.png */; };
+		835B88301B1D07D100A8E838 /* iconmonstr-navigation-5-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 835B882E1B1D07D100A8E838 /* iconmonstr-navigation-5-icon.png */; };
 		836CCF0114ABB3D1000EDC51 /* HostMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF0014ABB3D1000EDC51 /* HostMapViewController.xib */; };
 		836CCF0614ABB3E6000EDC51 /* Host.m in Sources */ = {isa = PBXBuildFile; fileRef = 836CCF0314ABB3E6000EDC51 /* Host.m */; };
 		836D64AA1893BFA000F0602F /* crittercism.plist in Resources */ = {isa = PBXBuildFile; fileRef = 836D64A91893BFA000F0602F /* crittercism.plist */; };
@@ -132,16 +130,12 @@
 		8330B47F126A0775008B2EC4 /* WSRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSRequests.h; sourceTree = "<group>"; };
 		8330B480126A0775008B2EC4 /* WSRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSRequests.m; sourceTree = "<group>"; };
 		8330B4C8126A092E008B2EC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		833198E21B02717C008E76F0 /* ios7-information-outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-information-outline.png"; sourceTree = "<group>"; };
-		833198E31B02717C008E76F0 /* ios7-information-outline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-information-outline@2x.png"; sourceTree = "<group>"; };
 		8343CC8D1AFFE2DC00EE3A45 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
 		8343CC8E1AFFE2DC00EE3A45 /* Thread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Thread.m; sourceTree = "<group>"; };
 		83441AD31608694900468716 /* WSHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSHTTPClient.h; sourceTree = "<group>"; };
 		83441AD41608694900468716 /* WSHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSHTTPClient.m; sourceTree = "<group>"; };
 		8348AE351872A0CF0097DF24 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		8348AE371872A2AD0097DF24 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		8348AE401872C2360097DF24 /* ios7-navigate-outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-navigate-outline.png"; sourceTree = "<group>"; };
-		8348AE411872C2360097DF24 /* ios7-navigate-outline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-navigate-outline@2x.png"; sourceTree = "<group>"; };
 		834C9CB71B0683E200C735F4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		834C9CB81B0683E200C735F4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		834C9CB91B0683E200C735F4 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -151,6 +145,8 @@
 		835696F31847D1CB00F5B999 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		835696F51847D1EC00F5B999 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		835696F71847D23100F5B999 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		835B882D1B1D07D100A8E838 /* iconmonstr-navigation-5-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconmonstr-navigation-5-icon@2x.png"; sourceTree = "<group>"; };
+		835B882E1B1D07D100A8E838 /* iconmonstr-navigation-5-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconmonstr-navigation-5-icon.png"; sourceTree = "<group>"; };
 		836CCF0014ABB3D1000EDC51 /* HostMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostMapViewController.xib; sourceTree = "<group>"; };
 		836CCF0214ABB3E6000EDC51 /* Host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Host.h; sourceTree = "<group>"; };
 		836CCF0314ABB3E6000EDC51 /* Host.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Host.m; sourceTree = "<group>"; };
@@ -371,10 +367,6 @@
 				838E22F01894037B0097A831 /* ws-50@2x.png */,
 				83F00E1515EBD11B00761BC6 /* trackmytour.png */,
 				83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */,
-				8348AE401872C2360097DF24 /* ios7-navigate-outline.png */,
-				8348AE411872C2360097DF24 /* ios7-navigate-outline@2x.png */,
-				833198E21B02717C008E76F0 /* ios7-information-outline.png */,
-				833198E31B02717C008E76F0 /* ios7-information-outline@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -475,6 +467,8 @@
 				830569DE1B1D02B60039C5E2 /* eject-icon@2x.png */,
 				830569E21B1D03190039C5E2 /* iconmonstr-info-6-icon.png */,
 				830569E11B1D03190039C5E2 /* iconmonstr-info-6-icon@2x.png */,
+				835B882E1B1D07D100A8E838 /* iconmonstr-navigation-5-icon.png */,
+				835B882D1B1D07D100A8E838 /* iconmonstr-navigation-5-icon@2x.png */,
 				83F78ED21B1450DC00BEEBC6 /* hamburger.png */,
 				83F78ED31B1450DC00BEEBC6 /* hamburger@2x.png */,
 			);
@@ -567,20 +561,18 @@
 				830569E01B1D02B60039C5E2 /* eject-icon@2x.png in Resources */,
 				830569D41B1D015E0039C5E2 /* iconmonstr-magnifier-2-icon.png in Resources */,
 				83E205691878B3550067738B /* ws@2x.png in Resources */,
-				8348AE431872C2360097DF24 /* ios7-navigate-outline@2x.png in Resources */,
 				830569D81B1D01E30039C5E2 /* iconmonstr-star-2-icon@2x.png in Resources */,
+				835B882F1B1D07D100A8E838 /* iconmonstr-navigation-5-icon@2x.png in Resources */,
 				836CCF0114ABB3D1000EDC51 /* HostMapViewController.xib in Resources */,
 				83F78ED41B1450DC00BEEBC6 /* hamburger.png in Resources */,
 				838E22F21894037B0097A831 /* ws-50@2x.png in Resources */,
 				830569E41B1D03190039C5E2 /* iconmonstr-info-6-icon.png in Resources */,
 				83E205681878B3550067738B /* ws.png in Resources */,
 				836D64AA1893BFA000F0602F /* crittercism.plist in Resources */,
-				833198E41B02717C008E76F0 /* ios7-information-outline.png in Resources */,
 				83F78ED51B1450DC00BEEBC6 /* hamburger@2x.png in Resources */,
 				834C9CBB1B0683E200C735F4 /* LoginViewController.xib in Resources */,
 				83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */,
 				83F00E1815EBD11B00761BC6 /* trackmytour@2x.png in Resources */,
-				8348AE421872C2360097DF24 /* ios7-navigate-outline.png in Resources */,
 				830569D71B1D01E30039C5E2 /* iconmonstr-star-2-icon.png in Resources */,
 				830569CF1B1D00030039C5E2 /* iconmonstr-location-icon.png in Resources */,
 				838E22F11894037B0097A831 /* ws-50.png in Resources */,
@@ -588,9 +580,9 @@
 				830569E31B1D03190039C5E2 /* iconmonstr-info-6-icon@2x.png in Resources */,
 				837DED051B1BA7E00031FCCB /* ws-40.png in Resources */,
 				830569D31B1D015E0039C5E2 /* iconmonstr-magnifier-2-icon@2x.png in Resources */,
-				833198E51B02717C008E76F0 /* ios7-information-outline@2x.png in Resources */,
 				830569DB1B1D026F0039C5E2 /* iconmonstr-inbox-2-icon.png in Resources */,
 				83B3348F1B046DE900A2A1FB /* ComposeMessageViewController.xib in Resources */,
+				835B88301B1D07D100A8E838 /* iconmonstr-navigation-5-icon.png in Resources */,
 				8355479B1642DFFE00D2A0B5 /* Settings.bundle in Resources */,
 				837DED061B1BA7E00031FCCB /* ws-40@2x.png in Resources */,
 			);
