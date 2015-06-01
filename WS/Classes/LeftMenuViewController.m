@@ -39,6 +39,8 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.tableView setScrollsToTop:NO];
+    
     [self setTitle:NSLocalizedString(@"Warm Showers", nil)];
     
     [self.tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Find a Host", nil)];
@@ -53,7 +55,7 @@
                                                     [bself.slidingViewController resetTopViewAnimated:YES];
                                                 }
                                                          style:UITableViewCellStyleDefault
-                                                         image:[[UIImage imageNamed:@"193-location-arrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+                                                         image:[[UIImage imageNamed:@"iconmonstr-location-icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                                                  accessoryType:UITableViewCellAccessoryDisclosureIndicator];
     [self.tableView addCell:cell];
     
@@ -66,7 +68,7 @@
                                    [bself.slidingViewController resetTopViewAnimated:YES];
                                }
                                         style:UITableViewCellStyleDefault
-                                        image:[[UIImage imageNamed:@"06-magnify"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+                                        image:[[UIImage imageNamed:@"iconmonstr-magnifier-2-icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator];
     [self.tableView addCell:cell];
     
@@ -82,7 +84,7 @@
                                    [bself.slidingViewController resetTopViewAnimated:YES];
                                }
                                         style:UITableViewCellStyleDefault
-                                        image:[[UIImage imageNamed:@"28-star"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+                                        image:[[UIImage imageNamed:@"iconmonstr-star-2-icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator];
     [self.tableView addCell:cell];
    
@@ -105,7 +107,7 @@
                                    
                                }
                                         style:UITableViewCellStyleDefault
-                                        image:[[UIImage imageNamed:@"40-inbox"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+                                        image:[[UIImage imageNamed:@"iconmonstr-inbox-2-icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator];
     [self.tableView addCell:cell];
     
@@ -118,7 +120,7 @@
                                didSelectBlock:^{
                                    
                                    
-                                   RHAboutViewController *controller = [[RHAboutViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                                   RHAboutViewController *controller = [RHAboutViewController new];
                                    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
                                    
                                   // navController.modalTransitionStyle   = UIModalTransitionStyleFlipHorizontal;
@@ -129,7 +131,7 @@
                                    [bself.slidingViewController resetTopViewAnimated:YES];
                                }
                                         style:UITableViewCellStyleDefault
-                                        image:nil
+                                        image:[[UIImage imageNamed:@"iconmonstr-info-6-icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     [self.tableView addCell:cell];
@@ -140,14 +142,25 @@
                               detailLabelText:nil
                                didSelectBlock:^{
                                    [[WSAppDelegate sharedInstance] logout];
-                                   [bself.slidingViewController resetTopViewAnimated:YES];
-                                   
+                                   [bself.slidingViewController resetTopViewAnimated:YES];                                   
                                }
                                         style:UITableViewCellStyleDefault
-                                        image:nil
+                                        image:[[UIImage imageNamed:@"eject-icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     [self.tableView addCell:cell];
+    
+    
+ /*
+  
+    [self.tableView setBackgroundColor:[UIColor darkGrayColor]];
+  
+  for (NSArray *section in self.tableView.tableRows) {
+        for (RHTableViewCell *cell in section) {
+            [cell setBackgroundColor:[UIColor lightGrayColor]];
+        }
+    }
+  */
     
 }
 

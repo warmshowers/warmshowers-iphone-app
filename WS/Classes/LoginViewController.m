@@ -34,6 +34,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    [self.usernameTextField setPlaceholder:NSLocalizedString(@"Username", nil)];
+    [self.passwordTextField setPlaceholder:NSLocalizedString(@"Password", nil)];
+    [self.loginButton setTitle:NSLocalizedString(@"Log in", nil) forState:UIControlStateNormal];
+    [self.createAnAccountButton setTitle:NSLocalizedString(@"Create an account", nil) forState:UIControlStateNormal];
+    [self.learnAboutButton setTitle:NSLocalizedString(@"Learn about the Warm Showers Community", nil) forState:UIControlStateNormal];
+
     [self.loginButton setType:BButtonTypePrimary];
     [self.scrunchView setBackgroundColor:kWSBaseColour];
     __weak LoginViewController *bself = self;
@@ -97,7 +104,6 @@
                               
                               [alert show];
                           }];
-    
 }
 
 -(IBAction)createAccountButtonTapped:(id)sender {
@@ -107,6 +113,5 @@
 -(IBAction)learnAboutButtonTapped:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.warmshowers.org/faq"]];
 }
-
 
 @end

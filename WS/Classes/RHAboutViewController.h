@@ -21,8 +21,6 @@
 //  THE SOFTWARE.
 //
 
-#import <StoreKit/StoreKit.h>
-
-@interface RHAboutViewController : UITableViewController<SKStoreProductViewControllerDelegate>
+@interface RHAboutViewController : UIViewController
 
 @end

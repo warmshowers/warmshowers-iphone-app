@@ -29,7 +29,7 @@
 #import "WSAppDelegate.h"
 #import "HostInfoViewController.h"
 #import "RHAboutViewController.h"
-#import "SearchHostsTableViewController.h"
+#import "HostsTableViewController.h"
 #import "WSHTTPClient.h"
 
 #import "KPAnnotation.h"
@@ -178,9 +178,11 @@
     [WSRequests requestWithMapView:self.mapView];
 }
 
-- (BOOL)clusteringControllerShouldClusterAnnotations:(KPClusteringController *)clusteringController {
+/*
+-(BOOL)clusteringControllerShouldClusterAnnotations:(KPClusteringController *)clusteringController {
     return self.mapView.zoomLevel < 14; // Find zoom level that suits your dataset
 }
+*/
 
 #pragma mark -
 #pragma mark Fetched results controller delegate
@@ -201,11 +203,8 @@
 }
 
 -(void)redrawAnnotations {
-    
     self.fetchedResultsController = nil;
-    
     [self.clusteringController setAnnotations:[self.fetchedResultsController fetchedObjects]];
-    
 }
 
 -(void)clusteringController:(KPClusteringController *)clusteringController configureAnnotationForDisplay:(KPAnnotation *)annotation {
@@ -247,38 +246,32 @@
             
             annotationView.pinColor = [host pinColour];
             // annotationView.canShowCallout = YES;
-            
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-            [button addTarget:self action:@selector(accessoryTapped:) forControlEvents:UIControlEventTouchUpInside];
-            annotationView.rightCalloutAccessoryView = button;
         }
         
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        [button addTarget:self action:@selector(accessoryTapped:) forControlEvents:UIControlEventTouchUpInside];
+        annotationView.rightCalloutAccessoryView = button;
         annotationView.canShowCallout = YES;
-        
     }
     
     return annotationView;
 }
 
-
 -(void)accessoryTapped:(id)sender {
     NSArray *annotations = [self.mapView selectedAnnotations];
+        KPAnnotation *kingpinAnnotation = [annotations firstObject];
+    NSSet *kpAnnotations = [kingpinAnnotation annotations];
     
-    KPAnnotation *kingpinAnnotation = [annotations firstObject];
-    Host *host = [[kingpinAnnotation annotations] anyObject];
-    HostInfoViewController *controller = [HostInfoViewController new];
-    controller.host = host;
-    [self.navigationController pushViewController:controller animated:YES];
-}
-
--(void)infoButtonPressed:(id)sender {
-    RHAboutViewController *controller = [[RHAboutViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-    
-    navController.modalTransitionStyle   = UIModalTransitionStyleCrossDissolve;
-    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-    
-    [self.navigationController presentViewController:navController animated:YES completion:nil];
+     if ([kpAnnotations count] == 1) {
+        Host *host = [[kingpinAnnotation annotations] anyObject];
+        HostInfoViewController *controller = [HostInfoViewController new];
+        controller.host = host;
+        [self.navigationController pushViewController:controller animated:YES];
+    } else {
+        HostsTableViewController *controller = [HostsTableViewController new];
+        [controller setBasePredicate:[NSPredicate predicateWithFormat:@"self in %@", kpAnnotations]];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 -(IBAction)mapTypeSegmentedControl:(UISegmentedControl *)sender {

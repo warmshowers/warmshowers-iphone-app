@@ -43,17 +43,11 @@
 
 -(NSString *)infoURL;
 -(NSString *)imageURL;
-// -(NSString *)contactURL;
--(BOOL)needsUpdate;
 -(BOOL)isStale;
 -(NSString *)statusString;
 
 -(NSUInteger)pinColour;
-
-
 -(CLLocation *)location;
 -(NSString *)address;
-
-// -(void)purgeFeedback;
 
 @end

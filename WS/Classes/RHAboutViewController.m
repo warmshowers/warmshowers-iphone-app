@@ -24,8 +24,9 @@
 #import "RHAboutViewController.h"
 
 @interface RHAboutViewController ()
--(UITableViewCell *)headerCell;
--(void)showMeTheApp:(NSString *)appid;
+@property (nonatomic, strong) RHTableView *tableView;
+-(RHTableViewCell *)headerCell;
+// -(void)showMeTheApp:(NSString *)appid;
 @end
 
 @implementation RHAboutViewController
@@ -40,31 +41,87 @@
                                                                                            block:^{
                                                                                                [bself dismissViewControllerAnimated:YES completion:nil];
                                                                                            }];
+    
+    [self.tableView addSectionWithSectionHeaderText:nil];
+    [self.tableView addCell:self.headerCell];
+    
+    [self.tableView addSectionWithSectionHeaderText:@"Warmshowers.org"];
+    
+    [self.tableView addCell:[RHTableViewCell cellWithLabelText:NSLocalizedString(@"Visit the Website", nil)
+                                              detailLabelText:nil
+                                               didSelectBlock:^{
+                                                   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://warmshowers.org"]];
+                                               } style:UITableViewCellStyleDefault
+                                                        image:nil
+                                                accessoryType:UITableViewCellAccessoryDisclosureIndicator]
+    ];
+    
+    [self.tableView addCell:[RHTableViewCell cellWithLabelText:NSLocalizedString(@"Contact Us", nil)
+                                               detailLabelText:nil
+                                                didSelectBlock:^{
+                                                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.warmshowers.org/contact"]];
+                                                } style:UITableViewCellStyleDefault
+                                                         image:nil
+                                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator]
+     ];
+    
+    [self.tableView addSectionWithSectionHeaderText:@"Warm Showers Online"];
+    
+    
+    [self.tableView addCell:[RHTableViewCell cellWithLabelText:NSLocalizedString(@"Follow us on Twitter", nil)
+                                               detailLabelText:nil
+                                                didSelectBlock:^{
+                                                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/warmshowers"]];
+                                                } style:UITableViewCellStyleDefault
+                                                         image:nil
+                                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator]
+     ];
+    
+    [self.tableView addCell:[RHTableViewCell cellWithLabelText:NSLocalizedString(@"Like us on Facebook", nil)
+                                               detailLabelText:nil
+                                                didSelectBlock:^{
+                                                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/groups/135049549858210/"]];
+                                                } style:UITableViewCellStyleDefault
+                                                         image:nil
+                                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator]
+     ];
+    
+    
+    [self.tableView addCell:[RHTableViewCell cellWithLabelText:NSLocalizedString(@"Rate this App", nil)
+                                               detailLabelText:nil
+                                                didSelectBlock:^{
+                                                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/app/warmshowers/id359056872?mt=8"]];
+                                                } style:UITableViewCellStyleDefault
+                                                         image:nil
+                                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator]
+     ];
+    
+    [self.tableView addSectionWithSectionHeaderText:@"Other Apps" footerText:NSLocalizedString(@"The Warm Showers and TrackMyTour apps developed by Christopher Meyer. Contact me at chris@schwiiz.org or visit my blog at http://schwiiz.org/.", nil)];
+    
+    
+    
+    RHTableViewCell *tmtCell = [self.tableView addCell:[RHTableViewCell cellWithLabelText:@"TrackMyTour"
+                                               detailLabelText:NSLocalizedString(@"A tracking app for bike touring", nil)
+                                                didSelectBlock:^{
+                                                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/app/trackmytour-travel-sharing/id307303960?mt=8"]];
+                                                } style:UITableViewCellStyleSubtitle
+                                                         image:[UIImage imageNamed:@"trackmytour"]
+                                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator]
+     ];
+    
+    [tmtCell setHeightBlock:^CGFloat{
+        return 80;
+    }];
+
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self.navigationController setToolbarHidden:YES animated:YES];
+-(void)loadView {
+    self.tableView = [[RHTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    self.view = self.tableView;
 }
 
-#pragma mark - Table view data source
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return 1;
-        case 1:
-            return 3;
-        default:
-            return 1;
-    }
-}
-
--(UITableViewCell *)headerCell {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+-(RHTableViewCell *)headerCell {
+    RHTableViewCell *cell = [[RHTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
     
     [cell.imageView setImage:[UIImage imageNamed:@"ws-50"]];
     
@@ -72,7 +129,7 @@
     [cell.detailTextLabel setFont:[UIFont systemFontOfSize:14]];
     [cell.detailTextLabel setTextColor:[UIColor darkTextColor]];
     
-    NSString *build_number = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *build_number  = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     NSString *short_version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     
 #ifdef DEBUG
@@ -87,137 +144,39 @@
     
     [cell.textLabel setText:appName];
     [cell.detailTextLabel setText:versionLabel];
-    // [cell setBackgroundColor:[UIColor clearColor]];
-    // [cell setBackgroundView:[[UIView alloc] initWithFrame:CGRectZero]];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
-    return cell;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == 0) {
-        return [self headerCell];
-    }
-    
-    UITableViewCell *cell;
-    
-    switch (indexPath.section) {
-        case 0:
-            break;
-        case 1:
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-            
-            if ( indexPath.row == 0) {
-                [cell.textLabel setText:NSLocalizedString(@"Follow us on Twitter", nil)];
-            } else if (indexPath.row == 1) {
-                [cell.textLabel setText:NSLocalizedString(@"Like us on Facebook", nil)];
-            } else { // if (indexPath.row == 1) {
-                [cell.textLabel setText:NSLocalizedString(@"Rate this App", nil)];
-            }
-            
-            break;
-        case 2:
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-            [cell.imageView setImage:[UIImage imageNamed:@"trackmytour"]];
-            [cell.textLabel setText:@"TrackMyTour"];
-            [cell.detailTextLabel setText:NSLocalizedString(@"A tracking app for bike touring", nil)];
-            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-            
-            break;
-    }
-    
-    return cell;
-}
-
-#pragma mark - Table view delegate
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case 0:
-            break;
-        case 1:
-            if (indexPath.row == 0) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/warmshowers"]];
-            } else if (indexPath.row == 1) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/groups/135049549858210/"]];
-            } else {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/app/warmshowers/id359056872?mt=8"]];
-                
-                
-                // [[RHPromptForReview sharedInstance] promptNow:nil];
-            }
-            break;
-            
-        default:
-            if (indexPath.row == 0) {
-                [self showMeTheApp:@"307303960"];
-                break;
-            }
-    }
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case 0:
-            if (indexPath.row == 0) {
-                return 80;
-            }
-        case 2:
-            return 80;
-        default:
-            return 44;
-    }
-}
-
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        return @"Warm Showers";
-    } else if (section == 2) {
-        return @"Other Apps";
-    }
-    
-    return @"";
-}
-
--(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    switch (section) {
-            //case 1:
-            //	return @"\nTrackMyTour is another app";
-        case 2:
-            return NSLocalizedString(@"The Warm Showers and TrackMyTour apps developed by Christopher Meyer. Contact me at chris@schwiiz.org or visit my blog at http://schwiiz.org/.", nil);
-            
-        default:
-            return @"";
-    }
-    
-}
-
--(void)showMeTheApp:(NSString *)appid {
-    
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Connecting to the App Store...", nil)];
-    
-    NSDictionary *appParameters = @{SKStoreProductParameterITunesItemIdentifier:appid};
-    SKStoreProductViewController *productViewController = [[SKStoreProductViewController alloc] init];
-    
-    [productViewController setDelegate:self];
-    
-    [productViewController loadProductWithParameters:appParameters completionBlock:^(BOOL result, NSError *error) {
-        if (error == nil) {
-            [SVProgressHUD dismiss];
-            
-            [self.navigationController presentViewController:productViewController animated:YES completion:nil];
-        } else {
-            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"An error occurred while connecting to the App Store.", nil)];
-        }
+    [cell setHeightBlock:^CGFloat{
+        return 80.0f;
     }];
+    
+    return cell;
 }
 
--(void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
-    [viewController dismissViewControllerAnimated:YES completion:nil];
-}
+/*
+ -(void)showMeTheApp:(NSString *)appid {
+ 
+ [SVProgressHUD showWithStatus:NSLocalizedString(@"Connecting to the App Store...", nil)];
+ 
+ NSDictionary *appParameters = @{SKStoreProductParameterITunesItemIdentifier:appid};
+ SKStoreProductViewController *productViewController = [[SKStoreProductViewController alloc] init];
+ 
+ [productViewController setDelegate:self];
+ 
+ [productViewController loadProductWithParameters:appParameters completionBlock:^(BOOL result, NSError *error) {
+ if (error == nil) {
+ [SVProgressHUD dismiss];
+ 
+ [self.navigationController presentViewController:productViewController animated:YES completion:nil];
+ } else {
+ [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"An error occurred while connecting to the App Store.", nil)];
+ }
+ }];
+ }
+ 
+ -(void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
+ [viewController dismissViewControllerAnimated:YES completion:nil];
+ }
+ */
 
 @end

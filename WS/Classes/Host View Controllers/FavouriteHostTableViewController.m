@@ -36,61 +36,32 @@
     [super viewDidLoad];
     self.title = NSLocalizedString(@"Favourites", nil);
     
+    self.basePredicate = [NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1 AND favourite=1"];
+    
+    [self addSearchBarWithPlaceHolder:NSLocalizedString(@"Filter", nil)];
+    
     [self updateDistances];
 }
 
 
 -(void)updateDistances {
-	CLLocation *current_location = [[WSAppDelegate sharedInstance] userLocation];
-	
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		NSArray *hosts = [Host fetchWithPredicate:[NSPredicate predicateWithFormat:@"favourite=1 AND notcurrentlyavailable != 1"]];
-		
-		for (Host *host in hosts) {
-			[host updateDistanceFromLocation:current_location];
-		}
-		
-		[Host commit];
-	});
+    CLLocation *current_location = [[WSAppDelegate sharedInstance] userLocation];
+    
+    if (current_location) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSArray *hosts = [Host fetchWithPredicate:self.basePredicate];
+            
+            for (Host *host in hosts) {
+                [host updateDistanceFromLocation:current_location];
+            }
+            
+            [Host commit];
+        });
+    };
 }
-
 
 -(NSArray *)sortDescriptors {
     return @[[NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES]];
 }
-
--(NSPredicate *)predicate {
-    if (self.searchString) {
-        return [NSPredicate predicateWithFormat:@"(notcurrentlyavailable != 1) AND (distance != nil AND favourite=1) AND (comments CONTAINS[cd] %@ OR name CONTAINS[cd] %@ OR fullname CONTAINS[cd] %@ OR city CONTAINS[cd] %@)", self.searchString, self.searchString, self.searchString, self.searchString];
-    } else {
-        return [NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1 AND favourite=1"];
-    }
-
-}
-
--(NSFetchedResultsController *)fetchedResultsController {
-    if (fetchedResultsController == nil) {
-
-		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-		[fetchRequest setEntity:[Host entityDescription]];
-		[fetchRequest setSortDescriptors:[self sortDescriptors]];
-		[fetchRequest setPredicate:[self predicate]];
-		
-        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-																			managedObjectContext:[Host managedObjectContextForCurrentThread] 
-																			  sectionNameKeyPath:nil 
-																					   cacheName:nil];
-		[fetchedResultsController setDelegate:self];
-		
-		NSError *error = nil;
-		if (![fetchedResultsController performFetch:&error]) {
-			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-		}
-    }
-	
-    return fetchedResultsController;
-} 
-
 
 @end

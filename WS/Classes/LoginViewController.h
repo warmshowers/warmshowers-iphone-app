@@ -29,6 +29,8 @@
 @property (strong, nonatomic) IBOutlet BButton *loginButton;
 @property (strong, nonatomic) IBOutlet RHTextField *usernameTextField;
 @property (strong, nonatomic) IBOutlet RHTextField *passwordTextField;
+@property (strong, nonatomic) IBOutlet UIButton *createAnAccountButton;
+@property (strong, nonatomic) IBOutlet UIButton *learnAboutButton;
 @property (strong, nonatomic) IBOutlet RHKeyboardScrunchView *scrunchView;
 
 -(IBAction)loginButtonTapped:(id)sender;

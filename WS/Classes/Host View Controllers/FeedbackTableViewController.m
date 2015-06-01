@@ -43,12 +43,16 @@ static NSString *CellIdentifier = @"1c8416b1-fe7d-4fbb-af58-d18b8efca04d";
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [WSRequests hostFeedbackWithHost:self.host];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 //	[self.navigationController setToolbarHidden:YES animated:YES];
+    
+    if (self.fetchedResultsController.fetchedObjects.count == 0) {
+        NSLog(@"%@", @"no");
+    }
+    
 }
 
 -(NSArray *)sortDescriptors {

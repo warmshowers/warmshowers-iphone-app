@@ -31,7 +31,6 @@
 
 @implementation WSRequests
 
-
 +(void)loginWithUsername:(NSString *)username
                 password:(NSString *)password
                  success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
@@ -49,19 +48,14 @@
                                                                 parameters:nil
                                                                    success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                        
-                                                                       // NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
-                                                                       // NSInteger statusCode = response.statusCode;
-                                                                       
                                                                        NSString *token = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
                                                                        [[WSHTTPClient sharedHTTPClient].requestSerializer setValue:token forHTTPHeaderField:@"X-CSRF"];
                                                                        
                                                                        if (success) {
                                                                            success(task, responseObject);
                                                                        }
-                                                                       
                                                                    }
                                                                    failure:failure];
-                                      
                                   }
                                   failure:failure];
 }
@@ -90,7 +84,7 @@
         
         NSArray *hosts = [responseObject objectForKey:@"accounts"];
         
-        async({
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
             for (NSDictionary *dict in hosts) {
                 NSString *hostidstring = [dict objectForKey:@"uid"];
                 NSNumber *hostid = [NSNumber numberWithInteger:[hostidstring integerValue]];
@@ -99,6 +93,8 @@
                 // number of fields.  We don't called [Host fetchOrCreate:] since that will wipe out many fields values.
                 Host *host = [Host hostWithID:hostid];
                 
+                // TODO: This is a bug in the API call
+                host.fullname = [dict objectForKey:@"fullname"];
                 host.name = [dict objectForKey:@"name"];
                 host.street = [dict objectForKey:@"street"];
                 host.city = [dict objectForKey:@"city"];
@@ -137,9 +133,13 @@
     
     [[WSHTTPClient sharedHTTPClient] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        async({
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
             [Host fetchOrCreate:responseObject];
             [Host commit];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [WSRequests hostFeedbackWithHost:host];
+            });
         });
         
         // This don't really belong here...
@@ -167,14 +167,16 @@
     if ([[WSAppDelegate sharedInstance] isLoggedIn] == NO) {
         return;
     }
-    
+
     NSString *path = [NSString stringWithFormat:@"/user/%i/json_recommendations", [host.hostid intValue]];
     
     [[WSHTTPClient sharedHTTPClient] GET:path
                               parameters:nil
                                  success:^(NSURLSessionDataTask *task, id responseObject) {
                                      
-                                  //   async({
+                                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+                                         
+                                         Host *bhost = [host objectInCurrentThreadContextWithError:nil];
                                          
                                          NSArray *recommendations = [responseObject objectForKey:@"recommendations"];
                                          
@@ -187,7 +189,7 @@
                                              NSDictionary *dict = [feedback objectForKey:@"recommendation"];
                                              
                                              NSString *snid = [dict objectForKey:@"nid"];
-                                             NSString *recommender = [dict objectForKey:@"fullname" defaultValue:[dict objectForKey:@"name" defaultValue:@"Unknown"]];
+                                             NSString *recommender = [[dict objectForKey:@"fullname" defaultValue:[dict objectForKey:@"name" defaultValue:@"Unknown"]] trim];
                                              NSString *body = [[dict objectForKey:@"body"] trim];
                                              NSString *hostOrGuest = [dict objectForKey:@"field_guest_or_host_value"];
                                              NSNumber *recommendationDate = [dict objectForKey:@"field_hosting_date_value"];
@@ -203,11 +205,11 @@
                                              [feedback setDate:rDate];
                                              [feedback setRatingValue:ratingValue];
                                              
-                                             [host addFeedbackObject:feedback];
+                                             [bhost addFeedbackObject:feedback];
                                          }
                                          
                                          [Feedback commit];
-                                  //   });
+                                     });
                                      
                                  }
                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -230,7 +232,7 @@
     [[WSHTTPClient sharedHTTPClient] POST:path
                                parameters:parms
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
-                                      async({
+                                      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
                                           NSArray *hosts = [[responseObject objectForKey:@"accounts"] allObjects];
                                           
                                           for (NSDictionary *dict in hosts) {
@@ -251,7 +253,7 @@
     
     [[WSHTTPClient sharedHTTPClient] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        async({
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
             NSArray *all_ids = [responseObject pluck:@"thread_id"];
             
             [Thread deleteWithPredicate:[NSPredicate predicateWithFormat:@"NOT (threadid IN %@)", all_ids]];

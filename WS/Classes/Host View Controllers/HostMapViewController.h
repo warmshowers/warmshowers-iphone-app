@@ -40,7 +40,7 @@
 
 -(IBAction)zoomToCurrentLocation:(id)sender;
 -(void)redrawAnnotations;
--(void)infoButtonPressed:(id)sender;
+
 
 -(IBAction)mapTypeSegmentedControl:(UISegmentedControl *)sender;
 

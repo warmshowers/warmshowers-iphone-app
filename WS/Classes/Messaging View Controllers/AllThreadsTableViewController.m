@@ -27,16 +27,14 @@
 #import "SingleThreadTableViewController.h"
 #import "WSRequests.h"
 
-static NSString *CellIdentifier = @"ThreadsTableCell";
+static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
 
 @interface AllThreadsTableViewController ()
-
 @end
-
 
 @implementation AllThreadsTableViewController
 
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     
     [super viewDidLoad];
     
@@ -45,46 +43,62 @@ static NSString *CellIdentifier = @"ThreadsTableCell";
     [self.tableView registerClass:[RHTableViewCellStyleSubtitleLighterDetail class] forCellReuseIdentifier:CellIdentifier];
     
     self.refreshControl = [RHRefreshControl refreshControlWithBlock:^(RHRefreshControl *refreshControl) {
-     
+        
         [WSRequests refreshThreadsSuccess:^(NSURLSessionDataTask *task, id responseObject) {
             [refreshControl endRefreshing];
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
             [refreshControl endRefreshing];
         }];
-       
+        
     }];
     
     // refresh on load
     [(RHRefreshControl *)self.refreshControl refresh];
+    
+    
+    if (!self.splitViewController.isCollapsed) {
+        [self.splitViewController showDetailViewController:[[self splashViewController] wrapInNavigationController] sender:nil];
+    }
+    
 }
 
 
+-(UIViewController *)splashViewController {
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ws-50"]];
+    
+    [imageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    [imageView setContentMode:UIViewContentModeCenter];
+    
+    UIViewController *splashViewController = [[UIViewController alloc] init];
+    [splashViewController setTitle:@"Warm Showers"];
+    [splashViewController.view setBackgroundColor:[UIColor lightGrayColor]];
+    [splashViewController.view addSubview:imageView];
+    
+    imageView.frame = splashViewController.view.bounds;
+    
+    return splashViewController;
+}
+
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
     Thread *thread = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     NSString *title = [NSString stringWithFormat:@"%@ (%ld)", thread.subject, (long)[thread.count integerValue]];
-    
     
     [cell.textLabel setText:title];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     [cell.detailTextLabel setText:thread.user.title];
     
-    /*
-     NSArray *participants = [thread.participants allObjects];
-    NSArray *names = [participants arrayByPerformingSelector:@selector(title)];
-    
-    
-    
-    [cell.detailTextLabel setText:[names componentsJoinedByString:@", "]];
-     */
 }
 
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
+    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -94,13 +108,11 @@ static NSString *CellIdentifier = @"ThreadsTableCell";
     SingleThreadTableViewController *controller = [[SingleThreadTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [controller setThread:thread];
     
+    // UISplitViewController *split = self.splitViewController;
     
-    UISplitViewController *split = self.splitViewController;
-    
-    [split showDetailViewController:[controller wrapInNavigationController] sender:nil];
+    [self.splitViewController showDetailViewController:[controller wrapInNavigationController] sender:nil];
     
 }
-
 
 -(NSFetchedResultsController *)fetchedResultsController {
     

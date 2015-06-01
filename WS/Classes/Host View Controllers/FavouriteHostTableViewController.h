@@ -21,8 +21,8 @@
 //  THE SOFTWARE.
 //
 
-#import "SearchHostsTableViewController.h"
+#import "HostsTableViewController.h"
 
-@interface FavouriteHostTableViewController : SearchHostsTableViewController
+@interface FavouriteHostTableViewController : HostsTableViewController
 
 @end

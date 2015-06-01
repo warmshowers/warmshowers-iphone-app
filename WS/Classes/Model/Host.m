@@ -77,7 +77,7 @@
     host.comments = [[dict objectForKey:@"comments"] trim];    
     host.country = [dict objectForKey:@"country"];
     host.food = [NSNumber numberWithInt:[[dict objectForKey:@"food"] intValue]];
-    host.fullname = [dict objectForKey:@"fullname"];
+     host.fullname = [[dict objectForKey:@"fullname"] trim];
     host.homephone = [dict objectForKey:@"homephone"];
     host.mobilephone = [dict objectForKey:@"mobilephone"];
     host.kitchenuse = [NSNumber numberWithInt:[[dict objectForKey:@"kitchenuse"] intValue]];
@@ -103,6 +103,7 @@
     NSTimeInterval member_since = [[dict objectForKey:@"created"] doubleValue];
     host.member_since = [NSDate dateWithTimeIntervalSince1970:member_since];
     
+    host.last_updated = [NSDate date];
     host.last_updated_details = [NSDate date];
 
     return host;
@@ -220,15 +221,7 @@
 	return [NSString stringWithFormat:@"https://www.warmshowers.org/files/imagecache/profile_picture/pictures/picture-%@.jpg", self.hostid];
 }
 
-
--(BOOL)needsUpdate {
-	// one week
-	return ([self isStale] || (self.last_updated_details == nil) || (fabs([self.last_updated_details timeIntervalSinceNow]) > 604800 ));
-}
-
 -(BOOL)isStale {
-	// return (self.last_updated_details == nil) || (abs([self.last_updated_details timeIntervalSinceNow]) > 60 );
-	// two weeks
 	return (self.last_updated_details == nil) || (fabs([self.last_updated_details timeIntervalSinceNow]) > kWeek );
 }
 

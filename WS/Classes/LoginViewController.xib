@@ -7,6 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
                 <outlet property="contentView" destination="j5i-IC-MIr" id="QPD-Lr-ahQ"/>
+                <outlet property="createAnAccountButton" destination="nH8-SD-7Q8" id="Nsb-nT-XJF"/>
+                <outlet property="learnAboutButton" destination="PiL-Mz-Yj3" id="Hdr-XY-1BS"/>
                 <outlet property="loginButton" destination="UX3-zf-xRQ" id="M0J-u9-ZeQ"/>
                 <outlet property="passwordTextField" destination="TTz-ze-QIw" id="a4k-ny-GZO"/>
                 <outlet property="scrunchView" destination="j5i-IC-MIr" id="UWh-c8-LMj"/>

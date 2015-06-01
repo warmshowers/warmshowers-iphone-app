@@ -21,10 +21,8 @@
 //  THE SOFTWARE.
 //
 
-#import "RHCoreDataTableViewController.h"
+#import "HostsTableViewController.h"
 
-@interface SearchHostsTableViewController : RHCoreDataTableViewController<UISearchDisplayDelegate, UISearchBarDelegate>
-
-// -(void)updateDistances;
+@interface SearchHostsTableViewController : HostsTableViewController<UISearchDisplayDelegate, UISearchBarDelegate>
 
 @end
