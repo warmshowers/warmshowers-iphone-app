@@ -38,7 +38,7 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
     
     [super viewDidLoad];
     
-    [self setTitle:NSLocalizedString(@"Inbox", nil)];
+    [self setTitle:NSLocalizedString(@"Messages", nil)];
     
     [self.tableView registerClass:[RHTableViewCellStyleSubtitleLighterDetail class] forCellReuseIdentifier:CellIdentifier];
     
@@ -62,7 +62,6 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
     
 }
 
-
 -(UIViewController *)splashViewController {
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ws-50"]];
@@ -85,6 +84,12 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
     Thread *thread = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     NSString *title = [NSString stringWithFormat:@"%@ (%ld)", thread.subject, (long)[thread.count integerValue]];
+    
+    if (thread.is_new.boolValue) {
+        [cell.imageView setImage:[[UIImage imageNamed:@"iconmonstr-email-icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+    } else {
+        [cell.imageView setImage:[[UIImage imageNamed:@"iconmonstr-email-7-icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+    }
     
     [cell.textLabel setText:title];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];

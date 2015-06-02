@@ -34,8 +34,9 @@
 #import "NSNumber+WS.h"
 
 @interface HostInfoViewController()
-@property (strong, nonatomic) RHTableView *tableView;
+// @property (strong, nonatomic) RHTableView *tableView2;
 @property (nonatomic, strong) UIView *topView;
+@property (nonatomic, strong) UIImageView *imageView;
 -(void)presentComposeViewController;
 @end
 
@@ -56,34 +57,54 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                            target:self
                                                                                            action:@selector(showActions:)];
-    
-    self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 200, 20)];
-    [self.statusLabel setFont:[UIFont systemFontOfSize:[UIFont smallSystemFontSize]]];
-    [self.statusLabel setTextAlignment:NSTextAlignmentCenter];
-    
     __weak HostInfoViewController *bself = self;
     
     RHBarButtonItem *compose = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose block:^{
         [bself presentComposeViewController];
     }];
     
+    
     NSArray *toolbarItems = @[
-                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshHost)],
-                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                              [[UIBarButtonItem alloc] initWithCustomView:self.statusLabel],
                               [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                               compose
                               ];
     
     [self setToolbarItems:toolbarItems animated:YES];
     
-   
+    self.refreshControl = [RHRefreshControl refreshControlWithBlock:^(RHRefreshControl *refreshControl) {
+        
+        if (bself.host.last_updated_details == nil) {
+            [SVProgressHUD showWithStatus:NSLocalizedString(@"Loading...", nil) maskType:SVProgressHUDMaskTypeGradient];
+        }
+        
+        [WSRequests hostDetailsWithHost:bself.host success:^(NSURLSessionDataTask *task, id responseObject) {
+            
+            [refreshControl endRefreshing];
+           
+            [SVProgressHUD dismiss];
+            
+            [WSRequests hostFeedbackWithHost:bself.host];
+            
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            
+            [refreshControl endRefreshing];
+            [SVProgressHUD dismiss];
+            
+            if (bself.host.last_updated_details == nil) {
+                [[RHAlertView alertWithOKButtonWithTitle:nil message:NSLocalizedString(@"An error occurred while loading the details of this host. Please check your network connection and try again.", nil)] show];
+            } else if (self.host.isStale) {
+                [[RHAlertView alertWithOKButtonWithTitle:nil message:NSLocalizedString(@"The details of this host haven't been updated in a while and might be out of date. Please connect to a network and refresh before attempting to contact this host.", nil)] show];
+            }
+            
+        }];
+    }];
+    
 }
 
 -(void)loadView {
-    self.tableView = [[RHTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    self.tableView.tableViewCellLayout = [RHTableViewCellLayout formLayout];
-    self.view = self.tableView;
+    RHTableView *tableView = [[RHTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    tableView.tableViewCellLayout = [RHTableViewCellLayout formLayout];
+    self.tableView = tableView;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -111,49 +132,29 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     [self.host setDidDeleteBlock:^() {
         // NSLog(@"%@", @"delete called");
     }];
-
+    
     // must go here for the header to render correctly
-     [self refreshTableView];
-    [self refreshHost];
+    [self refreshTableView];
+    
+    if (self.host.needsUpdate) {
+        [(RHRefreshControl *)self.refreshControl refresh];
+    }
 }
 
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self.navigationController setToolbarHidden:YES animated:animated];
     
     [self.host setDidUpdateBlock:nil];
     [self.host setDidDeleteBlock:nil];
-    
-    [self.navigationController setToolbarHidden:YES animated:animated];
-}
-
--(void)refreshHost {
-    
-    __weak UINavigationController *bNavigationController = self.navigationController;
-    
-    if ([[WSHTTPClient sharedHTTPClient] reachable]) {
-        // This will update the feedback after the host is updated
-        [WSRequests hostDetailsWithHost:self.host];
-        
-    } else if (self.host.last_updated_details == nil) {
-        RHAlertView *alert = [RHAlertView alertWithTitle:nil message:NSLocalizedString(@"An error occurred while loading the details of this host. Please check your network connection and try again.", nil)];
-        
-        [alert addButtonWithTitle:kOK block:^{
-            [bNavigationController popViewControllerAnimated:YES];
-        }];
-        
-        [alert show];
-    } else if (self.host.isStale) {
-        [[RHAlertView alertWithOKButtonWithTitle:nil message:NSLocalizedString(@"The details of this host hasn't been updated in a while and might be out of date. Please connect to a network and refresh before attempting to contact this host.", nil)] show];
-    }
 }
 
 -(void)setLastUpdatedDate {
     if (self.host.last_updated_details) {
-        NSString *updated = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), [self.host.last_updated_details timesinceWithDepth:1]];
-        [self.statusLabel setText:[NSString stringWithFormat:NSLocalizedString(@"Updated: %@", nil), updated]];
+        self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Updated", nil), self.host.last_updated_details.formatWithLocalTimeZone]];
     } else {
-        [self.statusLabel setText:@""];
+        self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Updated", nil), NSLocalizedString(@"never", nil)]];
     }
 }
 
@@ -163,55 +164,63 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     
     [self setLastUpdatedDate];
     
-    [self.tableView reset];
+    RHTableView *tableView = (RHTableView *)self.tableView;
     
-    if (self.host.last_updated_details) {
-        
-        [self.tableView setTableHeaderView:self.topView];
-        
-        [self.tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Actions", nil)];
-        
-        NSString *feedbackLabel = [NSString stringWithFormat:@"%@ (%lu)", NSLocalizedString(@"View Feedback", nil), (unsigned long)[self.host.feedback count]];
-        
-        // NSString *feedbackLabel = NSLocalizedString(@"View Feedback", nil);
-        
-        RHTableViewCell *cell = [self.tableView addCell:feedbackLabel
-                                         didSelectBlock:^{
-                                             FeedbackTableViewController *controller = [[FeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-                                             [controller setHost:bself.host];
-                                             [bself.navigationController pushViewController:controller animated:YES];
-                                         }
-                                 ];
-        
-        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-        
-        [self.tableView addSectionWithSectionHeaderText:nil];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Address", nil) largeLabel:[[self.host address] trim]]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Phone", nil) largeLabel:self.host.homephone]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Mobile", nil) largeLabel:self.host.mobilephone]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Comments", nil) largeLabel:[self.host.comments trim]]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Notice", nil) largeLabel:self.host.preferred_notice]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Status", nil) largeLabel:self.host.statusString]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Distance", nil) largeLabel:self.host.subtitle]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Mbr Since", nil) largeLabel:[self.host.member_since formatWithUTCTimeZone]]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Last Login", nil) largeLabel:[NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), [self.host.last_login timesince]]]];
-        
-        [self.tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Member Information", nil)];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Max Guests", nil) largeLabel:[NSString stringWithFormat:@"%i", [self.host.maxcyclists intValue]]]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Motel", nil) largeLabel:self.host.motel]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Camping", nil) largeLabel:self.host.campground]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Bike Shop", nil) largeLabel:self.host.bikeshop]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Bed", nil) largeLabel:self.host.bed.boolLabel]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Laundry", nil) largeLabel:self.host.laundry.boolLabel]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Kitchen", nil) largeLabel:self.host.kitchenuse.boolLabel]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Lawnspace", nil) largeLabel:self.host.lawnspace.boolLabel]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Storage", nil) largeLabel:self.host.storage.boolLabel]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Shower", nil) largeLabel:self.host.shower.boolLabel]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"SAG", nil) largeLabel:self.host.sag.boolLabel]];
-        [self.tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Food", nil) largeLabel:self.host.food.boolLabel]];
-        
-        [self.tableView reloadData];
-    }
+    [tableView reset];
+    
+    
+    
+    [tableView setTableHeaderView:self.topView];
+            [self.imageView setImageWithURL:[NSURL URLWithString:[self.host imageURL]] placeholderImage:[UIImage imageNamed:@"ws"]];
+    
+    [tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Actions", nil)];
+    
+    NSString *feedbackLabel = [NSString stringWithFormat:@"%@ (%lu)", NSLocalizedString(@"View Feedback", nil), (unsigned long)[self.host.feedback count]];
+    
+    // NSString *feedbackLabel = NSLocalizedString(@"View Feedback", nil);
+    
+    RHTableViewCell *cell = [tableView addCell:feedbackLabel
+                                didSelectBlock:^{
+                                    FeedbackTableViewController *controller = [[FeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                                    [controller setHost:bself.host];
+                                    [bself.navigationController pushViewController:controller animated:YES];
+                                }
+                             ];
+    
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    
+    [tableView addSectionWithSectionHeaderText:nil];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Address", nil) largeLabel:[[self.host address] trim]]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Phone", nil) largeLabel:self.host.homephone]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Mobile", nil) largeLabel:self.host.mobilephone]];
+    
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Notice", nil) largeLabel:self.host.preferred_notice]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Status", nil) largeLabel:self.host.statusString]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Distance", nil) largeLabel:self.host.subtitle]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Mbr Since", nil) largeLabel:self.host.member_since.formatWithLocalTimeZoneWithoutTime]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Last Login", nil) largeLabel:[NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), self.host.last_login.timesince]]];
+    
+    
+    [tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Comments", nil)];
+   // [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Comments", nil) largeLabel:self.host.comments.trim]];
+    [tableView addCell:[RHTableViewCell cellWithSingleLabel:self.host.comments.trim]];
+    
+    [tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Member Information", nil)];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Max Guests", nil) largeLabel:[NSString stringWithFormat:@"%i", [self.host.maxcyclists intValue]]]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Motel", nil) largeLabel:self.host.motel]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Camping", nil) largeLabel:self.host.campground]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Bike Shop", nil) largeLabel:self.host.bikeshop]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Bed", nil) largeLabel:self.host.bed.boolLabel]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Laundry", nil) largeLabel:self.host.laundry.boolLabel]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Kitchen", nil) largeLabel:self.host.kitchenuse.boolLabel]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Lawnspace", nil) largeLabel:self.host.lawnspace.boolLabel]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Storage", nil) largeLabel:self.host.storage.boolLabel]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Shower", nil) largeLabel:self.host.shower.boolLabel]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"SAG", nil) largeLabel:self.host.sag.boolLabel]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Food", nil) largeLabel:self.host.food.boolLabel]];
+    
+    [tableView reloadData];
+    
 }
 
 #pragma mark AlertView Delegate
@@ -272,12 +281,12 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
         [_topView setBackgroundColor:[UIColor whiteColor]];
         
         
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, baseHeight-20, baseHeight-20)];
-        [imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [imageView setImageWithURL:[NSURL URLWithString:[self.host imageURL]]
-                  placeholderImage:[UIImage imageNamed:@"ws"]
-         ];
-        [_topView addSubview:imageView];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, baseHeight-20, baseHeight-20)];
+        
+        [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
+        [self.imageView setImageWithURL:[NSURL URLWithString:[self.host imageURL]] placeholderImage:[UIImage imageNamed:@"ws"]];
+        
+        [_topView addSubview:self.imageView];
         
         
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(baseHeight, 0, viewWidth - baseHeight - 20, baseHeight)];

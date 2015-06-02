@@ -42,7 +42,8 @@
 -(void)updateDistanceFromLocation:(CLLocation *)location;
 
 -(NSString *)infoURL;
--(NSString *)imageURL;
+// -(NSString *)imageURL;
+-(BOOL)needsUpdate;
 -(BOOL)isStale;
 -(NSString *)statusString;
 

@@ -88,9 +88,9 @@
                                 accessoryType:UITableViewCellAccessoryDisclosureIndicator];
     [self.tableView addCell:cell];
    
-    [self.tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Messages", nil)];
+    [self.tableView addSectionWithSectionHeaderText:nil];
     
-    cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"Inbox", nil)
+    cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"Messages", nil)
                               detailLabelText:nil
                                didSelectBlock:^{
                                    

@@ -35,13 +35,9 @@
         _sharedClient = [[WSHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://www.warmshowers.org/"]];
         [[_sharedClient reachabilityManager] startMonitoring];
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-       
-        //                [_sharedClient setResponseSerializer:[AFHTTPResponseSerializer serializer]];
-        //  _sharedClient.responseSerializer.acceptableContentTypes = nil;
-        
+
+        // this is to allow a request that returns text/plain
         [_sharedClient setResponseSerializer:[AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:@[[AFJSONResponseSerializer serializer], [AFHTTPResponseSerializer serializer] ]]];
-//        [_sharedClient.requestSerializer setValue:@"ZZZZ" forHTTPHeaderField:@"X-CSRF"];
-        
     });
     
     [_sharedClient setDataTaskDidReceiveResponseBlock:^NSURLSessionResponseDisposition(NSURLSession *session, NSURLSessionDataTask *dataTask, NSURLResponse *response) {

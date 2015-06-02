@@ -25,6 +25,7 @@
 #import "Host.h"
 #import "Message.h"
 #import "ComposeMessageViewController.h"
+#import "WSRequests.h"
 
 static NSString *CellIdentifier = @"d8bd8a42-1303-444b-b1f0-aca389ee9cd7";
 
@@ -55,6 +56,19 @@ static NSString *CellIdentifier = @"d8bd8a42-1303-444b-b1f0-aca389ee9cd7";
 
 -(void)viewWillAppear:(BOOL)animated {
      [self.thread refreshMessages];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+ //   if (self.thread.is_newValue) {
+        // update the read status on the server
+        [WSRequests markThreadAsRead:self.thread];
+    
+        // regardless of how that goes, locally change this
+        [self.thread setIs_newValue:NO];
+        [Thread commit];
+   // }
 }
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {

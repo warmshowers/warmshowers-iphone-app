@@ -23,15 +23,12 @@
 
 #import "Host.h"
 
-@interface HostInfoViewController : UIViewController
+@interface HostInfoViewController : UITableViewController
 
 @property (nonatomic, strong) Host *host;
 @property (nonatomic, strong) UILabel *statusLabel;
-// @property (nonatomic, assign, getter = isShowingLoadingIndicator) BOOL showingLoadingIndicator;
 
--(void)refreshHost;
 -(void)setLastUpdatedDate;
-
 -(void)showActions:(id)sender;
 -(void)refreshTableView;
 

@@ -112,7 +112,7 @@
         [fetchRequest setEntity:entity];
         
         // Edit the sort key as appropriate.
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"last_updated" ascending:NO];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"fullname" ascending:NO];
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
         [fetchRequest setSortDescriptors:sortDescriptors];
         
@@ -269,6 +269,7 @@
         [self.navigationController pushViewController:controller animated:YES];
     } else {
         HostsTableViewController *controller = [HostsTableViewController new];
+        [controller setTitle:[NSString stringWithFormat:@"within %.0f meters", kingpinAnnotation.radius]];
         [controller setBasePredicate:[NSPredicate predicateWithFormat:@"self in %@", kpAnnotations]];
         [self.navigationController pushViewController:controller animated:YES];
     }

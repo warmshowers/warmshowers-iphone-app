@@ -17,9 +17,9 @@ extern const struct HostAttributes {
 	__unsafe_unretained NSString *fullname;
 	__unsafe_unretained NSString *homephone;
 	__unsafe_unretained NSString *hostid;
+	__unsafe_unretained NSString *imageURL;
 	__unsafe_unretained NSString *kitchenuse;
 	__unsafe_unretained NSString *last_login;
-	__unsafe_unretained NSString *last_updated;
 	__unsafe_unretained NSString *last_updated_details;
 	__unsafe_unretained NSString *latitude;
 	__unsafe_unretained NSString *laundry;
@@ -127,6 +127,10 @@ extern const struct HostRelationships {
 
 //- (BOOL)validateHostid:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) NSString* imageURL;
+
+//- (BOOL)validateImageURL:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) NSNumber* kitchenuse;
 
 @property (atomic) BOOL kitchenuseValue;
@@ -138,10 +142,6 @@ extern const struct HostRelationships {
 @property (nonatomic, strong) NSDate* last_login;
 
 //- (BOOL)validateLast_login:(id*)value_ error:(NSError**)error_;
-
-@property (nonatomic, strong) NSDate* last_updated;
-
-//- (BOOL)validateLast_updated:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSDate* last_updated_details;
 
@@ -342,6 +342,9 @@ extern const struct HostRelationships {
 - (int32_t)primitiveHostidValue;
 - (void)setPrimitiveHostidValue:(int32_t)value_;
 
+- (NSString*)primitiveImageURL;
+- (void)setPrimitiveImageURL:(NSString*)value;
+
 - (NSNumber*)primitiveKitchenuse;
 - (void)setPrimitiveKitchenuse:(NSNumber*)value;
 
@@ -350,9 +353,6 @@ extern const struct HostRelationships {
 
 - (NSDate*)primitiveLast_login;
 - (void)setPrimitiveLast_login:(NSDate*)value;
-
-- (NSDate*)primitiveLast_updated;
-- (void)setPrimitiveLast_updated:(NSDate*)value;
 
 - (NSDate*)primitiveLast_updated_details;
 - (void)setPrimitiveLast_updated_details:(NSDate*)value;

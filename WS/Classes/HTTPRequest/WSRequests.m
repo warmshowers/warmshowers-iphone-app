@@ -80,137 +80,141 @@
                             [NSNumber numberWithInteger:kMaxResults], @"limit",
                             nil];
     
-    [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/hosts/by_location" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        NSArray *hosts = [responseObject objectForKey:@"accounts"];
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
-            for (NSDictionary *dict in hosts) {
-                NSString *hostidstring = [dict objectForKey:@"uid"];
-                NSNumber *hostid = [NSNumber numberWithInteger:[hostidstring integerValue]];
-                
-                // This is a lightweight synchronization, which differs from [Host fetchOrCreate] due to the limited
-                // number of fields.  We don't called [Host fetchOrCreate:] since that will wipe out many fields values.
-                Host *host = [Host hostWithID:hostid];
-                
-                // TODO: This is a bug in the API call
-                host.fullname = [dict objectForKey:@"fullname"];
-                host.name = [dict objectForKey:@"name"];
-                host.street = [dict objectForKey:@"street"];
-                host.city = [dict objectForKey:@"city"];
-                host.province = [dict objectForKey:@"province"];
-                host.postal_code = [dict objectForKey:@"postal_code"];
-                host.country = [dict objectForKey:@"country"];
-                
-                host.last_updated = [NSDate date];
-                host.notcurrentlyavailable = [NSNumber numberWithInt:0];
-                
-                NSString *latitude = [dict objectForKey:@"latitude"];
-                NSString *longitude = [dict objectForKey:@"longitude"];
-                
-                host.latitude = [NSNumber numberWithDouble:[latitude doubleValue]];
-                host.longitude = [NSNumber numberWithDouble:[longitude doubleValue]];
-            }
-            
-            [Host commit];
-            
-        });
-    } failure:nil];
+    [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/hosts/by_location"
+                               parameters:params
+                                  success:^(NSURLSessionDataTask *task, id responseObject) {
+                                      
+                                      @synchronized([WSRequests class]) {
+                                          NSArray *hosts = [responseObject objectForKey:@"accounts"];
+                                          
+                                          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+                                              for (NSDictionary *dict in hosts) {
+                                                  NSString *hostidstring = [dict objectForKey:@"uid"];
+                                                  NSNumber *hostid = [NSNumber numberWithInteger:[hostidstring integerValue]];
+                                                  
+                                                  // This is a lightweight synchronization, which differs from [Host fetchOrCreate] due to the limited
+                                                  // number of fields.  We don't called [Host fetchOrCreate:] since that will wipe out many fields values.
+                                                  Host *host = [Host hostWithID:hostid];
+                                                  
+                                                  // TODO: This is a bug in the API call
+                                                  host.fullname = [dict objectForKey:@"fullname"];
+                                                  host.name = [dict objectForKey:@"name"];
+                                                  host.street = [dict objectForKey:@"street"];
+                                                  host.city = [dict objectForKey:@"city"];
+                                                  host.province = [dict objectForKey:@"province"];
+                                                  host.postal_code = [dict objectForKey:@"postal_code"];
+                                                  host.country = [dict objectForKey:@"country"];
+                                                  
+                                                  // host.last_updated = [NSDate date];
+                                                  host.notcurrentlyavailable = [NSNumber numberWithInt:0];
+                                                  
+                                                  NSString *latitude = [dict objectForKey:@"latitude"];
+                                                  NSString *longitude = [dict objectForKey:@"longitude"];
+                                                  
+                                                  host.latitude = [NSNumber numberWithDouble:[latitude doubleValue]];
+                                                  host.longitude = [NSNumber numberWithDouble:[longitude doubleValue]];
+                                              }
+                                              
+                                              [Host commit];
+                                              
+                                          });
+                                      };
+                                  }
+                                  failure:nil];
 }
 
 
-+(void)hostDetailsWithHost:(Host *)host {
-    
-    if ([[WSAppDelegate sharedInstance] isLoggedIn] == NO) {
-        return;
-    }
++(void)hostDetailsWithHost:(Host *)host
+                   success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                   failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure {
     
     NSString *path = [NSString stringWithFormat:@"/services/rest/user/%i", [host.hostid intValue]];
     
-    [[WSHTTPClient sharedHTTPClient] cancelAllOperations];
-    
-    [SVProgressHUD showWithStatus:@"Loading..."];
-    
-    [[WSHTTPClient sharedHTTPClient] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
-            [Host fetchOrCreate:responseObject];
-            [Host commit];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [WSRequests hostFeedbackWithHost:host];
-            });
-        });
-        
-        // This don't really belong here...
-        [SVProgressHUD dismiss];
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSHTTPURLResponse *response = (NSHTTPURLResponse *)[task response];
-        
-        NSInteger statusCode = [response statusCode];
-        
-        // 404 not found (page doesn't exist anymore)
-        if ( statusCode == 404 ) {
-            [host setNotcurrentlyavailable:[NSNumber numberWithBool:YES]];
-            [Host commit];
-        }
-        
-        // This don't really belong here...
-        [SVProgressHUD dismiss];
-    }];
+    [[WSHTTPClient sharedHTTPClient] GET:path
+                              parameters:nil
+                                 success:^(NSURLSessionDataTask *task, id responseObject) {
+                                     
+                                     @synchronized(host) {
+                                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+                                             Host *host = [Host fetchOrCreate:responseObject];
+                                             host.last_updated_details = [NSDate date];
+                                             [Host commit];
+                                             
+                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                 if (success) {
+                                                     success(task, responseObject);
+                                                 }
+                                                 
+                                             });
+                                         });
+                                     }
+                                     
+                                 }
+                                 failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                     NSHTTPURLResponse *response = (NSHTTPURLResponse *)[task response];
+                                     
+                                     NSInteger statusCode = [response statusCode];
+                                     
+                                     // 404 not found (page doesn't exist anymore)
+                                     if ( statusCode == 404 ) {
+                                         [host setNotcurrentlyavailable:[NSNumber numberWithBool:YES]];
+                                         [Host commit];
+                                     }
+                                     
+                                     if (failure) {
+                                         failure(task, error);
+                                     }
+                                     
+                                 }];
 }
 
 
 +(void)hostFeedbackWithHost:(Host *)host {
     
-    if ([[WSAppDelegate sharedInstance] isLoggedIn] == NO) {
-        return;
-    }
-
     NSString *path = [NSString stringWithFormat:@"/user/%i/json_recommendations", [host.hostid intValue]];
     
     [[WSHTTPClient sharedHTTPClient] GET:path
                               parameters:nil
                                  success:^(NSURLSessionDataTask *task, id responseObject) {
                                      
-                                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
-                                         
-                                         Host *bhost = [host objectInCurrentThreadContextWithError:nil];
-                                         
-                                         NSArray *recommendations = [responseObject objectForKey:@"recommendations"];
-                                         
-                                         NSArray *all_nids = [recommendations pluck:@"recommendation.nid"];
-                                         
-                                         [Feedback deleteWithPredicate:[NSPredicate predicateWithFormat:@"host = %@ AND NOT (nid IN %@)", host, all_nids]];
-                                         
-                                         for (NSDictionary *feedback in recommendations) {
+                                     @synchronized([WSRequests class]) {
+                                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
                                              
-                                             NSDictionary *dict = [feedback objectForKey:@"recommendation"];
+                                             Host *bhost = [host objectInCurrentThreadContextWithError:nil];
                                              
-                                             NSString *snid = [dict objectForKey:@"nid"];
-                                             NSString *recommender = [[dict objectForKey:@"fullname" defaultValue:[dict objectForKey:@"name" defaultValue:@"Unknown"]] trim];
-                                             NSString *body = [[dict objectForKey:@"body"] trim];
-                                             NSString *hostOrGuest = [dict objectForKey:@"field_guest_or_host_value"];
-                                             NSNumber *recommendationDate = [dict objectForKey:@"field_hosting_date_value"];
-                                             NSString *ratingValue = [dict objectForKey:@"field_rating_value"];
+                                             NSArray *recommendations = [responseObject objectForKey:@"recommendations"];
                                              
-                                             NSNumber *nid = [NSNumber numberWithInteger:[snid integerValue]];
-                                             NSDate *rDate = [NSDate dateWithTimeIntervalSince1970:[recommendationDate doubleValue]];
+                                             NSArray *all_nids = [recommendations pluck:@"recommendation.nid"];
                                              
-                                             Feedback *feedback = [Feedback feedbackWithID:nid];
-                                             [feedback setBody:body];
-                                             [feedback setFullname:recommender];
-                                             [feedback setHostOrGuest:hostOrGuest];
-                                             [feedback setDate:rDate];
-                                             [feedback setRatingValue:ratingValue];
+                                             [Feedback deleteWithPredicate:[NSPredicate predicateWithFormat:@"host = %@ AND NOT (nid IN %@)", host, all_nids]];
                                              
-                                             [bhost addFeedbackObject:feedback];
-                                         }
-                                         
-                                         [Feedback commit];
-                                     });
-                                     
+                                             for (NSDictionary *feedback in recommendations) {
+                                                 
+                                                 NSDictionary *dict = [feedback objectForKey:@"recommendation"];
+                                                 
+                                                 NSString *snid = [dict objectForKey:@"nid"];
+                                                 NSString *recommender = [[dict objectForKey:@"fullname" defaultValue:[dict objectForKey:@"name" defaultValue:@"Unknown"]] trim];
+                                                 NSString *body = [[dict objectForKey:@"body"] trim];
+                                                 NSString *hostOrGuest = [dict objectForKey:@"field_guest_or_host_value"];
+                                                 NSNumber *recommendationDate = [dict objectForKey:@"field_hosting_date_value"];
+                                                 NSString *ratingValue = [dict objectForKey:@"field_rating_value"];
+                                                 
+                                                 NSNumber *nid = [NSNumber numberWithInteger:[snid integerValue]];
+                                                 NSDate *rDate = [NSDate dateWithTimeIntervalSince1970:[recommendationDate doubleValue]];
+                                                 
+                                                 Feedback *feedback = [Feedback feedbackWithID:nid];
+                                                 [feedback setBody:body];
+                                                 [feedback setFullname:recommender];
+                                                 [feedback setHostOrGuest:hostOrGuest];
+                                                 [feedback setDate:rDate];
+                                                 [feedback setRatingValue:ratingValue];
+                                                 
+                                                 [bhost addFeedbackObject:feedback];
+                                             }
+                                             
+                                             [Feedback commit];
+                                         });
+                                     }
                                  }
                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
                                  }];
@@ -221,26 +225,27 @@
     
     [[WSHTTPClient sharedHTTPClient] cancelAllOperations];
     
-    NSString *path = @"/services/rest/hosts/by_keyword";
-    
     NSDictionary *parms = @{
                             @"keyword" : keyword,
                             @"limit" : @100,
                             @"page" : @0
                             };
     
-    [[WSHTTPClient sharedHTTPClient] POST:path
+    [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/hosts/by_keyword"
                                parameters:parms
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
-                                      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
-                                          NSArray *hosts = [[responseObject objectForKey:@"accounts"] allObjects];
-                                          
-                                          for (NSDictionary *dict in hosts) {
-                                              [Host fetchOrCreate:dict];
-                                          }
-                                          
-                                          [Host commit];
-                                      });
+                                      
+                                      @synchronized([WSRequests class]) {
+                                          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+                                              NSArray *hosts = [[responseObject objectForKey:@"accounts"] allObjects];
+                                              
+                                              for (NSDictionary *dict in hosts) {
+                                                  [Host fetchOrCreate:dict];
+                                              }
+                                              
+                                              [Host commit];
+                                          });
+                                      }
                                   }
                                   failure:^(NSURLSessionDataTask *task, NSError *error) {
                                   }];
@@ -249,46 +254,63 @@
 
 +(void)refreshThreadsSuccess:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure {
     
-    NSString *path = @"/services/rest/message/get";
     
-    [[WSHTTPClient sharedHTTPClient] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
-            NSArray *all_ids = [responseObject pluck:@"thread_id"];
-            
-            [Thread deleteWithPredicate:[NSPredicate predicateWithFormat:@"NOT (threadid IN %@)", all_ids]];
-            
-            for (NSDictionary *dict in responseObject) {
-                NSNumber *threadid = @([[dict objectForKey:@"thread_id"] intValue]);
-                NSString *subject = [dict objectForKey:@"subject"];
-                NSDictionary *participant = [[dict objectForKey:@"participants"] firstObject];
-                NSNumber *is_new= @([[dict objectForKey:@"is_new"] intValue]);
-                NSNumber *count = @([[dict objectForKey:@"count"] intValue]);
-                
-                Thread *thread = [Thread newOrExistingEntityWithPredicate:[NSPredicate predicateWithFormat:@"threadid=%d", [threadid intValue]]];
-                
-                [thread setThreadid:threadid];
-                [thread setSubject:subject];
-                [thread setIs_new:is_new];
-                [thread setCount:count];
-                
-                NSNumber *hostid = @([[participant objectForKey:@"uid"] intValue]);
-                NSString *name = [participant objectForKeyedSubscript:@"name"];
-                
-                Host *host = [Host hostWithID:hostid];
-                [host setName:name];
-                [thread setUser:host];
-            }
-            
-            [Thread commit];
-        });
-        
-        if (success) {
-            success(task, responseObject);
-        }
-        
-    } failure:failure];
+    [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/message/get"
+                               parameters:nil
+                                  success:^(NSURLSessionDataTask *task, id responseObject) {
+                                      
+                                      @synchronized([WSRequests class]) {
+                                          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+                                              NSArray *all_ids = [responseObject pluck:@"thread_id"];
+                                              
+                                              [Thread deleteWithPredicate:[NSPredicate predicateWithFormat:@"NOT (threadid IN %@)", all_ids]];
+                                              
+                                              for (NSDictionary *dict in responseObject) {
+                                                  NSNumber *threadid = @([[dict objectForKey:@"thread_id"] intValue]);
+                                                  NSString *subject = [dict objectForKey:@"subject"];
+                                                  NSDictionary *participant = [[dict objectForKey:@"participants"] firstObject];
+                                                  NSNumber *is_new= @([[dict objectForKey:@"is_new"] intValue]);
+                                                  NSNumber *count = @([[dict objectForKey:@"count"] intValue]);
+                                                  
+                                                  Thread *thread = [Thread newOrExistingEntityWithPredicate:[NSPredicate predicateWithFormat:@"threadid=%d", [threadid intValue]]];
+                                                  
+                                                  [thread setThreadid:threadid];
+                                                  [thread setSubject:subject];
+                                                  [thread setIs_new:is_new];
+                                                  [thread setCount:count];
+                                                  
+                                                  NSNumber *hostid = @([[participant objectForKey:@"uid"] intValue]);
+                                                  NSString *name = [participant objectForKeyedSubscript:@"name"];
+                                                  
+                                                  Host *host = [Host hostWithID:hostid];
+                                                  [host setName:name];
+                                                  [thread setUser:host];
+                                              }
+                                              
+                                              [Thread commit];
+                                          });
+                                          
+                                          if (success) {
+                                              success(task, responseObject);
+                                          }
+                                      }
+                                  }
+                                  failure:failure];
     
 }
 
-@end
++(void)markThreadAsRead:(Thread *)thread {
+    
+    NSDictionary *parms = @{
+                            @"thread_id" : thread.threadid,
+                            @"status" : @0
+                            };
+
+    [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/message/markThreadRead"
+                                parameters:parms
+                                   success:^(NSURLSessionDataTask *task, id responseObject) {
+                                       // do nothing... not so important to catch any success or errors here
+                                   } failure:nil];     
+     }
+     
+     @end

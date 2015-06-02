@@ -16,9 +16,9 @@ const struct HostAttributes HostAttributes = {
 	.fullname = @"fullname",
 	.homephone = @"homephone",
 	.hostid = @"hostid",
+	.imageURL = @"imageURL",
 	.kitchenuse = @"kitchenuse",
 	.last_login = @"last_login",
-	.last_updated = @"last_updated",
 	.last_updated_details = @"last_updated_details",
 	.latitude = @"latitude",
 	.laundry = @"laundry",
@@ -264,6 +264,8 @@ const struct HostRelationships HostRelationships = {
 	[self setPrimitiveHostid:[NSNumber numberWithInt:value_]];
 }
 
+@dynamic imageURL;
+
 @dynamic kitchenuse;
 
 - (BOOL)kitchenuseValue {
@@ -285,8 +287,6 @@ const struct HostRelationships HostRelationships = {
 }
 
 @dynamic last_login;
-
-@dynamic last_updated;
 
 @dynamic last_updated_details;
 
