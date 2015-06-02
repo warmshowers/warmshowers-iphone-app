@@ -21,6 +21,7 @@ extern const struct HostAttributes {
 	__unsafe_unretained NSString *kitchenuse;
 	__unsafe_unretained NSString *last_login;
 	__unsafe_unretained NSString *last_updated_details;
+	__unsafe_unretained NSString *last_updated_map;
 	__unsafe_unretained NSString *latitude;
 	__unsafe_unretained NSString *laundry;
 	__unsafe_unretained NSString *lawnspace;
@@ -146,6 +147,10 @@ extern const struct HostRelationships {
 @property (nonatomic, strong) NSDate* last_updated_details;
 
 //- (BOOL)validateLast_updated_details:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSDate* last_updated_map;
+
+//- (BOOL)validateLast_updated_map:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* latitude;
 
@@ -356,6 +361,9 @@ extern const struct HostRelationships {
 
 - (NSDate*)primitiveLast_updated_details;
 - (void)setPrimitiveLast_updated_details:(NSDate*)value;
+
+- (NSDate*)primitiveLast_updated_map;
+- (void)setPrimitiveLast_updated_map:(NSDate*)value;
 
 - (NSNumber*)primitiveLatitude;
 - (void)setPrimitiveLatitude:(NSNumber*)value;

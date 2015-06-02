@@ -20,6 +20,7 @@ const struct HostAttributes HostAttributes = {
 	.kitchenuse = @"kitchenuse",
 	.last_login = @"last_login",
 	.last_updated_details = @"last_updated_details",
+	.last_updated_map = @"last_updated_map",
 	.latitude = @"latitude",
 	.laundry = @"laundry",
 	.lawnspace = @"lawnspace",
@@ -289,6 +290,8 @@ const struct HostRelationships HostRelationships = {
 @dynamic last_login;
 
 @dynamic last_updated_details;
+
+@dynamic last_updated_map;
 
 @dynamic latitude;
 

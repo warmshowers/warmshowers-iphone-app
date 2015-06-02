@@ -78,9 +78,15 @@
         
         NSArray *all_msgids = [msgs pluck:@"mid"];
         
+        // delete any local messages that don't exist anymore
         [Message deleteWithPredicate:[NSPredicate predicateWithFormat:@"thread = %@ AND NOT (mid IN %@)", bself, all_msgids]];
-                
-        for (NSDictionary *dict in msgs) {
+        
+        NSArray *currentMessages = [[bself.messages.allObjects pluck:@"mid"] arrayByPerformingSelector:@selector(stringValue)];
+        
+        // We don't want to update objects unnecessarily.  This causes a number of problems with the core data update.
+        NSArray *newMsgs = [msgs filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"NOT (mid in %@)", currentMessages]];
+        
+        for (NSDictionary *dict in newMsgs) {
             
             NSNumber *mid = @([[dict objectForKey:@"mid"] intValue]);
             NSString *body = [dict objectForKey:@"body"];
@@ -88,17 +94,14 @@
             NSDictionary *author = [dict objectForKey:@"author"];
             NSNumber *uid = @([[author objectForKey:@"uid"] intValue]);
             NSString *name = [author objectForKey:@"name"];
-             NSTimeInterval timestamp_int = [[dict objectForKey:@"timestamp"] doubleValue];
+            NSTimeInterval timestamp_int = [[dict objectForKey:@"timestamp"] doubleValue];
             
             Message *message = [Message newOrExistingEntityWithPredicate:[NSPredicate predicateWithFormat:@"mid=%d", [mid intValue]]];
             [message setMid:mid];
             [message setBody:body];
             [message setThread:bself];
-            
-           
-            message.timestamp = [NSDate dateWithTimeIntervalSince1970:timestamp_int];
-            
-            
+            [message setTimestamp:[NSDate dateWithTimeIntervalSince1970:timestamp_int]];
+
             Host *host = [Host hostWithID:uid];
             [host setName:name];
             [host setHostid:uid];

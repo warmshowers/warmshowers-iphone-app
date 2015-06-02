@@ -47,6 +47,8 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
         [WSRequests refreshThreadsSuccess:^(NSURLSessionDataTask *task, id responseObject) {
             [refreshControl endRefreshing];
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+            NSInteger statusCode = response.statusCode;
             [refreshControl endRefreshing];
         }];
         
@@ -59,8 +61,9 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
     if (!self.splitViewController.isCollapsed) {
         [self.splitViewController showDetailViewController:[[self splashViewController] wrapInNavigationController] sender:nil];
     }
-    
 }
+
+
 
 -(UIViewController *)splashViewController {
     

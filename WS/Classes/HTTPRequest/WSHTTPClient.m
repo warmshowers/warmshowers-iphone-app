@@ -32,7 +32,9 @@
     static dispatch_once_t oncePredicate;
     
     dispatch_once(&oncePredicate, ^{
-        _sharedClient = [[WSHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://www.warmshowers.org/"]];
+         _sharedClient = [[WSHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://www.warmshowers.org/"]];
+        // _sharedClient = [[WSHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://www.wsupg.net/"]];
+        
         [[_sharedClient reachabilityManager] startMonitoring];
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
@@ -46,7 +48,6 @@
         NSInteger statusCode = r.statusCode;
         
         if (statusCode >= 400) {
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[WSAppDelegate sharedInstance] autologin];
             });
@@ -55,14 +56,10 @@
         } else {
             return NSURLSessionResponseAllow;
         }
-        
-        
     }];
-    
     
     return _sharedClient;
 }
-
 
 -(BOOL)reachable {
     return [[AFNetworkReachabilityManager sharedManager] isReachable];

@@ -43,7 +43,7 @@ static NSString *CellIdentifier = @"d8bd8a42-1303-444b-b1f0-aca389ee9cd7";
     [self.tableView registerNib:[UINib nibWithNibName:@"RHSingleLabelTableViewCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
     
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
-    [self.tableView setEstimatedRowHeight:44];
+    [self.tableView setEstimatedRowHeight:44.0f];
     
     __weak SingleThreadTableViewController *bself = self;
     
@@ -61,20 +61,20 @@ static NSString *CellIdentifier = @"d8bd8a42-1303-444b-b1f0-aca389ee9cd7";
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
- //   if (self.thread.is_newValue) {
+    if (self.thread.is_newValue) {
         // update the read status on the server
         [WSRequests markThreadAsRead:self.thread];
     
         // regardless of how that goes, locally change this
         [self.thread setIs_newValue:NO];
         [Thread commit];
-   // }
+    }
 }
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Message *message = [self.fetchedResultsController objectAtIndexPath:indexPath];
     RHTableViewCell *mcell = (RHTableViewCell *)cell;
-    [mcell.largeLabel setText:[message.body stripHTML]];
+    [mcell.largeLabel setText:message.body.stripHTML.trim];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

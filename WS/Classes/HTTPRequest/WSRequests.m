@@ -59,7 +59,8 @@ static dispatch_queue_t hostqueue;
                                                                    success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                        
                                                                        NSString *token = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-                                                                       [[WSHTTPClient sharedHTTPClient].requestSerializer setValue:token forHTTPHeaderField:@"X-CSRF"];
+                                                                       
+                                                                       [WSHTTPClient.sharedHTTPClient.requestSerializer setValue:token forHTTPHeaderField:@"X-CSRF-Token"];
                                                                        
                                                                        if (success) {
                                                                            success(task, responseObject);
@@ -93,10 +94,11 @@ static dispatch_queue_t hostqueue;
     [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/hosts/by_location"
                                parameters:params
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
-                                      
-                                      NSArray *hosts = [responseObject objectForKey:@"accounts"];
-                                      
+   
                                       dispatch_async(hostqueue, ^{
+                                          
+                                          NSArray *hosts = [responseObject objectForKey:@"accounts"];
+                                          
                                           for (NSDictionary *dict in hosts) {
                                               NSString *hostidstring = [dict objectForKey:@"uid"];
                                               NSNumber *hostid = [NSNumber numberWithInteger:[hostidstring integerValue]];
@@ -113,6 +115,7 @@ static dispatch_queue_t hostqueue;
                                               host.province = [dict objectForKey:@"province"];
                                               host.postal_code = [dict objectForKey:@"postal_code"];
                                               host.country = [dict objectForKey:@"country"];
+                                              host.last_updated_map = [NSDate date];
                                               
                                               // host.last_updated = [NSDate date];
                                               host.notcurrentlyavailable = [NSNumber numberWithInt:0];
@@ -268,7 +271,11 @@ static dispatch_queue_t hostqueue;
                                           
                                           [Thread deleteWithPredicate:[NSPredicate predicateWithFormat:@"NOT (threadid IN %@)", all_ids]];
                                           
-                                          for (NSDictionary *dict in responseObject) {
+                                          NSArray *allExistingThreadIDs = [[Thread.fetchAll pluck:@"threadid"] arrayByPerformingSelector:@selector(stringValue)];
+                                          
+                                          NSArray *newThreads = [responseObject filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"NOT (thread_id in %@)", allExistingThreadIDs]];
+                                          
+                                          for (NSDictionary *dict in newThreads) {
                                               NSNumber *threadid = @([[dict objectForKey:@"thread_id"] intValue]);
                                               NSString *subject = [dict objectForKey:@"subject"];
                                               NSDictionary *participant = [[dict objectForKey:@"participants"] firstObject];
