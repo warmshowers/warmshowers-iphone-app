@@ -104,36 +104,12 @@
 -(NSFetchedResultsController *)fetchedResultsController {
     
     if (_fetchedResultsController == nil) {
-        // Create the fetch request for the entity.
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         
-        // Edit the entity name as appropriate.
-        NSEntityDescription *entity = [Host entityDescription];
-        [fetchRequest setEntity:entity];
-        
-        // Edit the sort key as appropriate.
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"fullname" ascending:NO];
-        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-        [fetchRequest setSortDescriptors:sortDescriptors];
-        
-       //  bounds b = [self.mapView fetchBounds];
-        
-        // NSPredicate * p = [NSPredicate predicateWithFormat:@"last_updated >= NOW() - 86400", aDate]
-        // last_updated >= NOW() - 86400
-        // NOW()-86400 <= last_updated
-        // NSDate *weekago = [[NSDate date] dateByAddingTimeInterval:-604800];
-        
-        
-        // notcurrentlyavailable=1 means the host is not available.  The value 0 or nil means they are or might be availble.  Only hide if we're certain they are not not available.
-      //  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%f < latitude AND latitude < %f AND %f < longitude AND longitude < %f AND notcurrentlyavailable != 1", b.minLatitude, b.maxLatitude, b.minLongitude, b.maxLongitude];
-        
-        // NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%f < latitude AND latitude < %f AND %f < longitude AND longitude < %f AND last_updated >= %@", b.minLatitude, b.maxLatitude, b.minLongitude, b.maxLongitude, weekago];
-        // NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%f < latitude AND latitude < %f AND %f < longitude AND longitude < %f", b.minLatitude, b.maxLatitude, b.minLongitude, b.maxLongitude];
-        
-        //	[fetchRequest setPredicate:predicate];
-        
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
+        [fetchRequest setEntity:[Host entityDescription]];
+        [fetchRequest setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"hostid" ascending:YES]]];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1"]];
+     
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                             managedObjectContext:[Host managedObjectContextForCurrentThread]
                                                                               sectionNameKeyPath:nil
