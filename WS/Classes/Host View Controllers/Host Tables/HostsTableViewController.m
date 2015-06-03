@@ -86,6 +86,7 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
     
     cell.textLabel.text= [host title];
     cell.detailTextLabel.text = [host subtitle];
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     [cell.imageView setImageWithURL:[NSURL URLWithString:host.imageURL] placeholderImage:[UIImage imageNamed:@"ws-40"]];
 }
 

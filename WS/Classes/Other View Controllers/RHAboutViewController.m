@@ -153,30 +153,4 @@
     return cell;
 }
 
-/*
- -(void)showMeTheApp:(NSString *)appid {
- 
- [SVProgressHUD showWithStatus:NSLocalizedString(@"Connecting to the App Store...", nil)];
- 
- NSDictionary *appParameters = @{SKStoreProductParameterITunesItemIdentifier:appid};
- SKStoreProductViewController *productViewController = [[SKStoreProductViewController alloc] init];
- 
- [productViewController setDelegate:self];
- 
- [productViewController loadProductWithParameters:appParameters completionBlock:^(BOOL result, NSError *error) {
- if (error == nil) {
- [SVProgressHUD dismiss];
- 
- [self.navigationController presentViewController:productViewController animated:YES completion:nil];
- } else {
- [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"An error occurred while connecting to the App Store.", nil)];
- }
- }];
- }
- 
- -(void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
- [viewController dismissViewControllerAnimated:YES completion:nil];
- }
- */
-
 @end
