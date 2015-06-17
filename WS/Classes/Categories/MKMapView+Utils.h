@@ -1,7 +1,7 @@
 //
 //  MKMapView+Utils.h
 //
-//  Copyright (C) 2012 by Christopher Meyer
+//  Copyright (C) 2015 by Christopher Meyer
 //  http://schwiiz.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,29 +26,33 @@
 
 typedef struct {
     CLLocationDegrees minLatitude;
-	CLLocationDegrees maxLatitude;
-	CLLocationDegrees minLongitude;
-	CLLocationDegrees maxLongitude;
-	CLLocationDegrees centerLatitude;
-	CLLocationDegrees centerLongitude;
+    CLLocationDegrees maxLatitude;
+    CLLocationDegrees minLongitude;
+    CLLocationDegrees maxLongitude;
+    CLLocationDegrees centerLatitude;
+    CLLocationDegrees centerLongitude;
 } bounds;
 
 @interface MKMapView (Utils)
 
 +(MKPolyline *)getPolyLine:(NSArray *)array;
++(NSArray *)getPolyLines:(NSArray *)array;
 +(void)openInMapsWithAnnotation:(id<MKAnnotation>)annotation;
++(BOOL)canOpenInGoogleMaps;
++(void)openInGoogleMapsWithAnnotation:(id<MKAnnotation>)annotation;
 
 -(BOOL)annotionIsVisibile:(id<MKAnnotation>)annotation;
 -(NSArray *)visibleAnnotations;
 -(NSArray *)nonVisibleAnnotations;
 -(NSArray *)annotationsWithoutUserLocation;
 
--(bounds)fetchBounds;
+-(void)setCenterCoordinate:(CLLocationCoordinate2D)coordinate zoomLevel:(NSUInteger)zoomLevel offset:(CGPoint)offset animated:(BOOL)animated;
 
+-(bounds)fetchBounds;
 -(float)RandomFloatStart:(float)a end:(float)b;
 -(CLLocationCoordinate2D)randomLocation;
 
--(void)zoomToFitMapAnnotationsAnimated:(BOOL)_animated;
--(void)zoomToFitWithAnnotations:(NSArray *)_annotations animated:(BOOL)_animated;
+-(void)zoomToFitMapAnnotationsAnimated:(BOOL)animated;
+-(void)zoomToFitWithAnnotations:(NSArray *)_annotations animated:(BOOL)animated;
 
 @end

@@ -59,18 +59,6 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
                                                                                            action:@selector(showActions:)];
     __weak HostInfoViewController *bself = self;
     
-    RHBarButtonItem *compose = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose block:^{
-        [bself presentComposeViewController];
-    }];
-    
-    
-    NSArray *toolbarItems = @[
-                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                              compose
-                              ];
-    
-    [self setToolbarItems:toolbarItems animated:YES];
-    
     self.refreshControl = [RHRefreshControl refreshControlWithBlock:^(RHRefreshControl *refreshControl) {
         
         if (bself.host.last_updated_details == nil) {
@@ -80,7 +68,7 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
         [WSRequests hostDetailsWithHost:bself.host success:^(NSURLSessionDataTask *task, id responseObject) {
             
             [refreshControl endRefreshing];
-           
+            
             [SVProgressHUD dismiss];
             
             [WSRequests hostFeedbackWithHost:bself.host];
@@ -91,7 +79,8 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
             [SVProgressHUD dismiss];
             
             if (bself.host.last_updated_details == nil) {
-                [[RHAlertView alertWithOKButtonWithTitle:nil message:NSLocalizedString(@"An error occurred while loading the details of this host. Please check your network connection and try again.", nil)] show];
+                // [[RHAlertView alertWithOKButtonWithTitle:nil message:NSLocalizedString(@"An error occurred while loading the details of this host. Please check your network connection and try again.", nil)] show];
+                [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Error loading host details.", nil)];
             } else if (self.host.isStale) {
                 [[RHAlertView alertWithOKButtonWithTitle:nil message:NSLocalizedString(@"The details of this host haven't been updated in a while and might be out of date. Please connect to a network and refresh before attempting to contact this host.", nil)] show];
             }
@@ -99,6 +88,30 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
         }];
     }];
     
+}
+
+
+-(void)refreshToolbar {
+    __weak HostInfoViewController *bself = self;
+    
+    UIImage *starImage = self.host.favouriteValue ? [UIImage imageNamed:@"iconmonstr-star-2-icon"] : [UIImage imageNamed:@"iconmonstr-star-5-icon"];
+    
+    RHBarButtonItem *favouriteToggle = [[RHBarButtonItem alloc] initWithImage:starImage block:^{
+        Host *host = bself.host;
+        host.favouriteValue = !host.favouriteValue;
+        [Host commit];
+    }];
+    
+    RHBarButtonItem *compose = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose block:^{
+        [bself presentComposeViewController];
+    }];
+    
+    NSArray *toolbarItems = @[favouriteToggle,
+                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                              compose
+                              ];
+    
+    [self setToolbarItems:toolbarItems animated:YES];
 }
 
 -(void)loadView {
@@ -115,6 +128,17 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     __weak HostInfoViewController *bself = self;
     
     [self.host setDidUpdateBlock:^() {
+        
+        NSNumber *newFavouriteState = [bself.host.changedValues objectForKey:@"favourite"];
+        
+        if (newFavouriteState) {
+            if ([newFavouriteState boolValue]) {
+                [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Marked as favourite", nil)];
+            } else {
+                [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Unmarked as favourite", nil)];
+            }
+        }
+        
         if (bself.host.notcurrentlyavailableValue) {
             RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Host no longer available", nil)
                                                      message:NSLocalizedString(@"This host is no longer available and will be removed from the map and host list.", nil)];
@@ -163,15 +187,14 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     __weak HostInfoViewController *bself = self;
     
     [self setLastUpdatedDate];
+    [self refreshToolbar];
     
     RHTableView *tableView = (RHTableView *)self.tableView;
     
     [tableView reset];
     
-    
-    
     [tableView setTableHeaderView:self.topView];
-            [self.imageView setImageWithURL:[NSURL URLWithString:[self.host imageURL]] placeholderImage:[UIImage imageNamed:@"ws"]];
+    [self.imageView setImageWithURL:[NSURL URLWithString:[self.host imageURL]] placeholderImage:[UIImage imageNamed:@"ws"]];
     
     [tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Actions", nil)];
     
@@ -202,7 +225,7 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     
     
     [tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Comments", nil)];
-   // [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Comments", nil) largeLabel:self.host.comments.trim]];
+    // [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Comments", nil) largeLabel:self.host.comments.trim]];
     [tableView addCell:[RHTableViewCell cellWithSingleLabel:self.host.comments.trim]];
     
     [tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Member Information", nil)];
@@ -226,46 +249,44 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
 #pragma mark AlertView Delegate
 
 -(void)showActions:(id)sender {
-    if (self.host.last_updated_details) {
+    // if (self.host.last_updated_details) {
         
         RHActionSheet *popoverActionsheet = [[RHActionSheet alloc] init];
         
         __weak Host *bHost = self.host;
         __weak HostInfoViewController *bself = self;
         
-        if ([self.host.favourite boolValue]) {
-            [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Unmark as Favourite", nil) block:^{
-                bHost.favourite = [NSNumber numberWithBool:NO];
-                [Host commit];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:bHost forKey:@"host"]];
-                
-                [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Unmarked as favourite", nil)];
-            }];
-        } else {
-            [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Mark as Favourite", nil) block:^{
-                bHost.favourite = [NSNumber numberWithBool:YES];
-                [Host commit];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:bHost forKey:@"host"]];
-                [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Marked as favourite", nil)];
-            }];
-        }
-        
-        [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"View in Maps", nil) block:^{
-            [MKMapView openInMapsWithAnnotation:bHost];
+        [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Contact Host", nil) block:^{
+            [bself presentComposeViewController];
         }];
         
         [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Open in Safari", nil) block:^{
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[bHost infoURL]]];
         }];
         
-        [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Contact Host", nil) block:^{
-            [bself presentComposeViewController];
+        
+        [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"View in Maps", nil) block:^{
+            [MKMapView openInMapsWithAnnotation:bHost];
         }];
         
+        if ([self.host.favourite boolValue]) {
+            [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Unmark as Favourite", nil) block:^{
+                bHost.favouriteValue = NO;
+                [Host commit];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:bHost forKey:@"host"]];
+            }];
+        } else {
+            [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Mark as Favourite", nil) block:^{
+                bHost.favouriteValue = YES;
+                [Host commit];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:bHost forKey:@"host"]];
+            }];
+        }
+     
         [popoverActionsheet addCancelButton];
         
         [popoverActionsheet showFromBarButtonItem:sender animated:YES];
-    }
+  //  }
 }
 
 

@@ -10,6 +10,6 @@
 -(MKCoordinateRegion)coordinateRegionWithMapView:(MKMapView *)mapView
                                 centerCoordinate:(CLLocationCoordinate2D)centerCoordinate
                                     andZoomLevel:(NSUInteger)zoomLevel;
--(NSUInteger) zoomLevel;
+- (NSUInteger) zoomLevel;
 
 @end
