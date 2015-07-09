@@ -6,6 +6,7 @@
 const struct ThreadAttributes ThreadAttributes = {
 	.count = @"count",
 	.is_new = @"is_new",
+	.last_updated = @"last_updated",
 	.subject = @"subject",
 	.threadid = @"threadid",
 };
@@ -82,23 +83,25 @@ const struct ThreadRelationships ThreadRelationships = {
 
 @dynamic is_new;
 
-- (BOOL)is_newValue {
+- (int32_t)is_newValue {
 	NSNumber *result = [self is_new];
-	return [result boolValue];
+	return [result intValue];
 }
 
-- (void)setIs_newValue:(BOOL)value_ {
-	[self setIs_new:[NSNumber numberWithBool:value_]];
+- (void)setIs_newValue:(int32_t)value_ {
+	[self setIs_new:[NSNumber numberWithInt:value_]];
 }
 
-- (BOOL)primitiveIs_newValue {
+- (int32_t)primitiveIs_newValue {
 	NSNumber *result = [self primitiveIs_new];
-	return [result boolValue];
+	return [result intValue];
 }
 
-- (void)setPrimitiveIs_newValue:(BOOL)value_ {
-	[self setPrimitiveIs_new:[NSNumber numberWithBool:value_]];
+- (void)setPrimitiveIs_newValue:(int32_t)value_ {
+	[self setPrimitiveIs_new:[NSNumber numberWithInt:value_]];
 }
+
+@dynamic last_updated;
 
 @dynamic subject;
 

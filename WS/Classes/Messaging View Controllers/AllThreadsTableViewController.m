@@ -47,8 +47,8 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
         [WSRequests refreshThreadsSuccess:^(NSURLSessionDataTask *task, id responseObject) {
             [refreshControl endRefreshing];
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
-            NSInteger statusCode = response.statusCode;
+           //  NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+            // NSInteger statusCode = response.statusCode;
             [refreshControl endRefreshing];
         }];
         
@@ -88,7 +88,7 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
     
     NSString *title = [NSString stringWithFormat:@"%@ (%ld)", thread.subject, (long)[thread.count integerValue]];
     
-    if (thread.is_new.boolValue) {
+    if (thread.is_newValue > 0) {
         [cell.imageView setImage:[[UIImage imageNamed:@"iconmonstr-email-icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     } else {
         [cell.imageView setImage:[[UIImage imageNamed:@"iconmonstr-email-7-icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
@@ -97,7 +97,9 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
     [cell.textLabel setText:title];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
-    [cell.detailTextLabel setText:thread.user.title];
+    NSString *subtitle = [NSString stringWithFormat:@"%@ / %@", thread.user.title, thread.last_updated.formatWithLocalTimeZone];
+    
+    [cell.detailTextLabel setText:subtitle];
     
 }
 
@@ -125,7 +127,7 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
 -(NSFetchedResultsController *)fetchedResultsController {
     
     if (fetchedResultsController == nil) {
-        NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"threadid" ascending:NO];
+        NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"last_updated" ascending:NO];
         
         NSPredicate *predicate = nil;
         

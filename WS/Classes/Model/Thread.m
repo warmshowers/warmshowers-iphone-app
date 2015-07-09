@@ -84,6 +84,7 @@
         NSArray *currentMessages = [[bself.messages.allObjects pluck:@"mid"] arrayByPerformingSelector:@selector(stringValue)];
         
         // We don't want to update objects unnecessarily.  This causes a number of problems with the core data update.
+        // It's probably safe to assume that messages don't change.
         NSArray *newMsgs = [msgs filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"NOT (mid in %@)", currentMessages]];
         
         for (NSDictionary *dict in newMsgs) {

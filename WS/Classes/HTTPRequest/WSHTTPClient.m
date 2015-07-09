@@ -40,6 +40,8 @@
 
         // this is to allow a request that returns text/plain
         [_sharedClient setResponseSerializer:[AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:@[[AFJSONResponseSerializer serializer], [AFHTTPResponseSerializer serializer] ]]];
+        
+        [_sharedClient setCompletionQueue:dispatch_queue_create("org.warmshowers.app", NULL)];
     });
     
     [_sharedClient setDataTaskDidReceiveResponseBlock:^NSURLSessionResponseDisposition(NSURLSession *session, NSURLSessionDataTask *dataTask, NSURLResponse *response) {

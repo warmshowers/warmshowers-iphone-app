@@ -30,16 +30,8 @@
 #import "WSHTTPClient.h"
 
 // to prevent race conditions we do things on a single background thread
-static dispatch_queue_t hostqueue;
 
 @implementation WSRequests
-
-
-+(void)initialize {
-    if ([self class] == [WSRequests class]) {
-        hostqueue = dispatch_queue_create("org.warmshowers.app", NULL);
-    }
-}
 
 +(void)loginWithUsername:(NSString *)username
                 password:(NSString *)password
@@ -94,9 +86,7 @@ static dispatch_queue_t hostqueue;
     [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/hosts/by_location"
                                parameters:params
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
-   
-                                      dispatch_async(hostqueue, ^{
-                                          
+                                      
                                           NSArray *hosts = [responseObject objectForKey:@"accounts"];
                                           
                                           for (NSDictionary *dict in hosts) {
@@ -128,8 +118,6 @@ static dispatch_queue_t hostqueue;
                                           }
                                           
                                           [Host commit];
-                                          
-                                      });
                                   }
                                   failure:nil];
 }
@@ -145,7 +133,6 @@ static dispatch_queue_t hostqueue;
                               parameters:nil
                                  success:^(NSURLSessionDataTask *task, id responseObject) {
                                      
-                                     dispatch_async(hostqueue, ^{
                                          Host *host = [Host fetchOrCreate:responseObject];
                                          host.last_updated_details = [NSDate date];
                                          [Host commit];
@@ -156,9 +143,6 @@ static dispatch_queue_t hostqueue;
                                              }
                                              
                                          });
-                                     });
-                                     
-                                     
                                  }
                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
                                      NSHTTPURLResponse *response = (NSHTTPURLResponse *)[task response];
@@ -187,8 +171,6 @@ static dispatch_queue_t hostqueue;
                               parameters:nil
                                  success:^(NSURLSessionDataTask *task, id responseObject) {
                                      
-                                     dispatch_async(hostqueue, ^{
-                                         
                                          Host *bhost = [host objectInCurrentThreadContextWithError:nil];
                                          
                                          NSArray *recommendations = [responseObject objectForKey:@"recommendations"];
@@ -222,7 +204,6 @@ static dispatch_queue_t hostqueue;
                                          }
                                          
                                          [Feedback commit];
-                                     });
                                      
                                  }
                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -243,8 +224,7 @@ static dispatch_queue_t hostqueue;
     [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/hosts/by_keyword"
                                parameters:parms
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
-                                      
-                                      dispatch_async(hostqueue, ^{
+
                                           NSArray *hosts = [[responseObject objectForKey:@"accounts"] allObjects];
                                           
                                           for (NSDictionary *dict in hosts) {
@@ -252,7 +232,6 @@ static dispatch_queue_t hostqueue;
                                           }
                                           
                                           [Host commit];
-                                      });
                                       
                                   }
                                   failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -265,29 +244,30 @@ static dispatch_queue_t hostqueue;
     [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/message/get"
                                parameters:nil
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
-                                      
-                                      dispatch_async(hostqueue, ^{
                                           NSArray *all_ids = [responseObject pluck:@"thread_id"];
                                           
                                           [Thread deleteWithPredicate:[NSPredicate predicateWithFormat:@"NOT (threadid IN %@)", all_ids]];
                                           
-                                          NSArray *allExistingThreadIDs = [[Thread.fetchAll pluck:@"threadid"] arrayByPerformingSelector:@selector(stringValue)];
+                                          // NSArray *allExistingThreadIDs = [[Thread.fetchAll pluck:@"threadid"] arrayByPerformingSelector:@selector(stringValue)];
                                           
-                                          NSArray *newThreads = [responseObject filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"NOT (thread_id in %@)", allExistingThreadIDs]];
+                                          // this will prevent updates to the is_new field...
+                                          // NSArray *newThreads = [responseObject filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"NOT (thread_id in %@)", allExistingThreadIDs]];
                                           
-                                          for (NSDictionary *dict in newThreads) {
+                                          for (NSDictionary *dict in responseObject) {
                                               NSNumber *threadid = @([[dict objectForKey:@"thread_id"] intValue]);
                                               NSString *subject = [dict objectForKey:@"subject"];
                                               NSDictionary *participant = [[dict objectForKey:@"participants"] firstObject];
                                               NSNumber *is_new= @([[dict objectForKey:@"is_new"] intValue]);
                                               NSNumber *count = @([[dict objectForKey:@"count"] intValue]);
-                                              
+                                              NSNumber *last_updated = [dict objectForKey:@"last_updated"];
+
                                               Thread *thread = [Thread newOrExistingEntityWithPredicate:[NSPredicate predicateWithFormat:@"threadid=%d", [threadid intValue]]];
                                               
                                               [thread setThreadid:threadid];
                                               [thread setSubject:subject];
                                               [thread setIs_new:is_new];
                                               [thread setCount:count];
+                                              thread.last_updated = [NSDate dateWithTimeIntervalSince1970:last_updated.doubleValue];
                                               
                                               NSNumber *hostid = @([[participant objectForKey:@"uid"] intValue]);
                                               NSString *name = [participant objectForKeyedSubscript:@"name"];
@@ -298,7 +278,6 @@ static dispatch_queue_t hostqueue;
                                           }
                                           
                                           [Thread commit];
-                                      });
                                       
                                       if (success) {
                                           success(task, responseObject);
