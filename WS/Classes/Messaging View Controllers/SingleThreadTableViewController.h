@@ -22,10 +22,10 @@
 //
 
 #import "RHCoreDataTableViewController.h"
-#import "Thread.h"
+#import "MessageThread.h"
 
 @interface SingleThreadTableViewController : RHCoreDataTableViewController
 
-@property (nonatomic, strong) Thread *thread;
+@property (nonatomic, strong) MessageThread *thread;
 
 @end

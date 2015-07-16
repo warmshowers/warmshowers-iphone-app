@@ -21,10 +21,10 @@
 //  THE SOFTWARE.
 //
 
-#import "_Thread.h"
+#import "_MessageThread.h"
 #import "Host.h"
 
-@interface Thread : _Thread
+@interface MessageThread : _MessageThread
 
 
 +(void)newMessageToHost:(Host *)host

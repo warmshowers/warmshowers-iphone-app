@@ -21,12 +21,12 @@
 //  THE SOFTWARE.
 //
 
-#import "Thread.h"
+#import "MessageThread.h"
 #import "Host.h"
 #import "Message.h"
 #import "WSHTTPClient.h"
 
-@implementation Thread
+@implementation MessageThread
 
 +(NSString *)modelName {
     return @"WS";
@@ -70,9 +70,11 @@
                                   @"thread_id": [self.threadid stringValue],
                                   };
     
-    __weak Thread *bself = self;
+     __weak MessageThread *bself = self;
     
     [[WSHTTPClient sharedHTTPClient] POST:path parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        MessageThread *myThread = [bself objectInCurrentThreadContextWithError:nil];
         
         NSArray *msgs = [responseObject objectForKey:@"messages"];
         
@@ -81,7 +83,7 @@
         // delete any local messages that don't exist anymore
         [Message deleteWithPredicate:[NSPredicate predicateWithFormat:@"thread = %@ AND NOT (mid IN %@)", bself, all_msgids]];
         
-        NSArray *currentMessages = [[bself.messages.allObjects pluck:@"mid"] arrayByPerformingSelector:@selector(stringValue)];
+        NSArray *currentMessages = [[myThread.messages.allObjects pluck:@"mid"] arrayByPerformingSelector:@selector(stringValue)];
         
         // We don't want to update objects unnecessarily.  This causes a number of problems with the core data update.
         // It's probably safe to assume that messages don't change.
@@ -100,7 +102,7 @@
             Message *message = [Message newOrExistingEntityWithPredicate:[NSPredicate predicateWithFormat:@"mid=%d", [mid intValue]]];
             [message setMid:mid];
             [message setBody:body];
-            [message setThread:bself];
+            [message setThread:myThread];
             [message setTimestamp:[NSDate dateWithTimeIntervalSince1970:timestamp_int]];
 
             Host *host = [Host hostWithID:uid];

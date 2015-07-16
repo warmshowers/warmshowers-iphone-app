@@ -68,7 +68,7 @@ static NSString *CellIdentifier = @"d8bd8a42-1303-444b-b1f0-aca389ee9cd7";
         // regardless of how that goes, locally change this
         // [self.thread setIs_newValue:@0];
         self.thread.is_newValue = 0;
-        [Thread commit];
+        [MessageThread commit];
     }
 }
 

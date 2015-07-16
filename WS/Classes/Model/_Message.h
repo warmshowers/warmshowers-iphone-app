@@ -16,7 +16,7 @@ extern const struct MessageRelationships {
 } MessageRelationships;
 
 @class Host;
-@class Thread;
+@class MessageThread;
 
 @interface MessageID : NSManagedObjectID {}
 @end
@@ -47,7 +47,7 @@ extern const struct MessageRelationships {
 
 //- (BOOL)validateAuthor:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) Thread *thread;
+@property (nonatomic, strong) MessageThread *thread;
 
 //- (BOOL)validateThread:(id*)value_ error:(NSError**)error_;
 
@@ -70,7 +70,7 @@ extern const struct MessageRelationships {
 - (Host*)primitiveAuthor;
 - (void)setPrimitiveAuthor:(Host*)value;
 
-- (Thread*)primitiveThread;
-- (void)setPrimitiveThread:(Thread*)value;
+- (MessageThread*)primitiveThread;
+- (void)setPrimitiveThread:(MessageThread*)value;
 
 @end

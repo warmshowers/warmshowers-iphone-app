@@ -26,7 +26,7 @@
 #import "Host.h"
 #import "MKMapView+Utils.h"
 #import "Feedback.h"
-#import "Thread.h"
+#import "MessageThread.h"
 #import "WSHTTPClient.h"
 
 // to prevent race conditions we do things on a single background thread
@@ -246,7 +246,7 @@
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
                                           NSArray *all_ids = [responseObject pluck:@"thread_id"];
                                           
-                                          [Thread deleteWithPredicate:[NSPredicate predicateWithFormat:@"NOT (threadid IN %@)", all_ids]];
+                                          [MessageThread deleteWithPredicate:[NSPredicate predicateWithFormat:@"NOT (threadid IN %@)", all_ids]];
                                           
                                           // NSArray *allExistingThreadIDs = [[Thread.fetchAll pluck:@"threadid"] arrayByPerformingSelector:@selector(stringValue)];
                                           
@@ -261,7 +261,7 @@
                                               NSNumber *count = @([[dict objectForKey:@"count"] intValue]);
                                               NSNumber *last_updated = [dict objectForKey:@"last_updated"];
 
-                                              Thread *thread = [Thread newOrExistingEntityWithPredicate:[NSPredicate predicateWithFormat:@"threadid=%d", [threadid intValue]]];
+                                              MessageThread *thread = [MessageThread newOrExistingEntityWithPredicate:[NSPredicate predicateWithFormat:@"threadid=%d", [threadid intValue]]];
                                               
                                               [thread setThreadid:threadid];
                                               [thread setSubject:subject];
@@ -277,7 +277,7 @@
                                               [thread setUser:host];
                                           }
                                           
-                                          [Thread commit];
+                                          [MessageThread commit];
                                       
                                       if (success) {
                                           success(task, responseObject);
@@ -287,7 +287,7 @@
                                   failure:failure];
 }
 
-+(void)markThreadAsRead:(Thread *)thread {
++(void)markThreadAsRead:(MessageThread *)thread {
     
     NSDictionary *parms = @{
                             @"thread_id" : thread.threadid,

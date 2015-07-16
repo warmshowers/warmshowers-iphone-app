@@ -25,7 +25,7 @@
 
 #import <MapKit/MapKit.h>
 @class Host;
-@class Thread;
+@class MessageThread;
 
 @interface WSRequests : NSObject<NSXMLParserDelegate>
 
@@ -45,7 +45,7 @@
 
 +(void)searchHostsWithKeyword:(NSString *)keyword;
 +(void)refreshThreadsSuccess:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
-+(void)markThreadAsRead:(Thread *)thread;
++(void)markThreadAsRead:(MessageThread *)thread;
 
 @end
 

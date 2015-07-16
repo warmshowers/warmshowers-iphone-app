@@ -49,7 +49,7 @@ extern const struct HostRelationships {
 
 @class Feedback;
 @class Message;
-@class Thread;
+@class MessageThread;
 
 @interface HostID : NSManagedObjectID {}
 @end
@@ -289,8 +289,8 @@ extern const struct HostRelationships {
 @interface _Host (ThreadCoreDataGeneratedAccessors)
 - (void)addThread:(NSSet*)value_;
 - (void)removeThread:(NSSet*)value_;
-- (void)addThreadObject:(Thread*)value_;
-- (void)removeThreadObject:(Thread*)value_;
+- (void)addThreadObject:(MessageThread*)value_;
+- (void)removeThreadObject:(MessageThread*)value_;
 
 @end
 

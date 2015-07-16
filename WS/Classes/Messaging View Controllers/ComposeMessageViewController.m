@@ -37,7 +37,7 @@
     return controller;
 }
 
-+(ComposeMessageViewController *)controllerWithThread:(Thread *)thread {
++(ComposeMessageViewController *)controllerWithThread:(MessageThread *)thread {
     ComposeMessageViewController *controller = [self controllerWithHost:thread.user];
     [controller setThread:thread];
     return controller;
@@ -137,7 +137,7 @@
         
     } else {
         
-        [Thread newMessageToHost:self.host
+        [MessageThread newMessageToHost:self.host
                          subject:subject message:message success:^(NSURLSessionDataTask *task, id responseObject) {
                              [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Message sent!", nil)];
                              [bself dismissViewControllerAnimated:YES completion:nil];

@@ -22,12 +22,12 @@
 //
 
 #import "Host.h"
-#import "Thread.h"
+#import "MessageThread.h"
 
 @interface ComposeMessageViewController : UIViewController<UITextFieldDelegate,UITextViewDelegate>
 
 @property (strong, nonatomic) Host *host;
-@property (strong, nonatomic) Thread *thread;
+@property (strong, nonatomic) MessageThread *thread;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) IBOutlet UILabel *messageToTextLabel;
@@ -36,6 +36,6 @@
 
 
 +(ComposeMessageViewController *)controllerWithHost:(Host *)host;
-+(ComposeMessageViewController *)controllerWithThread:(Thread *)thread;
++(ComposeMessageViewController *)controllerWithThread:(MessageThread *)thread;
 
 @end

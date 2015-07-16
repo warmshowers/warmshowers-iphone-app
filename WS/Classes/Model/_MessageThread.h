@@ -1,33 +1,33 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
-// Make changes to Thread.h instead.
+// Make changes to MessageThread.h instead.
 
 #import <CoreData/CoreData.h>
 #import "RHManagedObject.h"
 
-extern const struct ThreadAttributes {
+extern const struct MessageThreadAttributes {
 	__unsafe_unretained NSString *count;
 	__unsafe_unretained NSString *is_new;
 	__unsafe_unretained NSString *last_updated;
 	__unsafe_unretained NSString *subject;
 	__unsafe_unretained NSString *threadid;
-} ThreadAttributes;
+} MessageThreadAttributes;
 
-extern const struct ThreadRelationships {
+extern const struct MessageThreadRelationships {
 	__unsafe_unretained NSString *messages;
 	__unsafe_unretained NSString *user;
-} ThreadRelationships;
+} MessageThreadRelationships;
 
 @class Message;
 @class Host;
 
-@interface ThreadID : NSManagedObjectID {}
+@interface MessageThreadID : NSManagedObjectID {}
 @end
 
-@interface _Thread : RHManagedObject {}
+@interface _MessageThread : RHManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
-@property (nonatomic, readonly, strong) ThreadID* objectID;
+@property (nonatomic, readonly, strong) MessageThreadID* objectID;
 
 @property (nonatomic, strong) NSNumber* count;
 
@@ -71,7 +71,7 @@ extern const struct ThreadRelationships {
 
 @end
 
-@interface _Thread (MessagesCoreDataGeneratedAccessors)
+@interface _MessageThread (MessagesCoreDataGeneratedAccessors)
 - (void)addMessages:(NSSet*)value_;
 - (void)removeMessages:(NSSet*)value_;
 - (void)addMessagesObject:(Message*)value_;
@@ -79,7 +79,7 @@ extern const struct ThreadRelationships {
 
 @end
 
-@interface _Thread (CoreDataGeneratedPrimitiveAccessors)
+@interface _MessageThread (CoreDataGeneratedPrimitiveAccessors)
 
 - (NSNumber*)primitiveCount;
 - (void)setPrimitiveCount:(NSNumber*)value;

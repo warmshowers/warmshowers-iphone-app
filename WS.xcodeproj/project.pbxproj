@@ -43,7 +43,7 @@
 		830922D11B13C62100C29C56 /* RHAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830922CF1B13C62100C29C56 /* RHAboutViewController.m */; };
 		832198911AFFF49B0041A72F /* SingleThreadTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 832198901AFFF49B0041A72F /* SingleThreadTableViewController.m */; };
 		8330B481126A0775008B2EC4 /* WSRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8330B480126A0775008B2EC4 /* WSRequests.m */; };
-		8343CC8F1AFFE2DC00EE3A45 /* Thread.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343CC8E1AFFE2DC00EE3A45 /* Thread.m */; };
+		8343CC8F1AFFE2DC00EE3A45 /* MessageThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343CC8E1AFFE2DC00EE3A45 /* MessageThread.m */; };
 		83441AD51608694900468716 /* WSHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AD41608694900468716 /* WSHTTPClient.m */; };
 		8348AE381872A2AD0097DF24 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8348AE371872A2AD0097DF24 /* Images.xcassets */; };
 		834C9CBA1B0683E200C735F4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 834C9CB81B0683E200C735F4 /* LoginViewController.m */; };
@@ -88,7 +88,6 @@
 		83EC1DA91B014E25003FD77B /* _Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EC1DA21B014E25003FD77B /* _Feedback.m */; };
 		83EC1DAA1B014E25003FD77B /* _Host.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EC1DA41B014E25003FD77B /* _Host.m */; };
 		83EC1DAB1B014E25003FD77B /* _Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EC1DA61B014E25003FD77B /* _Message.m */; };
-		83EC1DAC1B014E25003FD77B /* _Thread.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EC1DA81B014E25003FD77B /* _Thread.m */; };
 		83EC1DAF1B01508F003FD77B /* WS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83EC1DAD1B01508F003FD77B /* WS.xcdatamodeld */; };
 		83EC1DB21B0155D1003FD77B /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EC1DB11B0155D1003FD77B /* Message.m */; };
 		83EED7341B2802A7003257E5 /* iconmonstr-star-5-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 83EED7321B2802A7003257E5 /* iconmonstr-star-5-icon.png */; };
@@ -98,6 +97,7 @@
 		83F78ED41B1450DC00BEEBC6 /* hamburger.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F78ED21B1450DC00BEEBC6 /* hamburger.png */; };
 		83F78ED51B1450DC00BEEBC6 /* hamburger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F78ED31B1450DC00BEEBC6 /* hamburger@2x.png */; };
 		83F8C187152B8B280084E380 /* ComposeMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F8C185152B8B280084E380 /* ComposeMessageViewController.m */; };
+		83FF91EB1B57E9A60058AEFF /* _MessageThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF91EA1B57E9A60058AEFF /* _MessageThread.m */; };
 		83FFC5F316187AC300158C5F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8330B4C8126A092E008B2EC4 /* SystemConfiguration.framework */; };
 		83FFC5F416187B7D00158C5F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28860BE40F44EE6400985440 /* CoreData.framework */; };
 /* End PBXBuildFile section */
@@ -136,8 +136,8 @@
 		8330B47F126A0775008B2EC4 /* WSRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSRequests.h; sourceTree = "<group>"; };
 		8330B480126A0775008B2EC4 /* WSRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSRequests.m; sourceTree = "<group>"; };
 		8330B4C8126A092E008B2EC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		8343CC8D1AFFE2DC00EE3A45 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
-		8343CC8E1AFFE2DC00EE3A45 /* Thread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Thread.m; sourceTree = "<group>"; };
+		8343CC8D1AFFE2DC00EE3A45 /* MessageThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageThread.h; sourceTree = "<group>"; };
+		8343CC8E1AFFE2DC00EE3A45 /* MessageThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageThread.m; sourceTree = "<group>"; };
 		83441AD31608694900468716 /* WSHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSHTTPClient.h; sourceTree = "<group>"; };
 		83441AD41608694900468716 /* WSHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSHTTPClient.m; sourceTree = "<group>"; };
 		8348AE351872A0CF0097DF24 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -202,8 +202,6 @@
 		83EC1DA41B014E25003FD77B /* _Host.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Host.m; sourceTree = "<group>"; };
 		83EC1DA51B014E25003FD77B /* _Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Message.h; sourceTree = "<group>"; };
 		83EC1DA61B014E25003FD77B /* _Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Message.m; sourceTree = "<group>"; };
-		83EC1DA71B014E25003FD77B /* _Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Thread.h; sourceTree = "<group>"; };
-		83EC1DA81B014E25003FD77B /* _Thread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Thread.m; sourceTree = "<group>"; };
 		83EC1DAE1B01508F003FD77B /* WS3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WS3.xcdatamodel; sourceTree = "<group>"; };
 		83EC1DB01B0155D1003FD77B /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		83EC1DB11B0155D1003FD77B /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
@@ -215,6 +213,8 @@
 		83F78ED31B1450DC00BEEBC6 /* hamburger@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hamburger@2x.png"; sourceTree = "<group>"; };
 		83F8C184152B8B280084E380 /* ComposeMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeMessageViewController.h; sourceTree = "<group>"; };
 		83F8C185152B8B280084E380 /* ComposeMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeMessageViewController.m; sourceTree = "<group>"; };
+		83FF91E91B57E9A50058AEFF /* _MessageThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MessageThread.h; sourceTree = "<group>"; };
+		83FF91EA1B57E9A60058AEFF /* _MessageThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MessageThread.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* WS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WS-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D09F2CAA216B49BAA5EEDCA7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8BC23EBA708152878C4EBD7 /* Pods.ad-hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods.ad-hoc.xcconfig"; path = "Pods/Target Support Files/Pods/Pods.ad-hoc.xcconfig"; sourceTree = "<group>"; };
@@ -405,14 +405,14 @@
 				83EC1DA41B014E25003FD77B /* _Host.m */,
 				83EC1DA51B014E25003FD77B /* _Message.h */,
 				83EC1DA61B014E25003FD77B /* _Message.m */,
-				83EC1DA71B014E25003FD77B /* _Thread.h */,
-				83EC1DA81B014E25003FD77B /* _Thread.m */,
+				83FF91E91B57E9A50058AEFF /* _MessageThread.h */,
+				83FF91EA1B57E9A60058AEFF /* _MessageThread.m */,
 				836CCF0214ABB3E6000EDC51 /* Host.h */,
 				836CCF0314ABB3E6000EDC51 /* Host.m */,
 				83E605551608477F00C7C50E /* Feedback.h */,
 				83E605561608477F00C7C50E /* Feedback.m */,
-				8343CC8D1AFFE2DC00EE3A45 /* Thread.h */,
-				8343CC8E1AFFE2DC00EE3A45 /* Thread.m */,
+				8343CC8D1AFFE2DC00EE3A45 /* MessageThread.h */,
+				8343CC8E1AFFE2DC00EE3A45 /* MessageThread.m */,
 				83EC1DB01B0155D1003FD77B /* Message.h */,
 				83EC1DB11B0155D1003FD77B /* Message.m */,
 			);
@@ -667,6 +667,7 @@
 				83EC1DAA1B014E25003FD77B /* _Host.m in Sources */,
 				83518606152C0C1F009E558F /* MKMapView+Utils.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				83FF91EB1B57E9A60058AEFF /* _MessageThread.m in Sources */,
 				832198911AFFF49B0041A72F /* SingleThreadTableViewController.m in Sources */,
 				83EC1DAB1B014E25003FD77B /* _Message.m in Sources */,
 				1D3623260D0F684500981E51 /* WSAppDelegate.m in Sources */,
@@ -679,9 +680,8 @@
 				830922D11B13C62100C29C56 /* RHAboutViewController.m in Sources */,
 				83DBE69D1AFD6607003CFFCD /* LeftMenuViewController.m in Sources */,
 				83CE1361147455CB006EED95 /* FavouriteHostTableViewController.m in Sources */,
-				83EC1DAC1B014E25003FD77B /* _Thread.m in Sources */,
 				83C78E801474DE3D00274616 /* CLLocation+Bearing.m in Sources */,
-				8343CC8F1AFFE2DC00EE3A45 /* Thread.m in Sources */,
+				8343CC8F1AFFE2DC00EE3A45 /* MessageThread.m in Sources */,
 				836CCF0614ABB3E6000EDC51 /* Host.m in Sources */,
 				83F8C187152B8B280084E380 /* ComposeMessageViewController.m in Sources */,
 				83810A4E1B1667F9001FF02B /* NSNumber+WS.m in Sources */,

@@ -22,7 +22,7 @@
 //
 
 #import "AllThreadsTableViewController.h"
-#import "Thread.h"
+#import "MessageThread.h"
 #import "Host.h"
 #import "SingleThreadTableViewController.h"
 #import "WSRequests.h"
@@ -84,7 +84,7 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
-    Thread *thread = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    MessageThread *thread = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     NSString *title = [NSString stringWithFormat:@"%@ (%ld)", thread.subject, (long)[thread.count integerValue]];
     
@@ -113,7 +113,7 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Thread *thread = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    MessageThread *thread = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     SingleThreadTableViewController *controller = [[SingleThreadTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [controller setThread:thread];
@@ -132,12 +132,12 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
         NSPredicate *predicate = nil;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        [fetchRequest setEntity:[Thread entityDescription]];
+        [fetchRequest setEntity:[MessageThread entityDescription]];
         [fetchRequest setPredicate:predicate];
         [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sort1, nil]];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                            managedObjectContext:[Thread managedObjectContextForCurrentThread]
+                                                                            managedObjectContext:[MessageThread managedObjectContextForCurrentThread]
                                                                               sectionNameKeyPath:nil
                                                                                        cacheName:nil];
         

@@ -1,9 +1,9 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
-// Make changes to Thread.m instead.
+// Make changes to MessageThread.m instead.
 
-#import "_Thread.h"
+#import "_MessageThread.h"
 
-const struct ThreadAttributes ThreadAttributes = {
+const struct MessageThreadAttributes MessageThreadAttributes = {
 	.count = @"count",
 	.is_new = @"is_new",
 	.last_updated = @"last_updated",
@@ -11,32 +11,32 @@ const struct ThreadAttributes ThreadAttributes = {
 	.threadid = @"threadid",
 };
 
-const struct ThreadRelationships ThreadRelationships = {
+const struct MessageThreadRelationships MessageThreadRelationships = {
 	.messages = @"messages",
 	.user = @"user",
 };
 
-@implementation ThreadID
+@implementation MessageThreadID
 @end
 
-@implementation _Thread
+@implementation _MessageThread
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"Thread" inManagedObjectContext:moc_];
+	return [NSEntityDescription insertNewObjectForEntityForName:@"MessageThread" inManagedObjectContext:moc_];
 }
 
 + (NSString*)entityName {
-	return @"Thread";
+	return @"MessageThread";
 }
 
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"Thread" inManagedObjectContext:moc_];
+	return [NSEntityDescription entityForName:@"MessageThread" inManagedObjectContext:moc_];
 }
 
-- (ThreadID*)objectID {
-	return (ThreadID*)[super objectID];
+- (MessageThreadID*)objectID {
+	return (MessageThreadID*)[super objectID];
 }
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
