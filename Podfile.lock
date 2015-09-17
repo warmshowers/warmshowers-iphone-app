@@ -1,33 +1,33 @@
 PODS:
-  - AFNetworking (2.5.4):
-    - AFNetworking/NSURLConnection (= 2.5.4)
-    - AFNetworking/NSURLSession (= 2.5.4)
-    - AFNetworking/Reachability (= 2.5.4)
-    - AFNetworking/Security (= 2.5.4)
-    - AFNetworking/Serialization (= 2.5.4)
-    - AFNetworking/UIKit (= 2.5.4)
-  - AFNetworking/NSURLConnection (2.5.4):
+  - AFNetworking (2.6.0):
+    - AFNetworking/NSURLConnection (= 2.6.0)
+    - AFNetworking/NSURLSession (= 2.6.0)
+    - AFNetworking/Reachability (= 2.6.0)
+    - AFNetworking/Security (= 2.6.0)
+    - AFNetworking/Serialization (= 2.6.0)
+    - AFNetworking/UIKit (= 2.6.0)
+  - AFNetworking/NSURLConnection (2.6.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.4):
+  - AFNetworking/NSURLSession (2.6.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.4)
-  - AFNetworking/Security (2.5.4)
-  - AFNetworking/Serialization (2.5.4)
-  - AFNetworking/UIKit (2.5.4):
+  - AFNetworking/Reachability (2.6.0)
+  - AFNetworking/Security (2.6.0)
+  - AFNetworking/Serialization (2.6.0)
+  - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - BButton (4.0.2)
-  - CrittercismSDK (5.2.4)
+  - CrittercismSDK (5.3.3)
   - ECSlidingViewController (2.0.3)
   - FrameAccessor (2.0)
   - kingpin (0.2.5)
   - Lockbox (2.1.0)
   - MBAutoGrowingTextView (0.1.0)
-  - RHManagedObject (0.15)
+  - RHManagedObject (0.16)
   - RHTools (0.1.0):
     - FrameAccessor
   - SVProgressHUD (1.1.2)
@@ -51,15 +51,15 @@ EXTERNAL SOURCES:
     :path: ../RHTools/
 
 SPEC CHECKSUMS:
-  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
   BButton: ab0f2ed3b998ae73c5188b57d270d81e4a1eeb27
-  CrittercismSDK: 3efbb10c3c189f7d289de96ef81310476f27df00
+  CrittercismSDK: 6eb2b2a0b6d396110ecc664a457b87eb6bb70d9a
   ECSlidingViewController: 6485c14f23b4487e9946535421ca8f111f86cc53
   FrameAccessor: 443a13e58e23a10ff22180da0897b28c3f6abf66
   kingpin: 28ea5a6e16065ee10d078806a6cb0adb4c7c28cd
   Lockbox: 16442da35d9d4286966936763be728a931d589c3
   MBAutoGrowingTextView: 3955d4513be3d184fe2cb7739999c1f994dcd4d5
-  RHManagedObject: 459c86e4a257bec738e421c3051bb541f3aeabb8
+  RHManagedObject: 2685dbb2a782a8c25e1e52dffbab386fbf2e5b3c
   RHTools: 419b66e073e304190369201c14e5211dab511ece
   SVProgressHUD: 3afb875b9eb23acd1bed9b82495695c68621a8b2
 
