@@ -130,7 +130,6 @@
     self.slidingViewController.underLeftViewController = leftMenuViewController; // [leftMenuViewController wrapInNavigationController];
     self.slidingViewController.anchorRightRevealAmount = 280.0f;
     
-
     [SVProgressHUD setBackgroundColor:kWSBaseColour];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     

@@ -46,19 +46,13 @@
                                parameters:params
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
                                       
-                                      [[WSHTTPClient sharedHTTPClient] GET:@"/services/session/token"
-                                                                parameters:nil
-                                                                   success:^(NSURLSessionDataTask *task, id responseObject) {
-                                                                       
-                                                                       NSString *token = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-                                                                       
-                                                                       [WSHTTPClient.sharedHTTPClient.requestSerializer setValue:token forHTTPHeaderField:@"X-CSRF-Token"];
-                                                                       
-                                                                       if (success) {
-                                                                           success(task, responseObject);
-                                                                       }
-                                                                   }
-                                                                   failure:failure];
+                                      NSString *token = [responseObject objectForKey:@"token"];
+                                      
+                                      [WSHTTPClient.sharedHTTPClient.requestSerializer setValue:token forHTTPHeaderField:@"X-CSRF-Token"];
+                                      
+                                      if (success) {
+                                          success(task, responseObject);
+                                      }
                                   }
                                   failure:failure];
 }
@@ -87,6 +81,7 @@
                                parameters:params
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
                                       
+                      
                                           NSArray *hosts = [responseObject objectForKey:@"accounts"];
                                           
                                           for (NSDictionary *dict in hosts) {
@@ -119,7 +114,10 @@
                                           
                                           [Host commit];
                                   }
-                                  failure:nil];
+                                  failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
+                                      
+                                      NSLog(@"%@", @"Fail");
+                                  }];
 }
 
 
@@ -256,25 +254,28 @@
                                           for (NSDictionary *dict in responseObject) {
                                               NSNumber *threadid = @([[dict objectForKey:@"thread_id"] intValue]);
                                               NSString *subject = [dict objectForKey:@"subject"];
-                                              NSDictionary *participant = [[dict objectForKey:@"participants"] firstObject];
+                                              
                                               NSNumber *is_new= @([[dict objectForKey:@"is_new"] intValue]);
                                               NSNumber *count = @([[dict objectForKey:@"count"] intValue]);
                                               NSNumber *last_updated = [dict objectForKey:@"last_updated"];
 
                                               MessageThread *thread = [MessageThread newOrExistingEntityWithPredicate:[NSPredicate predicateWithFormat:@"threadid=%d", [threadid intValue]]];
-                                              
                                               [thread setThreadid:threadid];
                                               [thread setSubject:subject];
                                               [thread setIs_new:is_new];
                                               [thread setCount:count];
                                               thread.last_updated = [NSDate dateWithTimeIntervalSince1970:last_updated.doubleValue];
                                               
-                                              NSNumber *hostid = @([[participant objectForKey:@"uid"] intValue]);
-                                              NSString *name = [participant objectForKeyedSubscript:@"name"];
+                                              NSDictionary *participants = [dict objectForKey:@"participants"];
                                               
-                                              Host *host = [Host hostWithID:hostid];
-                                              [host setName:name];
-                                              [thread setUser:host];
+                                              for (NSDictionary *participant in participants) {
+                                                  NSNumber *hostid = @([[participant objectForKey:@"uid"] intValue]);
+                                                  NSString *name = [participant objectForKeyedSubscript:@"name"];
+                                                  
+                                                  Host *host = [Host hostWithID:hostid];
+                                                  [host setName:name];
+                                                  [thread setUser:host];
+                                              }
                                           }
                                           
                                           [MessageThread commit];

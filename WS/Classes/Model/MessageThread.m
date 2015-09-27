@@ -93,11 +93,22 @@
             
             NSNumber *mid = @([[dict objectForKey:@"mid"] intValue]);
             NSString *body = [dict objectForKey:@"body"];
+           
             
-            NSDictionary *author = [dict objectForKey:@"author"];
-            NSNumber *uid = @([[author objectForKey:@"uid"] intValue]);
-            NSString *name = [author objectForKey:@"name"];
+            NSString *author_string;
+            
+            if ([[dict objectForKey:@"author"] isKindOfClass:[NSDictionary class]]) {
+                author_string = [dict valueForKeyPath:@"author.uid" defaultValue:@"author"];
+            } else {
+                author_string = [dict objectForKey:@"author"];
+            }
+
+            NSNumber *author_id = @([author_string intValue]);
+                        
+            // NSNumber *author_id = @([[dict objectForKey:@"author"] intValue]);
+            
             NSTimeInterval timestamp_int = [[dict objectForKey:@"timestamp"] doubleValue];
+           //  NSNumber *isNew = @([[dict objectForKey:@"is_new"] boolValue]);
             
             Message *message = [Message newOrExistingEntityWithPredicate:[NSPredicate predicateWithFormat:@"mid=%d", [mid intValue]]];
             [message setMid:mid];
@@ -105,9 +116,9 @@
             [message setThread:myThread];
             [message setTimestamp:[NSDate dateWithTimeIntervalSince1970:timestamp_int]];
 
-            Host *host = [Host hostWithID:uid];
-            [host setName:name];
-            [host setHostid:uid];
+            Host *host = [Host hostWithID:author_id];
+            // [host setName:name];
+            // [host setHostid:author];
             
             [message setAuthor:host];
         }

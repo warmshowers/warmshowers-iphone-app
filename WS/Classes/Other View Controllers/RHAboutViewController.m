@@ -96,14 +96,14 @@
                                                  accessoryType:UITableViewCellAccessoryDisclosureIndicator]
      ];
     
-    [self.tableView addSectionWithSectionHeaderText:@"Other Apps" footerText:NSLocalizedString(@"The Warm Showers and TrackMyTour apps developed by Christopher Meyer. Contact me at chris@schwiiz.org or visit my blog at http://schwiiz.org/.", nil)];
+    [self.tableView addSectionWithSectionHeaderText:@"Other Apps" footerText:NSLocalizedString(@"The Warm Showers and TrackMyTour apps developed by Christopher Meyer.", nil)];
     
     
     
     RHTableViewCell *tmtCell = [self.tableView addCell:[RHTableViewCell cellWithLabelText:@"TrackMyTour"
                                                detailLabelText:NSLocalizedString(@"A tracking app for bike touring", nil)
                                                 didSelectBlock:^{
-                                                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/app/trackmytour-travel-sharing/id307303960?mt=8"]];
+                                                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://trackmytour.com/"]];
                                                 } style:UITableViewCellStyleSubtitle
                                                          image:[UIImage imageNamed:@"trackmytour"]
                                                  accessoryType:UITableViewCellAccessoryDisclosureIndicator]

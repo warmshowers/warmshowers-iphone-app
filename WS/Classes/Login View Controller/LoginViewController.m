@@ -59,7 +59,7 @@
 }
 
 // things get tight when the keyboard shows on the iPhone in landscape mode
--(NSUInteger)supportedInterfaceOrientations {
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations {
     if IsIPhone {
         return UIInterfaceOrientationMaskPortrait;
     } else {
@@ -82,7 +82,7 @@
     [WSRequests loginWithUsername:username
                          password:password
                           success:^(NSURLSessionDataTask *task, id responseObject) {
-                              
+                              dispatch_async(dispatch_get_main_queue(), ^{
                               [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
                               
                               [[WSAppDelegate sharedInstance] setUsername:username];
@@ -92,8 +92,11 @@
                               [bself dismissViewControllerAnimated:YES completion:^{
                                   
                               }];
+                              });
                               
                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                              
+                              dispatch_async(dispatch_get_main_queue(), ^{
                               [SVProgressHUD dismiss];
                               RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warm Showers", nil)
                                                                        message:NSLocalizedString(@"Login failed. Please check your username and password and try again. If you don't have an account you can tap the Sign Up button to register.", nil)];
@@ -103,6 +106,7 @@
                               }];
                               
                               [alert show];
+                              });
                           }];
 }
 

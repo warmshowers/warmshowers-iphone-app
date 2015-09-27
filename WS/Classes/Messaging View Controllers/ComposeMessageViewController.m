@@ -64,9 +64,9 @@
     
     self.navigationItem.leftBarButtonItem = [[RHBarButtonItem alloc]
                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                           block:^{
-                                                                                               [bself dismissViewControllerAnimated:YES completion:nil];
-                                                                                           }];
+                                             block:^{
+                                                 [bself dismissViewControllerAnimated:YES completion:nil];
+                                             }];
     
     self.navigationItem.rightBarButtonItem = [RHBarButtonItem itemWithTitle:NSLocalizedString(@"Send", nil) block:^{
         
@@ -89,7 +89,7 @@
                                                                       attribute:NSLayoutAttributeLeading
                                                                       relatedBy:0
                                                                          toItem:self.view
-                                                                      attribute:NSLayoutAttributeLeft
+                                                                      attribute:NSLayoutAttributeLeading
                                                                      multiplier:1.0
                                                                        constant:0];
     [self.view addConstraint:leftConstraint];
@@ -98,7 +98,7 @@
                                                                        attribute:NSLayoutAttributeTrailing
                                                                        relatedBy:0
                                                                           toItem:self.view
-                                                                       attribute:NSLayoutAttributeRight
+                                                                       attribute:NSLayoutAttributeTrailing
                                                                       multiplier:1.0
                                                                         constant:0];
     [self.view addConstraint:rightConstraint];
@@ -118,7 +118,7 @@
     __weak ComposeMessageViewController *bself = self;
     
     NSString *subject = self.subjectTextField.text;
-   // NSString *message = [NSString stringWithFormat:@"%@\n\nSent from the <a href='http://itunes.com/apps/warmshowers'>Warm Showers App for iPhone/iPad</a>", self.textView.text];
+    // NSString *message = [NSString stringWithFormat:@"%@\n\nSent from the <a href='http://itunes.com/apps/warmshowers'>Warm Showers App for iPhone/iPad</a>", self.textView.text];
     
     NSString *message = self.textView.text;
     
@@ -127,25 +127,29 @@
     if (self.thread) {
         
         [self.thread replyWithMessage:message success:^(NSURLSessionDataTask *task, id responseObject) {
-            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Message sent!", nil)];
-            [bself dismissViewControllerAnimated:YES completion:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Message sent!", nil)];
+                [bself dismissViewControllerAnimated:YES completion:nil];
+            });
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            [SVProgressHUD dismiss];
-            [[RHAlertView alertWithOKButtonWithTitle:NSLocalizedString(@"Error", nil)
-                                             message:NSLocalizedString(@"Your message could not be sent due to an error.", nil)] show];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+                [[RHAlertView alertWithOKButtonWithTitle:NSLocalizedString(@"Error", nil)
+                                                 message:NSLocalizedString(@"Your message could not be sent due to an error.", nil)] show];
+            });
         }];
         
     } else {
         
         [MessageThread newMessageToHost:self.host
-                         subject:subject message:message success:^(NSURLSessionDataTask *task, id responseObject) {
-                             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Message sent!", nil)];
-                             [bself dismissViewControllerAnimated:YES completion:nil];
-                         } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                             [SVProgressHUD dismiss];
-                             [[RHAlertView alertWithOKButtonWithTitle:NSLocalizedString(@"Error", nil)
-                                                              message:NSLocalizedString(@"Your message could not be sent due to an error.", nil)] show];
-                         }];
+                                subject:subject message:message success:^(NSURLSessionDataTask *task, id responseObject) {
+                                    [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Message sent!", nil)];
+                                    [bself dismissViewControllerAnimated:YES completion:nil];
+                                } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                    [SVProgressHUD dismiss];
+                                    [[RHAlertView alertWithOKButtonWithTitle:NSLocalizedString(@"Error", nil)
+                                                                     message:NSLocalizedString(@"Your message could not be sent due to an error.", nil)] show];
+                                }];
     }
     
     

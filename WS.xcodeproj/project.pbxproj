@@ -531,7 +531,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Red House Consulting GmbH";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
@@ -728,6 +728,7 @@
 				GCC_PREFIX_HEADER = "WS/Supporting Files/WS_Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "WS/Supporting Files/WS-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.trackmytour.warmshowers;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -741,7 +742,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = WS;
 				SDKROOT = iphoneos;
@@ -763,6 +764,7 @@
 				GCC_PREFIX_HEADER = "WS/Supporting Files/WS_Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "WS/Supporting Files/WS-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.trackmytour.warmshowers;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -787,12 +789,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Meyer (XV3JT68D49)";
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = WS;
 				SDKROOT = iphoneos;

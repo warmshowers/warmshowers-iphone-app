@@ -32,16 +32,31 @@
     static dispatch_once_t oncePredicate;
     
     dispatch_once(&oncePredicate, ^{
-         _sharedClient = [[WSHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://www.warmshowers.org/"]];
-        // _sharedClient = [[WSHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://www.wsupg.net/"]];
+         //  _sharedClient = [[WSHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://www.warmshowers.org/"]];
+        
+        
+      _sharedClient = [[WSHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://www.wsupg.net/"]];
+     [_sharedClient.requestSerializer setAuthorizationHeaderFieldWithUsername:@"drupal" password:@"drupal"];
+        
+        
+        [_sharedClient.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         
         [[_sharedClient reachabilityManager] startMonitoring];
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-
+        
+        
+   
+        
+        
         // this is to allow a request that returns text/plain
-        [_sharedClient setResponseSerializer:[AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:@[[AFJSONResponseSerializer serializer], [AFHTTPResponseSerializer serializer] ]]];
+       //  [_sharedClient setResponseSerializer:[AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:@[[AFJSONResponseSerializer serializer], [AFHTTPResponseSerializer serializer] ]]];
+       
+         [_sharedClient setResponseSerializer:[AFJSONResponseSerializer serializer]];
+        
         
         [_sharedClient setCompletionQueue:dispatch_queue_create("org.warmshowers.app", NULL)];
+        
+        
     });
     
     [_sharedClient setDataTaskDidReceiveResponseBlock:^NSURLSessionResponseDisposition(NSURLSession *session, NSURLSessionDataTask *dataTask, NSURLResponse *response) {

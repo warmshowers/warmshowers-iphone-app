@@ -83,7 +83,6 @@
         
         self.hasRunOnce = YES;
     }
-    
 }
 
 -(void)logoutActionSheet:(id)sender {
@@ -247,8 +246,20 @@
         HostsTableViewController *controller = [HostsTableViewController new];
         [controller setTitle:[NSString stringWithFormat:@"within %.0f meters", kingpinAnnotation.radius]];
         [controller setBasePredicate:[NSPredicate predicateWithFormat:@"self in %@", kpAnnotations]];
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+        // [self.navigationController pushViewController:controller animated:YES];
+
+        __weak UIViewController *bself = self;
+        controller.navigationItem.leftBarButtonItem = [RHBarButtonItem itemWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^{
+            [bself dismissViewControllerAnimated:YES completion:nil];
+        }];
+        
+        
+        UINavigationController *navController = controller.wrapInNavigationController;
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        
+        
+        [self.navigationController presentViewController:navController animated:YES completion:nil];
+     }
 }
 
 -(IBAction)mapTypeSegmentedControl:(UISegmentedControl *)sender {

@@ -45,11 +45,15 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
     self.refreshControl = [RHRefreshControl refreshControlWithBlock:^(RHRefreshControl *refreshControl) {
         
         [WSRequests refreshThreadsSuccess:^(NSURLSessionDataTask *task, id responseObject) {
-            [refreshControl endRefreshing];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [refreshControl endRefreshing];
+            });
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
-           //  NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+            //  NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
             // NSInteger statusCode = response.statusCode;
-            [refreshControl endRefreshing];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [refreshControl endRefreshing];
+            });
         }];
         
     }];
@@ -57,30 +61,16 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
     // refresh on load
     [(RHRefreshControl *)self.refreshControl refresh];
     
-    
+    /*
     if (!self.splitViewController.isCollapsed) {
         [self.splitViewController showDetailViewController:[[self splashViewController] wrapInNavigationController] sender:nil];
     }
+     */
 }
 
 
 
--(UIViewController *)splashViewController {
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ws-50"]];
-    
-    [imageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-    [imageView setContentMode:UIViewContentModeCenter];
-    
-    UIViewController *splashViewController = [[UIViewController alloc] init];
-    [splashViewController setTitle:@"Warm Showers"];
-    [splashViewController.view setBackgroundColor:[UIColor lightGrayColor]];
-    [splashViewController.view addSubview:imageView];
-    
-    imageView.frame = splashViewController.view.bounds;
-    
-    return splashViewController;
-}
+
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     

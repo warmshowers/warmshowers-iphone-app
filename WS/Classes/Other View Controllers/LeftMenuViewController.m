@@ -31,6 +31,7 @@
 
 @interface LeftMenuViewController ()
 @property (nonatomic, strong) RHTableView *tableView;
+@property (nonatomic, strong) UINavigationController *splashViewNavController;
 -(RHBarButtonItem *)leftMenuButton;
 @end
 
@@ -62,9 +63,22 @@
     cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"Search", nil)
                               detailLabelText:nil
                                didSelectBlock:^{
-                                   UIViewController *controller = [[SearchHostsTableViewController alloc] initWithStyle:UITableViewStylePlain];
+                                   /*
+                                    UIViewController *controller = [[SearchHostsTableViewController alloc] initWithStyle:UITableViewStylePlain];
                                    [controller.navigationItem setLeftBarButtonItem:[self leftMenuButton]];
                                    [bself.slidingViewController setTopViewController:[controller wrapInNavigationController]];
+                                   [bself.slidingViewController resetTopViewAnimated:YES];
+                                    */
+                                   
+                                   
+                                   SearchHostsTableViewController *controller = [SearchHostsTableViewController new];
+                                   controller.navigationItem.leftBarButtonItem = [self leftMenuButton];
+                                   
+                                   UISplitViewController *splitViewController = [UISplitViewController new];
+                                   [splitViewController setViewControllers:@[[controller wrapInNavigationController], self.splashViewNavController]];
+                                   [splitViewController setPreferredDisplayMode:UISplitViewControllerDisplayModeAllVisible];
+                                   [splitViewController setDelegate:self];
+                                   [bself.slidingViewController setTopViewController:splitViewController];
                                    [bself.slidingViewController resetTopViewAnimated:YES];
                                }
                                         style:UITableViewCellStyleDefault
@@ -75,13 +89,25 @@
     cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"Favourites", nil)
                               detailLabelText:nil
                                didSelectBlock:^{
-                                   
+                                  /*
                                    UIViewController *controller = [[FavouriteHostTableViewController alloc] initWithStyle:UITableViewStylePlain];
                                    
                                    [controller.navigationItem setLeftBarButtonItem:[self leftMenuButton]];
                                    
                                    [bself.slidingViewController setTopViewController:[controller wrapInNavigationController]];
                                    [bself.slidingViewController resetTopViewAnimated:YES];
+                                   */
+                                   
+                                   FavouriteHostTableViewController *controller = [FavouriteHostTableViewController new];
+                                   controller.navigationItem.leftBarButtonItem = [self leftMenuButton];
+                                   
+                                   UISplitViewController *splitViewController = [UISplitViewController new];
+                                   [splitViewController setViewControllers:@[[controller wrapInNavigationController], self.splashViewNavController]];
+                                   [splitViewController setPreferredDisplayMode:UISplitViewControllerDisplayModeAllVisible];
+                                   [splitViewController setDelegate:self];
+                                   [bself.slidingViewController setTopViewController:splitViewController];
+                                   [bself.slidingViewController resetTopViewAnimated:YES];
+                                   
                                }
                                         style:UITableViewCellStyleDefault
                                         image:[[UIImage imageNamed:@"iconmonstr-star-2-icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
@@ -98,7 +124,7 @@
                                    inboxTableViewController.navigationItem.leftBarButtonItem = [self leftMenuButton];
                                    
                                    UISplitViewController *splitViewController = [UISplitViewController new];
-                                   [splitViewController setViewControllers:@[[inboxTableViewController wrapInNavigationController], [UINavigationController new]]];
+                                   [splitViewController setViewControllers:@[[inboxTableViewController wrapInNavigationController], self.splashViewNavController]];
                                    [splitViewController setPreferredDisplayMode:UISplitViewControllerDisplayModeAllVisible];
                                    [splitViewController setDelegate:self];
                                    [bself.slidingViewController setTopViewController:splitViewController];
@@ -150,18 +176,6 @@
     
     [self.tableView addCell:cell];
     
-    
- /*
-  
-    [self.tableView setBackgroundColor:[UIColor darkGrayColor]];
-  
-  for (NSArray *section in self.tableView.tableRows) {
-        for (RHTableViewCell *cell in section) {
-            [cell setBackgroundColor:[UIColor lightGrayColor]];
-        }
-    }
-  */
-    
 }
 
 -(RHTableView *)tableView {
@@ -200,20 +214,34 @@
 }
 
 
-
 #pragma mark -
 #pragma mark UISplitViewControllerDelegate
-- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
-    
-    if ([secondaryViewController isKindOfClass:[UIViewController class]]) {
-        // If the detail controller doesn't have an item, display the primary view controller instead
-        return YES;
-    }
-    
-    return NO;
+-(BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
+
+    return (secondaryViewController == self.splashViewNavController);
     
 }
 
+
+-(UINavigationController *)splashViewNavController {
+    
+    if (_splashViewNavController == nil) {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ws-50"]];
+        
+        [imageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+        [imageView setContentMode:UIViewContentModeCenter];
+        
+        UIViewController *splashViewController = [UIViewController new];
+        [splashViewController setTitle:@"Warm Showers"];
+        [splashViewController.view setBackgroundColor:[UIColor lightGrayColor]];
+        [splashViewController.view addSubview:imageView];
+        imageView.frame = splashViewController.view.bounds;
+        
+        self.splashViewNavController = splashViewController.wrapInNavigationController;
+    }
+    
+    return _splashViewNavController;
+}
 
 
 

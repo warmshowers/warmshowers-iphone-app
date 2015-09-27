@@ -87,7 +87,7 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
     cell.textLabel.text= [host title];
     cell.detailTextLabel.text = [host subtitle];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    [cell.imageView setImageWithURL:[NSURL URLWithString:host.imageURL] placeholderImage:[UIImage imageNamed:@"ws-40"]];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:host.imageThumbURL] placeholderImage:[UIImage imageNamed:@"ws-40"]];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -99,9 +99,13 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     HostInfoViewController *controller = [HostInfoViewController new];
     controller.host = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [self.navigationController pushViewController:controller animated:YES];
+    
+    if (self.splitViewController) {
+        [self.splitViewController showDetailViewController:controller.wrapInNavigationController sender:nil];
+    } else {
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
-
 
 
 @end

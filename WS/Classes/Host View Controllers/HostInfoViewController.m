@@ -34,9 +34,6 @@
 #import "NSNumber+WS.h"
 
 @interface HostInfoViewController()
-// @property (strong, nonatomic) RHTableView *tableView2;
-@property (nonatomic, strong) UIView *topView;
-@property (nonatomic, strong) UIImageView *imageView;
 -(void)presentComposeViewController;
 @end
 
@@ -193,16 +190,29 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     
     [tableView reset];
     
-    [tableView setTableHeaderView:self.topView];
-    [self.imageView setImageWithURL:[NSURL URLWithString:[self.host imageURL]] placeholderImage:[UIImage imageNamed:@"ws"]];
+    [tableView addSectionWithSectionHeaderText:nil];
     
-    [tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Actions", nil)];
+    RHTableViewCell *cell = [tableView addCell:[RHTableViewCell
+                                               cellWithImage:nil
+                                                label:self.host.fullname]];
+    
+    [cell.imageView2 setImageWithURL:[NSURL URLWithString:self.host.imageURL] placeholderImage:[UIImage imageNamed:@"ws"]];
+    [cell setHeightBlock:^CGFloat {
+        return 180;
+    }];
+        
+
+    
+    
+    // [self.imageView setImageWithURL:[NSURL URLWithString:[self.host imageURL]] placeholderImage:[UIImage imageNamed:@"ws"]];
+    
+    [tableView addSectionWithSectionHeaderText:nil];
     
     NSString *feedbackLabel = [NSString stringWithFormat:@"%@ (%lu)", NSLocalizedString(@"View Feedback", nil), (unsigned long)[self.host.feedback count]];
     
     // NSString *feedbackLabel = NSLocalizedString(@"View Feedback", nil);
     
-    RHTableViewCell *cell = [tableView addCell:feedbackLabel
+     cell = [tableView addCell:feedbackLabel
                                 didSelectBlock:^{
                                     FeedbackTableViewController *controller = [[FeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
                                     [controller setHost:bself.host];
@@ -290,38 +300,23 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
 }
 
 
--(UIView *)topView {
+/*
+-(HostInfoTopView *)topView {
     
     if (_topView == nil) {
-        CGFloat viewWidth = self.view.bounds.size.width;
-        CGFloat baseHeight =  IsIPad ? 180 : 160;
+    
+       self.topView = [UIView viewFromNibNamed:@"HostInfoTopView" owner:self];
+
+        self.topView.height = 200;
         
-        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, viewWidth, baseHeight)];
-        [_topView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [_topView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-        [_topView setBackgroundColor:[UIColor whiteColor]];
-        
-        
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, baseHeight-20, baseHeight-20)];
-        
-        [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [self.imageView setImageWithURL:[NSURL URLWithString:[self.host imageURL]] placeholderImage:[UIImage imageNamed:@"ws"]];
-        
-        [_topView addSubview:self.imageView];
-        
-        
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(baseHeight, 0, viewWidth - baseHeight - 20, baseHeight)];
-        [titleLabel setNumberOfLines:0];
-        [titleLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-        [titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
-        [titleLabel setText:[self.host title]];
-        [_topView addSubview:titleLabel];
+        [_topView.imageView setImageWithURL:[NSURL URLWithString:self.host.imageURL] placeholderImage:[UIImage imageNamed:@"ws"]];
+        [_topView.titleLabel setText:self.host.title];
     }
     
     return _topView;
     
 }
-
+*/
 
 -(void)presentComposeViewController {
     ComposeMessageViewController *controller = [ComposeMessageViewController controllerWithHost:self.host];

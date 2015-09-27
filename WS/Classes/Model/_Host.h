@@ -17,6 +17,7 @@ extern const struct HostAttributes {
 	__unsafe_unretained NSString *fullname;
 	__unsafe_unretained NSString *homephone;
 	__unsafe_unretained NSString *hostid;
+	__unsafe_unretained NSString *imageThumbURL;
 	__unsafe_unretained NSString *imageURL;
 	__unsafe_unretained NSString *kitchenuse;
 	__unsafe_unretained NSString *last_login;
@@ -127,6 +128,10 @@ extern const struct HostRelationships {
 - (void)setHostidValue:(int32_t)value_;
 
 //- (BOOL)validateHostid:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSString* imageThumbURL;
+
+//- (BOOL)validateImageThumbURL:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSString* imageURL;
 
@@ -346,6 +351,9 @@ extern const struct HostRelationships {
 
 - (int32_t)primitiveHostidValue;
 - (void)setPrimitiveHostidValue:(int32_t)value_;
+
+- (NSString*)primitiveImageThumbURL;
+- (void)setPrimitiveImageThumbURL:(NSString*)value;
 
 - (NSString*)primitiveImageURL;
 - (void)setPrimitiveImageURL:(NSString*)value;
