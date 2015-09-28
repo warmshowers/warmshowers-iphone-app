@@ -241,7 +241,19 @@
         Host *host = [[kingpinAnnotation annotations] anyObject];
         HostInfoViewController *controller = [HostInfoViewController new];
         controller.host = host;
-        [self.navigationController pushViewController:controller animated:YES];
+         
+         
+      //   [self.navigationController pushViewController:controller animated:YES];
+         
+         __weak UIViewController *bself = self;
+         controller.navigationItem.leftBarButtonItem = [RHBarButtonItem itemWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^{
+             [bself dismissViewControllerAnimated:YES completion:nil];
+         }];
+         
+         UINavigationController *navController = controller.wrapInNavigationController;
+         navController.modalPresentationStyle = UIModalPresentationFormSheet;
+         [self.navigationController presentViewController:navController animated:YES completion:nil];
+
     } else {
         HostsTableViewController *controller = [HostsTableViewController new];
         [controller setTitle:[NSString stringWithFormat:@"within %.0f meters", kingpinAnnotation.radius]];
@@ -253,11 +265,8 @@
             [bself dismissViewControllerAnimated:YES completion:nil];
         }];
         
-        
         UINavigationController *navController = controller.wrapInNavigationController;
         navController.modalPresentationStyle = UIModalPresentationFormSheet;
-        
-        
         [self.navigationController presentViewController:navController animated:YES completion:nil];
      }
 }
