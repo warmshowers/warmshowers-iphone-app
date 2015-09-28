@@ -136,7 +136,10 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
             }
         }
         
-        if (bself.host.notcurrentlyavailableValue) {
+        [bself refreshTableView];
+        
+        /*
+         if (bself.host.notcurrentlyavailableValue) {
             RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Host no longer available", nil)
                                                      message:NSLocalizedString(@"This host is no longer available and will be removed from the map and host list.", nil)];
             
@@ -148,6 +151,7 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
         } else {
             [bself refreshTableView];
         }
+         */
     }];
     
     [self.host setDidDeleteBlock:^() {
@@ -200,9 +204,6 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     [cell setHeightBlock:^CGFloat {
         return 180;
     }];
-        
-
-    
     
     // [self.imageView setImageWithURL:[NSURL URLWithString:[self.host imageURL]] placeholderImage:[UIImage imageNamed:@"ws"]];
     
@@ -231,7 +232,8 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Status", nil) largeLabel:self.host.statusString]];
     [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Distance", nil) largeLabel:self.host.subtitle]];
     [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Mbr Since", nil) largeLabel:self.host.member_since.formatWithLocalTimeZoneWithoutTime]];
-    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Last Login", nil) largeLabel:[NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), self.host.last_login.timesince]]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Username", nil) largeLabel:self.host.name]];
+        [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Last Login", nil) largeLabel:[NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), self.host.last_login.timesince]]];
     
     
     [tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Comments", nil)];
@@ -298,25 +300,6 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
         [popoverActionsheet showFromBarButtonItem:sender animated:YES];
   //  }
 }
-
-
-/*
--(HostInfoTopView *)topView {
-    
-    if (_topView == nil) {
-    
-       self.topView = [UIView viewFromNibNamed:@"HostInfoTopView" owner:self];
-
-        self.topView.height = 200;
-        
-        [_topView.imageView setImageWithURL:[NSURL URLWithString:self.host.imageURL] placeholderImage:[UIImage imageNamed:@"ws"]];
-        [_topView.titleLabel setText:self.host.title];
-    }
-    
-    return _topView;
-    
-}
-*/
 
 -(void)presentComposeViewController {
     ComposeMessageViewController *controller = [ComposeMessageViewController controllerWithHost:self.host];

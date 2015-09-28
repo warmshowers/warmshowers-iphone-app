@@ -31,7 +31,9 @@
 	[super viewDidLoad];
     [self setTitle:NSLocalizedString(@"Search", nil)];
     
-    [self setBasePredicate:[NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1"]];
+    // [self setBasePredicate:[NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1"]];
+    [self setBasePredicate:[NSPredicate predicateWithFormat:@"1 = 1"]];
+    
     [self addSearchBarWithPlaceHolder:NSLocalizedString(@"Search", nil)];
 }
 
@@ -44,26 +46,5 @@
         [WSRequests searchHostsWithKeyword:searchString];
     }
 }
-
-/*
--(void)updateDistances {
-	CLLocation *current_location = [[WSAppDelegate sharedInstance] userLocation];
-    
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		// Merge the closests 50 and what the system thinks is currently the closest 50
-		NSArray *hosts1 = [Host hostsClosestToLocation:current_location withLimit:100];
-		NSArray *hosts2 = [Host fetchWithPredicate:[NSPredicate predicateWithFormat:@"distance != nil AND notcurrentlyavailable != 1"] sortDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES] withLimit:100];
-		
-		NSMutableArray *hosts = [NSMutableArray arrayWithArray:hosts1];
-        [hosts addObjectsFromArray:hosts2];
-		
-		for (Host *host in hosts) {
-			[host updateDistanceFromLocation:current_location];
-		}
-		
-		[Host commit];
-	});
-}
-*/
 
 @end

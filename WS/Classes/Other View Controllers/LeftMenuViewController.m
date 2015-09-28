@@ -226,7 +226,7 @@
 -(UINavigationController *)splashViewNavController {
     
     if (_splashViewNavController == nil) {
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ws-50"]];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"WSIcon50"]];
         
         [imageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [imageView setContentMode:UIViewContentModeCenter];

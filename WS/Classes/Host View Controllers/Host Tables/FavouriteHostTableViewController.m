@@ -36,7 +36,8 @@
     [super viewDidLoad];
     self.title = NSLocalizedString(@"Favourites", nil);
     
-    self.basePredicate = [NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1 AND favourite=1"];
+    // self.basePredicate = [NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1 AND favourite=1"];
+    self.basePredicate = [NSPredicate predicateWithFormat:@"favourite=1"];
     
     [self addSearchBarWithPlaceHolder:NSLocalizedString(@"Filter", nil)];
     

@@ -98,7 +98,7 @@
             NSString *author_string;
             
             if ([[dict objectForKey:@"author"] isKindOfClass:[NSDictionary class]]) {
-                author_string = [dict valueForKeyPath:@"author.uid" defaultValue:@"author"];
+                author_string = [dict valueForKeyPath:@"author.uid"];
             } else {
                 author_string = [dict objectForKey:@"author"];
             }

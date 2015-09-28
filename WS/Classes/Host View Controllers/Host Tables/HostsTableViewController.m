@@ -87,7 +87,8 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
     cell.textLabel.text= [host title];
     cell.detailTextLabel.text = [host subtitle];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    [cell.imageView setImageWithURL:[NSURL URLWithString:host.imageThumbURL] placeholderImage:[UIImage imageNamed:@"ws-40"]];
+    [cell.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:host.imageThumbURL] placeholderImage:[UIImage imageNamed:@"WSIcon40"]];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

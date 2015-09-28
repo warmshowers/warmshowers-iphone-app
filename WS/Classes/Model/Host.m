@@ -33,7 +33,7 @@
 +(void)initialize {
     
     if (self == [Host class]) {
-        const static NSInteger schemaVersion = 37;
+        const static NSInteger schemaVersion = 38;
         
         NSString *key = [NSString stringWithFormat:@"RHSchemaVersion-%@", [self modelName]];
         NSInteger version = [[NSUserDefaults standardUserDefaults] integerForKey:key];
@@ -83,7 +83,7 @@
     
     // host.imageURL = [dict objectForKey:@"profile_image_profile_picture"];
     host.imageURL = [dict objectForKey:@"profile_image_mobile_photo_456"];
-    host.imageThumbURL = [dict objectForKey:@"profile_image_map_infoWindow"];
+    host.imageThumbURL = [dict objectForKey:@"profile_image_profile_picture"];
     
     host.kitchenuse = [NSNumber numberWithInt:[[dict objectForKey:@"kitchenuse"] intValue]];
     host.laundry = [NSNumber numberWithInt:[[dict objectForKey:@"laundry"] intValue]];

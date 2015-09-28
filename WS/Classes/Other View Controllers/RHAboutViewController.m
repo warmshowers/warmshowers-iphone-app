@@ -123,7 +123,7 @@
 -(RHTableViewCell *)headerCell {
     RHTableViewCell *cell = [[RHTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
     
-    [cell.imageView setImage:[UIImage imageNamed:@"ws-50"]];
+    [cell.imageView setImage:[UIImage imageNamed:@"WSIcon50"]];
     
     [cell.textLabel setFont:[UIFont boldSystemFontOfSize:20]];
     [cell.detailTextLabel setFont:[UIFont systemFontOfSize:14]];
