@@ -21,10 +21,10 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - BButton (4.0.2)
-  - CrittercismSDK (5.3.3)
+  - CrittercismSDK (5.4.0)
   - ECSlidingViewController (2.0.3)
   - FrameAccessor (2.0)
-  - kingpin (0.2.5)
+  - kingpin (0.3.1)
   - Lockbox (2.1.0)
   - MBAutoGrowingTextView (0.1.0)
   - RHManagedObject (0.16)
@@ -53,10 +53,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
   BButton: ab0f2ed3b998ae73c5188b57d270d81e4a1eeb27
-  CrittercismSDK: 6eb2b2a0b6d396110ecc664a457b87eb6bb70d9a
+  CrittercismSDK: 6392d3628b4ea043a3d00ef745cf601a5049b394
   ECSlidingViewController: 6485c14f23b4487e9946535421ca8f111f86cc53
   FrameAccessor: 443a13e58e23a10ff22180da0897b28c3f6abf66
-  kingpin: 28ea5a6e16065ee10d078806a6cb0adb4c7c28cd
+  kingpin: 52bb578006bdeb881db225e6ff1a4228375cbfbf
   Lockbox: 16442da35d9d4286966936763be728a931d589c3
   MBAutoGrowingTextView: 3955d4513be3d184fe2cb7739999c1f994dcd4d5
   RHManagedObject: 2685dbb2a782a8c25e1e52dffbab386fbf2e5b3c

@@ -35,6 +35,27 @@
     [self setBasePredicate:[NSPredicate predicateWithFormat:@"1 = 1"]];
     
     [self addSearchBarWithPlaceHolder:NSLocalizedString(@"Search", nil)];
+    
+    self.searchController.searchBar.scopeButtonTitles = @[NSLocalizedString(@"All Hosts", nil), NSLocalizedString(@"Available Hosts", nil)];
+  
+    self.searchController.searchBar.selectedScopeButtonIndex = 0;
+    
+}
+
+
+-(void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope {
+    switch (selectedScope) {
+        case 0:
+            [self setBasePredicate:[NSPredicate predicateWithFormat:@"1 = 1"]];
+            break;
+            
+        default:
+             [self setBasePredicate:[NSPredicate predicateWithFormat:@"notcurrentlyavailable == 0"]];
+            break;
+    }    
+    
+    [self updateSearchResultsForSearchController:self.searchController];
+    
 }
 
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
