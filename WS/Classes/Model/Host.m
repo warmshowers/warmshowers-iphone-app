@@ -33,7 +33,7 @@
 +(void)initialize {
     
     if (self == [Host class]) {
-        const static NSInteger schemaVersion = 38;
+        const static NSInteger schemaVersion = 40;
         
         NSString *key = [NSString stringWithFormat:@"RHSchemaVersion-%@", [self modelName]];
         NSInteger version = [[NSUserDefaults standardUserDefaults] integerForKey:key];

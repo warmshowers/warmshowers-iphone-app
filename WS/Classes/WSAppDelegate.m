@@ -62,6 +62,14 @@
     [Lockbox setString:username forKey:@"ws-username"];
 }
 
+-(NSInteger)userID {
+    return [[NSUserDefaults standardUserDefaults] integerForKey:@"ws-userid"];
+}
+
+-(void)setUserID:(NSInteger)userid {
+    [[NSUserDefaults standardUserDefaults] setInteger:userid forKey:@"ws-userid"];
+}
+
 -(NSString *)password {
     return [Lockbox stringForKey:@"ws-password"] ? [Lockbox stringForKey:@"ws-password"] : @"";
 }

@@ -143,12 +143,16 @@
         
         [MessageThread newMessageToHost:self.host
                                 subject:subject message:message success:^(NSURLSessionDataTask *task, id responseObject) {
-                                    [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Message sent!", nil)];
-                                    [bself dismissViewControllerAnimated:YES completion:nil];
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Message sent!", nil)];
+                                        [bself dismissViewControllerAnimated:YES completion:nil];
+                                    });
                                 } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                    [SVProgressHUD dismiss];
-                                    [[RHAlertView alertWithOKButtonWithTitle:NSLocalizedString(@"Error", nil)
-                                                                     message:NSLocalizedString(@"Your message could not be sent due to an error.", nil)] show];
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [SVProgressHUD dismiss];
+                                        [[RHAlertView alertWithOKButtonWithTitle:NSLocalizedString(@"Error", nil)
+                                                                         message:NSLocalizedString(@"Your message could not be sent due to an error.", nil)] show];
+                                    });
                                 }];
     }
     

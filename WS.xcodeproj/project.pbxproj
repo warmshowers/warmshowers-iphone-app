@@ -91,6 +91,7 @@
 		83EED7351B2802A7003257E5 /* iconmonstr-star-5-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83EED7331B2802A7003257E5 /* iconmonstr-star-5-icon@2x.png */; };
 		83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1515EBD11B00761BC6 /* trackmytour.png */; };
 		83F00E1815EBD11B00761BC6 /* trackmytour@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */; };
+		83F150BD1BC2BB18005273F5 /* RHTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F150BC1BC2BB18005273F5 /* RHTimer.m */; settings = {ASSET_TAGS = (); }; };
 		83F78ED41B1450DC00BEEBC6 /* hamburger.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F78ED21B1450DC00BEEBC6 /* hamburger.png */; };
 		83F78ED51B1450DC00BEEBC6 /* hamburger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F78ED31B1450DC00BEEBC6 /* hamburger@2x.png */; };
 		83F8C187152B8B280084E380 /* ComposeMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F8C185152B8B280084E380 /* ComposeMessageViewController.m */; };
@@ -203,6 +204,8 @@
 		83EED7331B2802A7003257E5 /* iconmonstr-star-5-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconmonstr-star-5-icon@2x.png"; sourceTree = "<group>"; };
 		83F00E1515EBD11B00761BC6 /* trackmytour.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trackmytour.png; sourceTree = "<group>"; };
 		83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trackmytour@2x.png"; sourceTree = "<group>"; };
+		83F150BB1BC2BB18005273F5 /* RHTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHTimer.h; sourceTree = "<group>"; };
+		83F150BC1BC2BB18005273F5 /* RHTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHTimer.m; sourceTree = "<group>"; };
 		83F78ED21B1450DC00BEEBC6 /* hamburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburger.png; sourceTree = "<group>"; };
 		83F78ED31B1450DC00BEEBC6 /* hamburger@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hamburger@2x.png"; sourceTree = "<group>"; };
 		83F8C184152B8B280084E380 /* ComposeMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeMessageViewController.h; sourceTree = "<group>"; };
@@ -347,6 +350,8 @@
 				830922CF1B13C62100C29C56 /* RHAboutViewController.m */,
 				83DBE69B1AFD6607003CFFCD /* LeftMenuViewController.h */,
 				83DBE69C1AFD6607003CFFCD /* LeftMenuViewController.m */,
+				83F150BB1BC2BB18005273F5 /* RHTimer.h */,
+				83F150BC1BC2BB18005273F5 /* RHTimer.m */,
 			);
 			path = "Other View Controllers";
 			sourceTree = "<group>";
@@ -673,6 +678,7 @@
 				836CCF0614ABB3E6000EDC51 /* Host.m in Sources */,
 				83F8C187152B8B280084E380 /* ComposeMessageViewController.m in Sources */,
 				83810A4E1B1667F9001FF02B /* NSNumber+WS.m in Sources */,
+				83F150BD1BC2BB18005273F5 /* RHTimer.m in Sources */,
 				837DED011B1B9F280031FCCB /* HostsTableViewController.m in Sources */,
 				83EC1DAF1B01508F003FD77B /* WS.xcdatamodeld in Sources */,
 				83E7FF791AFEB8E5000FCAF7 /* AllThreadsTableViewController.m in Sources */,

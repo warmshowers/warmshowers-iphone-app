@@ -23,6 +23,11 @@
 
 #import "SearchHostsTableViewController.h"
 #import "WSRequests.h"
+#import "RHTimer.h"
+
+@interface SearchHostsTableViewController()
+@property (nonatomic, strong) RHTimer *timer;
+@end
 
 @implementation SearchHostsTableViewController
 
@@ -31,14 +36,12 @@
 	[super viewDidLoad];
     [self setTitle:NSLocalizedString(@"Search", nil)];
     
-    // [self setBasePredicate:[NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1"]];
-    [self setBasePredicate:[NSPredicate predicateWithFormat:@"1 = 1"]];
-    
     [self addSearchBarWithPlaceHolder:NSLocalizedString(@"Search", nil)];
     
-    self.searchController.searchBar.scopeButtonTitles = @[NSLocalizedString(@"All Hosts", nil), NSLocalizedString(@"Available Hosts", nil)];
+    self.searchController.searchBar.scopeButtonTitles = @[NSLocalizedString(@"Available Hosts", nil), NSLocalizedString(@"All Hosts", nil)];
   
     self.searchController.searchBar.selectedScopeButtonIndex = 0;
+    [self setBasePredicate:[NSPredicate predicateWithFormat:@"1 = 0"]];
     
 }
 
@@ -46,11 +49,11 @@
 -(void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope {
     switch (selectedScope) {
         case 0:
-            [self setBasePredicate:[NSPredicate predicateWithFormat:@"1 = 1"]];
+            [self setBasePredicate:[NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1"]];
             break;
             
         default:
-             [self setBasePredicate:[NSPredicate predicateWithFormat:@"notcurrentlyavailable == 0"]];
+            [self setBasePredicate:[NSPredicate predicateWithFormat:@"1 = 1"]];
             break;
     }    
     
@@ -60,11 +63,18 @@
 
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     [super updateSearchResultsForSearchController:searchController];
+
+    [self.timer invalidate];
+    [[WSHTTPClient sharedHTTPClient] cancelAllOperations];
     
     NSString *searchString = searchController.searchBar.text;
 
     if ([searchString length] >= 3) {
-        [WSRequests searchHostsWithKeyword:searchString];
+
+        self.timer = [[RHTimer alloc] initWithInterval:0.5f repeats:NO block:^{
+             [WSRequests searchHostsWithKeyword:searchString];
+        }];
+        
     }
 }
 
