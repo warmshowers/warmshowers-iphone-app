@@ -1,6 +1,12 @@
-# Warmshowers Changelog
+# Warmshowers changelog
 
-## v4.0 (build 400+)
+## v5.0.1
+
+- fixed bug in messages where "reply" would compose a message to the signed in user
+- fixed bug in search where initial typed in values return no results
+- fixed crash on iOS8
+
+## v5.0 (build 550)
 
 - pin clustering
 - iPhone 6 & 6+

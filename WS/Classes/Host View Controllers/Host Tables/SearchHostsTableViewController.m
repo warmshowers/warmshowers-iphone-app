@@ -41,7 +41,7 @@
     self.searchController.searchBar.scopeButtonTitles = @[NSLocalizedString(@"Available Hosts", nil), NSLocalizedString(@"All Hosts", nil)];
   
     self.searchController.searchBar.selectedScopeButtonIndex = 0;
-    [self setBasePredicate:[NSPredicate predicateWithFormat:@"1 = 0"]];
+    [self setBasePredicate:[NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1"]];
     
 }
 

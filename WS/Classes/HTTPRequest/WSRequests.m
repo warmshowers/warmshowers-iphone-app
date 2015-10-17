@@ -278,8 +278,10 @@
                                               [[Host hostWithID:hostid] setName:name];
                                           }
                                    
+                                          NSString *userIDString = [NSString stringWithFormat: @"%ld", (long)userid];
                                           
-                                        NSDictionary *participant2 = [[participants filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"uid != %d", userid]] firstObject];
+                                        
+                                        NSDictionary *participant2 = [[participants filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"uid != %@", userIDString]] firstObject];
                                           
                                           if (participant2) {
                                               

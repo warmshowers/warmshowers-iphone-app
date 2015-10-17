@@ -511,6 +511,7 @@
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 				22EB14AC66A04CC6A3D4EC37 /* Copy Pods Resources */,
+				F942ED9A1787CAB0FFFB8134 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -649,6 +650,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/mogenerator -m \"${PROJECT_DIR}/WS/Classes/Model/WS.xcdatamodeld\" -O \"${PROJECT_DIR}/WS/Classes/Model\" --template-var arc=true --base-class RHManagedObject";
+		};
+		F942ED9A1787CAB0FFFB8134 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
