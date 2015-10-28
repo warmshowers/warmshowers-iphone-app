@@ -41,7 +41,7 @@
 		830569E31B1D03190039C5E2 /* iconmonstr-info-6-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830569E11B1D03190039C5E2 /* iconmonstr-info-6-icon@2x.png */; };
 		830569E41B1D03190039C5E2 /* iconmonstr-info-6-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 830569E21B1D03190039C5E2 /* iconmonstr-info-6-icon.png */; };
 		830922D11B13C62100C29C56 /* RHAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830922CF1B13C62100C29C56 /* RHAboutViewController.m */; };
-		830D05411BB913BE0035257D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830D05401BB913BE0035257D /* LaunchScreen.storyboard */; settings = {ASSET_TAGS = (); }; };
+		830D05411BB913BE0035257D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830D05401BB913BE0035257D /* LaunchScreen.storyboard */; };
 		832198911AFFF49B0041A72F /* SingleThreadTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 832198901AFFF49B0041A72F /* SingleThreadTableViewController.m */; };
 		8330B481126A0775008B2EC4 /* WSRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8330B480126A0775008B2EC4 /* WSRequests.m */; };
 		8343CC8F1AFFE2DC00EE3A45 /* MessageThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343CC8E1AFFE2DC00EE3A45 /* MessageThread.m */; };
@@ -59,7 +59,6 @@
 		835B88301B1D07D100A8E838 /* iconmonstr-navigation-5-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 835B882E1B1D07D100A8E838 /* iconmonstr-navigation-5-icon.png */; };
 		836CCF0114ABB3D1000EDC51 /* HostMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF0014ABB3D1000EDC51 /* HostMapViewController.xib */; };
 		836CCF0614ABB3E6000EDC51 /* Host.m in Sources */ = {isa = PBXBuildFile; fileRef = 836CCF0314ABB3E6000EDC51 /* Host.m */; };
-		836D64AA1893BFA000F0602F /* crittercism.plist in Resources */ = {isa = PBXBuildFile; fileRef = 836D64A91893BFA000F0602F /* crittercism.plist */; };
 		837DED011B1B9F280031FCCB /* HostsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837DED001B1B9F280031FCCB /* HostsTableViewController.m */; };
 		83810A4E1B1667F9001FF02B /* NSNumber+WS.m in Sources */ = {isa = PBXBuildFile; fileRef = 83810A4D1B1667F9001FF02B /* NSNumber+WS.m */; };
 		8388B1371458A8100079ACE3 /* SearchHostsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388B1361458A8100079ACE3 /* SearchHostsTableViewController.m */; };
@@ -91,7 +90,7 @@
 		83EED7351B2802A7003257E5 /* iconmonstr-star-5-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83EED7331B2802A7003257E5 /* iconmonstr-star-5-icon@2x.png */; };
 		83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1515EBD11B00761BC6 /* trackmytour.png */; };
 		83F00E1815EBD11B00761BC6 /* trackmytour@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F00E1615EBD11B00761BC6 /* trackmytour@2x.png */; };
-		83F150BD1BC2BB18005273F5 /* RHTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F150BC1BC2BB18005273F5 /* RHTimer.m */; settings = {ASSET_TAGS = (); }; };
+		83F150BD1BC2BB18005273F5 /* RHTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F150BC1BC2BB18005273F5 /* RHTimer.m */; };
 		83F78ED41B1450DC00BEEBC6 /* hamburger.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F78ED21B1450DC00BEEBC6 /* hamburger.png */; };
 		83F78ED51B1450DC00BEEBC6 /* hamburger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F78ED31B1450DC00BEEBC6 /* hamburger@2x.png */; };
 		83F8C187152B8B280084E380 /* ComposeMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F8C185152B8B280084E380 /* ComposeMessageViewController.m */; };
@@ -157,7 +156,6 @@
 		836CCF0014ABB3D1000EDC51 /* HostMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostMapViewController.xib; sourceTree = "<group>"; };
 		836CCF0214ABB3E6000EDC51 /* Host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Host.h; sourceTree = "<group>"; };
 		836CCF0314ABB3E6000EDC51 /* Host.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Host.m; sourceTree = "<group>"; };
-		836D64A91893BFA000F0602F /* crittercism.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = crittercism.plist; sourceTree = "<group>"; };
 		837DECFF1B1B9F280031FCCB /* HostsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostsTableViewController.h; sourceTree = "<group>"; };
 		837DED001B1B9F280031FCCB /* HostsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostsTableViewController.m; sourceTree = "<group>"; };
 		83810A4C1B1667F9001FF02B /* NSNumber+WS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+WS.h"; sourceTree = "<group>"; };
@@ -328,7 +326,6 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97315FDCFA39411CA2CEA /* Supporting Files */,
-				836D64A91893BFA000F0602F /* crittercism.plist */,
 			);
 			path = WS;
 			sourceTree = "<group>";
@@ -583,7 +580,6 @@
 				83EED7341B2802A7003257E5 /* iconmonstr-star-5-icon.png in Resources */,
 				830569E41B1D03190039C5E2 /* iconmonstr-info-6-icon.png in Resources */,
 				83E205681878B3550067738B /* ws.png in Resources */,
-				836D64AA1893BFA000F0602F /* crittercism.plist in Resources */,
 				83F78ED51B1450DC00BEEBC6 /* hamburger@2x.png in Resources */,
 				834C9CBB1B0683E200C735F4 /* LoginViewController.xib in Resources */,
 				83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */,
