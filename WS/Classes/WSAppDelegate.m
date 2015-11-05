@@ -131,7 +131,7 @@
 }
 
 -(BOOL)postApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+    
     LeftMenuViewController *leftMenuViewController = [[LeftMenuViewController alloc] init];
     
     self.slidingViewController = [ECSlidingViewController slidingWithTopViewController:[leftMenuViewController.hostMapViewController wrapInNavigationController]];
@@ -209,9 +209,12 @@
 }
 
 -(void)promptForUsernameAndPassword {
-    LoginViewController *loginController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-    [loginController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    [self.slidingViewController presentViewController:loginController animated:YES completion:nil];
+    __weak WSAppDelegate *bself = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        LoginViewController *loginController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+        [loginController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        [bself.slidingViewController presentViewController:loginController animated:YES completion:nil];
+    });
 }
 
 @end

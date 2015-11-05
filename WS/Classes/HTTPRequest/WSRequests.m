@@ -46,24 +46,29 @@
                                parameters:params
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
                                       
-                                      NSString *token = [responseObject objectForKey:@"token"];
-                                      [WSHTTPClient.sharedHTTPClient.requestSerializer setValue:token forHTTPHeaderField:@"X-CSRF-Token"];
-                                      
-                                      
-                                      NSDictionary *user = [responseObject objectForKey:@"user"];
-                                      
-                                      NSInteger userid = [[user objectForKey:@"uid"] intValue];
-
-                                      NSNumber *hostid = @(userid);
-                                      NSString *name = [user objectForKey:@"name"];
-                                      
-                                      [[Host hostWithID:hostid] setName:name];
-                                      [Host commit];
-                                      
-                                      [[WSAppDelegate sharedInstance] setUserID:userid];
-
-                                      if (success) {
-                                          success(task, responseObject);
+                                      if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                                          
+                                          NSString *token = [responseObject objectForKey:@"token"];
+                                          [WSHTTPClient.sharedHTTPClient.requestSerializer setValue:token forHTTPHeaderField:@"X-CSRF-Token"];
+                                          
+                                          NSDictionary *user = [responseObject objectForKey:@"user"];
+                                          
+                                          NSInteger userid = [[user objectForKey:@"uid"] intValue];
+                                          
+                                          NSNumber *hostid = @(userid);
+                                          NSString *name = [user objectForKey:@"name"];
+                                          
+                                          [[Host hostWithID:hostid] setName:name];
+                                          [Host commit];
+                                          
+                                          [[WSAppDelegate sharedInstance] setUserID:userid];
+                                          
+                                          if (success) {
+                                              success(task, responseObject);
+                                          }
+                                          
+                                      } else {
+                                          failure(task, nil);
                                       }
                                   }
                                   failure:failure];
@@ -151,7 +156,6 @@
                                          if (success) {
                                              success(task, responseObject);
                                          }
-                                         
                                      });
                                  }
                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -160,7 +164,7 @@
                                      NSInteger statusCode = [response statusCode];
                                      
                                      // 404 not found (page doesn't exist anymore)
-                                     if ( statusCode == 404 ) {
+                                     if (statusCode == 404) {
                                          [host setNotcurrentlyavailable:[NSNumber numberWithBool:YES]];
                                          [Host commit];
                                      }
@@ -270,18 +274,18 @@
                                       for (NSDictionary *dict in responseObject) {
                                           
                                           NSArray *participants = [dict objectForKey:@"participants"];
-                                         
+                                          
                                           // make sure all participants exist
                                           for (NSDictionary *participant in participants) {
                                               NSNumber *hostid = @([[participant objectForKey:@"uid"] intValue]);
                                               NSString *name = [participant objectForKey:@"name"];
                                               [[Host hostWithID:hostid] setName:name];
                                           }
-                                   
+                                          
                                           NSString *userIDString = [NSString stringWithFormat: @"%ld", (long)userid];
                                           
-                                        
-                                        NSDictionary *participant2 = [[participants filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"uid != %@", userIDString]] firstObject];
+                                          
+                                          NSDictionary *participant2 = [[participants filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"uid != %@", userIDString]] firstObject];
                                           
                                           if (participant2) {
                                               
@@ -298,11 +302,11 @@
                                               [thread setIs_new:is_new];
                                               [thread setCount:count];
                                               thread.last_updated = [NSDate dateWithTimeIntervalSince1970:last_updated.doubleValue];
-
+                                              
                                               
                                               
                                               NSNumber *hostid = @([[participant2 objectForKey:@"uid"] intValue]);
-                                             //  NSString *name = [participant2 objectForKey:@"name"];
+                                              //  NSString *name = [participant2 objectForKey:@"name"];
                                               
                                               Host *host = [Host hostWithID:hostid];
                                               // [host setName:name];
@@ -310,14 +314,14 @@
                                               
                                               
                                               /*
-                                              for (NSDictionary *participant in participants) {
-                                                  NSNumber *hostid = @([[participant objectForKey:@"uid"] intValue]);
-                                                  NSString *name = [participant objectForKeyedSubscript:@"name"];
-                                                  
-                                                  Host *host = [Host hostWithID:hostid];
-                                                  [host setName:name];
-                                                  [thread setUser:host];
-                                              }
+                                               for (NSDictionary *participant in participants) {
+                                               NSNumber *hostid = @([[participant objectForKey:@"uid"] intValue]);
+                                               NSString *name = [participant objectForKeyedSubscript:@"name"];
+                                               
+                                               Host *host = [Host hostWithID:hostid];
+                                               [host setName:name];
+                                               [thread setUser:host];
+                                               }
                                                */
                                           }
                                       }

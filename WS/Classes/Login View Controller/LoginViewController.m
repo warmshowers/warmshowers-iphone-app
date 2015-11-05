@@ -34,13 +34,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     [self.usernameTextField setPlaceholder:NSLocalizedString(@"Username", nil)];
     [self.passwordTextField setPlaceholder:NSLocalizedString(@"Password", nil)];
     [self.loginButton setTitle:NSLocalizedString(@"Log in", nil) forState:UIControlStateNormal];
     [self.createAnAccountButton setTitle:NSLocalizedString(@"Create an account", nil) forState:UIControlStateNormal];
     [self.learnAboutButton setTitle:NSLocalizedString(@"Learn about the Warm Showers Community", nil) forState:UIControlStateNormal];
-
+    
     [self.loginButton setType:BButtonTypePrimary];
     [self.scrunchView setBackgroundColor:kWSBaseColour];
     __weak LoginViewController *bself = self;
@@ -83,29 +82,27 @@
                          password:password
                           success:^(NSURLSessionDataTask *task, id responseObject) {
                               dispatch_async(dispatch_get_main_queue(), ^{
-                              [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
-                              
-                              [[WSAppDelegate sharedInstance] setUsername:username];
-                              [[WSAppDelegate sharedInstance] setPassword:password];
-                              [[WSAppDelegate sharedInstance] loginSuccess];
-                              
-                              [bself dismissViewControllerAnimated:YES completion:^{
+                                  [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
                                   
-                              }];
+                                  [[WSAppDelegate sharedInstance] setUsername:username];
+                                  [[WSAppDelegate sharedInstance] setPassword:password];
+                                  [[WSAppDelegate sharedInstance] loginSuccess];
+                                  
+                                  [bself dismissViewControllerAnimated:YES completion:nil];
                               });
                               
                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                               
                               dispatch_async(dispatch_get_main_queue(), ^{
-                              [SVProgressHUD dismiss];
-                              RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warm Showers", nil)
-                                                                       message:NSLocalizedString(@"Login failed. Please check your username and password and try again. If you don't have an account you can tap the Sign Up button to register.", nil)];
-                              
-                              [alert addButtonWithTitle:kOK block:^{
-                                  //  [self logout];
-                              }];
-                              
-                              [alert show];
+                                  [SVProgressHUD dismiss];
+                                  RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warm Showers", nil)
+                                                                           message:NSLocalizedString(@"Login failed. Please check your username and password and try again. If you don't have an account you can tap the Sign Up button to register.", nil)];
+                                  
+                                  [alert addButtonWithTitle:kOK block:^{
+                                      //  [self logout];
+                                  }];
+                                  
+                                  [alert show];
                               });
                           }];
 }
