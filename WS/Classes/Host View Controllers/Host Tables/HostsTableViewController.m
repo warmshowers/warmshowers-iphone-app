@@ -38,7 +38,9 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
 }
 
 -(NSArray *)sortDescriptors {
-    return @[[NSSortDescriptor sortDescriptorWithKey:@"fullname" ascending:YES]];
+    return @[[NSSortDescriptor sortDescriptorWithKey:@"fullname"
+                                           ascending:YES
+              selector:@selector(caseInsensitiveCompare:)]];
 }
 
 -(NSPredicate *)predicate {
@@ -67,7 +69,7 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                             managedObjectContext:[Host managedObjectContextForCurrentThread]
-                                                                              sectionNameKeyPath:@"fullname.firstLetter"
+                                                                              sectionNameKeyPath:@"fullname.uppercaseString.firstLetter"
                                                                                        cacheName:nil];
         [fetchedResultsController setDelegate:self];
         
@@ -83,6 +85,7 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Host *host = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    NSLog(@"%@", host);
     
     cell.textLabel.text= [host title];
     cell.detailTextLabel.text = [host subtitle];
