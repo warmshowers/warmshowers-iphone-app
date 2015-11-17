@@ -185,7 +185,11 @@
 -(void)clusteringController:(KPClusteringController *)clusteringController configureAnnotationForDisplay:(KPAnnotation *)annotation {
     if ([annotation isCluster]) {
         annotation.title = [NSString stringWithFormat:@"%lu hosts", (unsigned long)annotation.annotations.count];
-        annotation.subtitle = [NSString stringWithFormat:@"within %.0f meters", annotation.radius];
+        if (annotation.radius > 1000) {
+            annotation.subtitle = [NSString stringWithFormat:@"within %.1f km", (annotation.radius / 1000)];
+        } else {
+            annotation.subtitle = [NSString stringWithFormat:@"within %.0f metres", annotation.radius];
+        }
     } else {
         Host *host = [[annotation annotations] anyObject];
         [annotation setTitle:[host title]];
@@ -256,7 +260,13 @@
 
     } else {
         HostsTableViewController *controller = [HostsTableViewController new];
-        [controller setTitle:[NSString stringWithFormat:@"within %.0f meters", kingpinAnnotation.radius]];
+        NSString *title;
+        if (kingpinAnnotation.radius > 1000) {
+            title = [NSString stringWithFormat:@"within %.1f km", (kingpinAnnotation.radius / 1000)];
+        } else {
+            title = [NSString stringWithFormat:@"within %.0f metres", kingpinAnnotation.radius];
+        }
+        [controller setTitle:title];
         [controller setBasePredicate:[NSPredicate predicateWithFormat:@"self in %@", kpAnnotations]];
         // [self.navigationController pushViewController:controller animated:YES];
 
