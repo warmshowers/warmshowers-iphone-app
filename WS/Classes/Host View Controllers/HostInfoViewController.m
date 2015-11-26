@@ -140,17 +140,17 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
         
         /*
          if (bself.host.notcurrentlyavailableValue) {
-            RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Host no longer available", nil)
-                                                     message:NSLocalizedString(@"This host is no longer available and will be removed from the map and host list.", nil)];
-            
-            [alert addButtonWithTitle:kOK block:^{
-                [bself.navigationController popViewControllerAnimated:YES];
-            }];
-            
-            [alert show];
-        } else {
-            [bself refreshTableView];
-        }
+         RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Host no longer available", nil)
+         message:NSLocalizedString(@"This host is no longer available and will be removed from the map and host list.", nil)];
+         
+         [alert addButtonWithTitle:kOK block:^{
+         [bself.navigationController popViewControllerAnimated:YES];
+         }];
+         
+         [alert show];
+         } else {
+         [bself refreshTableView];
+         }
          */
     }];
     
@@ -197,7 +197,7 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     [tableView addSectionWithSectionHeaderText:nil];
     
     RHTableViewCell *cell = [tableView addCell:[RHTableViewCell
-                                               cellWithImage:nil
+                                                cellWithImage:nil
                                                 label:self.host.fullname]];
     
     [cell.imageView2 setImageWithURL:[NSURL URLWithString:self.host.imageURL] placeholderImage:[UIImage imageNamed:@"ws"]];
@@ -213,13 +213,13 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     
     // NSString *feedbackLabel = NSLocalizedString(@"View Feedback", nil);
     
-     cell = [tableView addCell:feedbackLabel
-                                didSelectBlock:^{
-                                    FeedbackTableViewController *controller = [[FeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-                                    [controller setHost:bself.host];
-                                    [bself.navigationController pushViewController:controller animated:YES];
-                                }
-                             ];
+    cell = [tableView addCell:feedbackLabel
+               didSelectBlock:^{
+                   FeedbackTableViewController *controller = [[FeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                   [controller setHost:bself.host];
+                   [bself.navigationController pushViewController:controller animated:YES];
+               }
+            ];
     
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
@@ -233,7 +233,7 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Distance", nil) largeLabel:self.host.subtitle]];
     [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Mbr Since", nil) largeLabel:self.host.member_since.formatWithLocalTimeZoneWithoutTime]];
     [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Username", nil) largeLabel:self.host.name]];
-        [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Last Login", nil) largeLabel:[NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), self.host.last_login.timesince]]];
+    [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Last Login", nil) largeLabel:[NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), self.host.last_login.timesince]]];
     
     
     [tableView addSectionWithSectionHeaderText:NSLocalizedString(@"Comments", nil)];
@@ -262,43 +262,47 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
 
 -(void)showActions:(id)sender {
     // if (self.host.last_updated_details) {
-        
-        RHActionSheet *popoverActionsheet = [[RHActionSheet alloc] init];
-        
-        __weak Host *bHost = self.host;
-        __weak HostInfoViewController *bself = self;
-        
-        [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Contact Host", nil) block:^{
-            [bself presentComposeViewController];
+    
+    UIAlertController *actionsheet = [UIAlertController actionSheetWithTitle:nil
+                                                                     message:nil
+                                                               barButtonItem:sender];
+    weakify(self);
+    
+    [actionsheet addButtonWithTitle:NSLocalizedString(@"Contact Host", nil) block:^(UIAlertAction * _Nonnull action) {
+        strongify(self);
+        [self presentComposeViewController];
+    }];
+    
+    [actionsheet addButtonWithTitle:NSLocalizedString(@"Open in Safari", nil) block:^(UIAlertAction * _Nonnull action) {
+        strongify(self);
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self.host infoURL]]];
+    }];
+    
+    
+    [actionsheet addButtonWithTitle:NSLocalizedString(@"View in Maps", nil) block:^(UIAlertAction * _Nonnull action) {
+        [MKMapView openInMapsWithAnnotation:self.host];
+    }];
+    
+    if ([self.host.favourite boolValue]) {
+        [actionsheet addButtonWithTitle:NSLocalizedString(@"Unmark as Favourite", nil) block:^(UIAlertAction * _Nonnull action) {
+            strongify(self);
+            self.host.favouriteValue = NO;
+            [Host commit];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:self.host forKey:@"host"]];
         }];
-        
-        [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Open in Safari", nil) block:^{
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[bHost infoURL]]];
+    } else {
+        [actionsheet addButtonWithTitle:NSLocalizedString(@"Mark as Favourite", nil) block:^(UIAlertAction * _Nonnull action) {
+            strongify(self);
+            self.host.favouriteValue = YES;
+            [Host commit];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:self.host forKey:@"host"]];
         }];
-        
-        
-        [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"View in Maps", nil) block:^{
-            [MKMapView openInMapsWithAnnotation:bHost];
-        }];
-        
-        if ([self.host.favourite boolValue]) {
-            [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Unmark as Favourite", nil) block:^{
-                bHost.favouriteValue = NO;
-                [Host commit];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:bHost forKey:@"host"]];
-            }];
-        } else {
-            [popoverActionsheet addButtonWithTitle:NSLocalizedString(@"Mark as Favourite", nil) block:^{
-                bHost.favouriteValue = YES;
-                [Host commit];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:bHost forKey:@"host"]];
-            }];
-        }
-     
-        [popoverActionsheet addCancelButton];
-        
-        [popoverActionsheet showFromBarButtonItem:sender animated:YES];
-  //  }
+    }
+    
+    [actionsheet addCancelButton];
+    
+    [actionsheet presentInViewController:self];
+
 }
 
 -(void)presentComposeViewController {

@@ -13,15 +13,16 @@
     #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>
     #import <CoreData/CoreData.h>
-	// needed for AFNetworking
-	#import <SystemConfiguration/SystemConfiguration.h>
-	#import <MobileCoreServices/MobileCoreServices.h>
 
+    #import "RHTools.h"
     #import "SVProgressHUD.h"
-    #import "WSHTTPClient.h"
-	#import "RHTools.h"
 	#import "RHManagedObject+legacy.h"
-	#import "AFNetworking.h"
-	#import "UIKit+AFNetworking.h"
 
+
+    #import "AFNetworking.h"
+    #import "UIKit+AFNetworking.h"
+    #import <PromiseKit/PromiseKit.h>
+    #import "AFNetworking+PromiseKit.h"
+
+    #import "WSHTTPClient.h"
 #endif

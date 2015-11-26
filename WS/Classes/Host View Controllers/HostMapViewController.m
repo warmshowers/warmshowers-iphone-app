@@ -86,15 +86,18 @@
 }
 
 -(void)logoutActionSheet:(id)sender {
-    self.popoverActionsheet = [RHActionSheet actionSheetWithTitle:nil];
     
-    [self.popoverActionsheet addDestructiveButtonWithTitle:NSLocalizedString(@"Logout", nil) block:^{
-        [[WSAppDelegate sharedInstance] performSelector:@selector(logout)];
-        // [[RHAlertView alertWithOKButtonWithTitle:@"Logged Out" message:@"You have been logged out. You will need to login again to continue using the app."] show];
+    UIAlertController *actionSheet = [UIAlertController actionSheetWithTitle:nil
+                                                                     message:nil
+                                                               barButtonItem:sender];
+    
+    [actionSheet addDestructiveButtonWithTitle:NSLocalizedString(@"Logout", nil) block:^(UIAlertAction * _Nonnull action) {
+         [[WSAppDelegate sharedInstance] performSelector:@selector(logout)];
     }];
     
-    [self.popoverActionsheet addCancelButtonWithTitle:kCancel];
-    [self.popoverActionsheet showFromBarButtonItem:sender animated:YES];
+    [actionSheet addCancelButton];
+    
+    [actionSheet presentInViewController:self];
 }
 
 #pragma mark -

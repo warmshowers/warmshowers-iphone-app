@@ -22,13 +22,17 @@
 //
 
 #import "AFHTTPSessionManager.h"
+#import "MessageThread.h"
 
 @interface WSHTTPClient : AFHTTPSessionManager
 
 +(WSHTTPClient *)sharedHTTPClient;
 -(BOOL)reachable;
 -(void)cancelAllOperations;
-// -(BOOL)hasWSSessionCookie;
 -(void)deleteCookies;
+
+-(AnyPromise *)loginWithUsername:(NSString *)username password:(NSString *)password;
+-(AnyPromise *)refreshThreads;
+-(AnyPromise *)markThreadAsRead:(MessageThread *)thread;
 
 @end

@@ -104,6 +104,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
     
+    self.window.rootViewController = [UIViewController new];
+    
     // -doesRequireMigration is a method in my RHManagedObject Core Data framework. Function should be self explanatory.
     if ([Host doesRequireMigration]) {
         // SVProgressHUD displays an animated spinner
@@ -180,18 +182,15 @@
 -(void)autologin {
     NSLog(@"%@", @"Auto Login Called");
     if (self.isLoggedIn) {
-        [WSRequests loginWithUsername:[self username]
-                             password:[self password]
-                              success:^(NSURLSessionDataTask *task, id responseObject) {
-                                  [self loginSuccess];
-                              }
-                              failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                  NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
-                                  NSInteger statusCode = response.statusCode;
-                                  if (statusCode > 200) {
-                                      [[WSAppDelegate sharedInstance] logout];
-                                  }
-                              }];
+        [[WSHTTPClient sharedHTTPClient] loginWithUsername:self.username password:self.password].then(^() {
+            [self loginSuccess];
+        }).catch(^(NSError *error) {
+            NSHTTPURLResponse *response = error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey];
+            if (response) {
+                // NSInteger statusCode = response.statusCode;
+                [[WSAppDelegate sharedInstance] logout];
+            }
+        });
     } else {
         [self logout];
     }

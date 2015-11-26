@@ -23,7 +23,6 @@
 
 #import <MapKit/MapKit.h>
 #import <CoreData/CoreData.h>
-#import "RHActionSheet.h"
 #import "KPClusteringController.h"
 
 @interface HostMapViewController : UIViewController <NSFetchedResultsControllerDelegate, MKMapViewDelegate, KPClusteringControllerDelegate>
@@ -34,7 +33,7 @@
 
 @property (nonatomic, assign) BOOL locationUpdated;
 @property (nonatomic, assign) BOOL hasRunOnce;
-@property (nonatomic, strong) RHActionSheet *popoverActionsheet;
+
 
 
 

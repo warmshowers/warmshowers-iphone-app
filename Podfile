@@ -1,13 +1,23 @@
 platform :ios, '8.3'
-pod 'SVProgressHUD', '1.1.2'
+use_frameworks!
+
+pod 'SVProgressHUD'
 pod 'AFNetworking' 
 pod 'BButton'
 pod 'CrittercismSDK'
 pod 'kingpin'
-pod 'RHManagedObject', :path => '../RHManagedObject/'
-# pod 'RHManagedObject'
-pod 'RHTools', :path => '../RHTools/'
-# pod 'RHTools', :git => 'https://github.com/chriscdn/RHTools.git'
+
 pod 'ECSlidingViewController'
 pod 'Lockbox'
 pod 'MBAutoGrowingTextView', '~> 0.1.0'
+
+pod 'PromiseKit-AFNetworking'
+pod 'PromiseKit'
+pod 'KVOController'
+pod 'DateTools'
+
+# pod 'RHManagedObject'
+# pod 'RHTools', :git => 'https://github.com/chriscdn/RHTools.git'
+
+pod 'RHManagedObject', :path => '../RHManagedObject/'
+pod 'RHTools', :path => '../RHTools/'

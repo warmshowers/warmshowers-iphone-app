@@ -50,7 +50,7 @@
     
     RHTableViewCell *cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"Map", nil)
                                                detailLabelText:nil
-                                                didSelectBlock:^{
+                                                didSelectBlock:^(RHTableViewCell *cell) {
                                                     UIViewController *controller = self.hostMapViewController;
                                                     [bself.slidingViewController setTopViewController:[controller wrapInNavigationController]];
                                                     [bself.slidingViewController resetTopViewAnimated:YES];
@@ -62,7 +62,7 @@
     
     cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"Search", nil)
                               detailLabelText:nil
-                               didSelectBlock:^{
+                               didSelectBlock:^(RHTableViewCell *cell) {
                                    /*
                                     UIViewController *controller = [[SearchHostsTableViewController alloc] initWithStyle:UITableViewStylePlain];
                                    [controller.navigationItem setLeftBarButtonItem:[self leftMenuButton]];
@@ -88,7 +88,7 @@
     
     cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"Favourites", nil)
                               detailLabelText:nil
-                               didSelectBlock:^{
+                               didSelectBlock:^(RHTableViewCell *cell) {
                                   /*
                                    UIViewController *controller = [[FavouriteHostTableViewController alloc] initWithStyle:UITableViewStylePlain];
                                    
@@ -118,7 +118,7 @@
     
     cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"Messages", nil)
                               detailLabelText:nil
-                               didSelectBlock:^{
+                               didSelectBlock:^(RHTableViewCell *cell) {
                                    
                                    AllThreadsTableViewController *inboxTableViewController = [AllThreadsTableViewController new];
                                    inboxTableViewController.navigationItem.leftBarButtonItem = [self leftMenuButton];
@@ -143,7 +143,7 @@
     
     cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"About", nil)
                               detailLabelText:nil
-                               didSelectBlock:^{
+                               didSelectBlock:^(RHTableViewCell *cell) {
                                    
                                    
                                    RHAboutViewController *controller = [RHAboutViewController new];
@@ -166,7 +166,7 @@
     
     cell = [RHTableViewCell cellWithLabelText:NSLocalizedString(@"Logout", nil)
                               detailLabelText:nil
-                               didSelectBlock:^{
+                               didSelectBlock:^(RHTableViewCell *cell) {
                                    [[WSAppDelegate sharedInstance] logout];
                                    [bself.slidingViewController resetTopViewAnimated:YES];                                   
                                }

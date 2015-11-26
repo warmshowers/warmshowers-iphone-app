@@ -36,7 +36,7 @@ static NSString *const CellIdentifier = @"1c8416b1-fe7d-4fbb-af58-d18b8efca04d";
 -(void)viewDidLoad  {
 	[super viewDidLoad];
 	[self setTitle:NSLocalizedString(@"Feedback", nil)];
-    [self.tableView registerNib:[UINib nibWithNibName:@"RHSingleLabelTableViewCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"RHSingleLabelTableViewCell" bundle:[NSBundle bundleForClass:[RHTableViewCell class]]] forCellReuseIdentifier:CellIdentifier];
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
     [self.tableView setEstimatedRowHeight:44];
 }

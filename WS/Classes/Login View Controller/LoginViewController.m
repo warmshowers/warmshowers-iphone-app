@@ -42,17 +42,19 @@
     
     [self.loginButton setType:BButtonTypePrimary];
     [self.scrunchView setBackgroundColor:kWSBaseColour];
-    __weak LoginViewController *bself = self;
+    weakify(self);
     
     [self.usernameTextField setText:[[WSAppDelegate sharedInstance] username]];
     
     [self.usernameTextField setShouldReturnBlock:^BOOL(RHTextField *textField) {
-        [bself.passwordTextField becomeFirstResponder];
+        strongify(self);
+        [self.passwordTextField becomeFirstResponder];
         return YES;
     }];
     
     [self.passwordTextField setShouldReturnBlock:^BOOL(RHTextField *textField) {
-        [bself loginButtonTapped:nil];
+        strongify(self);
+        [self loginButtonTapped:nil];
         return YES;
     }];
 }
@@ -74,37 +76,30 @@
     [self.usernameTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
     
-    __weak LoginViewController *bself = self;
+    weakify(self);
     
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeBlack];
     
-    [WSRequests loginWithUsername:username
-                         password:password
-                          success:^(NSURLSessionDataTask *task, id responseObject) {
-                              dispatch_async(dispatch_get_main_queue(), ^{
-                                  [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
-                                  
-                                  [[WSAppDelegate sharedInstance] setUsername:username];
-                                  [[WSAppDelegate sharedInstance] setPassword:password];
-                                  [[WSAppDelegate sharedInstance] loginSuccess];
-                                  
-                                  [bself dismissViewControllerAnimated:YES completion:nil];
-                              });
-                              
-                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                              
-                              dispatch_async(dispatch_get_main_queue(), ^{
-                                  [SVProgressHUD dismiss];
-                                  RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warm Showers", nil)
-                                                                           message:NSLocalizedString(@"Login failed. Please check your username and password and try again. If you don't have an account you can tap the Sign Up button to register.", nil)];
-                                  
-                                  [alert addButtonWithTitle:kOK block:^{
-                                      //  [self logout];
-                                  }];
-                                  
-                                  [alert show];
-                              });
-                          }];
+    [[WSHTTPClient sharedHTTPClient] loginWithUsername:username password:password].then(^() {
+        strongify(self);
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
+        
+        [[WSAppDelegate sharedInstance] setUsername:username];
+        [[WSAppDelegate sharedInstance] setPassword:password];
+        [[WSAppDelegate sharedInstance] loginSuccess];
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }).catch(^(NSError *error) {
+        [SVProgressHUD dismiss];
+        RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Warm Showers", nil)
+                                                 message:NSLocalizedString(@"Login failed. Please check your username and password and try again. If you don't have an account you can create one.", nil)];
+        
+        [alert addButtonWithTitle:kOK block:^{
+            //  [self logout];
+        }];
+        
+        [alert show];
+    });
 }
 
 -(IBAction)createAccountButtonTapped:(id)sender {

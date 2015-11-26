@@ -43,33 +43,15 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
     [self.tableView registerClass:[RHTableViewCellStyleSubtitleLighterDetail class] forCellReuseIdentifier:CellIdentifier];
     
     self.refreshControl = [RHRefreshControl refreshControlWithBlock:^(RHRefreshControl *refreshControl) {
-        
-        [WSRequests refreshThreadsSuccess:^(NSURLSessionDataTask *task, id responseObject) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [refreshControl endRefreshing];
-            });
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            //  NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
-            // NSInteger statusCode = response.statusCode;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [refreshControl endRefreshing];
-            });
-        }];
-        
+
+        [[WSHTTPClient sharedHTTPClient] refreshThreads].finally(^() {
+            [refreshControl endRefreshing];
+        });
     }];
     
     // refresh on load
     [(RHRefreshControl *)self.refreshControl refresh];
-    
-    /*
-    if (!self.splitViewController.isCollapsed) {
-        [self.splitViewController showDetailViewController:[[self splashViewController] wrapInNavigationController] sender:nil];
-    }
-     */
 }
-
-
-
 
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -94,24 +76,18 @@ static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
-    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     MessageThread *thread = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     SingleThreadTableViewController *controller = [[SingleThreadTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [controller setThread:thread];
-    
-    // UISplitViewController *split = self.splitViewController;
-    
+
     [self.splitViewController showDetailViewController:[controller wrapInNavigationController] sender:nil];
-    
 }
 
 -(NSFetchedResultsController *)fetchedResultsController {

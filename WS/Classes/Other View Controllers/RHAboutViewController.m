@@ -49,7 +49,7 @@
     
     [self.tableView addCell:[RHTableViewCell cellWithLabelText:NSLocalizedString(@"Visit the Website", nil)
                                               detailLabelText:nil
-                                               didSelectBlock:^{
+                                               didSelectBlock:^(RHTableViewCell *cell) {
                                                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://warmshowers.org"]];
                                                } style:UITableViewCellStyleDefault
                                                         image:nil
@@ -58,7 +58,7 @@
     
     [self.tableView addCell:[RHTableViewCell cellWithLabelText:NSLocalizedString(@"Contact Us", nil)
                                                detailLabelText:nil
-                                                didSelectBlock:^{
+                                                didSelectBlock:^(RHTableViewCell *cell) {
                                                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.warmshowers.org/contact"]];
                                                 } style:UITableViewCellStyleDefault
                                                          image:nil
@@ -70,7 +70,7 @@
     
     [self.tableView addCell:[RHTableViewCell cellWithLabelText:NSLocalizedString(@"Follow us on Twitter", nil)
                                                detailLabelText:nil
-                                                didSelectBlock:^{
+                                                didSelectBlock:^(RHTableViewCell *cell) {
                                                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/warmshowers"]];
                                                 } style:UITableViewCellStyleDefault
                                                          image:nil
@@ -79,7 +79,7 @@
     
     [self.tableView addCell:[RHTableViewCell cellWithLabelText:NSLocalizedString(@"Like us on Facebook", nil)
                                                detailLabelText:nil
-                                                didSelectBlock:^{
+                                                didSelectBlock:^(RHTableViewCell *cell) {
                                                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/groups/135049549858210/"]];
                                                 } style:UITableViewCellStyleDefault
                                                          image:nil
@@ -89,7 +89,7 @@
     
     [self.tableView addCell:[RHTableViewCell cellWithLabelText:NSLocalizedString(@"Rate this App", nil)
                                                detailLabelText:nil
-                                                didSelectBlock:^{
+                                                didSelectBlock:^(RHTableViewCell *cell) {
                                                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/app/warmshowers/id359056872?mt=8"]];
                                                 } style:UITableViewCellStyleDefault
                                                          image:nil
@@ -102,7 +102,7 @@
     
     RHTableViewCell *tmtCell = [self.tableView addCell:[RHTableViewCell cellWithLabelText:@"TrackMyTour"
                                                detailLabelText:NSLocalizedString(@"A tracking app for bike touring", nil)
-                                                didSelectBlock:^{
+                                                didSelectBlock:^(RHTableViewCell *cell) {
                                                      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://trackmytour.com/"]];
                                                 } style:UITableViewCellStyleSubtitle
                                                          image:[UIImage imageNamed:@"trackmytour"]

@@ -27,7 +27,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		28C286E10D94DF7D0034E888 /* HostMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* HostMapViewController.m */; };
-		3102391F8DDD4D1FAC5382A5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D09F2CAA216B49BAA5EEDCA7 /* libPods.a */; };
+		33B25C1085E03D91267068F9 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4996531F5F7A67E879641E77 /* Pods.framework */; };
 		830569CF1B1D00030039C5E2 /* iconmonstr-location-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 830569CD1B1D00030039C5E2 /* iconmonstr-location-icon.png */; };
 		830569D01B1D00030039C5E2 /* iconmonstr-location-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830569CE1B1D00030039C5E2 /* iconmonstr-location-icon@2x.png */; };
 		830569D31B1D015E0039C5E2 /* iconmonstr-magnifier-2-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830569D11B1D015E0039C5E2 /* iconmonstr-magnifier-2-icon@2x.png */; };
@@ -59,6 +59,7 @@
 		835B88301B1D07D100A8E838 /* iconmonstr-navigation-5-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 835B882E1B1D07D100A8E838 /* iconmonstr-navigation-5-icon.png */; };
 		836CCF0114ABB3D1000EDC51 /* HostMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836CCF0014ABB3D1000EDC51 /* HostMapViewController.xib */; };
 		836CCF0614ABB3E6000EDC51 /* Host.m in Sources */ = {isa = PBXBuildFile; fileRef = 836CCF0314ABB3E6000EDC51 /* Host.m */; };
+		836D64AA1893BFA000F0602F /* crittercism.plist in Resources */ = {isa = PBXBuildFile; fileRef = 836D64A91893BFA000F0602F /* crittercism.plist */; };
 		837DED011B1B9F280031FCCB /* HostsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837DED001B1B9F280031FCCB /* HostsTableViewController.m */; };
 		83810A4E1B1667F9001FF02B /* NSNumber+WS.m in Sources */ = {isa = PBXBuildFile; fileRef = 83810A4D1B1667F9001FF02B /* NSNumber+WS.m */; };
 		8388B1371458A8100079ACE3 /* SearchHostsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388B1361458A8100079ACE3 /* SearchHostsTableViewController.m */; };
@@ -113,6 +114,7 @@
 		28C286E00D94DF7D0034E888 /* HostMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostMapViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3B04C42F3B42643FDA03D2FB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		4996531F5F7A67E879641E77 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		830569B51B1CF7490039C5E2 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		830569CD1B1D00030039C5E2 /* iconmonstr-location-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconmonstr-location-icon.png"; sourceTree = "<group>"; };
 		830569CE1B1D00030039C5E2 /* iconmonstr-location-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconmonstr-location-icon@2x.png"; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 		836CCF0014ABB3D1000EDC51 /* HostMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostMapViewController.xib; sourceTree = "<group>"; };
 		836CCF0214ABB3E6000EDC51 /* Host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Host.h; sourceTree = "<group>"; };
 		836CCF0314ABB3E6000EDC51 /* Host.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Host.m; sourceTree = "<group>"; };
+		836D64A91893BFA000F0602F /* crittercism.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = crittercism.plist; sourceTree = "<group>"; };
 		837DECFF1B1B9F280031FCCB /* HostsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostsTableViewController.h; sourceTree = "<group>"; };
 		837DED001B1B9F280031FCCB /* HostsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostsTableViewController.m; sourceTree = "<group>"; };
 		83810A4C1B1667F9001FF02B /* NSNumber+WS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+WS.h"; sourceTree = "<group>"; };
@@ -211,7 +214,6 @@
 		83FF91E91B57E9A50058AEFF /* _MessageThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MessageThread.h; sourceTree = "<group>"; };
 		83FF91EA1B57E9A60058AEFF /* _MessageThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MessageThread.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* WS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WS-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		D09F2CAA216B49BAA5EEDCA7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8BC23EBA708152878C4EBD7 /* Pods.ad-hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods.ad-hoc.xcconfig"; path = "Pods/Target Support Files/Pods/Pods.ad-hoc.xcconfig"; sourceTree = "<group>"; };
 		D90BFBC0537C4D0B37F09E35 /* Pods.distribution app store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods.distribution app store.xcconfig"; path = "Pods/Target Support Files/Pods/Pods.distribution app store.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -233,7 +235,7 @@
 				83CF4474126A01A200DF3CFD /* MapKit.framework in Frameworks */,
 				83FFC5F316187AC300158C5F /* SystemConfiguration.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				3102391F8DDD4D1FAC5382A5 /* libPods.a in Frameworks */,
+				33B25C1085E03D91267068F9 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,7 +317,7 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
 				28860BE40F44EE6400985440 /* CoreData.framework */,
-				D09F2CAA216B49BAA5EEDCA7 /* libPods.a */,
+				4996531F5F7A67E879641E77 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -326,6 +328,7 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97315FDCFA39411CA2CEA /* Supporting Files */,
+				836D64A91893BFA000F0602F /* crittercism.plist */,
 			);
 			path = WS;
 			sourceTree = "<group>";
@@ -580,6 +583,7 @@
 				83EED7341B2802A7003257E5 /* iconmonstr-star-5-icon.png in Resources */,
 				830569E41B1D03190039C5E2 /* iconmonstr-info-6-icon.png in Resources */,
 				83E205681878B3550067738B /* ws.png in Resources */,
+				836D64AA1893BFA000F0602F /* crittercism.plist in Resources */,
 				83F78ED51B1450DC00BEEBC6 /* hamburger@2x.png in Resources */,
 				834C9CBB1B0683E200C735F4 /* LoginViewController.xib in Resources */,
 				83F00E1715EBD11B00761BC6 /* trackmytour.png in Resources */,
