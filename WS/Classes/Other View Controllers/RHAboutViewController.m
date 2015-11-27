@@ -35,11 +35,12 @@
     [super viewDidLoad];
     [self setTitle:NSLocalizedString(@"About", nil)];
     
-    __weak UIViewController *bself = self;
+    weakify(self);
     
     self.navigationItem.leftBarButtonItem = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
                                                                                            block:^{
-                                                                                               [bself dismissViewControllerAnimated:YES completion:nil];
+                                                                                               strongify(self);
+                                                                                               [self dismissViewControllerAnimated:YES completion:nil];
                                                                                            }];
     
     [self.tableView addSectionWithSectionHeaderText:nil];
@@ -71,7 +72,7 @@
     [self.tableView addCell:[RHTableViewCell cellWithLabelText:NSLocalizedString(@"Follow us on Twitter", nil)
                                                detailLabelText:nil
                                                 didSelectBlock:^(RHTableViewCell *cell) {
-                                                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/warmshowers"]];
+                                                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/warmshowers"]];
                                                 } style:UITableViewCellStyleDefault
                                                          image:nil
                                                  accessoryType:UITableViewCellAccessoryDisclosureIndicator]
@@ -80,7 +81,7 @@
     [self.tableView addCell:[RHTableViewCell cellWithLabelText:NSLocalizedString(@"Like us on Facebook", nil)
                                                detailLabelText:nil
                                                 didSelectBlock:^(RHTableViewCell *cell) {
-                                                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/groups/135049549858210/"]];
+                                                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/groups/135049549858210/"]];
                                                 } style:UITableViewCellStyleDefault
                                                          image:nil
                                                  accessoryType:UITableViewCellAccessoryDisclosureIndicator]
@@ -97,8 +98,6 @@
      ];
     
     [self.tableView addSectionWithSectionHeaderText:@"Other Apps" footerText:NSLocalizedString(@"The Warm Showers and TrackMyTour apps developed by Christopher Meyer.", nil)];
-    
-    
     
     RHTableViewCell *tmtCell = [self.tableView addCell:[RHTableViewCell cellWithLabelText:@"TrackMyTour"
                                                detailLabelText:NSLocalizedString(@"A tracking app for bike touring", nil)

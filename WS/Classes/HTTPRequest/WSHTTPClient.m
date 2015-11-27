@@ -84,8 +84,7 @@
 }
 
 -(void)deleteCookies {
-    NSURL *baseURL = [self baseURL];
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:baseURL];
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:self.baseURL];
     
     for (NSHTTPCookie *cookie in cookies) {
         [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
@@ -98,6 +97,10 @@
      if ([[WSAppDelegate sharedInstance] isLoggedIn] == NO) {
      return;
      }
+     
+     // do we
+     return [AnyPromise promiseWithResolverBlock:^(PMKResolver  _Nonnull resolve) {};
+     
      */
     static NSInteger const maxResults = 50;
     
@@ -245,24 +248,6 @@
         host.last_updated_details = [NSDate date];
         [Host commit];
     });
-    
-    /*.catch(^(NSError *error) {
-        
-        NSHTTPURLResponse *response = (NSHTTPURLResponse *)[task response];
-        
-        NSInteger statusCode = [response statusCode];
-        
-        // 404 not found (page doesn't exist anymore)
-        if (statusCode == 404) {
-            [host delete];
-            [Host commit];
-        }
-        
-        if (failure) {
-            failure(task, error);
-        }
-        
-    });*/
 }
 
 -(AnyPromise *)markThreadAsRead:(MessageThread *)thread {

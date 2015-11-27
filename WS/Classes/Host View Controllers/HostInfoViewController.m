@@ -63,19 +63,27 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
         
         [[WSHTTPClient sharedHTTPClient] hostDetailsWithHost:self.host].then(^() {
             
+            [SVProgressHUD dismiss];
+            
             // We don't return the promise since we don't necessarily want to wait for this to finish.
             [[WSHTTPClient sharedHTTPClient] hostFeedbackWithHost:self.host];
             
         }).catch(^(NSError *error) {
-            if (self.host.last_updated_details == nil) {
-                // [[RHAlertView alertWithOKButtonWithTitle:nil message:NSLocalizedString(@"An error occurred while loading the details of this host. Please check your network connection and try again.", nil)] show];
-                [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Error loading host details.", nil)];
-            } else if (self.host.isStale) {
-                [[RHAlertView alertWithOKButtonWithTitle:nil message:NSLocalizedString(@"The details of this host haven't been updated in a while and might be out of date. Please connect to a network and refresh before attempting to contact this host.", nil)] show];
+            
+            NSHTTPURLResponse *response = error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey];
+            
+            if (response) {
+                [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"This host is no longer available.", nil)];
+                [self.host delete];
+                [Host commit];
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                [SVProgressHUD dismiss];
             }
+            
         }).finally(^() {
             [refreshControl endRefreshing];
-            [SVProgressHUD dismiss];
+            
         });
         
     }];
@@ -118,11 +126,11 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     
     [self.navigationController setToolbarHidden:NO animated:animated];
     
-    __weak HostInfoViewController *bself = self;
+    weakify(self);
     
     [self.host setDidUpdateBlock:^() {
-        
-        NSNumber *newFavouriteState = [bself.host.changedValues objectForKey:@"favourite"];
+        strongify(self);
+        NSNumber *newFavouriteState = [self.host.changedValues objectForKey:@"favourite"];
         
         if (newFavouriteState) {
             if ([newFavouriteState boolValue]) {
@@ -132,22 +140,7 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
             }
         }
         
-        [bself refreshTableView];
-        
-        /*
-         if (bself.host.notcurrentlyavailableValue) {
-         RHAlertView *alert = [RHAlertView alertWithTitle:NSLocalizedString(@"Host no longer available", nil)
-         message:NSLocalizedString(@"This host is no longer available and will be removed from the map and host list.", nil)];
-         
-         [alert addButtonWithTitle:kOK block:^{
-         [bself.navigationController popViewControllerAnimated:YES];
-         }];
-         
-         [alert show];
-         } else {
-         [bself refreshTableView];
-         }
-         */
+        [self refreshTableView];
     }];
     
     [self.host setDidDeleteBlock:^() {
