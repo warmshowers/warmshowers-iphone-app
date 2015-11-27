@@ -187,7 +187,12 @@
 -(void)clusteringController:(KPClusteringController *)clusteringController configureAnnotationForDisplay:(KPAnnotation *)annotation {
     if ([annotation isCluster]) {
         annotation.title = [NSString stringWithFormat:@"%lu hosts", (unsigned long)annotation.annotations.count];
-        annotation.subtitle = [NSString stringWithFormat:@"within %.0f meters", annotation.radius];
+        
+        NSString *radius = LocaleIsMetric
+            ? [NSString stringWithFormat:@"%.1f km", annotation.radius/1000]
+            :[NSString stringWithFormat:@"%.1f miles", annotation.radius/1609.344];
+        
+        annotation.subtitle = [NSString stringWithFormat:@"within %@", radius];
     } else {
         Host *host = [[annotation annotations] anyObject];
         [annotation setTitle:[host title]];

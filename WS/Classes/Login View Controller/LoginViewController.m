@@ -43,7 +43,7 @@
     [self.scrunchView setBackgroundColor:kWSBaseColour];
     weakify(self);
     
-    [self.usernameTextField setText:[[WSAppDelegate sharedInstance] username]];
+    [self.usernameTextField setText:[[WSUserDefaults sharedInstance] username]];
     
     [self.usernameTextField setShouldReturnBlock:^BOOL(RHTextField *textField) {
         strongify(self);
@@ -83,8 +83,9 @@
         strongify(self);
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
         
-        [[WSAppDelegate sharedInstance] setUsername:username];
-        [[WSAppDelegate sharedInstance] setPassword:password];
+        [[WSUserDefaults sharedInstance] setUsername:username];
+        [[WSUserDefaults sharedInstance] setPassword:password];
+        
         [[WSAppDelegate sharedInstance] loginSuccess];
         
         [self dismissViewControllerAnimated:YES completion:nil];

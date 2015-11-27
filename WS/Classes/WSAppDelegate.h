@@ -39,15 +39,6 @@
 
 +(WSAppDelegate *)sharedInstance;
 
--(NSString *)username;
--(void)setUsername:(NSString *)username;
--(NSInteger)userID;
--(void)setUserID:(NSInteger)userid;
--(NSString *)password;
--(void)setPassword:(NSString *)password;
--(BOOL)isLoggedIn;
--(void)setIsLoggedIn:(BOOL)isLoggedIn;
-
 -(void)loginSuccess;
 -(void)logout;
 

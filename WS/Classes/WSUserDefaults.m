@@ -22,13 +22,34 @@
 //
 
 #import "WSUserDefaults.h"
+#import "Lockbox.h"
 
 @implementation WSUserDefaults
 
 -(id)defaultForKey:(NSString *)key {
-    NSDictionary *defaultValues = @{};
+    NSDictionary *defaultValues = @{
+                                    @"userID":[NSNumber numberWithInt:0],
+                                    @"isLoggedIn":@NO
+                                    };
     
     return [defaultValues objectForKey:key];
+}
+
+
+-(NSString *)username {
+    return [Lockbox stringForKey:@"ws-username"] ? [Lockbox stringForKey:@"ws-username"] : @"";
+}
+
+-(void)setUsername:(NSString *)username {
+    [Lockbox setString:username forKey:@"ws-username"];
+}
+
+-(NSString *)password {
+    return [Lockbox stringForKey:@"ws-password"] ? [Lockbox stringForKey:@"ws-password"] : @"";
+}
+
+-(void)setPassword:(NSString *)password {
+    [Lockbox setString:password forKey:@"ws-password"];
 }
 
 @end

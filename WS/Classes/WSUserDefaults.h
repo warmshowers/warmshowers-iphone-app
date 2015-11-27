@@ -25,4 +25,9 @@
 
 @interface WSUserDefaults : RHUserDefaults
 
+@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) NSString *password;
+@property (nonatomic, assign) NSInteger userID;
+@property (nonatomic, assign) BOOL isLoggedIn;
+
 @end

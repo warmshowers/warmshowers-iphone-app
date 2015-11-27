@@ -49,7 +49,6 @@
 		834C9CBA1B0683E200C735F4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 834C9CB81B0683E200C735F4 /* LoginViewController.m */; };
 		834C9CBB1B0683E200C735F4 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834C9CB91B0683E200C735F4 /* LoginViewController.xib */; };
 		83518606152C0C1F009E558F /* MKMapView+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 835185FF152C0B0B009E558F /* MKMapView+Utils.m */; };
-		8355479B1642DFFE00D2A0B5 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8355479A1642DFFE00D2A0B5 /* Settings.bundle */; };
 		8355DF401B1F44CD00D112E1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8355DF421B1F44CD00D112E1 /* Localizable.strings */; };
 		835696F41847D1CB00F5B999 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 835696F31847D1CB00F5B999 /* AssetsLibrary.framework */; };
 		835696F61847D1EC00F5B999 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 835696F51847D1EC00F5B999 /* Security.framework */; };
@@ -145,7 +144,6 @@
 		834C9CB91B0683E200C735F4 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		835185FE152C0B0B009E558F /* MKMapView+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Utils.h"; sourceTree = "<group>"; };
 		835185FF152C0B0B009E558F /* MKMapView+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Utils.m"; sourceTree = "<group>"; };
-		8355479A1642DFFE00D2A0B5 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8355DF411B1F44CD00D112E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8355DF431B1F44D100D112E1 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		835696F31847D1CB00F5B999 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -282,7 +280,6 @@
 		29B97315FDCFA39411CA2CEA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8355479A1642DFFE00D2A0B5 /* Settings.bundle */,
 				28A0AAE50D9B0CCF005BE974 /* WS_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				8D1107310486CEB800E47090 /* WS-Info.plist */,
@@ -600,7 +597,6 @@
 				83E13CCE1B1DAC9E005141F6 /* iconmonstr-email-7-icon@2x.png in Resources */,
 				83E13CD01B1DAC9E005141F6 /* iconmonstr-email-icon@2x.png in Resources */,
 				835B88301B1D07D100A8E838 /* iconmonstr-navigation-5-icon.png in Resources */,
-				8355479B1642DFFE00D2A0B5 /* Settings.bundle in Resources */,
 				83EED7351B2802A7003257E5 /* iconmonstr-star-5-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

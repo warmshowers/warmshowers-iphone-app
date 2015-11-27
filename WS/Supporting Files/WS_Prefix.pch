@@ -14,7 +14,7 @@
     #import <UIKit/UIKit.h>
     #import <CoreData/CoreData.h>
 
-    #import "RHTools.h"
+    #import <RHTools/RHTools.h>
     #import "SVProgressHUD.h"
 	#import "RHManagedObject+legacy.h"
 

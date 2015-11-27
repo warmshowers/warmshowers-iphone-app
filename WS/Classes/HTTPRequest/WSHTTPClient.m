@@ -179,7 +179,7 @@
             [[Host hostWithID:hostid] setName:name];
             [Host commit];
             
-            [[WSAppDelegate sharedInstance] setUserID:userid];
+            [[WSUserDefaults sharedInstance] setUserID:userid];
             
         };
     });
@@ -194,7 +194,7 @@
         [MessageThread deleteWithPredicate:[NSPredicate predicateWithFormat:@"NOT (threadid IN %@)", all_ids]];
         
         // the signed in user
-        NSInteger userid = [[WSAppDelegate sharedInstance] userID];
+        NSInteger userid = [[WSUserDefaults sharedInstance] userID];
         
         for (NSDictionary *dict in responseObject) {
             

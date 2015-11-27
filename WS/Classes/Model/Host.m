@@ -183,10 +183,8 @@
         
         NSString *bearing = NSLocalizedStringFromBearing( [userLocation bearingToLocation:host_location] );
         CLLocationDistance distance = [host_location distanceFromLocation:userLocation];
-        
-        NSInteger units = [[NSUserDefaults standardUserDefaults] integerForKey:@"units"];
-        
-        if (units == 0) {
+
+        if LocaleIsMetric {
             return [NSString stringWithFormat:@"%.1f km %@", distance/1000, bearing];
         } else {
             return [NSString stringWithFormat:@"%.1f miles %@", distance/1609.344, bearing];

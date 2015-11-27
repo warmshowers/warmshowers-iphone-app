@@ -51,41 +51,6 @@
 }
 
 #pragma mark -
-#pragma mark Setters/Getters
-
--(NSString *)username {
-    return [Lockbox stringForKey:@"ws-username"] ? [Lockbox stringForKey:@"ws-username"] : @"";
-}
-
--(void)setUsername:(NSString *)username {
-    [Lockbox setString:username forKey:@"ws-username"];
-}
-
--(NSInteger)userID {
-    return [[NSUserDefaults standardUserDefaults] integerForKey:@"ws-userid"];
-}
-
--(void)setUserID:(NSInteger)userid {
-    [[NSUserDefaults standardUserDefaults] setInteger:userid forKey:@"ws-userid"];
-}
-
--(NSString *)password {
-    return [Lockbox stringForKey:@"ws-password"] ? [Lockbox stringForKey:@"ws-password"] : @"";
-}
-
--(void)setPassword:(NSString *)password {
-    [Lockbox setString:password forKey:@"ws-password"];
-}
-
--(BOOL)isLoggedIn {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"ws-loggedin"];
-}
-
--(void)setIsLoggedIn:(BOOL)isLoggedIn {
-    [[NSUserDefaults standardUserDefaults] setBool:isLoggedIn forKey:@"ws-loggedin"];
-}
-
-#pragma mark -
 // See http://schwiiz.org/?p=1734
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -180,14 +145,18 @@
 
 -(void)autologin {
     NSLog(@"%@", @"Auto Login Called");
-    if (self.isLoggedIn) {
-        [[WSHTTPClient sharedHTTPClient] loginWithUsername:self.username password:self.password].then(^() {
+    if ([[WSUserDefaults sharedInstance] isLoggedIn]) {
+        
+        NSString *username = [[WSUserDefaults sharedInstance] username];
+        NSString *password = [[WSUserDefaults sharedInstance] password];
+        
+        [[WSHTTPClient sharedHTTPClient] loginWithUsername:username password:password].then(^() {
             [self loginSuccess];
         }).catch(^(NSError *error) {
             NSHTTPURLResponse *response = error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey];
             if (response) {
                 // NSInteger statusCode = response.statusCode;
-                [[WSAppDelegate sharedInstance] logout];
+                [self logout];
             }
         });
     } else {
@@ -197,12 +166,12 @@
 
 #pragma mark Authentication
 -(void)loginSuccess {
-    [self setIsLoggedIn:YES];
+    [[WSUserDefaults sharedInstance] setIsLoggedIn:YES];
     [self requestLocationAuthorization];
 }
 
 -(void)logout {
-    [self setIsLoggedIn:NO];
+    [[WSUserDefaults sharedInstance] setIsLoggedIn:NO];
     [self promptForUsernameAndPassword];
 }
 
