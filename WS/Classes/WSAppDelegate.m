@@ -34,7 +34,6 @@
 #import "ECSlidingViewController.h"
 #import "LeftMenuViewController.h"
 #import "Lockbox.h"
-#import "WSRequests.h"
 #import "LoginViewController.h"
 
 @interface WSAppDelegate ()

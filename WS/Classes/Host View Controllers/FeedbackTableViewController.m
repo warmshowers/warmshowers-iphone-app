@@ -24,7 +24,6 @@
 #import "WSAppDelegate.h"
 #import "FeedbackTableViewController.h"
 #import "Feedback.h"
-#import "WSRequests.h"
 
 static NSString *const CellIdentifier = @"1c8416b1-fe7d-4fbb-af58-d18b8efca04d";
 

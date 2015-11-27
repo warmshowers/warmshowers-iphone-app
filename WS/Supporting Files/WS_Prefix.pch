@@ -25,4 +25,5 @@
     #import "AFNetworking+PromiseKit.h"
 
     #import "WSHTTPClient.h"
+    #import "WSUserDefaults.h"
 #endif

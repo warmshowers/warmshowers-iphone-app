@@ -21,23 +21,8 @@
 //  THE SOFTWARE.
 //
 
-#define kMaxResults 50
+#import <RHTools/RHTools.h>
 
-#import <MapKit/MapKit.h>
-@class Host;
-@class MessageThread;
-
-@interface WSRequests : NSObject<NSXMLParserDelegate>
-
-+(void)requestWithMapView:(MKMapView *)mapView;
-
-+(void)hostDetailsWithHost:(Host *)host
-                   success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
-                   failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
-
-+(void)hostFeedbackWithHost:(Host *)host;
-
-+(void)searchHostsWithKeyword:(NSString *)keyword;
+@interface WSUserDefaults : RHUserDefaults
 
 @end
-

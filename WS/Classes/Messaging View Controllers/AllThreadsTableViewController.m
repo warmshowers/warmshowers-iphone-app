@@ -25,7 +25,6 @@
 #import "MessageThread.h"
 #import "Host.h"
 #import "SingleThreadTableViewController.h"
-#import "WSRequests.h"
 
 static NSString *CellIdentifier = @"56f725aa-cd78-4bd3-9d24-859a36621df9";
 

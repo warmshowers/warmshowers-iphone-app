@@ -21,23 +21,14 @@
 //  THE SOFTWARE.
 //
 
-#import "AFHTTPSessionManager.h"
-#import "MessageThread.h"
-#import <MapKit/MapKit.h>
+#import "WSUserDefaults.h"
 
-@interface WSHTTPClient : AFHTTPSessionManager
+@implementation WSUserDefaults
 
-+(WSHTTPClient *)sharedHTTPClient;
--(BOOL)reachable;
--(void)cancelAllOperations;
--(void)deleteCookies;
-
--(AnyPromise *)requestWithMapView:(MKMapView *)mapView;
--(AnyPromise *)loginWithUsername:(NSString *)username password:(NSString *)password;
--(AnyPromise *)refreshThreads;
--(AnyPromise *)markThreadAsRead:(MessageThread *)thread;
--(AnyPromise *)hostDetailsWithHost:(Host *)host;
--(AnyPromise *)hostFeedbackWithHost:(Host *)host;
--(AnyPromise *)searchHostsWithKeyword:(NSString *)keyword;
+-(id)defaultForKey:(NSString *)key {
+    NSDictionary *defaultValues = @{};
+    
+    return [defaultValues objectForKey:key];
+}
 
 @end

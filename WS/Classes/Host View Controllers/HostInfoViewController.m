@@ -23,8 +23,6 @@
 
 #import "HostInfoViewController.h"
 #import "Host.h"
-
-#import "WSRequests.h"
 #import "WSAppDelegate.h"
 #import "NSDate+timesince.h"
 #import "ComposeMessageViewController.h"
@@ -54,53 +52,51 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                            target:self
                                                                                            action:@selector(showActions:)];
-    __weak HostInfoViewController *bself = self;
+    weakify(self);
     
     self.refreshControl = [RHRefreshControl refreshControlWithBlock:^(RHRefreshControl *refreshControl) {
+        strongify(self);
         
-        if (bself.host.last_updated_details == nil) {
+        if (self.host.last_updated_details == nil) {
             [SVProgressHUD showWithStatus:NSLocalizedString(@"Loading...", nil) maskType:SVProgressHUDMaskTypeGradient];
         }
         
-        [WSRequests hostDetailsWithHost:bself.host success:^(NSURLSessionDataTask *task, id responseObject) {
+        [[WSHTTPClient sharedHTTPClient] hostDetailsWithHost:self.host].then(^() {
             
-            [refreshControl endRefreshing];
+            // We don't return the promise since we don't necessarily want to wait for this to finish.
+            [[WSHTTPClient sharedHTTPClient] hostFeedbackWithHost:self.host];
             
-            [SVProgressHUD dismiss];
-            
-            [WSRequests hostFeedbackWithHost:bself.host];
-            
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            
-            [refreshControl endRefreshing];
-            [SVProgressHUD dismiss];
-            
-            if (bself.host.last_updated_details == nil) {
+        }).catch(^(NSError *error) {
+            if (self.host.last_updated_details == nil) {
                 // [[RHAlertView alertWithOKButtonWithTitle:nil message:NSLocalizedString(@"An error occurred while loading the details of this host. Please check your network connection and try again.", nil)] show];
                 [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Error loading host details.", nil)];
             } else if (self.host.isStale) {
                 [[RHAlertView alertWithOKButtonWithTitle:nil message:NSLocalizedString(@"The details of this host haven't been updated in a while and might be out of date. Please connect to a network and refresh before attempting to contact this host.", nil)] show];
             }
-            
-        }];
+        }).finally(^() {
+            [refreshControl endRefreshing];
+            [SVProgressHUD dismiss];
+        });
+        
     }];
-    
 }
 
 
 -(void)refreshToolbar {
-    __weak HostInfoViewController *bself = self;
+    weakify(self);
     
     UIImage *starImage = self.host.favouriteValue ? [UIImage imageNamed:@"iconmonstr-star-2-icon"] : [UIImage imageNamed:@"iconmonstr-star-5-icon"];
     
     RHBarButtonItem *favouriteToggle = [[RHBarButtonItem alloc] initWithImage:starImage block:^{
-        Host *host = bself.host;
+        strongify(self);
+        Host *host = self.host;
         host.favouriteValue = !host.favouriteValue;
         [Host commit];
     }];
     
     RHBarButtonItem *compose = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose block:^{
-        [bself presentComposeViewController];
+        strongify(self);
+        [self presentComposeViewController];
     }];
     
     NSArray *toolbarItems = @[favouriteToggle,
@@ -205,13 +201,9 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
         return 180;
     }];
     
-    // [self.imageView setImageWithURL:[NSURL URLWithString:[self.host imageURL]] placeholderImage:[UIImage imageNamed:@"ws"]];
-    
     [tableView addSectionWithSectionHeaderText:nil];
     
     NSString *feedbackLabel = [NSString stringWithFormat:@"%@ (%lu)", NSLocalizedString(@"View Feedback", nil), (unsigned long)[self.host.feedback count]];
-    
-    // NSString *feedbackLabel = NSLocalizedString(@"View Feedback", nil);
     
     cell = [tableView addCell:feedbackLabel
                didSelectBlock:^{
@@ -255,7 +247,6 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     [tableView addCell:[RHTableViewCell cellWithLeftLabel:NSLocalizedString(@"Food", nil) largeLabel:self.host.food.boolLabel]];
     
     [tableView reloadData];
-    
 }
 
 #pragma mark AlertView Delegate
@@ -302,7 +293,7 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     [actionsheet addCancelButton];
     
     [actionsheet presentInViewController:self];
-
+    
 }
 
 -(void)presentComposeViewController {

@@ -22,7 +22,6 @@
 //
 
 #import "LoginViewController.h"
-#import "WSRequests.h"
 #import "WSAppDelegate.h"
 
 @interface LoginViewController ()

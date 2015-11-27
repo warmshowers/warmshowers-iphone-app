@@ -22,7 +22,6 @@
 //
 
 #import "HostMapViewController.h"
-#import "WSRequests.h"
 #import "Host.h"
 #import "MKMapView+Utils.h"
 #import "MKMapView+ZoomLevel.h"
@@ -153,7 +152,7 @@
     BOOL animatePin = ([visibleAnnotations count] < 35);
     
     [self.clusteringController refresh:animatePin];
-    [WSRequests requestWithMapView:self.mapView];
+    [[WSHTTPClient sharedHTTPClient] requestWithMapView:self.mapView];
 }
 
 /*

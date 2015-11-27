@@ -23,13 +23,12 @@
 
 #import "WSHTTPClient.h"
 #import "WSAppDelegate.h"
-
+#import "MKMapView+Utils.h"
+#import "Feedback.h"
 
 
 @interface WSHTTPClient()
-
 @property (nonatomic) dispatch_queue_t backgroundQueue;
-
 @end
 
 
@@ -65,9 +64,9 @@
                 [[WSAppDelegate sharedInstance] autologin];
             });
             
-          //  return NSURLSessionResponseCancel;
+            //  return NSURLSessionResponseCancel;
         } else {
-           // return NSURLSessionResponseAllow;
+            // return NSURLSessionResponseAllow;
         }
         
         return NSURLSessionResponseAllow;
@@ -93,6 +92,68 @@
     }
 }
 
+
+-(AnyPromise *)requestWithMapView:(MKMapView *)mapView {
+    /*
+     if ([[WSAppDelegate sharedInstance] isLoggedIn] == NO) {
+     return;
+     }
+     */
+    static NSInteger const maxResults = 50;
+    
+    bounds b = [mapView fetchBounds];
+    
+    [self cancelAllOperations];
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [NSNumber numberWithDouble:b.minLatitude], @"minlat",
+                                [NSNumber numberWithDouble:b.maxLatitude], @"maxlat",
+                                [NSNumber numberWithDouble:b.minLongitude], @"minlon",
+                                [NSNumber numberWithDouble:b.maxLongitude], @"maxlon",
+                                [NSNumber numberWithDouble:b.centerLatitude], @"centerlat",
+                                [NSNumber numberWithDouble:b.centerLongitude], @"centerlon",
+                                [NSNumber numberWithInteger:maxResults], @"limit",
+                                nil];
+    
+    
+    
+    return [self POST:@"/services/rest/hosts/by_location" parameters:parameters].thenOn(self.backgroundQueue, ^(id responseObject, AFHTTPRequestOperation *operation) {
+        
+        NSArray *hosts = [responseObject objectForKey:@"accounts"];
+        
+        for (NSDictionary *dict in hosts) {
+            NSString *hostidstring = [dict objectForKey:@"uid"];
+            NSNumber *hostid = [NSNumber numberWithInteger:[hostidstring integerValue]];
+            
+            // This is a lightweight synchronization, which differs from [Host fetchOrCreate] due to the limited
+            // number of fields.  We don't called [Host fetchOrCreate:] since that will wipe out many fields values.
+            Host *host = [Host hostWithID:hostid];
+            
+            // TODO: This is a bug in the API call
+            host.fullname = [dict objectForKey:@"fullname"];
+            host.name = [dict objectForKey:@"name"];
+            host.street = [dict objectForKey:@"street"];
+            host.city = [dict objectForKey:@"city"];
+            host.province = [dict objectForKey:@"province"];
+            host.postal_code = [dict objectForKey:@"postal_code"];
+            host.country = [dict objectForKey:@"country"];
+            host.last_updated_map = [NSDate date];
+            
+            // host.last_updated = [NSDate date];
+            host.notcurrentlyavailable = [NSNumber numberWithInt:0];
+            
+            NSString *latitude = [dict objectForKey:@"latitude"];
+            NSString *longitude = [dict objectForKey:@"longitude"];
+            
+            host.latitude = [NSNumber numberWithDouble:[latitude doubleValue]];
+            host.longitude = [NSNumber numberWithDouble:[longitude doubleValue]];
+        }
+        
+        [Host commit];
+    });
+    
+    
+}
 
 
 -(AnyPromise *)loginWithUsername:(NSString *)username password:(NSString *)password {
@@ -126,7 +187,7 @@
 
 
 -(AnyPromise *)refreshThreads {
-
+    
     return [self POST:@"/services/rest/message/get" parameters:nil].thenOn(self.backgroundQueue, ^(id responseObject, AFHTTPRequestOperation *operation) {
         NSArray *all_ids = [[responseObject pluck:@"thread_id"] valueForKey:@"integerValue"];
         
@@ -176,6 +237,34 @@
     });
 }
 
+-(AnyPromise *)hostDetailsWithHost:(Host *)host {
+    NSString *path = [NSString stringWithFormat:@"/services/rest/user/%i", [host.hostid intValue]];
+    
+    return [self GET:path parameters:nil].thenOn(self.backgroundQueue, ^(id responseObject, AFHTTPRequestOperation *operation) {
+        Host *host = [Host fetchOrCreate:responseObject];
+        host.last_updated_details = [NSDate date];
+        [Host commit];
+    });
+    
+    /*.catch(^(NSError *error) {
+        
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)[task response];
+        
+        NSInteger statusCode = [response statusCode];
+        
+        // 404 not found (page doesn't exist anymore)
+        if (statusCode == 404) {
+            [host delete];
+            [Host commit];
+        }
+        
+        if (failure) {
+            failure(task, error);
+        }
+        
+    });*/
+}
+
 -(AnyPromise *)markThreadAsRead:(MessageThread *)thread {
     NSDictionary *parameters = @{
                                  @"thread_id" : thread.threadid,
@@ -185,6 +274,71 @@
     return [[WSHTTPClient sharedHTTPClient] POST:@"/services/rest/message/markThreadRead" parameters:parameters];
 }
 
+-(AnyPromise *)hostFeedbackWithHost:(Host *)host {
+    NSString *path = [NSString stringWithFormat:@"/user/%li/json_recommendations", (long)host.hostid.integerValue];
+    
+    return [[WSHTTPClient sharedHTTPClient] GET:path parameters:nil].thenOn(self.backgroundQueue, ^(id responseObject, AFHTTPRequestOperation *operation) {
+        
+        Host *bhost = [host objectInCurrentThreadContextWithError:nil];
+        
+        NSArray *recommendations = [responseObject objectForKey:@"recommendations"];
+        
+        NSArray *all_nids = [[recommendations pluck:@"recommendation.nid"] valueForKey:@"integerValue"];
+        
+        [Feedback deleteWithPredicate:[NSPredicate predicateWithFormat:@"host = %@ AND NOT (nid IN %@)", host, all_nids]];
+        
+        for (NSDictionary *feedback in recommendations) {
+            
+            NSDictionary *dict = [feedback objectForKey:@"recommendation"];
+            
+            NSString *snid = [dict objectForKey:@"nid"];
+            NSString *recommender = [[dict objectForKey:@"fullname" defaultValue:[dict objectForKey:@"name" defaultValue:@"Unknown"]] trim];
+            NSString *body = [[dict objectForKey:@"body"] trim];
+            NSString *hostOrGuest = [dict objectForKey:@"field_guest_or_host_value"];
+            NSNumber *recommendationDate = [dict objectForKey:@"field_hosting_date_value"];
+            NSString *ratingValue = [dict objectForKey:@"field_rating_value"];
+            
+            NSNumber *nid = [NSNumber numberWithInteger:[snid integerValue]];
+            NSDate *rDate = [NSDate dateWithTimeIntervalSince1970:[recommendationDate doubleValue]];
+            
+            Feedback *feedback = [Feedback feedbackWithID:nid];
+            [feedback setBody:body];
+            [feedback setFullname:recommender];
+            [feedback setHostOrGuest:hostOrGuest];
+            [feedback setDate:rDate];
+            [feedback setRatingValue:ratingValue];
+            
+            [bhost addFeedbackObject:feedback];
+        }
+        
+        [Feedback commit];
+        
+    });
+    
+}
 
+-(AnyPromise *)searchHostsWithKeyword:(NSString *)keyword {
+    
+    // redundant
+    // [self cancelAllOperations];
+    
+    NSDictionary *parameters = @{
+                                 @"keyword" : keyword,
+                                 @"limit" : @100,
+                                 @"page" : @0
+                                 };
+    
+    return [self POST:@"/services/rest/hosts/by_keyword" parameters:parameters].thenOn(self.backgroundQueue, ^(id responseObject, AFHTTPRequestOperation *operation) {
+        
+        NSArray *hosts = [[responseObject objectForKey:@"accounts"] allObjects];
+        
+        for (NSDictionary *dict in hosts) {
+            [Host fetchOrCreate:dict];
+        }
+        
+        [Host commit];
+    });
+    
+}
 
 @end

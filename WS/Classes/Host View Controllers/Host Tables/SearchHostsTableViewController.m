@@ -22,7 +22,6 @@
 //
 
 #import "SearchHostsTableViewController.h"
-#import "WSRequests.h"
 #import "RHTimer.h"
 
 @interface SearchHostsTableViewController()
@@ -70,11 +69,9 @@
     NSString *searchString = searchController.searchBar.text;
 
     if ([searchString length] >= 3) {
-
         self.timer = [[RHTimer alloc] initWithInterval:0.5f repeats:NO block:^{
-             [WSRequests searchHostsWithKeyword:searchString];
+            [[WSHTTPClient sharedHTTPClient] searchHostsWithKeyword:searchString];
         }];
-        
     }
 }
 

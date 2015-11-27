@@ -43,7 +43,6 @@
 		830922D11B13C62100C29C56 /* RHAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830922CF1B13C62100C29C56 /* RHAboutViewController.m */; };
 		830D05411BB913BE0035257D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830D05401BB913BE0035257D /* LaunchScreen.storyboard */; };
 		832198911AFFF49B0041A72F /* SingleThreadTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 832198901AFFF49B0041A72F /* SingleThreadTableViewController.m */; };
-		8330B481126A0775008B2EC4 /* WSRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8330B480126A0775008B2EC4 /* WSRequests.m */; };
 		8343CC8F1AFFE2DC00EE3A45 /* MessageThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 8343CC8E1AFFE2DC00EE3A45 /* MessageThread.m */; };
 		83441AD51608694900468716 /* WSHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 83441AD41608694900468716 /* WSHTTPClient.m */; };
 		8348AE381872A2AD0097DF24 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8348AE371872A2AD0097DF24 /* Images.xcassets */; };
@@ -68,6 +67,7 @@
 		839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */; };
 		83B3348F1B046DE900A2A1FB /* ComposeMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83B3348E1B046DE900A2A1FB /* ComposeMessageViewController.xib */; };
 		83BE50B6126B4E7B00B5A65A /* HostInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BE50B4126B4E7B00B5A65A /* HostInfoViewController.m */; };
+		83BFC42B1C082881000A680E /* WSUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFC42A1C082881000A680E /* WSUserDefaults.m */; };
 		83C78E801474DE3D00274616 /* CLLocation+Bearing.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C78E7F1474DE3D00274616 /* CLLocation+Bearing.m */; };
 		83CDACE0160A310000B5DC83 /* FeedbackTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CDACDF160A310000B5DC83 /* FeedbackTableViewController.m */; };
 		83CE1361147455CB006EED95 /* FavouriteHostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE1360147455CB006EED95 /* FavouriteHostTableViewController.m */; };
@@ -133,8 +133,6 @@
 		830D05401BB913BE0035257D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8321988F1AFFF49B0041A72F /* SingleThreadTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleThreadTableViewController.h; sourceTree = "<group>"; };
 		832198901AFFF49B0041A72F /* SingleThreadTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleThreadTableViewController.m; sourceTree = "<group>"; };
-		8330B47F126A0775008B2EC4 /* WSRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSRequests.h; sourceTree = "<group>"; };
-		8330B480126A0775008B2EC4 /* WSRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSRequests.m; sourceTree = "<group>"; };
 		8330B4C8126A092E008B2EC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8343CC8D1AFFE2DC00EE3A45 /* MessageThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageThread.h; sourceTree = "<group>"; };
 		8343CC8E1AFFE2DC00EE3A45 /* MessageThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageThread.m; sourceTree = "<group>"; };
@@ -172,6 +170,8 @@
 		83B3348E1B046DE900A2A1FB /* ComposeMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeMessageViewController.xib; sourceTree = "<group>"; };
 		83BE50B3126B4E7B00B5A65A /* HostInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostInfoViewController.h; sourceTree = "<group>"; };
 		83BE50B4126B4E7B00B5A65A /* HostInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostInfoViewController.m; sourceTree = "<group>"; };
+		83BFC4291C082881000A680E /* WSUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSUserDefaults.h; sourceTree = "<group>"; };
+		83BFC42A1C082881000A680E /* WSUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSUserDefaults.m; sourceTree = "<group>"; };
 		83C78E7E1474DE3D00274616 /* CLLocation+Bearing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+Bearing.h"; sourceTree = "<group>"; };
 		83C78E7F1474DE3D00274616 /* CLLocation+Bearing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+Bearing.m"; sourceTree = "<group>"; };
 		83CDACDE160A310000B5DC83 /* FeedbackTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackTableViewController.h; sourceTree = "<group>"; };
@@ -254,6 +254,8 @@
 				830569B81B1CF8890039C5E2 /* Other View Controllers */,
 				1D3623240D0F684500981E51 /* WSAppDelegate.h */,
 				1D3623250D0F684500981E51 /* WSAppDelegate.m */,
+				83BFC4291C082881000A680E /* WSUserDefaults.h */,
+				83BFC42A1C082881000A680E /* WSUserDefaults.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -361,8 +363,6 @@
 			children = (
 				83441AD31608694900468716 /* WSHTTPClient.h */,
 				83441AD41608694900468716 /* WSHTTPClient.m */,
-				8330B47F126A0775008B2EC4 /* WSRequests.h */,
-				8330B480126A0775008B2EC4 /* WSRequests.m */,
 			);
 			path = HTTPRequest;
 			sourceTree = "<group>";
@@ -682,12 +682,12 @@
 				1D3623260D0F684500981E51 /* WSAppDelegate.m in Sources */,
 				83EC1DB21B0155D1003FD77B /* Message.m in Sources */,
 				28C286E10D94DF7D0034E888 /* HostMapViewController.m in Sources */,
-				8330B481126A0775008B2EC4 /* WSRequests.m in Sources */,
 				839FD6F3126AED0A00C008F8 /* MKMapView+ZoomLevel.m in Sources */,
 				83BE50B6126B4E7B00B5A65A /* HostInfoViewController.m in Sources */,
 				8388B1371458A8100079ACE3 /* SearchHostsTableViewController.m in Sources */,
 				830922D11B13C62100C29C56 /* RHAboutViewController.m in Sources */,
 				83DBE69D1AFD6607003CFFCD /* LeftMenuViewController.m in Sources */,
+				83BFC42B1C082881000A680E /* WSUserDefaults.m in Sources */,
 				83CE1361147455CB006EED95 /* FavouriteHostTableViewController.m in Sources */,
 				83C78E801474DE3D00274616 /* CLLocation+Bearing.m in Sources */,
 				8343CC8F1AFFE2DC00EE3A45 /* MessageThread.m in Sources */,
