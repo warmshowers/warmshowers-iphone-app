@@ -54,7 +54,8 @@ static NSString *CellIdentifier = @"d8bd8a42-1303-444b-b1f0-aca389ee9cd7";
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-     [self.thread refreshMessages];
+    [super viewWillAppear:animated];
+    [[WSHTTPClient sharedHTTPClient] refreshMessagesForThread:self.thread];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

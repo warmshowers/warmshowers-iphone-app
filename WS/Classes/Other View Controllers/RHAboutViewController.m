@@ -100,7 +100,7 @@
     [self.tableView addSectionWithSectionHeaderText:@"Other Apps" footerText:NSLocalizedString(@"The Warm Showers and TrackMyTour apps developed by Christopher Meyer.", nil)];
     
     RHTableViewCell *tmtCell = [self.tableView addCell:[RHTableViewCell cellWithLabelText:@"TrackMyTour"
-                                               detailLabelText:NSLocalizedString(@"A tracking app for bike touring", nil)
+                                               detailLabelText:NSLocalizedString(@"A tracking app for bike touring.", nil)
                                                 didSelectBlock:^(RHTableViewCell *cell) {
                                                      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://trackmytour.com/"]];
                                                 } style:UITableViewCellStyleSubtitle

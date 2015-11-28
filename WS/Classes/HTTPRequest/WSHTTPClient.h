@@ -39,5 +39,6 @@
 -(AnyPromise *)hostDetailsWithHost:(Host *)host;
 -(AnyPromise *)hostFeedbackWithHost:(Host *)host;
 -(AnyPromise *)searchHostsWithKeyword:(NSString *)keyword;
+-(AnyPromise *)refreshMessagesForThread:(MessageThread *)thread;
 
 @end

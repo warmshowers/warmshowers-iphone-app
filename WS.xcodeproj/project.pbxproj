@@ -163,6 +163,7 @@
 		8388B1361458A8100079ACE3 /* SearchHostsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchHostsTableViewController.m; sourceTree = "<group>"; };
 		838AB090172F94FA005A9149 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		838AB092172F9500005A9149 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		839006F31C09CAE70075DF93 /* WS4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WS4.xcdatamodel; sourceTree = "<group>"; };
 		839FD6F1126AED0A00C008F8 /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
 		839FD6F2126AED0A00C008F8 /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
 		83B3348E1B046DE900A2A1FB /* ComposeMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeMessageViewController.xib; sourceTree = "<group>"; };
@@ -842,9 +843,10 @@
 		83EC1DAD1B01508F003FD77B /* WS.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				839006F31C09CAE70075DF93 /* WS4.xcdatamodel */,
 				83EC1DAE1B01508F003FD77B /* WS3.xcdatamodel */,
 			);
-			currentVersion = 83EC1DAE1B01508F003FD77B /* WS3.xcdatamodel */;
+			currentVersion = 839006F31C09CAE70075DF93 /* WS4.xcdatamodel */;
 			path = WS.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

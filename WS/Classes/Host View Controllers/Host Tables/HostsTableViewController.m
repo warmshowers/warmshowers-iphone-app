@@ -85,7 +85,7 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Host *host = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSLog(@"%@", host);
+    // NSLog(@"%@", host);
     
     cell.textLabel.text= [host title];
     cell.detailTextLabel.text = [host subtitle];

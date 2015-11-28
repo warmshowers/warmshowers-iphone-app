@@ -1,5 +1,11 @@
 # Warmshowers changelog
 
+## v5.1.0
+
+- migrated all network kit to use PromiseKit
+- fixed deleted messages from not being purged
+- updated all dependent libraries to latest version
+
 ## v5.0.1
 
 - fixed bug in messages where "reply" would compose a message to the signed in user

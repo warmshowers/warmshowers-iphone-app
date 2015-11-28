@@ -25,7 +25,7 @@
 #import "WSAppDelegate.h"
 #import "MKMapView+Utils.h"
 #import "Feedback.h"
-
+#import "Message.h"
 
 @interface WSHTTPClient()
 @property (nonatomic) dispatch_queue_t backgroundQueue;
@@ -93,15 +93,7 @@
 
 
 -(AnyPromise *)requestWithMapView:(MKMapView *)mapView {
-    /*
-     if ([[WSAppDelegate sharedInstance] isLoggedIn] == NO) {
-     return;
-     }
-     
-     // do we
-     return [AnyPromise promiseWithResolverBlock:^(PMKResolver  _Nonnull resolve) {};
-     
-     */
+    
     static NSInteger const maxResults = 50;
     
     bounds b = [mapView fetchBounds];
@@ -117,8 +109,6 @@
                                 [NSNumber numberWithDouble:b.centerLongitude], @"centerlon",
                                 [NSNumber numberWithInteger:maxResults], @"limit",
                                 nil];
-    
-    
     
     return [self POST:@"/services/rest/hosts/by_location" parameters:parameters].thenOn(self.backgroundQueue, ^(id responseObject, AFHTTPRequestOperation *operation) {
         
@@ -262,7 +252,7 @@
 -(AnyPromise *)hostFeedbackWithHost:(Host *)host {
     NSString *path = [NSString stringWithFormat:@"/user/%li/json_recommendations", (long)host.hostid.integerValue];
     
-    return [[WSHTTPClient sharedHTTPClient] GET:path parameters:nil].thenOn(self.backgroundQueue, ^(id responseObject, AFHTTPRequestOperation *operation) {
+    return [self GET:path parameters:nil].thenOn(self.backgroundQueue, ^(id responseObject, AFHTTPRequestOperation *operation) {
         
         Host *bhost = [host objectInCurrentThreadContextWithError:nil];
         
@@ -322,6 +312,63 @@
         }
         
         [Host commit];
+    });
+    
+}
+
+// Is this the right place for this?
+-(AnyPromise *)refreshMessagesForThread:(MessageThread *)thread {
+    
+    NSString *path = @"/services/rest/message/getThread";
+    
+    NSDictionary *parameters = @{@"thread_id": thread.threadid.stringValue};
+    
+    return [self POST:path parameters:parameters].thenOn(self.backgroundQueue, ^(id responseObject, AFHTTPRequestOperation *operation) {
+        
+        MessageThread *myThread = [thread objectInCurrentThreadContextWithError:nil];
+        
+        NSArray *msgs = [responseObject objectForKey:@"messages"];
+        NSArray *all_msgids = [[msgs pluck:@"mid"] valueForKey:@"integerValue"];
+        
+        // delete any local messages that don't exist anymore
+        [Message deleteWithPredicate:[NSPredicate predicateWithFormat:@"thread = %@ AND NOT (mid IN %@)", myThread, all_msgids]];
+        
+        // We don't want to update objects unnecessarily.  This causes a number of problems with the core data update.
+        // It's probably safe to assume that messages don't change.
+        NSArray *currentMessages = [[myThread.messages.allObjects pluck:@"mid"] arrayByPerformingSelector:@selector(stringValue)];
+        NSArray *newMsgs = [msgs filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"NOT (mid in %@)", currentMessages]];
+        
+        for (NSDictionary *dict in newMsgs) {
+            
+            NSNumber *mid = @([[dict objectForKey:@"mid"] intValue]);
+            NSString *body = [dict objectForKey:@"body"];
+            
+            NSString *author_string;
+            
+            if ([[dict objectForKey:@"author"] isKindOfClass:[NSDictionary class]]) {
+                author_string = [dict valueForKeyPath:@"author.uid"];
+            } else {
+                author_string = [dict objectForKey:@"author"];
+            }
+            
+            NSNumber *author_id = @([author_string intValue]);
+            
+            NSTimeInterval timestamp_int = [[dict objectForKey:@"timestamp"] doubleValue];
+            
+            Message *message = [Message newOrExistingEntityWithPredicate:[NSPredicate predicateWithFormat:@"mid=%d", [mid intValue]]];
+            [message setMid:mid];
+            [message setBody:body];
+            [message setThread:myThread];
+            [message setTimestamp:[NSDate dateWithTimeIntervalSince1970:timestamp_int]];
+            
+            Host *host = [Host hostWithID:author_id];
+            // [host setName:name];
+            // [host setHostid:author];
+            
+            [message setAuthor:host];
+        }
+        
+        [Message commit];
     });
     
 }
