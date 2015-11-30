@@ -35,6 +35,7 @@
 #import "LeftMenuViewController.h"
 #import "Lockbox.h"
 #import "LoginViewController.h"
+#import "MessageThread.h"
 
 @interface WSAppDelegate ()
 @property (nonatomic, strong) ECSlidingViewController *slidingViewController;
@@ -172,6 +173,8 @@
 
 -(void)logout {
     [[WSUserDefaults sharedInstance] setIsLoggedIn:NO];
+    [MessageThread deleteAll];
+    [MessageThread commit];
     [self promptForUsernameAndPassword];
 }
 

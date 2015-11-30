@@ -139,8 +139,8 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
                 [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Unmarked as favourite", nil)];
             }
         }
-        
         [self refreshTableView];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil];
     }];
     
     [self.host setDidDeleteBlock:^() {
@@ -272,14 +272,14 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
             strongify(self);
             self.host.favouriteValue = NO;
             [Host commit];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:self.host forKey:@"host"]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil];
         }];
     } else {
         [actionsheet addButtonWithTitle:NSLocalizedString(@"Mark as Favourite", nil) block:^(UIAlertAction * _Nonnull action) {
             strongify(self);
             self.host.favouriteValue = YES;
             [Host commit];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil userInfo:[NSDictionary dictionaryWithObject:self.host forKey:@"host"]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kShouldRedrawMapAnnotation object:nil];
         }];
     }
     

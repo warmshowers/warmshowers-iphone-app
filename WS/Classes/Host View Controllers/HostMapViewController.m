@@ -30,12 +30,10 @@
 #import "RHAboutViewController.h"
 #import "HostsTableViewController.h"
 #import "WSHTTPClient.h"
-
 #import "KPAnnotation.h"
 
 @interface HostMapViewController()
 @property (nonatomic, strong) KPClusteringController *clusteringController;
-
 @end
 
 @implementation HostMapViewController
@@ -59,7 +57,7 @@
     
     self.lastZoomLevel = [self.mapView zoomLevel];
     
-  //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redrawAnnotations) name:kShouldRedrawMapAnnotation object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redrawAnnotations) name:kShouldRedrawMapAnnotation object:nil];
 
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     [self.clusteringController setDelegate:self];
@@ -79,7 +77,6 @@
     if (self.hasRunOnce == NO) {
         [self.mapView setDelegate:self];
         [self.mapView setShowsUserLocation:YES];
-        
         self.hasRunOnce = YES;
     }
 }
@@ -101,37 +98,6 @@
 
 #pragma mark -
 #pragma mark Fetched results controller
-
--(NSFetchedResultsController *)fetchedResultsController {
-    
-    if (_fetchedResultsController == nil) {
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        
-        [fetchRequest setEntity:[Host entityDescription]];
-        [fetchRequest setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"hostid" ascending:YES]]];
-        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1"]];
-     
-        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                            managedObjectContext:[Host managedObjectContextForCurrentThread]
-                                                                              sectionNameKeyPath:nil
-                                                                                       cacheName:nil];
-        [_fetchedResultsController setDelegate:self];
-        
-        
-        NSError *error = nil;
-        if (![_fetchedResultsController performFetch:&error]) {
-            /*
-             Replace this implementation with code to handle the error appropriately.
-             abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-             */
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            // abort();
-        }
-    }
-    
-    return _fetchedResultsController;
-}
-
 -(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
     [[WSHTTPClient sharedHTTPClient] cancelAllOperations];
 }
@@ -152,36 +118,20 @@
     BOOL animatePin = ([visibleAnnotations count] < 35);
     
     [self.clusteringController refresh:animatePin];
-    [[WSHTTPClient sharedHTTPClient] requestWithMapView:self.mapView];
+    [[WSHTTPClient sharedHTTPClient] requestWithMapView:self.mapView].then(^() {
+        [self redrawAnnotations];
+    });
 }
-
-/*
--(BOOL)clusteringControllerShouldClusterAnnotations:(KPClusteringController *)clusteringController {
-    return self.mapView.zoomLevel < 14; // Find zoom level that suits your dataset
-}
-*/
 
 #pragma mark -
-#pragma mark Fetched results controller delegate
-
--(void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    
-    [self redrawAnnotations];
-    
-    // this doesn't seem to work if the objects are inserted off the main thread (??)
-    //if ([[[controller managedObjectContext] insertedObjects] count] > 0) {
-      //   [self redrawAnnotations];
-   // }
-}
-
 -(void)zoomToCurrentLocation:(id)sender {
     MKUserLocation *userLocation = [self.mapView userLocation];
     [self.mapView setCenterCoordinate:userLocation.coordinate animated:YES];
 }
 
 -(void)redrawAnnotations {
-    self.fetchedResultsController = nil;
-    [self.clusteringController setAnnotations:[self.fetchedResultsController fetchedObjects]];
+    NSArray *hosts = [Host fetchWithPredicate:[NSPredicate predicateWithFormat:@"notcurrentlyavailable != 1"]];
+    [self.clusteringController setAnnotations:hosts];
 }
 
 -(void)clusteringController:(KPClusteringController *)clusteringController configureAnnotationForDisplay:(KPAnnotation *)annotation {
@@ -248,10 +198,7 @@
         Host *host = [[kingpinAnnotation annotations] anyObject];
         HostInfoViewController *controller = [HostInfoViewController new];
         controller.host = host;
-         
-         
-      //   [self.navigationController pushViewController:controller animated:YES];
-         
+
          __weak UIViewController *bself = self;
          controller.navigationItem.leftBarButtonItem = [RHBarButtonItem itemWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^{
              [bself dismissViewControllerAnimated:YES completion:nil];
@@ -290,6 +237,10 @@
             self.mapView.mapType = MKMapTypeHybrid;
             break;
     }
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

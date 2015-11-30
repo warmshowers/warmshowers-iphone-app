@@ -25,22 +25,15 @@
 #import <CoreData/CoreData.h>
 #import "KPClusteringController.h"
 
-@interface HostMapViewController : UIViewController <NSFetchedResultsControllerDelegate, MKMapViewDelegate, KPClusteringControllerDelegate>
+@interface HostMapViewController : UIViewController <MKMapViewDelegate, KPClusteringControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet MKMapView *mapView;
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, assign) NSUInteger lastZoomLevel;
-
 @property (nonatomic, assign) BOOL locationUpdated;
 @property (nonatomic, assign) BOOL hasRunOnce;
 
-
-
-
 -(IBAction)zoomToCurrentLocation:(id)sender;
 -(void)redrawAnnotations;
-
-
 -(IBAction)mapTypeSegmentedControl:(UISegmentedControl *)sender;
 
 @end

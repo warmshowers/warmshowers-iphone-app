@@ -21,6 +21,8 @@
 //  THE SOFTWARE.
 //
 
+#define kShouldRedrawMapAnnotation @"ShouldRedrawMapAnnotations"
+
 #import "AFHTTPSessionManager.h"
 #import "MessageThread.h"
 #import <MapKit/MapKit.h>

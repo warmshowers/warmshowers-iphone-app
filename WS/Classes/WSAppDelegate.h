@@ -22,8 +22,6 @@
 //
 
 #define kWSBaseColour [UIColor colorFromHexString:@"0288D1"]
-#define kShouldRedrawMapAnnotation @"ShouldRedrawMapAnnotations"
-#define kNetworkError @"Check your network connection"
 
 #import <MapKit/MapKit.h>
 
