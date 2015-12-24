@@ -21,7 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - BButton (4.0.2)
-  - CrittercismSDK (5.4.5)
+  - CrittercismSDK (5.4.10)
   - DateTools (1.7.0)
   - ECSlidingViewController (2.0.3)
   - FFGlobalAlertController (1.0.2)
@@ -83,7 +83,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   BButton: ab0f2ed3b998ae73c5188b57d270d81e4a1eeb27
-  CrittercismSDK: ac7fd22cd81d63a6398febc9f97427dca54edfc1
+  CrittercismSDK: c235710dea3a08a3759ec50ce1445495ab46aecf
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   ECSlidingViewController: 6485c14f23b4487e9946535421ca8f111f86cc53
   FFGlobalAlertController: 40c66500ae173895085911ba19d79d045bd26742
