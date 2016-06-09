@@ -122,7 +122,7 @@
     
     NSString *message = self.textView.text;
     
-    [SVProgressHUD showWithStatus:@"Sending..." maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:@"Sending..."];
     
     if (self.thread) {
         

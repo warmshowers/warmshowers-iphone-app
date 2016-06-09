@@ -58,7 +58,7 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
         strongify(self);
         
         if (self.host.last_updated_details == nil) {
-            [SVProgressHUD showWithStatus:NSLocalizedString(@"Loading...", nil) maskType:SVProgressHUDMaskTypeGradient];
+            [SVProgressHUD showWithStatus:NSLocalizedString(@"Loading...", nil)];
         }
         
         [[WSHTTPClient sharedHTTPClient] hostDetailsWithHost:self.host].then(^() {

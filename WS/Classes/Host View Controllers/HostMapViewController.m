@@ -199,9 +199,10 @@
         HostInfoViewController *controller = [HostInfoViewController new];
         controller.host = host;
 
-         __weak UIViewController *bself = self;
+         weakify(self);
          controller.navigationItem.leftBarButtonItem = [RHBarButtonItem itemWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^{
-             [bself dismissViewControllerAnimated:YES completion:nil];
+             strongify(self);
+             [self dismissViewControllerAnimated:YES completion:nil];
          }];
          
          UINavigationController *navController = controller.wrapInNavigationController;
@@ -214,9 +215,10 @@
         [controller setBasePredicate:[NSPredicate predicateWithFormat:@"self in %@", kpAnnotations]];
         // [self.navigationController pushViewController:controller animated:YES];
 
-        __weak UIViewController *bself = self;
+        weakify(self);
         controller.navigationItem.leftBarButtonItem = [RHBarButtonItem itemWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^{
-            [bself dismissViewControllerAnimated:YES completion:nil];
+            strongify(self);
+            [self dismissViewControllerAnimated:YES completion:nil];
         }];
         
         UINavigationController *navController = controller.wrapInNavigationController;

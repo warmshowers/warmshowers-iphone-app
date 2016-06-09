@@ -37,19 +37,19 @@
 
 
 -(NSString *)username {
-    return [Lockbox stringForKey:@"ws-username"] ? [Lockbox stringForKey:@"ws-username"] : @"";
+    return [Lockbox unarchiveObjectForKey:@"ws-username"] ? [Lockbox unarchiveObjectForKey:@"ws-username"] : @"";
 }
 
 -(void)setUsername:(NSString *)username {
-    [Lockbox setString:username forKey:@"ws-username"];
+    [Lockbox archiveObject:username forKey:@"ws-username"];
 }
 
 -(NSString *)password {
-    return [Lockbox stringForKey:@"ws-password"] ? [Lockbox stringForKey:@"ws-password"] : @"";
+    return [Lockbox unarchiveObjectForKey:@"ws-password"] ? [Lockbox unarchiveObjectForKey:@"ws-password"] : @"";
 }
 
 -(void)setPassword:(NSString *)password {
-    [Lockbox setString:password forKey:@"ws-password"];
+    [Lockbox archiveObject:password forKey:@"ws-password"];
 }
 
 @end

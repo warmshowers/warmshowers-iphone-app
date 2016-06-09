@@ -27,7 +27,6 @@
 #import "Feedback.h"
 
 @implementation Host
-@synthesize coordinate;
 
 // TODO: To be moved into RHManagedObject
 +(void)initialize {
@@ -104,9 +103,9 @@
     
     NSString *latitude = [dict objectForKey:@"latitude"];
     NSString *longitude = [dict objectForKey:@"longitude"];
-    
-    host.latitude = [NSNumber numberWithDouble:[latitude doubleValue]];
-    host.longitude = [NSNumber numberWithDouble:[longitude doubleValue]];
+
+    host.latitude  = [latitude isKindOfClass:[NSNull class]]  ? nil : [NSNumber numberWithDouble:[latitude doubleValue]];
+    host.longitude = [longitude isKindOfClass:[NSNull class]] ? nil : [NSNumber numberWithDouble:[longitude doubleValue]];
     
     NSTimeInterval last_login_int = [[dict objectForKey:@"login"] doubleValue];
     host.last_login = [NSDate dateWithTimeIntervalSince1970:last_login_int];
@@ -123,11 +122,11 @@
 +(NSArray *)hostsClosestToLocation:(CLLocation *)location withLimit:(int)limit {
     CLLocationCoordinate2D c = location.coordinate;
     NSPredicate *predicate;
-    int factor = 1;
+    NSUInteger factor = 1;
     
     CLLocationDegrees minLatitude, maxLatitude, minLongitude, maxLongitude;
     
-    for (int i=1; i < 180; i++) {
+    for (NSUInteger i=1; i < 180; i++) {
         minLatitude = c.latitude - ( i * factor);
         maxLatitude = c.latitude + ( i * factor);
         minLongitude = c.longitude - (i * factor);

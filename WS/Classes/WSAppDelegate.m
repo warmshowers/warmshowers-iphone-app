@@ -30,7 +30,7 @@
 #import "SVProgressHUD.h"
 #import "Host.h"
 #import "WSHTTPClient.h"
-#import "Crittercism.h"
+#import <Crittercism/Crittercism.h>
 #import "ECSlidingViewController.h"
 #import "LeftMenuViewController.h"
 #import "Lockbox.h"
@@ -74,7 +74,7 @@
     // -doesRequireMigration is a method in my RHManagedObject Core Data framework. Function should be self explanatory.
     if ([Host doesRequireMigration]) {
         // SVProgressHUD displays an animated spinner
-        [SVProgressHUD showWithStatus:NSLocalizedString(@"Upgrading...", nil) maskType:SVProgressHUDMaskTypeGradient];
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"Upgrading...", nil)];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             
@@ -107,6 +107,8 @@
     
     [SVProgressHUD setBackgroundColor:kWSBaseColour];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD setMinimumDismissTimeInterval:1.0f];
     
     [self.window setTintColor:kWSBaseColour];
     self.window.rootViewController = self.slidingViewController;

@@ -47,7 +47,7 @@ static NSString *CellIdentifier = @"2dcc246d-59aa-497c-b2d8-438b2eee35d5";
     if (self.searchString) {
         NSMutableArray *predicates = [NSMutableArray arrayWithObject:self.basePredicate];
         
-        for (NSString *term in [self.searchString whitespaceTokenize]) {
+        for (NSString *term in self.searchString.whitespaceTokenize) {
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"comments CONTAINS[cd] %@ OR name CONTAINS[cd] %@ OR fullname CONTAINS[cd] %@ OR city CONTAINS[cd] %@ OR province CONTAINS[cd] %@", term, term, term, term, term];
             [predicates addObject:predicate];
         }

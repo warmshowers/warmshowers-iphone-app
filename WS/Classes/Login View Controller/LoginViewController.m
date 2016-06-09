@@ -77,7 +77,7 @@
     
     weakify(self);
     
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil)];
     
     [[WSHTTPClient sharedHTTPClient] loginWithUsername:username password:password].then(^() {
         strongify(self);

@@ -21,42 +21,40 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - BButton (4.0.2)
-  - CrittercismSDK (5.4.10)
+  - CrittercismSDK (5.6.0)
   - DateTools (1.7.0)
   - ECSlidingViewController (2.0.3)
-  - FFGlobalAlertController (1.0.2)
   - FrameAccessor (2.0)
-  - kingpin (0.3.1)
-  - KVOController (1.0.3)
-  - Lockbox (2.1.0)
+  - kingpin (0.3.2)
+  - KVOController (1.1.0)
+  - Lockbox (3.0.0)
   - MBAutoGrowingTextView (0.1.0)
-  - OMGHTTPURLRQ (3.0.2):
-    - OMGHTTPURLRQ/RQ (= 3.0.2)
-  - OMGHTTPURLRQ/FormURLEncode (3.0.2)
-  - OMGHTTPURLRQ/RQ (3.0.2):
+  - OMGHTTPURLRQ (3.1.2):
+    - OMGHTTPURLRQ/RQ (= 3.1.2)
+  - OMGHTTPURLRQ/FormURLEncode (3.1.2)
+  - OMGHTTPURLRQ/RQ (3.1.2):
     - OMGHTTPURLRQ/FormURLEncode
     - OMGHTTPURLRQ/UserAgent
-  - OMGHTTPURLRQ/UserAgent (3.0.2)
-  - PromiseKit (3.0.0):
-    - PromiseKit/Foundation (= 3.0.0)
-    - PromiseKit/QuartzCore (= 3.0.0)
-    - PromiseKit/UIKit (= 3.0.0)
+  - OMGHTTPURLRQ/UserAgent (3.1.2)
+  - PromiseKit (3.2.0):
+    - PromiseKit/Foundation (= 3.2.0)
+    - PromiseKit/QuartzCore (= 3.2.0)
+    - PromiseKit/UIKit (= 3.2.0)
   - PromiseKit-AFNetworking (0.6.0):
     - AFNetworking (~> 2.0)
     - PromiseKit/CorePromise (~> 3.0)
-  - PromiseKit/CorePromise (3.0.0)
-  - PromiseKit/Foundation (3.0.0):
-    - OMGHTTPURLRQ (~> 3.0.0)
+  - PromiseKit/CorePromise (3.2.0)
+  - PromiseKit/Foundation (3.2.0):
+    - OMGHTTPURLRQ (~> 3.1.0)
     - PromiseKit/CorePromise
-  - PromiseKit/QuartzCore (3.0.0):
+  - PromiseKit/QuartzCore (3.2.0):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (3.0.0):
+  - PromiseKit/UIKit (3.2.0):
     - PromiseKit/CorePromise
-  - RHManagedObject (0.16)
+  - RHManagedObject (0.17)
   - RHTools (0.1.0):
-    - FFGlobalAlertController
     - FrameAccessor
-  - SVProgressHUD (1.1.3)
+  - SVProgressHUD (2.0.3)
 
 DEPENDENCIES:
   - AFNetworking
@@ -83,20 +81,21 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   BButton: ab0f2ed3b998ae73c5188b57d270d81e4a1eeb27
-  CrittercismSDK: c235710dea3a08a3759ec50ce1445495ab46aecf
+  CrittercismSDK: c692ad3963048c359c443c7f28634c3ab2a27110
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   ECSlidingViewController: 6485c14f23b4487e9946535421ca8f111f86cc53
-  FFGlobalAlertController: 40c66500ae173895085911ba19d79d045bd26742
   FrameAccessor: 443a13e58e23a10ff22180da0897b28c3f6abf66
-  kingpin: 52bb578006bdeb881db225e6ff1a4228375cbfbf
-  KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
-  Lockbox: 16442da35d9d4286966936763be728a931d589c3
+  kingpin: eed1ff08e782d11a426e91d5c6d6814c5c88b984
+  KVOController: 321b5fc59300fcaabd42c0f679baa7a27efbb2fd
+  Lockbox: 3b23507064de0bfcd772f54eddf41064d4152703
   MBAutoGrowingTextView: 3955d4513be3d184fe2cb7739999c1f994dcd4d5
-  OMGHTTPURLRQ: 8376dc887d76a5a7e2a67881dc788f917a2f437c
-  PromiseKit: 665540a1eb43156446872dcf49ed7dee6ebbe13b
+  OMGHTTPURLRQ: 38316b56d88125c600bcdb16df8329147da2b0ee
+  PromiseKit: 1db024241265f428137a9f3c00ff9590740c4be6
   PromiseKit-AFNetworking: d3b2c88f9bb6bd3124454df99feb47e620873ce4
-  RHManagedObject: 2685dbb2a782a8c25e1e52dffbab386fbf2e5b3c
-  RHTools: a5c868c2711b40440c3616010e62a3aa5442b1ee
-  SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
+  RHManagedObject: 5091a94613bf1cab829d855b76d167817905e8a2
+  RHTools: 419b66e073e304190369201c14e5211dab511ece
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 49f44b091dbfda8c099addff6ee532a4a46224f6
+
+COCOAPODS: 1.0.1
