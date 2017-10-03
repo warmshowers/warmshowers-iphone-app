@@ -38,7 +38,7 @@
     weakify(self);
     
     self.navigationItem.leftBarButtonItem = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
-                                                                                           block:^{
+                                                                                           block:^(RHBarButtonItem *barButtonItem) {
                                                                                                strongify(self);
                                                                                                [self dismissViewControllerAnimated:YES completion:nil];
                                                                                            }];

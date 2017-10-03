@@ -10,9 +10,9 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "046B6680-9AED-48D9-A5A8-24546BE841F4",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "01E228AD04CB9B8A16D7300F550FB8D41E94E7E4" : "RHTools",
-    "0676A656A78758FE02F2A2518760C3E3B746B60B" : "warmshowers-iphone-app",
-    "DB2BCD2DBA086B64535F22975CED221118793941" : "RHManagedObject"
+    "01E228AD04CB9B8A16D7300F550FB8D41E94E7E4" : "RHTools\/",
+    "0676A656A78758FE02F2A2518760C3E3B746B60B" : "warmshowers-iphone-app\/",
+    "DB2BCD2DBA086B64535F22975CED221118793941" : "RHManagedObject\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "WS",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,

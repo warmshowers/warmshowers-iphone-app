@@ -39,8 +39,6 @@
 
 -(void)loginSuccess;
 -(void)logout;
-
--(void)logout;
 -(CLLocation *)userLocation;
 -(void)requestLocationAuthorization;
 -(void)autologin;

@@ -200,7 +200,7 @@
         controller.host = host;
 
          weakify(self);
-         controller.navigationItem.leftBarButtonItem = [RHBarButtonItem itemWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^{
+         controller.navigationItem.leftBarButtonItem = [RHBarButtonItem itemWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^(RHBarButtonItem *barButtonItem) {
              strongify(self);
              [self dismissViewControllerAnimated:YES completion:nil];
          }];
@@ -216,7 +216,7 @@
         // [self.navigationController pushViewController:controller animated:YES];
 
         weakify(self);
-        controller.navigationItem.leftBarButtonItem = [RHBarButtonItem itemWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^{
+        controller.navigationItem.leftBarButtonItem = [RHBarButtonItem itemWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^(RHBarButtonItem *barButtonItem) {
             strongify(self);
             [self dismissViewControllerAnimated:YES completion:nil];
         }];

@@ -46,7 +46,7 @@ static NSString *CellIdentifier = @"d8bd8a42-1303-444b-b1f0-aca389ee9cd7";
     
     __weak SingleThreadTableViewController *bself = self;
     
-    self.navigationItem.rightBarButtonItem = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply block:^{
+    self.navigationItem.rightBarButtonItem = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply block:^(RHBarButtonItem *barButtonItem){
         ComposeMessageViewController *controller = [ComposeMessageViewController controllerWithThread:bself.thread];
         UINavigationController *navController = [controller wrapInNavigationControllerWithPresentationStyle:UIModalPresentationPageSheet];
         [bself presentViewController:navController animated:YES completion:nil];

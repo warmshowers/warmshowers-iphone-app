@@ -95,14 +95,14 @@ static NSString *CellIdentifier = @"40e03609-53d8-49e2-8080-b7ccf4e8d234";
     
     UIImage *starImage = self.host.favouriteValue ? [UIImage imageNamed:@"iconmonstr-star-2-icon"] : [UIImage imageNamed:@"iconmonstr-star-5-icon"];
     
-    RHBarButtonItem *favouriteToggle = [[RHBarButtonItem alloc] initWithImage:starImage block:^{
+    RHBarButtonItem *favouriteToggle = [[RHBarButtonItem alloc] initWithImage:starImage block:^(RHBarButtonItem *barButtonItem) {
         strongify(self);
         Host *host = self.host;
         host.favouriteValue = !host.favouriteValue;
         [Host commit];
     }];
     
-    RHBarButtonItem *compose = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose block:^{
+    RHBarButtonItem *compose = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose block:^(RHBarButtonItem *barButtonItem) {
         strongify(self);
         [self presentComposeViewController];
     }];

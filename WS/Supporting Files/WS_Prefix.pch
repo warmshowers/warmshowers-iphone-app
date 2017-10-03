@@ -15,14 +15,16 @@
     #import <CoreData/CoreData.h>
 
     #import <RHTools/RHTools.h>
-    #import "SVProgressHUD.h"
 	#import "RHManagedObject+legacy.h"
 
+    #import "SVProgressHUD.h"
 
     #import "AFNetworking.h"
     #import "UIKit+AFNetworking.h"
     #import <PromiseKit/PromiseKit.h>
     #import "AFNetworking+PromiseKit.h"
+
+    #import <KVOController/NSObject+FBKVOController.h>
 
     #import "WSHTTPClient.h"
     #import "WSUserDefaults.h"

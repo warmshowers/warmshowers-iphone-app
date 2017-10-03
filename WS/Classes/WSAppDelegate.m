@@ -105,6 +105,7 @@
     self.slidingViewController.underLeftViewController = leftMenuViewController; // [leftMenuViewController wrapInNavigationController];
     self.slidingViewController.anchorRightRevealAmount = 280.0f;
     
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];
     [SVProgressHUD setBackgroundColor:kWSBaseColour];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
@@ -147,7 +148,9 @@
 }
 
 -(void)autologin {
+    
     NSLog(@"%@", @"Auto Login Called");
+   
     if ([[WSUserDefaults sharedInstance] isLoggedIn]) {
         
         NSString *username = [[WSUserDefaults sharedInstance] username];

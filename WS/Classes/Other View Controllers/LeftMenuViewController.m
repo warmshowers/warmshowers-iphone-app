@@ -193,7 +193,7 @@
 
 
 -(RHBarButtonItem *)leftMenuButton {
-    return [RHBarButtonItem itemWithImage:[UIImage imageNamed:@"hamburger"] block:^{
+    return [RHBarButtonItem itemWithImage:[UIImage imageNamed:@"hamburger"] block:^(RHBarButtonItem *barButtonItem) {
         [self.slidingViewController resetTopViewAnimated:YES];
         [self.slidingViewController anchorTopViewToRightAnimated:YES];
     }];

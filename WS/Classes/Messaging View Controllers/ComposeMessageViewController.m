@@ -64,11 +64,11 @@
     
     self.navigationItem.leftBarButtonItem = [[RHBarButtonItem alloc]
                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                             block:^{
+                                             block:^(RHBarButtonItem *barButtonItem) {
                                                  [bself dismissViewControllerAnimated:YES completion:nil];
                                              }];
     
-    self.navigationItem.rightBarButtonItem = [RHBarButtonItem itemWithTitle:NSLocalizedString(@"Send", nil) block:^{
+    self.navigationItem.rightBarButtonItem = [RHBarButtonItem itemWithTitle:NSLocalizedString(@"Send", nil) block:^(RHBarButtonItem *barButtonItem) {
         
         [self.subjectTextField resignFirstResponder];
         [self.textView resignFirstResponder];
